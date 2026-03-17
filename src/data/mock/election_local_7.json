@@ -1,0 +1,623 @@
+[
+  {
+    "adm_cd": "00",
+    "adm_nm": "전국",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 41495000,
+    "total_votes": 24565310,
+    "valid_votes": 24393353,
+    "invalid_votes": 171957,
+    "turnout_rate": 60.2,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 13091489,
+        "vote_rate": 53.67,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "자유한국당",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 9497396,
+        "vote_rate": 38.93,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "바른미래당",
+        "party": "바른미래당",
+        "party_color": "#7B68EE",
+        "votes": 1058394,
+        "vote_rate": 4.34,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "11",
+    "adm_nm": "서울특별시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 8200000,
+    "total_votes": 4682200,
+    "valid_votes": 4649425,
+    "invalid_votes": 32775,
+    "turnout_rate": 57.1,
+    "candidates": [
+      {
+        "name": "박원순",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 2471265,
+        "vote_rate": 52.78,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 1381249,
+        "vote_rate": 29.5,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "안철수",
+        "party": "바른미래당",
+        "party_color": "#7B68EE",
+        "votes": 722463,
+        "vote_rate": 15.43,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "21",
+    "adm_nm": "부산광역시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 2810000,
+    "total_votes": 1601700,
+    "valid_votes": 1590488,
+    "invalid_votes": 11212,
+    "turnout_rate": 57.0,
+    "candidates": [
+      {
+        "name": "오거돈",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 883177,
+        "vote_rate": 55.14,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "서병수",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 718523,
+        "vote_rate": 44.86,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "22",
+    "adm_nm": "대구광역시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 1950000,
+    "total_votes": 1088100,
+    "valid_votes": 1080483,
+    "invalid_votes": 7617,
+    "turnout_rate": 55.8,
+    "candidates": [
+      {
+        "name": "권영진",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 712597,
+        "vote_rate": 65.49,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "임대윤",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 335135,
+        "vote_rate": 30.8,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "23",
+    "adm_nm": "인천광역시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 2380000,
+    "total_votes": 1311380,
+    "valid_votes": 1302200,
+    "invalid_votes": 9180,
+    "turnout_rate": 55.1,
+    "candidates": [
+      {
+        "name": "박남춘",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 623037,
+        "vote_rate": 47.51,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "유정복",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 592088,
+        "vote_rate": 45.15,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "24",
+    "adm_nm": "광주광역시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 1130000,
+    "total_votes": 680260,
+    "valid_votes": 675498,
+    "invalid_votes": 4762,
+    "turnout_rate": 60.2,
+    "candidates": [
+      {
+        "name": "이용섭",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 470468,
+        "vote_rate": 69.16,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "이정재",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 119250,
+        "vote_rate": 17.53,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "25",
+    "adm_nm": "대전광역시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 1155000,
+    "total_votes": 674520,
+    "valid_votes": 669798,
+    "invalid_votes": 4722,
+    "turnout_rate": 58.4,
+    "candidates": [
+      {
+        "name": "허태정",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 342184,
+        "vote_rate": 50.73,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "박성효",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 299217,
+        "vote_rate": 44.36,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "26",
+    "adm_nm": "울산광역시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 880000,
+    "total_votes": 520960,
+    "valid_votes": 517313,
+    "invalid_votes": 3647,
+    "turnout_rate": 59.2,
+    "candidates": [
+      {
+        "name": "송철호",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 265794,
+        "vote_rate": 51.02,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김기현",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 237714,
+        "vote_rate": 45.63,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "29",
+    "adm_nm": "세종특별자치시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 220000,
+    "total_votes": 149160,
+    "valid_votes": 148116,
+    "invalid_votes": 1044,
+    "turnout_rate": 67.8,
+    "candidates": [
+      {
+        "name": "이춘희",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 106620,
+        "vote_rate": 71.48,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "권광택",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 42540,
+        "vote_rate": 28.52,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "31",
+    "adm_nm": "경기도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 10300000,
+    "total_votes": 5994600,
+    "valid_votes": 5952638,
+    "invalid_votes": 41962,
+    "turnout_rate": 58.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 3379156,
+        "vote_rate": 56.37,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "남경필",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 2438004,
+        "vote_rate": 40.67,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "32",
+    "adm_nm": "강원특별자치도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 1215000,
+    "total_votes": 787320,
+    "valid_votes": 781809,
+    "invalid_votes": 5511,
+    "turnout_rate": 64.8,
+    "candidates": [
+      {
+        "name": "최문순",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 431766,
+        "vote_rate": 54.84,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "정창수",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 329100,
+        "vote_rate": 41.8,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "33",
+    "adm_nm": "충청북도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 1225000,
+    "total_votes": 732550,
+    "valid_votes": 727422,
+    "invalid_votes": 5128,
+    "turnout_rate": 59.8,
+    "candidates": [
+      {
+        "name": "이시종",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 385395,
+        "vote_rate": 52.61,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "박경국",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 294632,
+        "vote_rate": 40.22,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "34",
+    "adm_nm": "충청남도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 1630000,
+    "total_votes": 997560,
+    "valid_votes": 990577,
+    "invalid_votes": 6983,
+    "turnout_rate": 61.2,
+    "candidates": [
+      {
+        "name": "양승조",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 511948,
+        "vote_rate": 51.32,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "이인제",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 382963,
+        "vote_rate": 38.39,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "35",
+    "adm_nm": "전북특별자치도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 1490000,
+    "total_votes": 944660,
+    "valid_votes": 938047,
+    "invalid_votes": 6613,
+    "turnout_rate": 63.4,
+    "candidates": [
+      {
+        "name": "송하진",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 647092,
+        "vote_rate": 68.5,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "장명국",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 223129,
+        "vote_rate": 23.62,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "36",
+    "adm_nm": "전라남도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 1510000,
+    "total_votes": 1044920,
+    "valid_votes": 1037606,
+    "invalid_votes": 7314,
+    "turnout_rate": 69.2,
+    "candidates": [
+      {
+        "name": "김영록",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 787556,
+        "vote_rate": 75.37,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "이정현",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 228315,
+        "vote_rate": 21.85,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "37",
+    "adm_nm": "경상북도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 2190000,
+    "total_votes": 1388460,
+    "valid_votes": 1378741,
+    "invalid_votes": 9719,
+    "turnout_rate": 63.4,
+    "candidates": [
+      {
+        "name": "이철우",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 741854,
+        "vote_rate": 53.43,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "오중기",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 465412,
+        "vote_rate": 33.52,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "권혁진",
+        "party": "바른미래당",
+        "party_color": "#7B68EE",
+        "votes": 118297,
+        "vote_rate": 8.52,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "38",
+    "adm_nm": "경상남도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 2680000,
+    "total_votes": 1621400,
+    "valid_votes": 1610050,
+    "invalid_votes": 11350,
+    "turnout_rate": 60.5,
+    "candidates": [
+      {
+        "name": "김경수",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 857558,
+        "vote_rate": 52.89,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김태호",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 756221,
+        "vote_rate": 46.64,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "39",
+    "adm_nm": "제주특별자치도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "시·도지사",
+    "total_voters": 530000,
+    "total_votes": 345560,
+    "valid_votes": 343141,
+    "invalid_votes": 2419,
+    "turnout_rate": 65.2,
+    "candidates": [
+      {
+        "name": "원희룡",
+        "party": "바른미래당",
+        "party_color": "#7B68EE",
+        "votes": 217634,
+        "vote_rate": 62.98,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "문대림",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 127926,
+        "vote_rate": 37.02,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,1566 @@
+[
+  {
+    "adm_cd": "11",
+    "adm_nm": "서울특별시",
+    "year": 2024,
+    "month": 6,
+    "total_population": 9367151,
+    "male_population": 4568741,
+    "female_population": 4798410,
+    "total_households": 4266958,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 283000,
+        "female": 268000,
+        "total": 551000
+      },
+      {
+        "age_range": "10-19",
+        "male": 378000,
+        "female": 358000,
+        "total": 736000
+      },
+      {
+        "age_range": "20-29",
+        "male": 658000,
+        "female": 654000,
+        "total": 1312000
+      },
+      {
+        "age_range": "30-39",
+        "male": 704000,
+        "female": 699000,
+        "total": 1403000
+      },
+      {
+        "age_range": "40-49",
+        "male": 700000,
+        "female": 700000,
+        "total": 1400000
+      },
+      {
+        "age_range": "50-59",
+        "male": 730000,
+        "female": 755000,
+        "total": 1485000
+      },
+      {
+        "age_range": "60-69",
+        "male": 573000,
+        "female": 626000,
+        "total": 1199000
+      },
+      {
+        "age_range": "70+",
+        "male": 540000,
+        "female": 738000,
+        "total": 1278000
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 2039686,
+        "percentage": 45.2
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 1036591,
+        "percentage": 23.0
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 751638,
+        "percentage": 16.7
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 538925,
+        "percentage": 11.9
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 145978,
+        "percentage": 3.2
+      }
+    ]
+  },
+  {
+    "adm_cd": "21",
+    "adm_nm": "부산광역시",
+    "year": 2024,
+    "month": 6,
+    "total_population": 3299311,
+    "male_population": 1614000,
+    "female_population": 1685311,
+    "total_households": 1432000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 91000,
+        "female": 86000,
+        "total": 177000
+      },
+      {
+        "age_range": "10-19",
+        "male": 131000,
+        "female": 124000,
+        "total": 255000
+      },
+      {
+        "age_range": "20-29",
+        "male": 209000,
+        "female": 198000,
+        "total": 407000
+      },
+      {
+        "age_range": "30-39",
+        "male": 224000,
+        "female": 217000,
+        "total": 441000
+      },
+      {
+        "age_range": "40-49",
+        "male": 248000,
+        "female": 248000,
+        "total": 496000
+      },
+      {
+        "age_range": "50-59",
+        "male": 275000,
+        "female": 283000,
+        "total": 558000
+      },
+      {
+        "age_range": "60-69",
+        "male": 219000,
+        "female": 241000,
+        "total": 460000
+      },
+      {
+        "age_range": "70+",
+        "male": 217000,
+        "female": 288000,
+        "total": 505000
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 673469,
+        "percentage": 42.7
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 421670,
+        "percentage": 26.7
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 263492,
+        "percentage": 16.7
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 172636,
+        "percentage": 10.9
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 45386,
+        "percentage": 2.9
+      }
+    ]
+  },
+  {
+    "adm_cd": "22",
+    "adm_nm": "대구광역시",
+    "year": 2024,
+    "month": 6,
+    "total_population": 2357482,
+    "male_population": 1148000,
+    "female_population": 1209482,
+    "total_households": 987000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 67000,
+        "female": 63000,
+        "total": 130000
+      },
+      {
+        "age_range": "10-19",
+        "male": 97000,
+        "female": 92000,
+        "total": 189000
+      },
+      {
+        "age_range": "20-29",
+        "male": 155000,
+        "female": 148000,
+        "total": 303000
+      },
+      {
+        "age_range": "30-39",
+        "male": 168000,
+        "female": 163000,
+        "total": 331000
+      },
+      {
+        "age_range": "40-49",
+        "male": 184000,
+        "female": 185000,
+        "total": 369000
+      },
+      {
+        "age_range": "50-59",
+        "male": 201000,
+        "female": 209000,
+        "total": 410000
+      },
+      {
+        "age_range": "60-69",
+        "male": 152000,
+        "female": 169000,
+        "total": 321000
+      },
+      {
+        "age_range": "70+",
+        "male": 124000,
+        "female": 180000,
+        "total": 304000
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 454852,
+        "percentage": 40.8
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 295661,
+        "percentage": 26.5
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 196105,
+        "percentage": 17.6
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 135674,
+        "percentage": 12.2
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 32869,
+        "percentage": 2.9
+      }
+    ]
+  },
+  {
+    "adm_cd": "23",
+    "adm_nm": "인천광역시",
+    "year": 2024,
+    "month": 6,
+    "total_population": 2990981,
+    "male_population": 1487000,
+    "female_population": 1503981,
+    "total_households": 1232000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 110906,
+        "female": 104445,
+        "total": 215351
+      },
+      {
+        "age_range": "10-19",
+        "male": 147754,
+        "female": 136389,
+        "total": 284143
+      },
+      {
+        "age_range": "20-29",
+        "male": 202191,
+        "female": 186637,
+        "total": 388828
+      },
+      {
+        "age_range": "30-39",
+        "male": 221183,
+        "female": 212509,
+        "total": 433692
+      },
+      {
+        "age_range": "40-49",
+        "male": 234119,
+        "female": 229483,
+        "total": 463602
+      },
+      {
+        "age_range": "50-59",
+        "male": 236886,
+        "female": 241671,
+        "total": 478557
+      },
+      {
+        "age_range": "60-69",
+        "male": 191796,
+        "female": 211986,
+        "total": 403782
+      },
+      {
+        "age_range": "70+",
+        "male": 135671,
+        "female": 187355,
+        "total": 323026
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 551588,
+        "percentage": 39.3
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 356763,
+        "percentage": 25.4
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 259402,
+        "percentage": 18.5
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 185676,
+        "percentage": 13.2
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 50855,
+        "percentage": 3.6
+      }
+    ]
+  },
+  {
+    "adm_cd": "24",
+    "adm_nm": "광주광역시",
+    "year": 2024,
+    "month": 6,
+    "total_population": 1423735,
+    "male_population": 698000,
+    "female_population": 725735,
+    "total_households": 592000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 49859,
+        "female": 46955,
+        "total": 96814
+      },
+      {
+        "age_range": "10-19",
+        "male": 75515,
+        "female": 69706,
+        "total": 145221
+      },
+      {
+        "age_range": "20-29",
+        "male": 107350,
+        "female": 99092,
+        "total": 206442
+      },
+      {
+        "age_range": "30-39",
+        "male": 100202,
+        "female": 96273,
+        "total": 196475
+      },
+      {
+        "age_range": "40-49",
+        "male": 102096,
+        "female": 100074,
+        "total": 202170
+      },
+      {
+        "age_range": "50-59",
+        "male": 109236,
+        "female": 111443,
+        "total": 220679
+      },
+      {
+        "age_range": "60-69",
+        "male": 93326,
+        "female": 103149,
+        "total": 196475
+      },
+      {
+        "age_range": "70+",
+        "male": 66972,
+        "female": 92486,
+        "total": 159458
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 279211,
+        "percentage": 42.4
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 164409,
+        "percentage": 24.9
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 109990,
+        "percentage": 16.7
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 82156,
+        "percentage": 12.5
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 23321,
+        "percentage": 3.5
+      }
+    ]
+  },
+  {
+    "adm_cd": "25",
+    "adm_nm": "대전광역시",
+    "year": 2024,
+    "month": 6,
+    "total_population": 1434028,
+    "male_population": 706000,
+    "female_population": 728028,
+    "total_households": 598000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 48004,
+        "female": 45208,
+        "total": 93212
+      },
+      {
+        "age_range": "10-19",
+        "male": 74570,
+        "female": 68833,
+        "total": 143403
+      },
+      {
+        "age_range": "20-29",
+        "male": 111854,
+        "female": 103250,
+        "total": 215104
+      },
+      {
+        "age_range": "30-39",
+        "male": 98733,
+        "female": 94861,
+        "total": 193594
+      },
+      {
+        "age_range": "40-49",
+        "male": 99937,
+        "female": 97959,
+        "total": 197896
+      },
+      {
+        "age_range": "50-59",
+        "male": 107896,
+        "female": 110076,
+        "total": 217972
+      },
+      {
+        "age_range": "60-69",
+        "male": 94001,
+        "female": 103895,
+        "total": 197896
+      },
+      {
+        "age_range": "70+",
+        "male": 73479,
+        "female": 101472,
+        "total": 174951
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 309491,
+        "percentage": 44.2
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 172725,
+        "percentage": 24.7
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 112814,
+        "percentage": 16.1
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 82054,
+        "percentage": 11.7
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 22591,
+        "percentage": 3.2
+      }
+    ]
+  },
+  {
+    "adm_cd": "26",
+    "adm_nm": "울산광역시",
+    "year": 2024,
+    "month": 6,
+    "total_population": 1108744,
+    "male_population": 562000,
+    "female_population": 546744,
+    "total_households": 435000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 39970,
+        "female": 37642,
+        "total": 77612
+      },
+      {
+        "age_range": "10-19",
+        "male": 57654,
+        "female": 53220,
+        "total": 110874
+      },
+      {
+        "age_range": "20-29",
+        "male": 72068,
+        "female": 66525,
+        "total": 138593
+      },
+      {
+        "age_range": "30-39",
+        "male": 79164,
+        "female": 76060,
+        "total": 155224
+      },
+      {
+        "age_range": "40-49",
+        "male": 89586,
+        "female": 87813,
+        "total": 177399
+      },
+      {
+        "age_range": "50-59",
+        "male": 93301,
+        "female": 95185,
+        "total": 188486
+      },
+      {
+        "age_range": "60-69",
+        "male": 71098,
+        "female": 78582,
+        "total": 149680
+      },
+      {
+        "age_range": "70+",
+        "male": 46567,
+        "female": 64307,
+        "total": 110874
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 190041,
+        "percentage": 38.0
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 133179,
+        "percentage": 26.6
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 93377,
+        "percentage": 18.7
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 67531,
+        "percentage": 13.5
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 15822,
+        "percentage": 3.2
+      }
+    ]
+  },
+  {
+    "adm_cd": "29",
+    "adm_nm": "세종특별자치시",
+    "year": 2024,
+    "month": 6,
+    "total_population": 389649,
+    "male_population": 195000,
+    "female_population": 194649,
+    "total_households": 162000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 23077,
+        "female": 21733,
+        "total": 44810
+      },
+      {
+        "age_range": "10-19",
+        "male": 21275,
+        "female": 19638,
+        "total": 40913
+      },
+      {
+        "age_range": "20-29",
+        "male": 22288,
+        "female": 20573,
+        "total": 42861
+      },
+      {
+        "age_range": "30-39",
+        "male": 31795,
+        "female": 30549,
+        "total": 62344
+      },
+      {
+        "age_range": "40-49",
+        "male": 32467,
+        "female": 31825,
+        "total": 64292
+      },
+      {
+        "age_range": "50-59",
+        "male": 27003,
+        "female": 27548,
+        "total": 54551
+      },
+      {
+        "age_range": "60-69",
+        "male": 22210,
+        "female": 24548,
+        "total": 46758
+      },
+      {
+        "age_range": "70+",
+        "male": 13910,
+        "female": 19210,
+        "total": 33120
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 57596,
+        "percentage": 34.8
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 37510,
+        "percentage": 22.7
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 32490,
+        "percentage": 19.6
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 29848,
+        "percentage": 18.0
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 8005,
+        "percentage": 4.8
+      }
+    ]
+  },
+  {
+    "adm_cd": "31",
+    "adm_nm": "경기도",
+    "year": 2024,
+    "month": 6,
+    "total_population": 13619548,
+    "male_population": 6803000,
+    "female_population": 6816548,
+    "total_households": 5451000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 547097,
+        "female": 515228,
+        "total": 1062325
+      },
+      {
+        "age_range": "10-19",
+        "male": 722381,
+        "female": 666813,
+        "total": 1389194
+      },
+      {
+        "age_range": "20-29",
+        "male": 906517,
+        "female": 836785,
+        "total": 1743302
+      },
+      {
+        "age_range": "30-39",
+        "male": 1007165,
+        "female": 967669,
+        "total": 1974834
+      },
+      {
+        "age_range": "40-49",
+        "male": 1066070,
+        "female": 1044960,
+        "total": 2111030
+      },
+      {
+        "age_range": "50-59",
+        "male": 1065185,
+        "female": 1086704,
+        "total": 2151889
+      },
+      {
+        "age_range": "60-69",
+        "male": 841007,
+        "female": 929534,
+        "total": 1770541
+      },
+      {
+        "age_range": "70+",
+        "male": 594902,
+        "female": 821531,
+        "total": 1416433
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 2317406,
+        "percentage": 37.8
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 1512233,
+        "percentage": 24.6
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 1159516,
+        "percentage": 18.9
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 899870,
+        "percentage": 14.7
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 249730,
+        "percentage": 4.1
+      }
+    ]
+  },
+  {
+    "adm_cd": "32",
+    "adm_nm": "강원특별자치도",
+    "year": 2024,
+    "month": 6,
+    "total_population": 1521429,
+    "male_population": 759000,
+    "female_population": 762429,
+    "total_households": 676000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 43095,
+        "female": 40584,
+        "total": 83679
+      },
+      {
+        "age_range": "10-19",
+        "male": 63291,
+        "female": 58423,
+        "total": 121714
+      },
+      {
+        "age_range": "20-29",
+        "male": 90981,
+        "female": 83983,
+        "total": 174964
+      },
+      {
+        "age_range": "30-39",
+        "male": 89232,
+        "female": 85732,
+        "total": 174964
+      },
+      {
+        "age_range": "40-49",
+        "male": 107565,
+        "female": 105435,
+        "total": 213000
+      },
+      {
+        "age_range": "50-59",
+        "male": 128028,
+        "female": 130615,
+        "total": 258643
+      },
+      {
+        "age_range": "60-69",
+        "male": 115629,
+        "female": 127800,
+        "total": 243429
+      },
+      {
+        "age_range": "70+",
+        "male": 105435,
+        "female": 145601,
+        "total": 251036
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 355487,
+        "percentage": 46.2
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 213095,
+        "percentage": 27.7
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 108884,
+        "percentage": 14.1
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 69701,
+        "percentage": 9.1
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 22341,
+        "percentage": 2.9
+      }
+    ]
+  },
+  {
+    "adm_cd": "33",
+    "adm_nm": "충청북도",
+    "year": 2024,
+    "month": 6,
+    "total_population": 1596872,
+    "male_population": 804000,
+    "female_population": 792872,
+    "total_households": 689000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 49343,
+        "female": 46469,
+        "total": 95812
+      },
+      {
+        "age_range": "10-19",
+        "male": 73073,
+        "female": 67452,
+        "total": 140525
+      },
+      {
+        "age_range": "20-29",
+        "male": 99645,
+        "female": 91980,
+        "total": 191625
+      },
+      {
+        "age_range": "30-39",
+        "male": 101801,
+        "female": 97808,
+        "total": 199609
+      },
+      {
+        "age_range": "40-49",
+        "male": 116931,
+        "female": 114615,
+        "total": 231546
+      },
+      {
+        "age_range": "50-59",
+        "male": 134377,
+        "female": 137091,
+        "total": 271468
+      },
+      {
+        "age_range": "60-69",
+        "male": 117570,
+        "female": 129945,
+        "total": 247515
+      },
+      {
+        "age_range": "70+",
+        "male": 91884,
+        "female": 126887,
+        "total": 218771
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 364984,
+        "percentage": 45.6
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 211910,
+        "percentage": 26.5
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 117085,
+        "percentage": 14.6
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 80363,
+        "percentage": 10.0
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 25370,
+        "percentage": 3.2
+      }
+    ]
+  },
+  {
+    "adm_cd": "34",
+    "adm_nm": "충청남도",
+    "year": 2024,
+    "month": 6,
+    "total_population": 2133846,
+    "male_population": 1080000,
+    "female_population": 1053846,
+    "total_households": 908000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 68133,
+        "female": 64165,
+        "total": 132298
+      },
+      {
+        "age_range": "10-19",
+        "male": 94316,
+        "female": 87061,
+        "total": 181377
+      },
+      {
+        "age_range": "20-29",
+        "male": 127604,
+        "female": 117788,
+        "total": 245392
+      },
+      {
+        "age_range": "30-39",
+        "male": 139297,
+        "female": 133835,
+        "total": 273132
+      },
+      {
+        "age_range": "40-49",
+        "male": 156251,
+        "female": 153157,
+        "total": 309408
+      },
+      {
+        "age_range": "50-59",
+        "male": 179563,
+        "female": 183191,
+        "total": 362754
+      },
+      {
+        "age_range": "60-69",
+        "male": 160145,
+        "female": 177003,
+        "total": 337148
+      },
+      {
+        "age_range": "70+",
+        "male": 122782,
+        "female": 169555,
+        "total": 292337
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 484346,
+        "percentage": 45.5
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 280387,
+        "percentage": 26.3
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 154255,
+        "percentage": 14.5
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 110418,
+        "percentage": 10.4
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 34816,
+        "percentage": 3.3
+      }
+    ]
+  },
+  {
+    "adm_cd": "35",
+    "adm_nm": "전북특별자치도",
+    "year": 2024,
+    "month": 6,
+    "total_population": 1767475,
+    "male_population": 869000,
+    "female_population": 898475,
+    "total_households": 769000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 50064,
+        "female": 47147,
+        "total": 97211
+      },
+      {
+        "age_range": "10-19",
+        "male": 78122,
+        "female": 72113,
+        "total": 150235
+      },
+      {
+        "age_range": "20-29",
+        "male": 110290,
+        "female": 101807,
+        "total": 212097
+      },
+      {
+        "age_range": "30-39",
+        "male": 103663,
+        "female": 99597,
+        "total": 203260
+      },
+      {
+        "age_range": "40-49",
+        "male": 120498,
+        "female": 118111,
+        "total": 238609
+      },
+      {
+        "age_range": "50-59",
+        "male": 144358,
+        "female": 147275,
+        "total": 291633
+      },
+      {
+        "age_range": "60-69",
+        "male": 134328,
+        "female": 148468,
+        "total": 282796
+      },
+      {
+        "age_range": "70+",
+        "male": 122486,
+        "female": 169147,
+        "total": 291633
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 403173,
+        "percentage": 46.4
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 232838,
+        "percentage": 26.8
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 121687,
+        "percentage": 14.0
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 82527,
+        "percentage": 9.5
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 29346,
+        "percentage": 3.4
+      }
+    ]
+  },
+  {
+    "adm_cd": "36",
+    "adm_nm": "전라남도",
+    "year": 2024,
+    "month": 6,
+    "total_population": 1812040,
+    "male_population": 900000,
+    "female_population": 912040,
+    "total_households": 799000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 46660,
+        "female": 43942,
+        "total": 90602
+      },
+      {
+        "age_range": "10-19",
+        "male": 70670,
+        "female": 65233,
+        "total": 135903
+      },
+      {
+        "age_range": "20-29",
+        "male": 94226,
+        "female": 86978,
+        "total": 181204
+      },
+      {
+        "age_range": "30-39",
+        "male": 97035,
+        "female": 93229,
+        "total": 190264
+      },
+      {
+        "age_range": "40-49",
+        "male": 118960,
+        "female": 116605,
+        "total": 235565
+      },
+      {
+        "age_range": "50-59",
+        "male": 147999,
+        "female": 150988,
+        "total": 298987
+      },
+      {
+        "age_range": "60-69",
+        "male": 150626,
+        "female": 166481,
+        "total": 317107
+      },
+      {
+        "age_range": "70+",
+        "male": 152211,
+        "female": 210197,
+        "total": 362408
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 434947,
+        "percentage": 47.6
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 247725,
+        "percentage": 27.1
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 120034,
+        "percentage": 13.1
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 80577,
+        "percentage": 8.8
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 30285,
+        "percentage": 3.3
+      }
+    ]
+  },
+  {
+    "adm_cd": "37",
+    "adm_nm": "경상북도",
+    "year": 2024,
+    "month": 6,
+    "total_population": 2556045,
+    "male_population": 1276000,
+    "female_population": 1280045,
+    "total_households": 1133000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 68451,
+        "female": 64463,
+        "total": 132914
+      },
+      {
+        "age_range": "10-19",
+        "male": 103673,
+        "female": 95699,
+        "total": 199372
+      },
+      {
+        "age_range": "20-29",
+        "male": 139560,
+        "female": 128825,
+        "total": 268385
+      },
+      {
+        "age_range": "30-39",
+        "male": 143394,
+        "female": 137771,
+        "total": 281165
+      },
+      {
+        "age_range": "40-49",
+        "male": 180712,
+        "female": 177134,
+        "total": 357846
+      },
+      {
+        "age_range": "50-59",
+        "male": 215091,
+        "female": 219437,
+        "total": 434528
+      },
+      {
+        "age_range": "60-69",
+        "male": 206401,
+        "female": 228127,
+        "total": 434528
+      },
+      {
+        "age_range": "70+",
+        "male": 187869,
+        "female": 259439,
+        "total": 447308
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 610872,
+        "percentage": 47.1
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 358480,
+        "percentage": 27.7
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 179759,
+        "percentage": 13.9
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 113615,
+        "percentage": 8.8
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 33272,
+        "percentage": 2.6
+      }
+    ]
+  },
+  {
+    "adm_cd": "38",
+    "adm_nm": "경상남도",
+    "year": 2024,
+    "month": 6,
+    "total_population": 3231985,
+    "male_population": 1614000,
+    "female_population": 1617985,
+    "total_households": 1367000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 99868,
+        "female": 94051,
+        "total": 193919
+      },
+      {
+        "age_range": "10-19",
+        "male": 147896,
+        "female": 136519,
+        "total": 284415
+      },
+      {
+        "age_range": "20-29",
+        "male": 193273,
+        "female": 178405,
+        "total": 371678
+      },
+      {
+        "age_range": "30-39",
+        "male": 197797,
+        "female": 190041,
+        "total": 387838
+      },
+      {
+        "age_range": "40-49",
+        "male": 236662,
+        "female": 231976,
+        "total": 468638
+      },
+      {
+        "age_range": "50-59",
+        "male": 271971,
+        "female": 277466,
+        "total": 549437
+      },
+      {
+        "age_range": "60-69",
+        "male": 245631,
+        "female": 271487,
+        "total": 517118
+      },
+      {
+        "age_range": "70+",
+        "male": 192756,
+        "female": 266186,
+        "total": 458942
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 655025,
+        "percentage": 42.2
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 423089,
+        "percentage": 27.3
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 252244,
+        "percentage": 16.3
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 173160,
+        "percentage": 11.2
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 47195,
+        "percentage": 3.0
+      }
+    ]
+  },
+  {
+    "adm_cd": "39",
+    "adm_nm": "제주특별자치도",
+    "year": 2024,
+    "month": 6,
+    "total_population": 673745,
+    "male_population": 335000,
+    "female_population": 338745,
+    "total_households": 296000,
+    "age_groups": [
+      {
+        "age_range": "0-9",
+        "male": 26023,
+        "female": 24508,
+        "total": 50531
+      },
+      {
+        "age_range": "10-19",
+        "male": 33283,
+        "female": 30723,
+        "total": 64006
+      },
+      {
+        "age_range": "20-29",
+        "male": 42041,
+        "female": 38808,
+        "total": 80849
+      },
+      {
+        "age_range": "30-39",
+        "male": 46388,
+        "female": 44568,
+        "total": 90956
+      },
+      {
+        "age_range": "40-49",
+        "male": 51036,
+        "female": 50026,
+        "total": 101062
+      },
+      {
+        "age_range": "50-59",
+        "male": 53361,
+        "female": 54438,
+        "total": 107799
+      },
+      {
+        "age_range": "60-69",
+        "male": 46404,
+        "female": 51289,
+        "total": 97693
+      },
+      {
+        "age_range": "70+",
+        "male": 33957,
+        "female": 46892,
+        "total": 80849
+      }
+    ],
+    "household_structure": [
+      {
+        "members": 1,
+        "members_label": "1인",
+        "count": 137588,
+        "percentage": 43.6
+      },
+      {
+        "members": 2,
+        "members_label": "2인",
+        "count": 78470,
+        "percentage": 24.9
+      },
+      {
+        "members": 3,
+        "members_label": "3인",
+        "count": 49192,
+        "percentage": 15.6
+      },
+      {
+        "members": 4,
+        "members_label": "4인",
+        "count": 35340,
+        "percentage": 11.2
+      },
+      {
+        "members": 5,
+        "members_label": "5인이상",
+        "count": 15083,
+        "percentage": 4.8
+      }
+    ]
+  }
+]

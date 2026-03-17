@@ -1,0 +1,902 @@
+[
+  {
+    "adm_cd": "00",
+    "adm_nm": "전국",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 44000000,
+    "total_votes": 34848000,
+    "valid_votes": 34604064,
+    "invalid_votes": 243936,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 17213962,
+        "vote_rate": 49.42,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 15058498,
+        "vote_rate": 43.26,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 2022596,
+        "vote_rate": 5.81,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 525434,
+        "vote_rate": 1.51,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "11",
+    "adm_nm": "서울특별시",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 8350000,
+    "total_votes": 6613200,
+    "valid_votes": 6567104,
+    "invalid_votes": 46096,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 3240268,
+        "vote_rate": 49.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 2840476,
+        "vote_rate": 43.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 397718,
+        "vote_rate": 6.02,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 128602,
+        "vote_rate": 1.98,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "21",
+    "adm_nm": "부산광역시",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 2900000,
+    "total_votes": 2297200,
+    "valid_votes": 2281201,
+    "invalid_votes": 15999,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 963820,
+        "vote_rate": 42.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 1148600,
+        "vote_rate": 50.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 137832,
+        "vote_rate": 6.0,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 46004,
+        "vote_rate": 2.0,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "22",
+    "adm_nm": "대구광역시",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 1970000,
+    "total_votes": 1560240,
+    "valid_votes": 1549918,
+    "invalid_votes": 10322,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 296445,
+        "vote_rate": 19.0,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 1184582,
+        "vote_rate": 75.9,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 62409,
+        "vote_rate": 4.0,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 17162,
+        "vote_rate": 1.1,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "23",
+    "adm_nm": "인천광역시",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 2420000,
+    "total_votes": 1916640,
+    "valid_votes": 1903224,
+    "invalid_votes": 13416,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 946044,
+        "vote_rate": 49.4,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 824559,
+        "vote_rate": 43.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 112000,
+        "vote_rate": 5.85,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 34037,
+        "vote_rate": 1.75,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "24",
+    "adm_nm": "광주광역시",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 1150000,
+    "total_votes": 910800,
+    "valid_votes": 904424,
+    "invalid_votes": 6376,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 737748,
+        "vote_rate": 81.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 118404,
+        "vote_rate": 13.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 45540,
+        "vote_rate": 5.0,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 9108,
+        "vote_rate": 1.0,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "25",
+    "adm_nm": "대전광역시",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 1190000,
+    "total_votes": 942480,
+    "valid_votes": 935682,
+    "invalid_votes": 6798,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 462715,
+        "vote_rate": 49.1,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 404364,
+        "vote_rate": 42.9,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 58034,
+        "vote_rate": 6.16,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 17369,
+        "vote_rate": 1.84,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "26",
+    "adm_nm": "울산광역시",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 920000,
+    "total_votes": 728640,
+    "valid_votes": 723539,
+    "invalid_votes": 5101,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 218592,
+        "vote_rate": 30.0,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 473616,
+        "vote_rate": 65.0,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 29145,
+        "vote_rate": 4.0,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 7286,
+        "vote_rate": 1.0,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "29",
+    "adm_nm": "세종특별자치시",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 380000,
+    "total_votes": 300960,
+    "valid_votes": 298853,
+    "invalid_votes": 2107,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 156499,
+        "vote_rate": 52.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 120384,
+        "vote_rate": 40.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 18057,
+        "vote_rate": 6.0,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 6019,
+        "vote_rate": 2.0,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "31",
+    "adm_nm": "경기도",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 11250000,
+    "total_votes": 8910000,
+    "valid_votes": 8847630,
+    "invalid_votes": 62370,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 4410450,
+        "vote_rate": 49.5,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 3830300,
+        "vote_rate": 43.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 533295,
+        "vote_rate": 5.98,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 133650,
+        "vote_rate": 1.5,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "32",
+    "adm_nm": "강원특별자치도",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 1260000,
+    "total_votes": 997920,
+    "valid_votes": 991125,
+    "invalid_votes": 6795,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 438884,
+        "vote_rate": 44.0,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 488880,
+        "vote_rate": 49.0,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 49895,
+        "vote_rate": 5.0,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 19958,
+        "vote_rate": 2.0,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "33",
+    "adm_nm": "충청북도",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 1280000,
+    "total_votes": 1013760,
+    "valid_votes": 1006664,
+    "invalid_votes": 7096,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 466330,
+        "vote_rate": 46.0,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 476887,
+        "vote_rate": 47.0,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 55556,
+        "vote_rate": 5.48,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 15207,
+        "vote_rate": 1.5,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "34",
+    "adm_nm": "충청남도",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 1650000,
+    "total_votes": 1306800,
+    "valid_votes": 1297654,
+    "invalid_votes": 9146,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 601128,
+        "vote_rate": 46.0,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 614196,
+        "vote_rate": 47.0,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 71874,
+        "vote_rate": 5.5,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 19602,
+        "vote_rate": 1.5,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "35",
+    "adm_nm": "전라북도",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 1490000,
+    "total_votes": 1180080,
+    "valid_votes": 1171819,
+    "invalid_votes": 8261,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 944064,
+        "vote_rate": 80.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 165211,
+        "vote_rate": 14.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 59004,
+        "vote_rate": 5.0,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 11800,
+        "vote_rate": 1.0,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "36",
+    "adm_nm": "전라남도",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 1520000,
+    "total_votes": 1203840,
+    "valid_votes": 1195413,
+    "invalid_votes": 8427,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 975410,
+        "vote_rate": 81.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 156499,
+        "vote_rate": 13.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 60192,
+        "vote_rate": 5.0,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 12038,
+        "vote_rate": 1.0,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "37",
+    "adm_nm": "경상북도",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 2170000,
+    "total_votes": 1718640,
+    "valid_votes": 1707809,
+    "invalid_votes": 10831,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 309355,
+        "vote_rate": 18.0,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 1322152,
+        "vote_rate": 76.9,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 68745,
+        "vote_rate": 4.0,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 18907,
+        "vote_rate": 1.1,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "38",
+    "adm_nm": "경상남도",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 2690000,
+    "total_votes": 2130480,
+    "valid_votes": 2115567,
+    "invalid_votes": 14913,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 617839,
+        "vote_rate": 29.0,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 1407917,
+        "vote_rate": 66.1,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 85219,
+        "vote_rate": 4.0,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 21304,
+        "vote_rate": 1.0,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "39",
+    "adm_nm": "제주특별자치도",
+    "election_type": "presidential",
+    "election_name": "제21대 대통령선거",
+    "election_date": "2025-06-03",
+    "total_voters": 560000,
+    "total_votes": 443520,
+    "valid_votes": 440415,
+    "invalid_votes": 3105,
+    "turnout_rate": 79.2,
+    "candidates": [
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 221760,
+        "vote_rate": 50.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김문수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 182224,
+        "vote_rate": 41.1,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "이준석",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 26611,
+        "vote_rate": 6.0,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타후보",
+        "party": "무소속",
+        "party_color": "#888888",
+        "votes": 12675,
+        "vote_rate": 2.9,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  }
+]

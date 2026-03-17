@@ -1,0 +1,1244 @@
+[
+  {
+    "adm_cd": "00",
+    "adm_nm": "전국",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 44280000,
+    "total_votes": 29667600,
+    "valid_votes": 29479157,
+    "invalid_votes": 188443,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 12576096,
+        "vote_rate": 42.39,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 10991846,
+        "vote_rate": 37.05,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 1607984,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 768391,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 625986,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 3097297,
+        "vote_rate": 10.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "11",
+    "adm_nm": "서울특별시",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 8350000,
+    "total_votes": 5594500,
+    "valid_votes": 5559027,
+    "invalid_votes": 35473,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 2483399,
+        "vote_rate": 44.39,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 1960872,
+        "vote_rate": 35.05,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 303222,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 144898,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 118044,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 584066,
+        "vote_rate": 10.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "21",
+    "adm_nm": "부산광역시",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 2900000,
+    "total_votes": 1943000,
+    "valid_votes": 1930751,
+    "invalid_votes": 12249,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 765348,
+        "vote_rate": 39.39,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 797602,
+        "vote_rate": 41.05,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 105311,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 50324,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 40997,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 183419,
+        "vote_rate": 9.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "22",
+    "adm_nm": "대구광역시",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 1970000,
+    "total_votes": 1319900,
+    "valid_votes": 1311543,
+    "invalid_votes": 8357,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 401118,
+        "vote_rate": 30.39,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 673809,
+        "vote_rate": 51.05,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 71539,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 34185,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 27850,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 111400,
+        "vote_rate": 8.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "23",
+    "adm_nm": "인천광역시",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 2420000,
+    "total_votes": 1621400,
+    "valid_votes": 1611162,
+    "invalid_votes": 10238,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 703525,
+        "vote_rate": 43.39,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 584515,
+        "vote_rate": 36.05,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 87880,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 41994,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 34212,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 169274,
+        "vote_rate": 10.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "24",
+    "adm_nm": "광주광역시",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 1150000,
+    "total_votes": 770500,
+    "valid_votes": 765627,
+    "invalid_votes": 4873,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 442190,
+        "vote_rate": 57.39,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 177600,
+        "vote_rate": 23.05,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 41761,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 19956,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 16258,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 72735,
+        "vote_rate": 9.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "25",
+    "adm_nm": "대전광역시",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 1190000,
+    "total_votes": 797300,
+    "valid_votes": 792399,
+    "invalid_votes": 4901,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 345948,
+        "vote_rate": 43.39,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 287427,
+        "vote_rate": 36.05,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 43214,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 20650,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 16823,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 83238,
+        "vote_rate": 10.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "26",
+    "adm_nm": "울산광역시",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 920000,
+    "total_votes": 616400,
+    "valid_votes": 612506,
+    "invalid_votes": 3894,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 211980,
+        "vote_rate": 34.39,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 283852,
+        "vote_rate": 46.05,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 33409,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 15965,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 13006,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 58188,
+        "vote_rate": 9.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "29",
+    "adm_nm": "세종특별자치시",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 380000,
+    "total_votes": 254600,
+    "valid_votes": 252984,
+    "invalid_votes": 1616,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 113017,
+        "vote_rate": 44.39,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 89237,
+        "vote_rate": 35.05,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 13799,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 6594,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 5372,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 26580,
+        "vote_rate": 10.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "31",
+    "adm_nm": "경기도",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 11250000,
+    "total_votes": 7537500,
+    "valid_votes": 7489668,
+    "invalid_votes": 47832,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 3345896,
+        "vote_rate": 44.39,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 2641894,
+        "vote_rate": 35.05,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 408532,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 195221,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 159041,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 786915,
+        "vote_rate": 10.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "32",
+    "adm_nm": "강원특별자치도",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 1260000,
+    "total_votes": 844200,
+    "valid_votes": 838891,
+    "invalid_votes": 5309,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 340972,
+        "vote_rate": 40.39,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 338102,
+        "vote_rate": 40.05,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 45756,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 21865,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 17813,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 79692,
+        "vote_rate": 9.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "33",
+    "adm_nm": "충청북도",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 1280000,
+    "total_votes": 857600,
+    "valid_votes": 852207,
+    "invalid_votes": 5393,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 354961,
+        "vote_rate": 41.39,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 334893,
+        "vote_rate": 39.05,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 46482,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 22212,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 18095,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 80957,
+        "vote_rate": 9.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "34",
+    "adm_nm": "충청남도",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 1650000,
+    "total_votes": 1105500,
+    "valid_votes": 1097782,
+    "invalid_votes": 7718,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 457566,
+        "vote_rate": 41.39,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 431698,
+        "vote_rate": 39.05,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 59918,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 28632,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 23326,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 104359,
+        "vote_rate": 9.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "35",
+    "adm_nm": "전라북도",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 1490000,
+    "total_votes": 998300,
+    "valid_votes": 992204,
+    "invalid_votes": 6096,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 562941,
+        "vote_rate": 56.39,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 240091,
+        "vote_rate": 24.05,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 54108,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 25856,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 21064,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 94240,
+        "vote_rate": 9.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "36",
+    "adm_nm": "전라남도",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 1520000,
+    "total_votes": 1018400,
+    "valid_votes": 1011281,
+    "invalid_votes": 7119,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 594644,
+        "vote_rate": 58.39,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 224557,
+        "vote_rate": 22.05,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 55197,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 26377,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 21488,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 96137,
+        "vote_rate": 9.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "37",
+    "adm_nm": "경상북도",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 2170000,
+    "total_votes": 1453900,
+    "valid_votes": 1444636,
+    "invalid_votes": 9264,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 441840,
+        "vote_rate": 30.39,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 727677,
+        "vote_rate": 50.05,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 78801,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 37656,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 30677,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 137248,
+        "vote_rate": 9.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "38",
+    "adm_nm": "경상남도",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 2690000,
+    "total_votes": 1802300,
+    "valid_votes": 1790284,
+    "invalid_votes": 12016,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 637834,
+        "vote_rate": 35.39,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 811936,
+        "vote_rate": 45.05,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 97685,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 46680,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 38029,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 170137,
+        "vote_rate": 9.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "39",
+    "adm_nm": "제주특별자치도",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 560000,
+    "total_votes": 375200,
+    "valid_votes": 372874,
+    "invalid_votes": 2326,
+    "turnout_rate": 67.0,
+    "candidates": [
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 170303,
+        "vote_rate": 45.39,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 127756,
+        "vote_rate": 34.05,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "개혁신당",
+        "party": "개혁신당",
+        "party_color": "#FF6400",
+        "votes": 20336,
+        "vote_rate": 5.42,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "조국혁신당",
+        "party": "조국혁신당",
+        "party_color": "#0055A5",
+        "votes": 9718,
+        "vote_rate": 2.59,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "새로운미래",
+        "party": "새로운미래",
+        "party_color": "#2196F3",
+        "votes": 7917,
+        "vote_rate": 2.11,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "무소속/기타",
+        "party": "무소속/기타",
+        "party_color": "#888888",
+        "votes": 39171,
+        "vote_rate": 10.44,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  }
+]

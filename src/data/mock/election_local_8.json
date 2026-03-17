@@ -1,0 +1,614 @@
+[
+  {
+    "adm_cd": "00",
+    "adm_nm": "전국",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 42207070,
+    "total_votes": 20806841,
+    "valid_votes": 20661193,
+    "invalid_votes": 145648,
+    "turnout_rate": 50.9,
+    "candidates": [
+      {
+        "name": "국민의힘",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 11178034,
+        "vote_rate": 54.1,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "더불어민주당",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 9214623,
+        "vote_rate": 44.6,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "기본소득당",
+        "party": "기본소득당",
+        "party_color": "#00C4A1",
+        "votes": 53184,
+        "vote_rate": 0.26,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "11",
+    "adm_nm": "서울특별시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 8334070,
+    "total_votes": 4128841,
+    "valid_votes": 4099939,
+    "invalid_votes": 28902,
+    "turnout_rate": 49.54,
+    "candidates": [
+      {
+        "name": "오세훈",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 2479034,
+        "vote_rate": 59.37,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "송영길",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 1596623,
+        "vote_rate": 38.22,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "신지혜",
+        "party": "기본소득당",
+        "party_color": "#00C4A1",
+        "votes": 53184,
+        "vote_rate": 1.27,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "21",
+    "adm_nm": "부산광역시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 2847000,
+    "total_votes": 1420000,
+    "valid_votes": 1410060,
+    "invalid_votes": 9940,
+    "turnout_rate": 49.88,
+    "candidates": [
+      {
+        "name": "박형준",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 932000,
+        "vote_rate": 65.63,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "변성완",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 456000,
+        "vote_rate": 32.11,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "22",
+    "adm_nm": "대구광역시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 1997000,
+    "total_votes": 960000,
+    "valid_votes": 953280,
+    "invalid_votes": 6720,
+    "turnout_rate": 48.07,
+    "candidates": [
+      {
+        "name": "홍준표",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 746000,
+        "vote_rate": 77.71,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "서재헌",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 183000,
+        "vote_rate": 19.06,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "23",
+    "adm_nm": "인천광역시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 2436000,
+    "total_votes": 1180000,
+    "valid_votes": 1171740,
+    "invalid_votes": 8260,
+    "turnout_rate": 48.44,
+    "candidates": [
+      {
+        "name": "유정복",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 643000,
+        "vote_rate": 54.49,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "박남춘",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 516000,
+        "vote_rate": 43.73,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "24",
+    "adm_nm": "광주광역시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 1153000,
+    "total_votes": 502000,
+    "valid_votes": 498486,
+    "invalid_votes": 3514,
+    "turnout_rate": 43.54,
+    "candidates": [
+      {
+        "name": "강기정",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 414000,
+        "vote_rate": 82.47,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "이정재",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 64000,
+        "vote_rate": 12.75,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "25",
+    "adm_nm": "대전광역시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 1171000,
+    "total_votes": 552000,
+    "valid_votes": 548136,
+    "invalid_votes": 3864,
+    "turnout_rate": 47.14,
+    "candidates": [
+      {
+        "name": "이장우",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 306000,
+        "vote_rate": 55.43,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "허태정",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 232000,
+        "vote_rate": 42.03,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "26",
+    "adm_nm": "울산광역시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 919000,
+    "total_votes": 436000,
+    "valid_votes": 432948,
+    "invalid_votes": 3052,
+    "turnout_rate": 47.44,
+    "candidates": [
+      {
+        "name": "김두겸",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 238000,
+        "vote_rate": 54.59,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "송철호",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 183000,
+        "vote_rate": 41.97,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "29",
+    "adm_nm": "세종특별자치시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 282000,
+    "total_votes": 140000,
+    "valid_votes": 139020,
+    "invalid_votes": 980,
+    "turnout_rate": 49.65,
+    "candidates": [
+      {
+        "name": "최민호",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 74000,
+        "vote_rate": 52.86,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "이춘희",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 62000,
+        "vote_rate": 44.29,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "31",
+    "adm_nm": "경기도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 10636000,
+    "total_votes": 5253000,
+    "valid_votes": 5216229,
+    "invalid_votes": 36771,
+    "turnout_rate": 49.39,
+    "candidates": [
+      {
+        "name": "김동연",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 2724000,
+        "vote_rate": 51.85,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김은혜",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 2478000,
+        "vote_rate": 47.17,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "32",
+    "adm_nm": "강원특별자치도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 1244000,
+    "total_votes": 623000,
+    "valid_votes": 618639,
+    "invalid_votes": 4361,
+    "turnout_rate": 50.08,
+    "candidates": [
+      {
+        "name": "김진태",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 397000,
+        "vote_rate": 63.72,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "이광재",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 213000,
+        "vote_rate": 34.19,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "33",
+    "adm_nm": "충청북도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 1279000,
+    "total_votes": 641000,
+    "valid_votes": 636513,
+    "invalid_votes": 4487,
+    "turnout_rate": 50.12,
+    "candidates": [
+      {
+        "name": "김영환",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 355000,
+        "vote_rate": 55.38,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "노영민",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 268000,
+        "vote_rate": 41.81,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "34",
+    "adm_nm": "충청남도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 1673000,
+    "total_votes": 858000,
+    "valid_votes": 851994,
+    "invalid_votes": 6006,
+    "turnout_rate": 51.29,
+    "candidates": [
+      {
+        "name": "김태흠",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 481000,
+        "vote_rate": 56.06,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "양승조",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 362000,
+        "vote_rate": 42.19,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "35",
+    "adm_nm": "전북특별자치도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 1444000,
+    "total_votes": 688000,
+    "valid_votes": 683184,
+    "invalid_votes": 4816,
+    "turnout_rate": 47.65,
+    "candidates": [
+      {
+        "name": "김관영",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 537000,
+        "vote_rate": 78.05,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "조배숙",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 120000,
+        "vote_rate": 17.44,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "36",
+    "adm_nm": "전라남도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 1476000,
+    "total_votes": 740000,
+    "valid_votes": 734820,
+    "invalid_votes": 5180,
+    "turnout_rate": 50.14,
+    "candidates": [
+      {
+        "name": "김영록",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 594000,
+        "vote_rate": 80.27,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "이정현",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 127000,
+        "vote_rate": 17.16,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "37",
+    "adm_nm": "경상북도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 2124000,
+    "total_votes": 1091000,
+    "valid_votes": 1083363,
+    "invalid_votes": 7637,
+    "turnout_rate": 51.37,
+    "candidates": [
+      {
+        "name": "이철우",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 839000,
+        "vote_rate": 76.9,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "임미애",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 220000,
+        "vote_rate": 20.17,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "38",
+    "adm_nm": "경상남도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 2658000,
+    "total_votes": 1318000,
+    "valid_votes": 1308774,
+    "invalid_votes": 9226,
+    "turnout_rate": 49.59,
+    "candidates": [
+      {
+        "name": "박완수",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 783000,
+        "vote_rate": 59.41,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "양문석",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 499000,
+        "vote_rate": 37.86,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "39",
+    "adm_nm": "제주특별자치도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "시·도지사",
+    "total_voters": 534000,
+    "total_votes": 276000,
+    "valid_votes": 274068,
+    "invalid_votes": 1932,
+    "turnout_rate": 51.69,
+    "candidates": [
+      {
+        "name": "오영훈",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 155000,
+        "vote_rate": 56.16,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "허향진",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 116000,
+        "vote_rate": 42.03,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  }
+]

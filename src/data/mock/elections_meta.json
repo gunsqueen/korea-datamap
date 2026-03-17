@@ -1,0 +1,268 @@
+[
+  {
+    "id": "presidential_21",
+    "type": "presidential",
+    "name": "제21대 대통령선거",
+    "short_name": "21대 대선",
+    "date": "2025-06-03",
+    "year": 2025
+  },
+  {
+    "id": "presidential_20",
+    "type": "presidential",
+    "name": "제20대 대통령선거",
+    "short_name": "20대 대선",
+    "date": "2022-03-09",
+    "year": 2022
+  },
+  {
+    "id": "presidential_19",
+    "type": "presidential",
+    "name": "제19대 대통령선거",
+    "short_name": "19대 대선",
+    "date": "2017-05-09",
+    "year": 2017
+  },
+  {
+    "id": "presidential_18",
+    "type": "presidential",
+    "name": "제18대 대통령선거",
+    "short_name": "18대 대선",
+    "date": "2012-12-19",
+    "year": 2012
+  },
+  {
+    "id": "assembly_22_district",
+    "type": "assembly",
+    "name": "제22대 국회의원선거",
+    "short_name": "22대 총선",
+    "date": "2024-04-10",
+    "year": 2024,
+    "sub_type": "지역구"
+  },
+  {
+    "id": "assembly_22_pr",
+    "type": "assembly",
+    "name": "제22대 국회의원선거",
+    "short_name": "22대 총선",
+    "date": "2024-04-10",
+    "year": 2024,
+    "sub_type": "비례대표"
+  },
+  {
+    "id": "assembly_21_district",
+    "type": "assembly",
+    "name": "제21대 국회의원선거",
+    "short_name": "21대 총선",
+    "date": "2020-04-15",
+    "year": 2020,
+    "sub_type": "지역구"
+  },
+  {
+    "id": "assembly_21_pr",
+    "type": "assembly",
+    "name": "제21대 국회의원선거",
+    "short_name": "21대 총선",
+    "date": "2020-04-15",
+    "year": 2020,
+    "sub_type": "비례대표"
+  },
+  {
+    "id": "assembly_20_district",
+    "type": "assembly",
+    "name": "제20대 국회의원선거",
+    "short_name": "20대 총선",
+    "date": "2016-04-13",
+    "year": 2016,
+    "sub_type": "지역구"
+  },
+  {
+    "id": "assembly_20_pr",
+    "type": "assembly",
+    "name": "제20대 국회의원선거",
+    "short_name": "20대 총선",
+    "date": "2016-04-13",
+    "year": 2016,
+    "sub_type": "비례대표"
+  },
+  {
+    "id": "assembly_19_district",
+    "type": "assembly",
+    "name": "제19대 국회의원선거",
+    "short_name": "19대 총선",
+    "date": "2012-04-11",
+    "year": 2012,
+    "sub_type": "지역구"
+  },
+  {
+    "id": "assembly_19_pr",
+    "type": "assembly",
+    "name": "제19대 국회의원선거",
+    "short_name": "19대 총선",
+    "date": "2012-04-11",
+    "year": 2012,
+    "sub_type": "비례대표"
+  },
+  {
+    "id": "local_8_metro_mayor",
+    "type": "local",
+    "name": "제8회 전국동시지방선거",
+    "short_name": "8회 지방선거",
+    "date": "2022-06-01",
+    "year": 2022,
+    "sub_type": "광역단체장"
+  },
+  {
+    "id": "local_8_mayor",
+    "type": "local",
+    "name": "제8회 전국동시지방선거",
+    "short_name": "8회 지방선거",
+    "date": "2022-06-01",
+    "year": 2022,
+    "sub_type": "단체장"
+  },
+  {
+    "id": "local_8_council_district",
+    "type": "local",
+    "name": "제8회 전국동시지방선거",
+    "short_name": "8회 지방선거",
+    "date": "2022-06-01",
+    "year": 2022,
+    "sub_type": "광역의원(지역구)"
+  },
+  {
+    "id": "local_8_council_pr",
+    "type": "local",
+    "name": "제8회 전국동시지방선거",
+    "short_name": "8회 지방선거",
+    "date": "2022-06-01",
+    "year": 2022,
+    "sub_type": "광역의원(비례)"
+  },
+  {
+    "id": "local_8_basic_district",
+    "type": "local",
+    "name": "제8회 전국동시지방선거",
+    "short_name": "8회 지방선거",
+    "date": "2022-06-01",
+    "year": 2022,
+    "sub_type": "기초의원(지역구)"
+  },
+  {
+    "id": "local_8_basic_pr",
+    "type": "local",
+    "name": "제8회 전국동시지방선거",
+    "short_name": "8회 지방선거",
+    "date": "2022-06-01",
+    "year": 2022,
+    "sub_type": "기초의원(비례)"
+  },
+  {
+    "id": "local_7_metro_mayor",
+    "type": "local",
+    "name": "제7회 전국동시지방선거",
+    "short_name": "7회 지방선거",
+    "date": "2018-06-13",
+    "year": 2018,
+    "sub_type": "광역단체장"
+  },
+  {
+    "id": "local_7_mayor",
+    "type": "local",
+    "name": "제7회 전국동시지방선거",
+    "short_name": "7회 지방선거",
+    "date": "2018-06-13",
+    "year": 2018,
+    "sub_type": "단체장"
+  },
+  {
+    "id": "local_7_council_district",
+    "type": "local",
+    "name": "제7회 전국동시지방선거",
+    "short_name": "7회 지방선거",
+    "date": "2018-06-13",
+    "year": 2018,
+    "sub_type": "광역의원(지역구)"
+  },
+  {
+    "id": "local_7_council_pr",
+    "type": "local",
+    "name": "제7회 전국동시지방선거",
+    "short_name": "7회 지방선거",
+    "date": "2018-06-13",
+    "year": 2018,
+    "sub_type": "광역의원(비례)"
+  },
+  {
+    "id": "local_7_basic_district",
+    "type": "local",
+    "name": "제7회 전국동시지방선거",
+    "short_name": "7회 지방선거",
+    "date": "2018-06-13",
+    "year": 2018,
+    "sub_type": "기초의원(지역구)"
+  },
+  {
+    "id": "local_7_basic_pr",
+    "type": "local",
+    "name": "제7회 전국동시지방선거",
+    "short_name": "7회 지방선거",
+    "date": "2018-06-13",
+    "year": 2018,
+    "sub_type": "기초의원(비례)"
+  },
+  {
+    "id": "local_6_metro_mayor",
+    "type": "local",
+    "name": "제6회 전국동시지방선거",
+    "short_name": "6회 지방선거",
+    "date": "2014-06-04",
+    "year": 2014,
+    "sub_type": "광역단체장"
+  },
+  {
+    "id": "local_6_mayor",
+    "type": "local",
+    "name": "제6회 전국동시지방선거",
+    "short_name": "6회 지방선거",
+    "date": "2014-06-04",
+    "year": 2014,
+    "sub_type": "단체장"
+  },
+  {
+    "id": "local_6_council_district",
+    "type": "local",
+    "name": "제6회 전국동시지방선거",
+    "short_name": "6회 지방선거",
+    "date": "2014-06-04",
+    "year": 2014,
+    "sub_type": "광역의원(지역구)"
+  },
+  {
+    "id": "local_6_council_pr",
+    "type": "local",
+    "name": "제6회 전국동시지방선거",
+    "short_name": "6회 지방선거",
+    "date": "2014-06-04",
+    "year": 2014,
+    "sub_type": "광역의원(비례)"
+  },
+  {
+    "id": "local_6_basic_district",
+    "type": "local",
+    "name": "제6회 전국동시지방선거",
+    "short_name": "6회 지방선거",
+    "date": "2014-06-04",
+    "year": 2014,
+    "sub_type": "기초의원(지역구)"
+  },
+  {
+    "id": "local_6_basic_pr",
+    "type": "local",
+    "name": "제6회 전국동시지방선거",
+    "short_name": "6회 지방선거",
+    "date": "2014-06-04",
+    "year": 2014,
+    "sub_type": "기초의원(비례)"
+  }
+]

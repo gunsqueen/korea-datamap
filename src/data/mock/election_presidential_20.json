@@ -1,0 +1,740 @@
+[
+  {
+    "adm_cd": "00",
+    "adm_nm": "전국",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 44197692,
+    "total_votes": 34062688,
+    "valid_votes": 33823470,
+    "invalid_votes": 239218,
+    "turnout_rate": 77.1,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 16394815,
+        "vote_rate": 48.56,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 16147738,
+        "vote_rate": 47.83,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 803358,
+        "vote_rate": 2.37,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "11",
+    "adm_nm": "서울특별시",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 8296000,
+    "total_votes": 6338144,
+    "valid_votes": 6293777,
+    "invalid_votes": 44367,
+    "turnout_rate": 76.4,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 3083507,
+        "vote_rate": 48.65,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 3204566,
+        "vote_rate": 50.56,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 50071,
+        "vote_rate": 0.79,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "21",
+    "adm_nm": "부산광역시",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 2843000,
+    "total_votes": 2154994,
+    "valid_votes": 2139909,
+    "invalid_votes": 15085,
+    "turnout_rate": 75.8,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 1206150,
+        "vote_rate": 55.97,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 929018,
+        "vote_rate": 43.11,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 19826,
+        "vote_rate": 0.92,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "22",
+    "adm_nm": "대구광역시",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 1973000,
+    "total_votes": 1503426,
+    "valid_votes": 1492902,
+    "invalid_votes": 10524,
+    "turnout_rate": 76.2,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 1069537,
+        "vote_rate": 71.14,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 417952,
+        "vote_rate": 27.8,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 15936,
+        "vote_rate": 1.06,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "23",
+    "adm_nm": "인천광역시",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 2419000,
+    "total_votes": 1816669,
+    "valid_votes": 1803952,
+    "invalid_votes": 12717,
+    "turnout_rate": 75.1,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 885808,
+        "vote_rate": 48.76,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 917055,
+        "vote_rate": 50.48,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 13807,
+        "vote_rate": 0.76,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "24",
+    "adm_nm": "광주광역시",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 1145000,
+    "total_votes": 918290,
+    "valid_votes": 911862,
+    "invalid_votes": 6428,
+    "turnout_rate": 80.2,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 126265,
+        "vote_rate": 13.75,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 779077,
+        "vote_rate": 84.84,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 12948,
+        "vote_rate": 1.41,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "25",
+    "adm_nm": "대전광역시",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 1183000,
+    "total_votes": 908544,
+    "valid_votes": 902184,
+    "invalid_votes": 6360,
+    "turnout_rate": 76.8,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 425835,
+        "vote_rate": 46.87,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 474078,
+        "vote_rate": 52.18,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 8631,
+        "vote_rate": 0.95,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "26",
+    "adm_nm": "울산광역시",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 904000,
+    "total_votes": 676192,
+    "valid_votes": 671459,
+    "invalid_votes": 4733,
+    "turnout_rate": 74.8,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 376368,
+        "vote_rate": 55.66,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 293332,
+        "vote_rate": 43.38,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 6491,
+        "vote_rate": 0.96,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "29",
+    "adm_nm": "세종특별자치시",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 263000,
+    "total_votes": 213819,
+    "valid_votes": 212322,
+    "invalid_votes": 1497,
+    "turnout_rate": 81.3,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 87217,
+        "vote_rate": 40.79,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 124207,
+        "vote_rate": 58.09,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 2395,
+        "vote_rate": 1.12,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "31",
+    "adm_nm": "경기도",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 10826000,
+    "total_votes": 8281890,
+    "valid_votes": 8223917,
+    "invalid_votes": 57973,
+    "turnout_rate": 76.5,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 3955431,
+        "vote_rate": 47.76,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 4258548,
+        "vote_rate": 51.42,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 67911,
+        "vote_rate": 0.82,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "32",
+    "adm_nm": "강원특별자치도",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 1241000,
+    "total_votes": 958052,
+    "valid_votes": 951346,
+    "invalid_votes": 6706,
+    "turnout_rate": 77.2,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 503552,
+        "vote_rate": 52.56,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 444632,
+        "vote_rate": 46.41,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 9868,
+        "vote_rate": 1.03,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "33",
+    "adm_nm": "충청북도",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 1253000,
+    "total_votes": 964810,
+    "valid_votes": 958056,
+    "invalid_votes": 6754,
+    "turnout_rate": 77.0,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 479800,
+        "vote_rate": 49.73,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 477002,
+        "vote_rate": 49.44,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 8008,
+        "vote_rate": 0.83,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "34",
+    "adm_nm": "충청남도",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 1686000,
+    "total_votes": 1318452,
+    "valid_votes": 1309223,
+    "invalid_votes": 9229,
+    "turnout_rate": 78.2,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 635362,
+        "vote_rate": 48.19,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 670960,
+        "vote_rate": 50.89,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 12130,
+        "vote_rate": 0.92,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "35",
+    "adm_nm": "전북특별자치도",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 1477000,
+    "total_votes": 1178646,
+    "valid_votes": 1170395,
+    "invalid_votes": 8251,
+    "turnout_rate": 79.8,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 185637,
+        "vote_rate": 15.75,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 980633,
+        "vote_rate": 83.2,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 12376,
+        "vote_rate": 1.05,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "36",
+    "adm_nm": "전라남도",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 1541000,
+    "total_votes": 1265161,
+    "valid_votes": 1256305,
+    "invalid_votes": 8856,
+    "turnout_rate": 82.1,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 162194,
+        "vote_rate": 12.82,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 1089304,
+        "vote_rate": 86.1,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 13664,
+        "vote_rate": 1.08,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "37",
+    "adm_nm": "경상북도",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 2201000,
+    "total_votes": 1696971,
+    "valid_votes": 1685092,
+    "invalid_votes": 11879,
+    "turnout_rate": 77.1,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 1232510,
+        "vote_rate": 72.63,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 446982,
+        "vote_rate": 26.34,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 17479,
+        "vote_rate": 1.03,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "38",
+    "adm_nm": "경상남도",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 2719000,
+    "total_votes": 2055564,
+    "valid_votes": 2041175,
+    "invalid_votes": 14389,
+    "turnout_rate": 75.6,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 1170233,
+        "vote_rate": 56.93,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 865598,
+        "vote_rate": 42.11,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 19733,
+        "vote_rate": 0.96,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "39",
+    "adm_nm": "제주특별자치도",
+    "election_type": "presidential",
+    "election_name": "제20대 대통령선거",
+    "election_date": "2022-03-09",
+    "total_voters": 553000,
+    "total_votes": 439635,
+    "valid_votes": 436558,
+    "invalid_votes": 3077,
+    "turnout_rate": 79.5,
+    "candidates": [
+      {
+        "name": "윤석열",
+        "party": "국민의힘",
+        "party_color": "#C9151E",
+        "votes": 184823,
+        "vote_rate": 42.04,
+        "rank": 2,
+        "elected": true
+      },
+      {
+        "name": "이재명",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 249889,
+        "vote_rate": 56.84,
+        "rank": 1,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 4924,
+        "vote_rate": 1.12,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,362 @@
+[
+  {
+    "adm_cd": "00",
+    "adm_nm": "전국",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 42607870,
+    "total_votes": 25649939,
+    "valid_votes": 25471889,
+    "invalid_votes": 178050,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 13620146, "vote_rate": 53.1, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 7413236, "vote_rate": 28.9, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 2230916, "vote_rate": 8.7, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 1333797, "vote_rate": 5.2, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 1051794, "vote_rate": 4.1, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "11",
+    "adm_nm": "서울특별시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 8400000,
+    "total_votes": 5056800,
+    "valid_votes": 5021591,
+    "invalid_votes": 35209,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 2761079, "vote_rate": 55.0, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 1467476, "vote_rate": 29.2, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 434079, "vote_rate": 8.6, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 251590, "vote_rate": 5.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 107367, "vote_rate": 2.1, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "21",
+    "adm_nm": "부산광역시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 2910000,
+    "total_votes": 1751820,
+    "valid_votes": 1739601,
+    "invalid_votes": 12219,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 907946, "vote_rate": 52.2, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 506040, "vote_rate": 29.1, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 153187, "vote_rate": 8.8, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 91093, "vote_rate": 5.2, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 81335, "vote_rate": 4.7, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "22",
+    "adm_nm": "대구광역시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 1965000,
+    "total_votes": 1182930,
+    "valid_votes": 1174692,
+    "invalid_votes": 8238,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 365301, "vote_rate": 31.1, "rank": 2, "elected": false },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 613820, "vote_rate": 52.3, "rank": 1, "elected": true },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 101824, "vote_rate": 8.7, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 61583, "vote_rate": 5.2, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 32164, "vote_rate": 2.7, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "23",
+    "adm_nm": "인천광역시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 2400000,
+    "total_votes": 1444800,
+    "valid_votes": 1434749,
+    "invalid_votes": 10051,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 786024, "vote_rate": 54.8, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 415375, "vote_rate": 29.0, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 126858, "vote_rate": 8.8, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 74770, "vote_rate": 5.2, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 31722, "vote_rate": 2.2, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "24",
+    "adm_nm": "광주광역시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 1165000,
+    "total_votes": 701330,
+    "valid_votes": 696444,
+    "invalid_votes": 4886,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 571244, "vote_rate": 82.0, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 55716, "vote_rate": 8.0, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 34822, "vote_rate": 5.0, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 34822, "vote_rate": 5.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 4840, "vote_rate": 0.7, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "25",
+    "adm_nm": "대전광역시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 1195000,
+    "total_votes": 719390,
+    "valid_votes": 714380,
+    "invalid_votes": 5010,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 391635, "vote_rate": 54.8, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 207965, "vote_rate": 29.1, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 63675, "vote_rate": 8.9, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 37416, "vote_rate": 5.2, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 13689, "vote_rate": 1.9, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "26",
+    "adm_nm": "울산광역시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 912000,
+    "total_votes": 549024,
+    "valid_votes": 545198,
+    "invalid_votes": 3826,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 285384, "vote_rate": 52.3, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 161558, "vote_rate": 29.6, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 46339, "vote_rate": 8.5, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 26619, "vote_rate": 4.9, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 25298, "vote_rate": 4.6, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "29",
+    "adm_nm": "세종특별자치시",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 250000,
+    "total_votes": 150500,
+    "valid_votes": 149451,
+    "invalid_votes": 1049,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 83876, "vote_rate": 56.1, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 40036, "vote_rate": 26.8, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 12951, "vote_rate": 8.7, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 7771, "vote_rate": 5.2, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 4817, "vote_rate": 3.2, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "31",
+    "adm_nm": "경기도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 11200000,
+    "total_votes": 6742400,
+    "valid_votes": 6695434,
+    "invalid_votes": 46966,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 3622135, "vote_rate": 54.1, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 1959219, "vote_rate": 29.3, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 582502, "vote_rate": 8.7, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 348163, "vote_rate": 5.2, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 183415, "vote_rate": 2.7, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "32",
+    "adm_nm": "강원특별자치도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 1268000,
+    "total_votes": 763336,
+    "valid_votes": 758019,
+    "invalid_votes": 5317,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 413281, "vote_rate": 54.5, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 220232, "vote_rate": 29.1, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 65949, "vote_rate": 8.7, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 39717, "vote_rate": 5.2, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 18840, "vote_rate": 2.5, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "33",
+    "adm_nm": "충청북도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 1285000,
+    "total_votes": 773570,
+    "valid_votes": 768171,
+    "invalid_votes": 5399,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 419941, "vote_rate": 54.7, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 222602, "vote_rate": 29.0, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 66831, "vote_rate": 8.7, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 39945, "vote_rate": 5.2, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 18852, "vote_rate": 2.5, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "34",
+    "adm_nm": "충청남도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 1650000,
+    "total_votes": 993300,
+    "valid_votes": 986371,
+    "invalid_votes": 6929,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 537073, "vote_rate": 54.4, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 288875, "vote_rate": 29.3, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 86215, "vote_rate": 8.7, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 51654, "vote_rate": 5.2, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 22554, "vote_rate": 2.3, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "35",
+    "adm_nm": "전라북도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 1492000,
+    "total_votes": 898184,
+    "valid_votes": 891924,
+    "invalid_votes": 6260,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 744879, "vote_rate": 83.5, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 62873, "vote_rate": 7.0, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 53515, "vote_rate": 6.0, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 26758, "vote_rate": 3.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 3899, "vote_rate": 0.4, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "36",
+    "adm_nm": "전라남도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 1530000,
+    "total_votes": 920460,
+    "valid_votes": 914017,
+    "invalid_votes": 6443,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 757854, "vote_rate": 83.0, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 64981, "vote_rate": 7.1, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 73121, "vote_rate": 8.0, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 18280, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": -219, "vote_rate": -0.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "37",
+    "adm_nm": "경상북도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 2168000,
+    "total_votes": 1305136,
+    "valid_votes": 1296000,
+    "invalid_votes": 9136,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 349920, "vote_rate": 27.0, "rank": 2, "elected": false },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 673408, "vote_rate": 52.0, "rank": 1, "elected": true },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 112752, "vote_rate": 8.7, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 67392, "vote_rate": 5.2, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 92528, "vote_rate": 7.1, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "38",
+    "adm_nm": "경상남도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 2702000,
+    "total_votes": 1626604,
+    "valid_votes": 1615291,
+    "invalid_votes": 11313,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 834899, "vote_rate": 51.7, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 466876, "vote_rate": 28.9, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 140530, "vote_rate": 8.7, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 84595, "vote_rate": 5.2, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 88391, "vote_rate": 5.5, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "39",
+    "adm_nm": "제주특별자치도",
+    "election_type": "local",
+    "election_name": "제7회 전국동시지방선거",
+    "election_date": "2018-06-13",
+    "sub_type": "기초의원(지역구)",
+    "total_voters": 506000,
+    "total_votes": 304612,
+    "valid_votes": 302485,
+    "invalid_votes": 2127,
+    "turnout_rate": 60.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 166366, "vote_rate": 55.0, "rank": 1, "elected": true },
+      { "name": "자유한국당", "party": "자유한국당", "party_color": "#C9151E", "votes": 88337, "vote_rate": 29.2, "rank": 2, "elected": false },
+      { "name": "바른미래당", "party": "바른미래당", "party_color": "#7B68EE", "votes": 26315, "vote_rate": 8.7, "rank": 3, "elected": false },
+      { "name": "무소속", "party": "무소속", "party_color": "#888888", "votes": 15730, "vote_rate": 5.2, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 5737, "vote_rate": 1.9, "rank": 5, "elected": false }
+    ]
+  }
+]

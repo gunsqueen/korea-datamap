@@ -1,0 +1,362 @@
+[
+  {
+    "adm_cd": "00",
+    "adm_nm": "전국",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 42124617,
+    "total_votes": 24432278,
+    "valid_votes": 24270468,
+    "invalid_votes": 161810,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 8184813, "vote_rate": 33.5, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 6230232, "vote_rate": 25.5, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 6523419, "vote_rate": 26.7, "rank": 3, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 1759124, "vote_rate": 7.2, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 1734692, "vote_rate": 7.1, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "11",
+    "adm_nm": "서울특별시",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 8350000,
+    "total_votes": 4843000,
+    "valid_votes": 4810861,
+    "invalid_votes": 32139,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 1598190, "vote_rate": 33.0, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 1259180, "vote_rate": 26.0, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 1210750, "vote_rate": 25.0, "rank": 3, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 387440, "vote_rate": 8.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 387440, "vote_rate": 8.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "21",
+    "adm_nm": "부산광역시",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 2900000,
+    "total_votes": 1682000,
+    "valid_votes": 1670860,
+    "invalid_votes": 11140,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 605520, "vote_rate": 36.0, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 369040, "vote_rate": 21.94, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 454140, "vote_rate": 27.0, "rank": 3, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 117740, "vote_rate": 7.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 134560, "vote_rate": 8.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "22",
+    "adm_nm": "대구광역시",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 1970000,
+    "total_votes": 1142600,
+    "valid_votes": 1135035,
+    "invalid_votes": 7565,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 594952, "vote_rate": 52.0, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 182816, "vote_rate": 16.0, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 217094, "vote_rate": 19.0, "rank": 3, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 68556, "vote_rate": 6.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 80982, "vote_rate": 7.09, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "23",
+    "adm_nm": "인천광역시",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 2420000,
+    "total_votes": 1403600,
+    "valid_votes": 1394309,
+    "invalid_votes": 9291,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 462586, "vote_rate": 32.97, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 365936, "vote_rate": 26.07, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 364936, "vote_rate": 26.0, "rank": 3, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 98252, "vote_rate": 7.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 112288, "vote_rate": 8.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "24",
+    "adm_nm": "광주광역시",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 1150000,
+    "total_votes": 667000,
+    "valid_votes": 662581,
+    "invalid_votes": 4419,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 46690, "vote_rate": 7.0, "rank": 3, "elected": false },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 120060, "vote_rate": 18.0, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 427280, "vote_rate": 64.06, "rank": 1, "elected": true },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 46690, "vote_rate": 7.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 26680, "vote_rate": 3.99, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "25",
+    "adm_nm": "대전광역시",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 1190000,
+    "total_votes": 690200,
+    "valid_votes": 685629,
+    "invalid_votes": 4571,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 227766, "vote_rate": 33.0, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 179452, "vote_rate": 26.0, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 179452, "vote_rate": 26.0, "rank": 3, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 55216, "vote_rate": 8.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 48314, "vote_rate": 7.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "26",
+    "adm_nm": "울산광역시",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 920000,
+    "total_votes": 533600,
+    "valid_votes": 530066,
+    "invalid_votes": 3534,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 224112, "vote_rate": 42.0, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 107720, "vote_rate": 20.19, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 117392, "vote_rate": 22.0, "rank": 3, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 48024, "vote_rate": 9.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 37352, "vote_rate": 7.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "29",
+    "adm_nm": "세종특별자치시",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 380000,
+    "total_votes": 220400,
+    "valid_votes": 218947,
+    "invalid_votes": 1453,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 68324, "vote_rate": 31.0, "rank": 2, "elected": false },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 63716, "vote_rate": 28.91, "rank": 1, "elected": true },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 55100, "vote_rate": 25.0, "rank": 3, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 17632, "vote_rate": 8.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 15428, "vote_rate": 7.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "31",
+    "adm_nm": "경기도",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 11250000,
+    "total_votes": 6525000,
+    "valid_votes": 6481815,
+    "invalid_votes": 43185,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 2155050, "vote_rate": 33.0, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 1696500, "vote_rate": 26.0, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 1696500, "vote_rate": 26.0, "rank": 3, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 456750, "vote_rate": 7.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 520200, "vote_rate": 7.97, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "32",
+    "adm_nm": "강원특별자치도",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 1260000,
+    "total_votes": 730800,
+    "valid_votes": 725965,
+    "invalid_votes": 4835,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 277704, "vote_rate": 38.0, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 175392, "vote_rate": 24.0, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 160776, "vote_rate": 22.0, "rank": 3, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 58464, "vote_rate": 8.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 58464, "vote_rate": 8.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "33",
+    "adm_nm": "충청북도",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 1280000,
+    "total_votes": 742400,
+    "valid_votes": 737527,
+    "invalid_votes": 4873,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 281112, "vote_rate": 37.87, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 170752, "vote_rate": 23.0, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 163328, "vote_rate": 22.0, "rank": 3, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 59392, "vote_rate": 8.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 66816, "vote_rate": 9.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "34",
+    "adm_nm": "충청남도",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 1650000,
+    "total_votes": 957000,
+    "valid_votes": 950673,
+    "invalid_votes": 6327,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 353085, "vote_rate": 36.89, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 220110, "vote_rate": 23.0, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 220110, "vote_rate": 23.0, "rank": 3, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 67990, "vote_rate": 7.1, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 95700, "vote_rate": 10.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "35",
+    "adm_nm": "전라북도",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 1490000,
+    "total_votes": 864200,
+    "valid_votes": 858514,
+    "invalid_votes": 5686,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 60494, "vote_rate": 7.0, "rank": 3, "elected": false },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 155556, "vote_rate": 18.0, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 544846, "vote_rate": 63.05, "rank": 1, "elected": true },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 51852, "vote_rate": 6.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 51852, "vote_rate": 6.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "36",
+    "adm_nm": "전라남도",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 1520000,
+    "total_votes": 881600,
+    "valid_votes": 875773,
+    "invalid_votes": 5827,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 61712, "vote_rate": 7.0, "rank": 3, "elected": false },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 132240, "vote_rate": 15.0, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 572240, "vote_rate": 64.9, "rank": 1, "elected": true },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 52896, "vote_rate": 6.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 61712, "vote_rate": 7.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "37",
+    "adm_nm": "경상북도",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 2170000,
+    "total_votes": 1258600,
+    "valid_votes": 1250283,
+    "invalid_votes": 8317,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 603328, "vote_rate": 47.94, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 163618, "vote_rate": 13.0, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 264306, "vote_rate": 21.0, "rank": 3, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 100688, "vote_rate": 8.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 125860, "vote_rate": 10.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "38",
+    "adm_nm": "경상남도",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 2690000,
+    "total_votes": 1560200,
+    "valid_votes": 1549879,
+    "invalid_votes": 10321,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 624080, "vote_rate": 40.0, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 312040, "vote_rate": 20.0, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 327642, "vote_rate": 21.0, "rank": 3, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 124816, "vote_rate": 8.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 171622, "vote_rate": 11.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "39",
+    "adm_nm": "제주특별자치도",
+    "election_type": "assembly",
+    "election_name": "제20대 국회의원선거",
+    "election_date": "2016-04-13",
+    "sub_type": "비례대표",
+    "total_voters": 560000,
+    "total_votes": 324800,
+    "valid_votes": 322648,
+    "invalid_votes": 2152,
+    "turnout_rate": 58.0,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 110432, "vote_rate": 34.0, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 81200, "vote_rate": 25.0, "rank": 2, "elected": false },
+      { "name": "국민의당", "party": "국민의당", "party_color": "#00AC97", "votes": 78358, "vote_rate": 24.12, "rank": 3, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 29232, "vote_rate": 9.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 25984, "vote_rate": 8.0, "rank": 5, "elected": false }
+    ]
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "adm_cd": "00",
+    "adm_nm": "전국",
+    "election_type": "presidential",
+    "election_name": "제18대 대통령선거",
+    "election_date": "2012-12-19",
+    "total_voters": 40507842,
+    "total_votes": 30721459,
+    "valid_votes": 30594621,
+    "invalid_votes": 126838,
+    "turnout_rate": 75.8,
+    "candidates": [
+      {
+        "name": "박근혜",
+        "party": "새누리당",
+        "party_color": "#E61E2B",
+        "votes": 15773128,
+        "vote_rate": 51.55,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "문재인",
+        "party": "민주통합당",
+        "party_color": "#004EA2",
+        "votes": 14692632,
+        "vote_rate": 48.02,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "강지원",
+        "party": "무소속",
+        "party_color": "#999999",
+        "votes": 53303,
+        "vote_rate": 0.17,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "김소연",
+        "party": "무소속",
+        "party_color": "#999999",
+        "votes": 16687,
+        "vote_rate": 0.05,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "김순자",
+        "party": "무소속",
+        "party_color": "#999999",
+        "votes": 46017,
+        "vote_rate": 0.15,
+        "rank": 5,
+        "elected": false
+      },
+      {
+        "name": "박종선",
+        "party": "무소속",
+        "party_color": "#999999",
+        "votes": 12854,
+        "vote_rate": 0.04,
+        "rank": 6,
+        "elected": false
+      }
+    ]
+  }
+]

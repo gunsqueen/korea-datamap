@@ -1,0 +1,362 @@
+[
+  {
+    "adm_cd": "00",
+    "adm_nm": "전국",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 43994247,
+    "total_votes": 29124172,
+    "valid_votes": 28930343,
+    "invalid_votes": 193829,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 14530962, "vote_rate": 49.9, "rank": 1, "elected": true },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 12086531, "vote_rate": 41.5, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 757228, "vote_rate": 2.6, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 611607, "vote_rate": 2.1, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 1135843, "vote_rate": 3.9, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "11",
+    "adm_nm": "서울특별시",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 8350000,
+    "total_votes": 5527700,
+    "valid_votes": 5490764,
+    "invalid_votes": 36936,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 2763850, "vote_rate": 50.0, "rank": 1, "elected": true },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 2211080, "vote_rate": 40.0, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 165831, "vote_rate": 3.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 110554, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 276385, "vote_rate": 5.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "21",
+    "adm_nm": "부산광역시",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 2900000,
+    "total_votes": 1919800,
+    "valid_votes": 1906982,
+    "invalid_votes": 12818,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 748922, "vote_rate": 39.0, "rank": 2, "elected": false },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 960890, "vote_rate": 50.05, "rank": 1, "elected": true },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 57594, "vote_rate": 3.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 38396, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 115188, "vote_rate": 6.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "22",
+    "adm_nm": "대구광역시",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 1970000,
+    "total_votes": 1304140,
+    "valid_votes": 1295551,
+    "invalid_votes": 8589,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 195621, "vote_rate": 15.0, "rank": 2, "elected": false },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 983638, "vote_rate": 75.42, "rank": 1, "elected": true },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 39124, "vote_rate": 3.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 26082, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 65207, "vote_rate": 5.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "23",
+    "adm_nm": "인천광역시",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 2420000,
+    "total_votes": 1602040,
+    "valid_votes": 1591284,
+    "invalid_votes": 10756,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 793019, "vote_rate": 49.5, "rank": 1, "elected": true },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 641618, "vote_rate": 40.05, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 48061, "vote_rate": 3.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 32040, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 87302, "vote_rate": 5.45, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "24",
+    "adm_nm": "광주광역시",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 1150000,
+    "total_votes": 761300,
+    "valid_votes": 756271,
+    "invalid_votes": 5029,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 624266, "vote_rate": 82.0, "rank": 1, "elected": true },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 83743, "vote_rate": 11.0, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 30452, "vote_rate": 4.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 15226, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 7613, "vote_rate": 1.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "25",
+    "adm_nm": "대전광역시",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 1190000,
+    "total_votes": 787780,
+    "valid_votes": 782554,
+    "invalid_votes": 5226,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 393890, "vote_rate": 50.0, "rank": 1, "elected": true },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 299956, "vote_rate": 38.08, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 23633, "vote_rate": 3.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 15755, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 55145, "vote_rate": 7.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "26",
+    "adm_nm": "울산광역시",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 920000,
+    "total_votes": 609040,
+    "valid_votes": 604997,
+    "invalid_votes": 4043,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 182712, "vote_rate": 30.0, "rank": 2, "elected": false },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 371514, "vote_rate": 61.0, "rank": 1, "elected": true },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 18271, "vote_rate": 3.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 12180, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 24362, "vote_rate": 4.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "29",
+    "adm_nm": "세종특별자치시",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 380000,
+    "total_votes": 251560,
+    "valid_votes": 249887,
+    "invalid_votes": 1673,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 136345, "vote_rate": 54.2, "rank": 1, "elected": true },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 90562, "vote_rate": 36.0, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 7546, "vote_rate": 3.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 5031, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 12580, "vote_rate": 5.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "31",
+    "adm_nm": "경기도",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 11250000,
+    "total_votes": 7447500,
+    "valid_votes": 7397823,
+    "invalid_votes": 49677,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 3760590, "vote_rate": 50.5, "rank": 1, "elected": true },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 2978760, "vote_rate": 40.0, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 223425, "vote_rate": 3.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 148950, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 335775, "vote_rate": 4.51, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "32",
+    "adm_nm": "강원특별자치도",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 1260000,
+    "total_votes": 834120,
+    "valid_votes": 828641,
+    "invalid_votes": 5479,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 375354, "vote_rate": 45.0, "rank": 2, "elected": false },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 408718, "vote_rate": 49.0, "rank": 1, "elected": true },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 25023, "vote_rate": 3.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 8341, "vote_rate": 1.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 16682, "vote_rate": 2.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "33",
+    "adm_nm": "충청북도",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 1280000,
+    "total_votes": 847360,
+    "valid_votes": 841831,
+    "invalid_votes": 5529,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 406732, "vote_rate": 48.0, "rank": 1, "elected": true },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 381312, "vote_rate": 45.0, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 25420, "vote_rate": 3.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 16947, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 16947, "vote_rate": 2.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "34",
+    "adm_nm": "충청남도",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 1650000,
+    "total_votes": 1092300,
+    "valid_votes": 1085178,
+    "invalid_votes": 7122,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 524304, "vote_rate": 48.0, "rank": 1, "elected": true },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 491535, "vote_rate": 45.0, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 32769, "vote_rate": 3.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 21846, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 21846, "vote_rate": 2.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "35",
+    "adm_nm": "전라북도",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 1490000,
+    "total_votes": 986180,
+    "valid_votes": 979601,
+    "invalid_votes": 6579,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 798085, "vote_rate": 80.9, "rank": 1, "elected": true },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 108479, "vote_rate": 11.0, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 39447, "vote_rate": 4.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 19723, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 19723, "vote_rate": 2.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "36",
+    "adm_nm": "전라남도",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 1520000,
+    "total_votes": 1006240,
+    "valid_votes": 999200,
+    "invalid_votes": 7040,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 815054, "vote_rate": 81.0, "rank": 1, "elected": true },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 100624, "vote_rate": 10.0, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 40249, "vote_rate": 4.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 30187, "vote_rate": 3.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 20124, "vote_rate": 2.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "37",
+    "adm_nm": "경상북도",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 2170000,
+    "total_votes": 1436540,
+    "valid_votes": 1426932,
+    "invalid_votes": 9608,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 215481, "vote_rate": 15.0, "rank": 2, "elected": false },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 1062640, "vote_rate": 73.97, "rank": 1, "elected": true },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 43096, "vote_rate": 3.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 28730, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 86593, "vote_rate": 6.03, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "38",
+    "adm_nm": "경상남도",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 2690000,
+    "total_votes": 1780580,
+    "valid_votes": 1768716,
+    "invalid_votes": 11864,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 498562, "vote_rate": 28.0, "rank": 2, "elected": false },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 1068348, "vote_rate": 60.0, "rank": 1, "elected": true },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 53417, "vote_rate": 3.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 35611, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 124640, "vote_rate": 7.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "39",
+    "adm_nm": "제주특별자치도",
+    "election_type": "assembly",
+    "election_name": "제21대 국회의원선거",
+    "election_date": "2020-04-15",
+    "sub_type": "지역구",
+    "total_voters": 560000,
+    "total_votes": 370720,
+    "valid_votes": 368245,
+    "invalid_votes": 2475,
+    "turnout_rate": 66.2,
+    "candidates": [
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 192174, "vote_rate": 51.8, "rank": 1, "elected": true },
+      { "name": "미래통합당", "party": "미래통합당", "party_color": "#C9151E", "votes": 144580, "vote_rate": 39.0, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 14828, "vote_rate": 4.0, "rank": 3, "elected": false },
+      { "name": "민생당", "party": "민생당", "party_color": "#004EA2", "votes": 7414, "vote_rate": 2.0, "rank": 4, "elected": false },
+      { "name": "기타/무소속", "party": "기타/무소속", "party_color": "#888888", "votes": 11721, "vote_rate": 3.16, "rank": 5, "elected": false }
+    ]
+  }
+]

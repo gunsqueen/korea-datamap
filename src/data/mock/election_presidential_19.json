@@ -1,0 +1,1064 @@
+[
+  {
+    "adm_cd": "00",
+    "adm_nm": "전국",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 42479710,
+    "total_votes": 32794336,
+    "valid_votes": 32564776,
+    "invalid_votes": 229560,
+    "turnout_rate": 77.2,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 13377610,
+        "vote_rate": 41.08,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 7825316,
+        "vote_rate": 24.03,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 6972119,
+        "vote_rate": 21.41,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 2201379,
+        "vote_rate": 6.76,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 2009247,
+        "vote_rate": 6.17,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "11",
+    "adm_nm": "서울특별시",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 8100000,
+    "total_votes": 6326100,
+    "valid_votes": 6281817,
+    "invalid_votes": 44283,
+    "turnout_rate": 78.1,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 2674675,
+        "vote_rate": 42.28,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 1420209,
+        "vote_rate": 22.45,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 1275342,
+        "vote_rate": 20.16,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 505455,
+        "vote_rate": 7.99,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 450418,
+        "vote_rate": 7.12,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "21",
+    "adm_nm": "부산광역시",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 2780000,
+    "total_votes": 2129480,
+    "valid_votes": 2114574,
+    "invalid_votes": 14906,
+    "turnout_rate": 76.6,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 780454,
+        "vote_rate": 36.65,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 680369,
+        "vote_rate": 31.95,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 449533,
+        "vote_rate": 21.11,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 117547,
+        "vote_rate": 5.52,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 101576,
+        "vote_rate": 4.77,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "22",
+    "adm_nm": "대구광역시",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 1930000,
+    "total_votes": 1459080,
+    "valid_votes": 1448866,
+    "invalid_votes": 10214,
+    "turnout_rate": 75.6,
+    "candidates": [
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 662714,
+        "vote_rate": 45.42,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 314432,
+        "vote_rate": 21.55,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 267595,
+        "vote_rate": 18.34,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 220613,
+        "vote_rate": 15.12,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": -6274,
+        "vote_rate": -0.43,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "23",
+    "adm_nm": "인천광역시",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 2380000,
+    "total_votes": 1839740,
+    "valid_votes": 1826862,
+    "invalid_votes": 12878,
+    "turnout_rate": 77.3,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 733136,
+        "vote_rate": 39.85,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 425900,
+        "vote_rate": 23.15,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 414861,
+        "vote_rate": 22.55,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 138900,
+        "vote_rate": 7.55,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 126942,
+        "vote_rate": 6.9,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "24",
+    "adm_nm": "광주광역시",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 1130000,
+    "total_votes": 907390,
+    "valid_votes": 901038,
+    "invalid_votes": 6352,
+    "turnout_rate": 80.3,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 554778,
+        "vote_rate": 61.14,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 227573,
+        "vote_rate": 25.08,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 64425,
+        "vote_rate": 7.1,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 33392,
+        "vote_rate": 3.68,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 27222,
+        "vote_rate": 3.0,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "25",
+    "adm_nm": "대전광역시",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 1160000,
+    "total_votes": 909440,
+    "valid_votes": 903074,
+    "invalid_votes": 6366,
+    "turnout_rate": 78.4,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 402245,
+        "vote_rate": 44.23,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 194074,
+        "vote_rate": 21.34,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 183252,
+        "vote_rate": 20.15,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 72028,
+        "vote_rate": 7.92,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 57840,
+        "vote_rate": 6.36,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "26",
+    "adm_nm": "울산광역시",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 885000,
+    "total_votes": 674370,
+    "valid_votes": 669649,
+    "invalid_votes": 4721,
+    "turnout_rate": 76.2,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 261790,
+        "vote_rate": 38.82,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 190037,
+        "vote_rate": 28.18,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 139932,
+        "vote_rate": 20.75,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 43767,
+        "vote_rate": 6.49,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 38844,
+        "vote_rate": 5.76,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "29",
+    "adm_nm": "세종특별자치시",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 240000,
+    "total_votes": 197520,
+    "valid_votes": 196137,
+    "invalid_votes": 1383,
+    "turnout_rate": 82.3,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 91155,
+        "vote_rate": 46.15,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 43158,
+        "vote_rate": 21.85,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 32354,
+        "vote_rate": 16.38,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 16236,
+        "vote_rate": 8.22,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 14616,
+        "vote_rate": 7.4,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "31",
+    "adm_nm": "경기도",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 10480000,
+    "total_votes": 8153440,
+    "valid_votes": 8096366,
+    "invalid_votes": 57074,
+    "turnout_rate": 77.8,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 3437490,
+        "vote_rate": 42.16,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 1779081,
+        "vote_rate": 21.82,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 1744836,
+        "vote_rate": 21.4,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 604985,
+        "vote_rate": 7.42,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 587048,
+        "vote_rate": 7.2,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "32",
+    "adm_nm": "강원특별자치도",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 1220000,
+    "total_votes": 962580,
+    "valid_votes": 955842,
+    "invalid_votes": 6738,
+    "turnout_rate": 78.9,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 350572,
+        "vote_rate": 36.42,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 290218,
+        "vote_rate": 30.15,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 190880,
+        "vote_rate": 19.83,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 76429,
+        "vote_rate": 7.94,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 54482,
+        "vote_rate": 5.66,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "33",
+    "adm_nm": "충청북도",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 1225000,
+    "total_votes": 949375,
+    "valid_votes": 942729,
+    "invalid_votes": 6646,
+    "turnout_rate": 77.5,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 367978,
+        "vote_rate": 38.76,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 259274,
+        "vote_rate": 27.31,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 188166,
+        "vote_rate": 19.82,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 72912,
+        "vote_rate": 7.68,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 61045,
+        "vote_rate": 6.43,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "34",
+    "adm_nm": "충청남도",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 1630000,
+    "total_votes": 1281180,
+    "valid_votes": 1272212,
+    "invalid_votes": 8968,
+    "turnout_rate": 78.6,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 524259,
+        "vote_rate": 40.92,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 303896,
+        "vote_rate": 23.72,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 259183,
+        "vote_rate": 20.23,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 105313,
+        "vote_rate": 8.22,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 88530,
+        "vote_rate": 6.91,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "35",
+    "adm_nm": "전북특별자치도",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 1490000,
+    "total_votes": 1212860,
+    "valid_votes": 1204370,
+    "invalid_votes": 8490,
+    "turnout_rate": 81.4,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 749790,
+        "vote_rate": 61.82,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 238691,
+        "vote_rate": 19.68,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 106247,
+        "vote_rate": 8.76,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 69376,
+        "vote_rate": 5.72,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 48757,
+        "vote_rate": 4.02,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "36",
+    "adm_nm": "전라남도",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 1500000,
+    "total_votes": 1255500,
+    "valid_votes": 1246712,
+    "invalid_votes": 8788,
+    "turnout_rate": 83.7,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 818335,
+        "vote_rate": 65.18,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 233272,
+        "vote_rate": 18.58,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 93911,
+        "vote_rate": 7.48,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 57376,
+        "vote_rate": 4.57,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 52605,
+        "vote_rate": 4.19,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "37",
+    "adm_nm": "경상북도",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 2180000,
+    "total_votes": 1674240,
+    "valid_votes": 1662520,
+    "invalid_votes": 11720,
+    "turnout_rate": 76.8,
+    "candidates": [
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 879478,
+        "vote_rate": 52.53,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 378378,
+        "vote_rate": 22.6,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 246448,
+        "vote_rate": 14.72,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 90074,
+        "vote_rate": 5.38,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 79861,
+        "vote_rate": 4.77,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "38",
+    "adm_nm": "경상남도",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 2670000,
+    "total_votes": 2042550,
+    "valid_votes": 2028252,
+    "invalid_votes": 14298,
+    "turnout_rate": 76.5,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 727556,
+        "vote_rate": 35.62,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 669344,
+        "vote_rate": 32.77,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 396255,
+        "vote_rate": 19.4,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 129702,
+        "vote_rate": 6.35,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 119693,
+        "vote_rate": 5.86,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "39",
+    "adm_nm": "제주특별자치도",
+    "election_type": "presidential",
+    "election_name": "제19대 대통령선거",
+    "election_date": "2017-05-09",
+    "total_voters": 540000,
+    "total_votes": 428760,
+    "valid_votes": 425759,
+    "invalid_votes": 3001,
+    "turnout_rate": 79.4,
+    "candidates": [
+      {
+        "name": "문재인",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 191999,
+        "vote_rate": 44.78,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "안철수",
+        "party": "국민의당",
+        "party_color": "#EA5504",
+        "votes": 100030,
+        "vote_rate": 23.33,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "홍준표",
+        "party": "자유한국당",
+        "party_color": "#C9151E",
+        "votes": 80607,
+        "vote_rate": 18.8,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "유승민",
+        "party": "바른정당",
+        "party_color": "#00703C",
+        "votes": 31471,
+        "vote_rate": 7.34,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "심상정",
+        "party": "정의당",
+        "party_color": "#FFCC00",
+        "votes": 24654,
+        "vote_rate": 5.75,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,362 @@
+[
+  {
+    "adm_cd": "00",
+    "adm_nm": "전국",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 42207070,
+    "total_votes": 21487400,
+    "valid_votes": 21337484,
+    "invalid_votes": 149916,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 11134294, "vote_rate": 51.8, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 8857402, "vote_rate": 41.2, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 795834, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 301084, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 408870, "vote_rate": 1.9, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "11",
+    "adm_nm": "서울특별시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 8334070,
+    "total_votes": 4242102,
+    "valid_votes": 4212488,
+    "invalid_votes": 29614,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 2188487, "vote_rate": 52.0, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 1737261, "vote_rate": 41.3, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 168884, "vote_rate": 4.0, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 59389, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 58467, "vote_rate": 1.4, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "21",
+    "adm_nm": "부산광역시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 2867000,
+    "total_votes": 1459283,
+    "valid_votes": 1449128,
+    "invalid_votes": 10155,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 826900, "vote_rate": 57.1, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 597905, "vote_rate": 41.3, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 53893, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 20430, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": -49000, "vote_rate": -3.4, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "22",
+    "adm_nm": "대구광역시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 1945000,
+    "total_votes": 989905,
+    "valid_votes": 982983,
+    "invalid_votes": 6922,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 638778, "vote_rate": 65.0, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 307272, "vote_rate": 31.3, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 36627, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 13859, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": -13553, "vote_rate": -1.4, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "23",
+    "adm_nm": "인천광역시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 2380000,
+    "total_votes": 1211420,
+    "valid_votes": 1203020,
+    "invalid_votes": 8400,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 625935, "vote_rate": 52.0, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 499786, "vote_rate": 41.5, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 44523, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 16960, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 15816, "vote_rate": 1.3, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "24",
+    "adm_nm": "광주광역시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 1155000,
+    "total_votes": 587895,
+    "valid_votes": 583782,
+    "invalid_votes": 4113,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 47008, "vote_rate": 8.1, "rank": 2, "elected": false },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 481809, "vote_rate": 82.5, "rank": 1, "elected": true },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 21609, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 8230, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 25126, "vote_rate": 4.3, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "25",
+    "adm_nm": "대전광역시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 1182000,
+    "total_votes": 601638,
+    "valid_votes": 597385,
+    "invalid_votes": 4253,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 311045, "vote_rate": 52.1, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 249280, "vote_rate": 41.7, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 22096, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 8423, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 6541, "vote_rate": 1.1, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "26",
+    "adm_nm": "울산광역시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 904000,
+    "total_votes": 460136,
+    "valid_votes": 456875,
+    "invalid_votes": 3261,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 256632, "vote_rate": 56.2, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 183134, "vote_rate": 40.1, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 17025, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 6442, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": -6358, "vote_rate": -1.4, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "29",
+    "adm_nm": "세종특별자치시",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 310000,
+    "total_votes": 157790,
+    "valid_votes": 156684,
+    "invalid_votes": 1106,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 80863, "vote_rate": 51.6, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 64690, "vote_rate": 41.3, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 5797, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 2189, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 3145, "vote_rate": 2.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "31",
+    "adm_nm": "경기도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 11100000,
+    "total_votes": 5649900,
+    "valid_votes": 5610347,
+    "invalid_votes": 39553,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 2926547, "vote_rate": 52.2, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 2338459, "vote_rate": 41.7, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 207646, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 79099, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 98596, "vote_rate": 1.8, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "32",
+    "adm_nm": "강원특별자치도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 1252000,
+    "total_votes": 637268,
+    "valid_votes": 632810,
+    "invalid_votes": 4458,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 334316, "vote_rate": 52.8, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 261515, "vote_rate": 41.3, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 23414, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 8921, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 4644, "vote_rate": 0.7, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "33",
+    "adm_nm": "충청북도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 1267000,
+    "total_votes": 644903,
+    "valid_votes": 640393,
+    "invalid_votes": 4510,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 334484, "vote_rate": 52.2, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 268161, "vote_rate": 41.9, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 23661, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 9015, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 5072, "vote_rate": 0.8, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "34",
+    "adm_nm": "충청남도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 1628000,
+    "total_votes": 828652,
+    "valid_votes": 822881,
+    "invalid_votes": 5771,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 428445, "vote_rate": 52.1, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 342588, "vote_rate": 41.6, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 30460, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 11601, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 9787, "vote_rate": 1.2, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "35",
+    "adm_nm": "전라북도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 1470000,
+    "total_votes": 748230,
+    "valid_votes": 742872,
+    "invalid_votes": 5358,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 60205, "vote_rate": 8.1, "rank": 2, "elected": false },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 618483, "vote_rate": 83.3, "rank": 1, "elected": true },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 27484, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 10475, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 26225, "vote_rate": 3.5, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "36",
+    "adm_nm": "전라남도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 1503000,
+    "total_votes": 765027,
+    "valid_votes": 759672,
+    "invalid_votes": 5355,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 61530, "vote_rate": 8.1, "rank": 2, "elected": false },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 628532, "vote_rate": 82.7, "rank": 1, "elected": true },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 28107, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 10710, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 30793, "vote_rate": 4.1, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "37",
+    "adm_nm": "경상북도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 2145000,
+    "total_votes": 1091805,
+    "valid_votes": 1084173,
+    "invalid_votes": 7632,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 696690, "vote_rate": 64.3, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 339963, "vote_rate": 31.4, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 40397, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 15285, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": -7838, "vote_rate": -0.7, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "38",
+    "adm_nm": "경상남도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 2662000,
+    "total_votes": 1354958,
+    "valid_votes": 1345453,
+    "invalid_votes": 9505,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 773150, "vote_rate": 57.5, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 557495, "vote_rate": 41.4, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 50133, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 18969, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": -54294, "vote_rate": -4.0, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "39",
+    "adm_nm": "제주특별자치도",
+    "election_type": "local",
+    "election_name": "제8회 전국동시지방선거",
+    "election_date": "2022-06-01",
+    "sub_type": "기초의원(비례)",
+    "total_voters": 503000,
+    "total_votes": 256027,
+    "valid_votes": 254235,
+    "invalid_votes": 1792,
+    "turnout_rate": 50.9,
+    "candidates": [
+      { "name": "국민의힘", "party": "국민의힘", "party_color": "#C9151E", "votes": 130562, "vote_rate": 51.4, "rank": 1, "elected": true },
+      { "name": "더불어민주당", "party": "더불어민주당", "party_color": "#004EA2", "votes": 105481, "vote_rate": 41.5, "rank": 2, "elected": false },
+      { "name": "정의당", "party": "정의당", "party_color": "#FFCC00", "votes": 9407, "vote_rate": 3.7, "rank": 3, "elected": false },
+      { "name": "기본소득당", "party": "기본소득당", "party_color": "#00C4A1", "votes": 3585, "vote_rate": 1.4, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 5200, "vote_rate": 2.0, "rank": 5, "elected": false }
+    ]
+  }
+]

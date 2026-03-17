@@ -1,0 +1,362 @@
+[
+  {
+    "adm_cd": "00",
+    "adm_nm": "전국",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 40507842,
+    "total_votes": 21995759,
+    "valid_votes": 21841789,
+    "invalid_votes": 153970,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 9413887, "vote_rate": 42.8, "rank": 1, "elected": true },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 8028455, "vote_rate": 36.5, "rank": 2, "elected": false },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 2265573, "vote_rate": 10.3, "rank": 3, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 703865, "vote_rate": 3.2, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 1584019, "vote_rate": 7.2, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "11",
+    "adm_nm": "서울특별시",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 8200000,
+    "total_votes": 4452600,
+    "valid_votes": 4421738,
+    "invalid_votes": 30862,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 1894157, "vote_rate": 42.8, "rank": 1, "elected": true },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 1605244, "vote_rate": 36.3, "rank": 2, "elected": false },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 445260, "vote_rate": 10.1, "rank": 3, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 133578, "vote_rate": 3.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 374361, "vote_rate": 8.5, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "21",
+    "adm_nm": "부산광역시",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 2850000,
+    "total_votes": 1547550,
+    "valid_votes": 1536722,
+    "invalid_votes": 10828,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 678523, "vote_rate": 44.3, "rank": 1, "elected": true },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 548083, "vote_rate": 35.8, "rank": 2, "elected": false },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 154755, "vote_rate": 10.1, "rank": 3, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 46427, "vote_rate": 3.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 119767, "vote_rate": 7.8, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "22",
+    "adm_nm": "대구광역시",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 1935000,
+    "total_votes": 1050705,
+    "valid_votes": 1043250,
+    "invalid_votes": 7455,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 588712, "vote_rate": 56.5, "rank": 1, "elected": true },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 172867, "vote_rate": 16.6, "rank": 2, "elected": false },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 105071, "vote_rate": 10.1, "rank": 3, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 31521, "vote_rate": 3.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 152534, "vote_rate": 14.6, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "23",
+    "adm_nm": "인천광역시",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 2335000,
+    "total_votes": 1267905,
+    "valid_votes": 1259035,
+    "invalid_votes": 8870,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 543284, "vote_rate": 43.2, "rank": 1, "elected": true },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 455289, "vote_rate": 36.2, "rank": 2, "elected": false },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 127008, "vote_rate": 10.1, "rank": 3, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 38037, "vote_rate": 3.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 104287, "vote_rate": 8.3, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "24",
+    "adm_nm": "광주광역시",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 1126000,
+    "total_votes": 611418,
+    "valid_votes": 607136,
+    "invalid_votes": 4282,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 30571, "vote_rate": 5.0, "rank": 3, "elected": false },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 421079, "vote_rate": 69.4, "rank": 1, "elected": true },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 97827, "vote_rate": 16.1, "rank": 2, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 18342, "vote_rate": 3.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 43599, "vote_rate": 7.2, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "25",
+    "adm_nm": "대전광역시",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 1165000,
+    "total_votes": 632595,
+    "valid_votes": 628172,
+    "invalid_votes": 4423,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 268752, "vote_rate": 42.8, "rank": 1, "elected": true },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 227915, "vote_rate": 36.3, "rank": 2, "elected": false },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 63259, "vote_rate": 10.1, "rank": 3, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 56929, "vote_rate": 9.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 15740, "vote_rate": 2.5, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "26",
+    "adm_nm": "울산광역시",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 900000,
+    "total_votes": 488700,
+    "valid_votes": 485285,
+    "invalid_votes": 3415,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 209177, "vote_rate": 43.2, "rank": 1, "elected": true },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 176356, "vote_rate": 36.4, "rank": 2, "elected": false },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 48870, "vote_rate": 10.1, "rank": 3, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 14661, "vote_rate": 3.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 39636, "vote_rate": 8.2, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "29",
+    "adm_nm": "세종특별자치시",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 100000,
+    "total_votes": 54300,
+    "valid_votes": 53920,
+    "invalid_votes": 380,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 23241, "vote_rate": 43.1, "rank": 1, "elected": true },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 19548, "vote_rate": 36.3, "rank": 2, "elected": false },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 5430, "vote_rate": 10.1, "rank": 3, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 2715, "vote_rate": 5.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 2986, "vote_rate": 5.5, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "31",
+    "adm_nm": "경기도",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 10380000,
+    "total_votes": 5636340,
+    "valid_votes": 5597001,
+    "invalid_votes": 39339,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 2412338, "vote_rate": 42.9, "rank": 1, "elected": true },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 2032237, "vote_rate": 36.2, "rank": 2, "elected": false },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 563634, "vote_rate": 10.1, "rank": 3, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 169090, "vote_rate": 3.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 459041, "vote_rate": 8.2, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "32",
+    "adm_nm": "강원특별자치도",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 1245000,
+    "total_votes": 676035,
+    "valid_votes": 671302,
+    "invalid_votes": 4733,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 289183, "vote_rate": 43.2, "rank": 1, "elected": true },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 242773, "vote_rate": 36.2, "rank": 2, "elected": false },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 67604, "vote_rate": 10.1, "rank": 3, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 20281, "vote_rate": 3.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 56194, "vote_rate": 8.4, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "33",
+    "adm_nm": "충청북도",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 1255000,
+    "total_votes": 681465,
+    "valid_votes": 676691,
+    "invalid_votes": 4774,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 291747, "vote_rate": 43.1, "rank": 1, "elected": true },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 244725, "vote_rate": 36.2, "rank": 2, "elected": false },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 68147, "vote_rate": 10.1, "rank": 3, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 61332, "vote_rate": 9.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 15514, "vote_rate": 2.3, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "34",
+    "adm_nm": "충청남도",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 1585000,
+    "total_votes": 860655,
+    "valid_votes": 854627,
+    "invalid_votes": 6028,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 369081, "vote_rate": 43.2, "rank": 1, "elected": true },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 309836, "vote_rate": 36.3, "rank": 2, "elected": false },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 86066, "vote_rate": 10.1, "rank": 3, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 77459, "vote_rate": 9.1, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 18213, "vote_rate": 2.1, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "35",
+    "adm_nm": "전라북도",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 1487000,
+    "total_votes": 807441,
+    "valid_votes": 801792,
+    "invalid_votes": 5649,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 40372, "vote_rate": 5.0, "rank": 3, "elected": false },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 549941, "vote_rate": 68.6, "rank": 1, "elected": true },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 129191, "vote_rate": 16.1, "rank": 2, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 24223, "vote_rate": 3.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 63714, "vote_rate": 7.9, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "36",
+    "adm_nm": "전라남도",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 1494000,
+    "total_votes": 811242,
+    "valid_votes": 805513,
+    "invalid_votes": 5729,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 40562, "vote_rate": 5.0, "rank": 3, "elected": false },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 556554, "vote_rate": 69.1, "rank": 1, "elected": true },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 130610, "vote_rate": 16.2, "rank": 2, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 24337, "vote_rate": 3.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 59179, "vote_rate": 7.3, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "37",
+    "adm_nm": "경상북도",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 2138000,
+    "total_votes": 1160934,
+    "valid_votes": 1152811,
+    "invalid_votes": 8123,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 647081, "vote_rate": 56.3, "rank": 1, "elected": true },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 191554, "vote_rate": 16.6, "rank": 2, "elected": false },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 116093, "vote_rate": 10.1, "rank": 3, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 34828, "vote_rate": 3.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 171378, "vote_rate": 14.9, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "38",
+    "adm_nm": "경상남도",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 2665000,
+    "total_votes": 1447095,
+    "valid_votes": 1436973,
+    "invalid_votes": 10122,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 627187, "vote_rate": 43.6, "rank": 1, "elected": true },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 519354, "vote_rate": 36.1, "rank": 2, "elected": false },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 144710, "vote_rate": 10.1, "rank": 3, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 43413, "vote_rate": 3.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 112431, "vote_rate": 7.8, "rank": 5, "elected": false }
+    ]
+  },
+  {
+    "adm_cd": "39",
+    "adm_nm": "제주특별자치도",
+    "election_type": "assembly",
+    "election_name": "제19대 국회의원선거",
+    "election_date": "2012-04-11",
+    "sub_type": "비례대표",
+    "total_voters": 460000,
+    "total_votes": 249780,
+    "valid_votes": 248032,
+    "invalid_votes": 1748,
+    "turnout_rate": 54.3,
+    "candidates": [
+      { "name": "새누리당", "party": "새누리당", "party_color": "#C9151E", "votes": 107309, "vote_rate": 43.3, "rank": 1, "elected": true },
+      { "name": "민주통합당", "party": "민주통합당", "party_color": "#004EA2", "votes": 90232, "vote_rate": 36.4, "rank": 2, "elected": false },
+      { "name": "통합진보당", "party": "통합진보당", "party_color": "#AA0000", "votes": 24978, "vote_rate": 10.1, "rank": 3, "elected": false },
+      { "name": "자유선진당", "party": "자유선진당", "party_color": "#FFA500", "votes": 7493, "vote_rate": 3.0, "rank": 4, "elected": false },
+      { "name": "기타", "party": "기타", "party_color": "#888888", "votes": 19768, "vote_rate": 8.0, "rank": 5, "elected": false }
+    ]
+  }
+]
