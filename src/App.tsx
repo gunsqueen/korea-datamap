@@ -125,6 +125,11 @@ export default function App() {
       </header>
 
       <div className="app-body">
+        {/* 모바일: 패널 오픈 시 지도 dimming */}
+        {selectedArea !== null && (
+          <div className="map-overlay" onClick={handleClosePanel} />
+        )}
+
         {/* 지도 영역 */}
         <main className="map-container">
           {/* 브레드크럼 + 뒤로가기 */}
@@ -178,7 +183,9 @@ export default function App() {
         </main>
 
         {/* 사이드 패널 */}
-        <aside className="side-panel">
+        <aside className={`side-panel${selectedArea !== null ? ' panel-open' : ''}`}>
+          {/* 모바일 드래그 핸들 */}
+          <div className="mobile-drag-handle" onClick={handleClosePanel} role="button" aria-label="패널 닫기" />
           {isComparing && selectedArea ? (
             <ComparePanel
               areaA={selectedArea}
