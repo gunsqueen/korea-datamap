@@ -32,16 +32,19 @@ const ELECTION_MAP: Record<string, NecElectionParam> = {
   assembly_20_pr:       { sgId: '20160413', sgTypecode: '7' },
   assembly_19_district: { sgId: '20120411', sgTypecode: '2' },
   assembly_19_pr:       { sgId: '20120411', sgTypecode: '7' },
+  local_8_metro_mayor:      { sgId: '20220601', sgTypecode: '3' },
   local_8_mayor:            { sgId: '20220601', sgTypecode: '3', sgTypecodeLocal: '4' },
   local_8_council_district: { sgId: '20220601', sgTypecode: '5' },
   local_8_council_pr:       { sgId: '20220601', sgTypecode: '8' },
   local_8_basic_district:   { sgId: '20220601', sgTypecode: '6' },
   local_8_basic_pr:         { sgId: '20220601', sgTypecode: '9' },
+  local_7_metro_mayor:      { sgId: '20180613', sgTypecode: '3' },
   local_7_mayor:            { sgId: '20180613', sgTypecode: '3', sgTypecodeLocal: '4' },
   local_7_council_district: { sgId: '20180613', sgTypecode: '5' },
   local_7_council_pr:       { sgId: '20180613', sgTypecode: '8' },
   local_7_basic_district:   { sgId: '20180613', sgTypecode: '6' },
   local_7_basic_pr:         { sgId: '20180613', sgTypecode: '9' },
+  local_6_metro_mayor:      { sgId: '20140604', sgTypecode: '3' },
   local_6_mayor:            { sgId: '20140604', sgTypecode: '3', sgTypecodeLocal: '4' },
   local_6_council_district: { sgId: '20140604', sgTypecode: '5' },
   local_6_council_pr:       { sgId: '20140604', sgTypecode: '8' },
@@ -378,6 +381,66 @@ function buildNecResult(
   });
 }
 
+/**
+ * 시군구에 지역구 선거구가 여러 개일 때 정당별 득표 합산 집계
+ * (광역의원·기초의원 지역구에서 구 단위 조회 시 사용)
+ */
+function aggregateDistrictItems(
+  items: NecItem[],
+  admCd: string,
+  admNm: string,
+  electionName: string,
+  electionDate: string,
+  electionType: 'presidential' | 'assembly' | 'local',
+  subType?: string,
+): ElectionData {
+  const totalVoters = items.reduce((s, it) => s + Number(it.sunsu ?? 0), 0);
+  const totalVotes  = items.reduce((s, it) => s + Number(it.tusu  ?? 0), 0);
+  const validVotes  = items.reduce((s, it) => s + Number(it.yutusu ?? 0), 0);
+  const invalidVotes = items.reduce((s, it) => s + Number(it.mutusu ?? 0), 0);
+
+  // 정당별 득표 합산
+  const partyVotes: Record<string, number> = {};
+  for (const item of items) {
+    for (let i = 1; i <= 50; i++) {
+      const key = String(i).padStart(2, '0');
+      const party = (item[`jd${key}`] ?? '').trim();
+      const votes = Number(item[`dugsu${key}`] ?? 0);
+      if (!party) break;
+      partyVotes[party] = (partyVotes[party] ?? 0) + votes;
+    }
+  }
+
+  const turnout = totalVoters > 0 ? Math.round((totalVotes / totalVoters) * 10000) / 100 : 0;
+  const candidates: Candidate[] = Object.entries(partyVotes)
+    .filter(([, v]) => v > 0)
+    .sort(([, a], [, b]) => b - a)
+    .map(([party, votes], idx) => ({
+      name: party,
+      party,
+      party_color: getPartyColor(party),
+      votes,
+      vote_rate: validVotes > 0 ? Math.round((votes / validVotes) * 10000) / 100 : 0,
+      rank: idx + 1,
+      elected: idx === 0,
+    }));
+
+  return {
+    adm_cd: admCd,
+    adm_nm: admNm,
+    election_type: electionType,
+    election_name: electionName,
+    election_date: electionDate,
+    sub_type: subType,
+    total_voters: totalVoters,
+    total_votes: totalVotes,
+    valid_votes: validVotes,
+    invalid_votes: invalidVotes,
+    turnout_rate: turnout,
+    candidates,
+  };
+}
+
 // ── 메인 API: 선거 결과 조회 ─────────────────────────────────
 export async function fetchNecElection(
   admCd: string,
@@ -564,33 +627,38 @@ export async function fetchNecElection(
       const directItems = directApiResult.items;
 
       if (['2', '5', '6'].includes(sgTypecode) || isDistrictElection(electionId)) {
-        if (directItems.length !== 1) {
-          mappingFailureReason = directItems.length > 1
-            ? `multiple district records matched for ${necWiwName}`
-            : `district record missing for ${necWiwName}`;
-          throw new ElectionLookupError(
-            directItems.length > 1 ? 'NEEDS_REVIEW' : 'NO_DATA',
-            directItems.length > 1 ? '선거 데이터 확인 필요' : '선거 데이터 없음',
-            {
-              sourceType: 'real',
-              requestUrl: getFirstRequestUrl(directApiResult.requestUrls),
-              statusCode: directApiResult.statusCode,
-              matchedRegionName: necWiwName,
-              matchedRegionCode: sigunguCd,
-              recordCount: directItems.length,
-              fallbackReason: mappingFailureReason,
-            },
-          );
+        if (directItems.length === 0) {
+          mappingFailureReason = `district record missing for ${necWiwName}`;
+          throw new ElectionLookupError('NO_DATA', '선거 데이터 없음', {
+            sourceType: 'real',
+            requestUrl: getFirstRequestUrl(directApiResult.requestUrls),
+            statusCode: directApiResult.statusCode,
+            matchedRegionName: necWiwName,
+            matchedRegionCode: sigunguCd,
+            recordCount: 0,
+            fallbackReason: mappingFailureReason,
+          });
         }
 
-        const matched = directItems[0];
         const admNmResult = parentCity
           ? `${sdNameForApi} ${parentCity} ${wiwName}`
           : `${sdNameForApi} ${wiwName}`;
-        result = buildNecResult(parseNecItem(
-          matched, sigunguCd, admNmResult,
-          meta.name, meta.date, meta.type, meta.subType,
-        ), directApiResult.requestUrls, directApiResult.statusCode, matched.sggName || matched.wiwName, sigunguCd, 1);
+
+        if (directItems.length === 1) {
+          const matched = directItems[0];
+          result = buildNecResult(parseNecItem(
+            matched, sigunguCd, admNmResult,
+            meta.name, meta.date, meta.type, meta.subType,
+          ), directApiResult.requestUrls, directApiResult.statusCode, matched.sggName || matched.wiwName, sigunguCd, 1);
+        } else {
+          // 시군구에 선거구 여러 개 → 정당별 집계
+          const aggregated = aggregateDistrictItems(
+            directItems, sigunguCd, admNmResult,
+            meta.name, meta.date, meta.type, meta.subType,
+          );
+          result = buildNecResult(aggregated, directApiResult.requestUrls, directApiResult.statusCode,
+            `${necWiwName} (${directItems.length}개 선거구 합계)`, sigunguCd, directItems.length);
+        }
       } else if (sgTypecode === '4') {
         const apiResult = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi);
         const matched = apiResult.items.find(
