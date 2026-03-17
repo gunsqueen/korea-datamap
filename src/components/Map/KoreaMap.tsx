@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import type { GeoJsonObject } from 'geojson';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { AdminArea, AdminGeoCollection, AdminLevel } from '../../types';
@@ -16,14 +17,15 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
   const mapRef = useRef<L.Map | null>(null);
   const layerRef = useRef<L.GeoJSON | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const leafletGeoData = geoData as unknown as GeoJsonObject;
 
   // 지도 초기화
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
     mapRef.current = L.map(containerRef.current, {
-      center: [36.5, 127.8],
-      zoom: 7,
+      center: [36.0, 127.7],
+      zoom: 8,
       zoomControl: true,
       attributionControl: true,
     });
@@ -34,7 +36,14 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
       maxZoom: 18,
     }).addTo(mapRef.current);
 
+    // 컨테이너 크기 변화(사이드 패널 열림/닫힘) 시 지도 재조정
+    const resizeObserver = new ResizeObserver(() => {
+      mapRef.current?.invalidateSize({ animate: false });
+    });
+    resizeObserver.observe(containerRef.current);
+
     return () => {
+      resizeObserver.disconnect();
       mapRef.current?.remove();
       mapRef.current = null;
     };
@@ -48,7 +57,7 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
       mapRef.current.removeLayer(layerRef.current);
     }
 
-    layerRef.current = L.geoJSON(geoData as any, {
+    layerRef.current = L.geoJSON(leafletGeoData, {
       style: (feature) => {
         const adm_cd = feature?.properties?.adm_cd ?? '';
         const isSelected = adm_cd === selectedCode;
@@ -100,21 +109,21 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
         (f) => f.properties.adm_cd === selectedCode
       );
       if (target) {
-        const bounds = L.geoJSON(target as any).getBounds();
+        const bounds = L.geoJSON(target as unknown as GeoJsonObject).getBounds();
         mapRef.current.fitBounds(bounds, { padding: [40, 40] });
       } else {
         // 현재 레벨의 데이터에 selectedCode가 없을 때 (예: 읍면동 레벨 전환 시)
         // 전체 피처 범위로 fitBounds
-        mapRef.current.fitBounds(L.geoJSON(geoData as any).getBounds(), {
+        mapRef.current.fitBounds(L.geoJSON(leafletGeoData).getBounds(), {
           padding: [20, 20],
         });
       }
     } else {
-      mapRef.current.fitBounds(L.geoJSON(geoData as any).getBounds(), {
+      mapRef.current.fitBounds(L.geoJSON(leafletGeoData).getBounds(), {
         padding: [20, 20],
       });
     }
-  }, [geoData, selectedCode, level, onHover, onSelect]);
+  }, [geoData, leafletGeoData, selectedCode, level, onHover, onSelect]);
 
   return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />;
 }

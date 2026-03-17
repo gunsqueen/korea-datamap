@@ -9,11 +9,17 @@ export function useElection(admCd: string | null, electionId?: string, admNm?: s
 
   useEffect(() => {
     if (!admCd) return;
-    setLoading(true);
-    setError(null);
-    getElection(admCd, electionId, admNm)
+    Promise.resolve()
+      .then(() => {
+        setLoading(true);
+        setError(null);
+        return getElection(admCd, electionId, admNm);
+      })
       .then(setData)
-      .catch((e) => setError(e.message))
+      .catch((e) => {
+        setData(null);
+        setError(e.message);
+      })
       .finally(() => setLoading(false));
   }, [admCd, electionId, admNm]);
 

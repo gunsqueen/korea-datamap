@@ -144,13 +144,19 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* ─── Side Panel ────────────────────────────── */
 .side-panel {
-  width: 360px;
+  width: 0;
   flex-shrink: 0;
   background: #fff;
   border-left: 1px solid #e8e8e8;
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.side-panel.panel-open {
+  width: 360px;
 }
 
 /* ─── Data Panel ────────────────────────────── */

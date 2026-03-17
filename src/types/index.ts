@@ -78,6 +78,17 @@ export interface HouseholdStructure {
 // ───────────────────────────────────────────
 
 export type ElectionType = 'presidential' | 'assembly' | 'local';
+export type ElectionSourceType = 'real' | 'snapshot' | 'mock';
+
+export interface ElectionDebugMeta {
+  sourceType: ElectionSourceType;
+  requestUrl?: string;
+  statusCode?: string;
+  fallbackReason?: string;
+  matchedRegionName?: string;
+  matchedRegionCode?: string;
+  recordCount?: number;
+}
 
 export interface ElectionMeta {
   id: string;           // e.g. 'presidential_20'
@@ -102,6 +113,7 @@ export interface ElectionData {
   invalid_votes: number;
   turnout_rate: number;
   candidates: Candidate[];
+  debug_meta?: ElectionDebugMeta;
 }
 
 export interface Candidate {

@@ -1,6 +1,12 @@
 import type { ElectionData, ElectionMeta } from '../types';
 import { fetchNecElection } from './nec';
 import { lookupLocalElectionDong } from './localElectionStatic';
+import {
+  attachElectionDebugMeta,
+  ElectionLookupError,
+  isElectionLookupError,
+  logElectionDecision,
+} from './electionDebug';
 import electionsMeta from '../data/mock/elections_meta.json';
 import presidentialData21 from '../data/mock/election_presidential_21.json';
 import presidentialData20 from '../data/mock/election_presidential_20.json';
@@ -62,6 +68,14 @@ const DATA_BY_ID: Record<string, ElectionData[]> = {
 
 export const ELECTIONS_META: ElectionMeta[] = electionsMeta as ElectionMeta[];
 
+function isDistrictElection(electionId: string): boolean {
+  return electionId.endsWith('_district');
+}
+
+function canUseBroadFallback(electionId: string): boolean {
+  return !isDistrictElection(electionId);
+}
+
 /**
  * admCd 기준으로 선거 결과 조회 (mock fallback).
  */
@@ -70,15 +84,38 @@ export function getElectionByCode(admCd: string, electionId: string): ElectionDa
   if (!rows || rows.length === 0) return null;
 
   const find = (cd: string) => rows.find((r) => r.adm_cd === cd) ?? null;
+  const exact = find(admCd);
+  if (exact) {
+    return attachElectionDebugMeta(exact, {
+      sourceType: 'mock',
+      matchedRegionName: exact.adm_nm,
+      matchedRegionCode: exact.adm_cd,
+      recordCount: 1,
+    });
+  }
 
-  return (
-    find(admCd) ??
-    find(admCd.slice(0, 5)) ??
-    find(admCd.slice(0, 2)) ??
-    find('00') ??
-    rows[0] ??
-    null
-  );
+  if (!canUseBroadFallback(electionId)) return null;
+
+  const fallbackCandidates = [
+    admCd.length === 8 ? admCd.slice(0, 5) : null,
+    admCd.length >= 5 ? admCd.slice(0, 2) : null,
+    '00',
+  ].filter((candidate): candidate is string => !!candidate);
+
+  for (const fallbackCode of fallbackCandidates) {
+    const fallback = find(fallbackCode);
+    if (!fallback) continue;
+
+    return attachElectionDebugMeta(fallback, {
+      sourceType: 'mock',
+      matchedRegionName: fallback.adm_nm,
+      matchedRegionCode: fallback.adm_cd,
+      recordCount: 1,
+      fallbackReason: `mock fallback to ${fallbackCode}`,
+    });
+  }
+
+  return null;
 }
 
 /**
@@ -89,6 +126,12 @@ export async function fetchElectionResult(
   electionId = 'presidential_20',
   admNm?: string,
 ): Promise<ElectionData> {
+  const context = {
+    requestedAdminCode: admCd,
+    requestedAdminName: admNm,
+    electionId,
+  };
+
   // 읍면동(8자리) + admNm → 정적 데이터 우선 조회 (지방선거 + 대통령선거)
   if (admCd.length === 8 && admNm && (electionId.startsWith('local_') || electionId.startsWith('presidential_') || electionId.startsWith('assembly_'))) {
     try {
@@ -100,14 +143,62 @@ export async function fetchElectionResult(
   }
 
   // NEC API 우선 시도 (나머지)
+  let realError: unknown = null;
   try {
     return await fetchNecElection(admCd, electionId, admNm);
   } catch (err) {
+    realError = err;
+    if (isElectionLookupError(err) && err.code === 'NEEDS_REVIEW') {
+      logElectionDecision(
+        context,
+        err.debugMeta ?? { sourceType: 'real', fallbackReason: err.message },
+        { data: null, mappingSucceeded: false, fallbackReason: err.debugMeta?.fallbackReason ?? err.message },
+      );
+      throw err;
+    }
     console.warn('NEC API 실패 → mock fallback', err);
   }
 
   // mock fallback
   const result = getElectionByCode(admCd, electionId);
-  if (result) return result;
-  throw new Error(`선거 데이터 없음: ${electionId} / ${admCd}`);
+  if (result) {
+    result.debug_meta = {
+      sourceType: result.debug_meta?.sourceType ?? 'mock',
+      requestUrl: result.debug_meta?.requestUrl,
+      statusCode: result.debug_meta?.statusCode,
+      matchedRegionName: result.debug_meta?.matchedRegionName,
+      matchedRegionCode: result.debug_meta?.matchedRegionCode,
+      recordCount: result.debug_meta?.recordCount,
+      fallbackReason: result.debug_meta?.fallbackReason ?? 'NEC unavailable',
+    };
+    logElectionDecision(context, result.debug_meta!, {
+      data: result,
+      mappingSucceeded: true,
+      fallbackReason: result.debug_meta?.fallbackReason,
+    });
+    return result;
+  }
+
+  if (isElectionLookupError(realError)) {
+    logElectionDecision(
+      context,
+      realError.debugMeta ?? { sourceType: 'real', fallbackReason: realError.message },
+      { data: null, mappingSucceeded: false, fallbackReason: realError.debugMeta?.fallbackReason ?? realError.message },
+    );
+    throw realError;
+  }
+
+  const noDataError = new ElectionLookupError('NO_DATA', '선거 데이터 없음', {
+    sourceType: 'mock',
+    fallbackReason: `no safe fallback for ${electionId}`,
+    matchedRegionCode: admCd,
+    matchedRegionName: admNm,
+    recordCount: 0,
+  });
+  logElectionDecision(context, noDataError.debugMeta!, {
+    data: null,
+    mappingSucceeded: false,
+    fallbackReason: noDataError.debugMeta?.fallbackReason,
+  });
+  throw noDataError;
 }

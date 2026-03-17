@@ -9,12 +9,15 @@ export function useBoundary(admCd: string, level: AdminLevel) {
 
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    setError(null);
-
-    getBoundary(admCd, level)
+    Promise.resolve()
+      .then(() => {
+        if (cancelled) return null;
+        setLoading(true);
+        setError(null);
+        return getBoundary(admCd, level);
+      })
       .then((result) => {
-        if (!cancelled) setData(result);
+        if (!cancelled && result) setData(result);
       })
       .catch((e) => {
         if (!cancelled) setError(e.message);

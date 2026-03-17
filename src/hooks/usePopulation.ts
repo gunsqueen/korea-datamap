@@ -9,9 +9,12 @@ export function usePopulation(admCd: string | null) {
 
   useEffect(() => {
     if (!admCd) return;
-    setLoading(true);
-    setError(null);
-    getPopulation(admCd)
+    Promise.resolve()
+      .then(() => {
+        setLoading(true);
+        setError(null);
+        return getPopulation(admCd);
+      })
       .then(setData)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));

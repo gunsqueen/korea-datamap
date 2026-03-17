@@ -1,9 +1,28 @@
 import type { ElectionData, Candidate } from '../types';
+import { attachElectionDebugMeta, logElectionDecision } from './electionDebug';
+
+interface StaticCandidateEntry {
+  name?: string;
+  party: string;
+  votes: number;
+}
+
+interface StaticElectionEntry {
+  election_district: string;
+  total_voters: number;
+  total_votes: number;
+  valid_votes: number;
+  invalid_votes: number;
+  national_winner?: string;
+  candidates: StaticCandidateEntry[];
+}
+
+type StaticElectionMap = Record<string, StaticElectionEntry>;
 
 // 파일별 지연 로딩 캐시
-const dataCache = new Map<string, Record<string, any>>();
+const dataCache = new Map<string, StaticElectionMap>();
 // assembly 지역구: sido|dong → entry (선거구명 우회)
-const dongIndexCache = new Map<string, Record<string, any>>();
+const dongIndexCache = new Map<string, Record<string, StaticElectionEntry | null>>();
 
 const PARTY_COLORS: Record<string, string> = {
   '더불어민주당': '#004EA2', '민주당': '#004EA2', '더불어민주연합': '#004EA2',
@@ -56,16 +75,17 @@ const ELECTION_META: Record<string, { name: string; date: string; subType: strin
   assembly_19_pr:       { name: '제19대 국회의원선거', date: '2012-04-11', subType: '비례대표', electionType: 'assembly' },
 };
 
-async function loadStaticData(electionId: string): Promise<Record<string, any>> {
+async function loadStaticData(electionId: string): Promise<StaticElectionMap> {
   if (dataCache.has(electionId)) return dataCache.get(electionId)!;
   try {
     const mod = await import(`../data/static/${electionId}.json`);
-    const data = mod.default as Record<string, any>;
+    const data = mod.default as StaticElectionMap;
     dataCache.set(electionId, data);
     return data;
   } catch {
-    dataCache.set(electionId, {});
-    return {};
+    const emptyData: StaticElectionMap = {};
+    dataCache.set(electionId, emptyData);
+    return emptyData;
   }
 }
 
@@ -86,30 +106,47 @@ export async function lookupLocalElectionDong(
   const dong = parts[parts.length - 1];
   const key = `${sido}|${sigungu}|${dong}`;
 
-  let entry = data[key];
+  let entry: StaticElectionEntry | undefined = data[key];
+  let matchedKey = key;
 
   // assembly 지역구만: 선거구명(강서구갑)이 key에 쓰이므로 시군구명(강서구)으로 찾을 수 없음
   // sido|dong 인덱스로 재시도 (local 선거는 시군구 기반 키이므로 제외)
   if (!entry && electionId.startsWith('assembly_') && electionId.endsWith('_district')) {
     if (!dongIndexCache.has(electionId)) {
-      const idx: Record<string, any> = {};
+      const idx: Record<string, StaticElectionEntry | null> = {};
       for (const [k, v] of Object.entries(data)) {
         const [s, , d] = k.split('|');
-        if (s && d) idx[`${s}|${d}`] = v;
+        if (!s || !d) continue;
+        const dongKey = `${s}|${d}`;
+        idx[dongKey] = idx[dongKey] && idx[dongKey] !== v ? null : v;
       }
       dongIndexCache.set(electionId, idx);
     }
-    entry = dongIndexCache.get(electionId)![`${sido}|${dong}`];
+    matchedKey = `${sido}|${dong}`;
+    entry = dongIndexCache.get(electionId)![matchedKey] ?? undefined;
   }
 
-  if (!entry) return null;
+  if (!entry) {
+    logElectionDecision(
+      { requestedAdminCode: admCd, requestedAdminName: admNm, electionId },
+      {
+        sourceType: 'snapshot',
+        matchedRegionName: matchedKey,
+        matchedRegionCode: admCd,
+        recordCount: 0,
+        fallbackReason: 'static exact match missing',
+      },
+      { data: null, mappingSucceeded: false },
+    );
+    return null;
+  }
 
   // 실제 당선인: presidential은 전국 당선인, local은 지역 1위
   const nationalWinner = entry.national_winner ?? meta.nationalWinner;
 
   const candidates: Candidate[] = entry.candidates
-    .filter((c: any) => c.votes > 0 || c.party)
-    .map((c: any) => ({
+    .filter((c) => c.votes > 0 || c.party)
+    .map((c) => ({
       name: c.name || c.party,
       party: c.party,
       party_color: getPartyColor(c.party),
@@ -118,7 +155,7 @@ export async function lookupLocalElectionDong(
       rank: 0,
       elected: false,
     }))
-    .sort((a: Candidate, b: Candidate) => b.votes - a.votes);
+    .sort((a, b) => b.votes - a.votes);
 
   candidates.forEach((c, i) => { c.rank = i + 1; });
 
@@ -133,7 +170,7 @@ export async function lookupLocalElectionDong(
 
   const turnout = entry.total_voters > 0 ? Math.round((entry.total_votes / entry.total_voters) * 10000) / 100 : 0;
 
-  return {
+  const result = attachElectionDebugMeta({
     adm_cd: admCd,
     adm_nm: admNm,
     election_type: meta.electionType as 'presidential' | 'assembly' | 'local',
@@ -146,5 +183,18 @@ export async function lookupLocalElectionDong(
     invalid_votes: entry.invalid_votes,
     turnout_rate: turnout,
     candidates,
-  };
+  }, {
+    sourceType: 'snapshot',
+    matchedRegionName: matchedKey,
+    matchedRegionCode: admCd,
+    recordCount: 1,
+  });
+
+  logElectionDecision(
+    { requestedAdminCode: admCd, requestedAdminName: admNm, electionId },
+    result.debug_meta!,
+    { data: result, mappingSucceeded: true },
+  );
+
+  return result;
 }

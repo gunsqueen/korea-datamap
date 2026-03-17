@@ -1,4 +1,4 @@
-import type { AdminGeoCollection, AdminLevel } from '../types';
+import type { AdminGeoCollection, AdminGeoFeature, AdminLevel } from '../types';
 import { convertCoordinates } from '../utils/projection';
 
 const SGIS_AUTH_URL = 'https://sgisapi.mods.go.kr/OpenAPI3/auth/authentication.json';
@@ -34,6 +34,23 @@ async function getAccessToken(): Promise<string> {
 // 키: `${level}:${admCd}` → 한 번 받은 데이터는 세션 동안 재사용
 const boundaryCache = new Map<string, AdminGeoCollection>();
 
+interface SgisFeatureGeometry {
+  type: 'Polygon' | 'MultiPolygon';
+  coordinates: number[][][] | number[][][][];
+}
+
+interface SgisFeature {
+  type: 'Feature';
+  geometry: SgisFeatureGeometry;
+  properties: AdminGeoFeature['properties'];
+}
+
+interface SgisBoundaryResponse {
+  errCd: number;
+  errMsg?: string;
+  features?: SgisFeature[];
+}
+
 /** 경계 GeoJSON 가져오기 (UTM-K → WGS84 변환 + 메모리 캐시) */
 export async function fetchBoundary(
   admCd: string,
@@ -63,7 +80,7 @@ export async function fetchBoundary(
   });
 
   const res = await fetch(`${SGIS_BOUNDARY_URL}?${params}`);
-  const raw = await res.json();
+  const raw = await res.json() as SgisBoundaryResponse;
 
   if (raw.errCd !== 0) {
     throw new Error(`SGIS 경계 조회 실패: ${raw.errMsg} (adm_cd=${sgisAdmCd})`);
@@ -76,7 +93,7 @@ export async function fetchBoundary(
   // UTM-K → WGS84 좌표 변환
   const converted: AdminGeoCollection = {
     type: 'FeatureCollection',
-    features: raw.features.map((f: any) => ({
+    features: raw.features.map((f) => ({
       ...f,
       geometry: {
         ...f.geometry,

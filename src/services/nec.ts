@@ -3,6 +3,11 @@
  * https://www.data.go.kr/data/15000900/openapi.do
  */
 import type { ElectionData, Candidate } from '../types';
+import {
+  attachElectionDebugMeta,
+  ElectionLookupError,
+  logElectionDecision,
+} from './electionDebug';
 
 const NEC_BASE = 'https://apis.data.go.kr/9760000/VoteXmntckInfoInqireService2';
 const SERVICE_KEY = 'fcfb6899040b2dc7f9c3bf04402834c6a83364a827417cad9d2052178fce7591';
@@ -204,15 +209,31 @@ interface NecItem {
   [key: string]: string;
 }
 
-async function fetchNecApi(
+interface NecApiResult {
+  items: NecItem[];
+  requestUrls: string[];
+  statusCode: string;
+  totalCount: number;
+}
+
+function isDistrictElection(electionId: string): boolean {
+  return electionId.endsWith('_district');
+}
+
+function getFirstRequestUrl(requestUrls: string[]): string | undefined {
+  return requestUrls[0];
+}
+
+async function fetchNecApiPage(
   sgId: string,
   sgTypecode: string,
+  pageNo: number,
   sdName?: string,
   wiwName?: string,
-): Promise<NecItem[]> {
+): Promise<{ items: NecItem[]; requestUrl: string; statusCode: string; totalCount: number }> {
   const params = new URLSearchParams({
     serviceKey: SERVICE_KEY,
-    pageNo: '1',
+    pageNo: String(pageNo),
     numOfRows: '1000',
     resultType: 'json',
     sgId,
@@ -230,8 +251,50 @@ async function fetchNecApi(
   if (code !== 'INFO-00') throw new Error(`NEC API error: ${code}`);
 
   const items = json?.response?.body?.items?.item;
-  if (!items) return [];
-  return Array.isArray(items) ? items : [items];
+  const totalCount = Number(json?.response?.body?.totalCount ?? 0);
+  return {
+    items: !items ? [] : Array.isArray(items) ? items : [items],
+    requestUrl: url,
+    statusCode: code,
+    totalCount,
+  };
+}
+
+async function fetchNecApi(
+  sgId: string,
+  sgTypecode: string,
+  sdName?: string,
+  wiwName?: string,
+): Promise<NecApiResult> {
+  const firstPage = await fetchNecApiPage(sgId, sgTypecode, 1, sdName, wiwName);
+  const requestUrls = [firstPage.requestUrl];
+  const items = [...firstPage.items];
+
+  if (wiwName) {
+    return {
+      items,
+      requestUrls,
+      statusCode: firstPage.statusCode,
+      totalCount: firstPage.totalCount,
+    };
+  }
+
+  const totalPages = firstPage.totalCount > 0
+    ? Math.ceil(firstPage.totalCount / Math.max(firstPage.items.length || 100, 1))
+    : 1;
+
+  for (let pageNo = 2; pageNo <= totalPages; pageNo++) {
+    const nextPage = await fetchNecApiPage(sgId, sgTypecode, pageNo, sdName, wiwName);
+    requestUrls.push(nextPage.requestUrl);
+    items.push(...nextPage.items);
+  }
+
+  return {
+    items,
+    requestUrls,
+    statusCode: firstPage.statusCode,
+    totalCount: firstPage.totalCount,
+  };
 }
 
 // ── NEC 응답 → ElectionData 변환 ─────────────────────────────
@@ -297,6 +360,24 @@ function parseNecItem(
   };
 }
 
+function buildNecResult(
+  data: ElectionData,
+  requestUrls: string[],
+  statusCode: string,
+  matchedRegionName: string,
+  matchedRegionCode: string,
+  recordCount: number,
+): ElectionData {
+  return attachElectionDebugMeta(data, {
+    sourceType: 'real',
+    requestUrl: getFirstRequestUrl(requestUrls),
+    statusCode,
+    matchedRegionName,
+    matchedRegionCode,
+    recordCount,
+  });
+}
+
 // ── 메인 API: 선거 결과 조회 ─────────────────────────────────
 export async function fetchNecElection(
   admCd: string,
@@ -328,28 +409,36 @@ export async function fetchNecElection(
     sgTypecode = param.sgTypecodeLocal;
   }
 
+  const context = {
+    requestedAdminCode: admCd,
+    requestedAdminName: admNm,
+    electionId,
+  };
   let result: ElectionData;
+  let mappingFailureReason: string | undefined;
 
   if (admCd === '00') {
     // 전국 데이터
-    const items = await fetchNecApi(param.sgId, sgTypecode);
+    const apiResult = await fetchNecApi(param.sgId, sgTypecode);
+    const items = apiResult.items;
     const nationalItem = items.find(
       (it) => it.sdName === '합계' && it.wiwName === '합계',
     );
     if (!nationalItem) throw new Error('전국 데이터 없음');
-    result = parseNecItem(
+    result = buildNecResult(parseNecItem(
       nationalItem, '00', '전국',
       meta.name, meta.date, meta.type, meta.subType,
-    );
+    ), apiResult.requestUrls, apiResult.statusCode, '전국', '00', 1);
   } else if (admCd.length === 2) {
     // 시도 데이터
-    const items = await fetchNecApi(param.sgId, sgTypecode, sdName);
+    const apiResult = await fetchNecApi(param.sgId, sgTypecode, sdName);
+    const items = apiResult.items;
     const sidoItem = items.find((it) => it.wiwName === '합계');
     if (!sidoItem) throw new Error(`시도 데이터 없음: ${sdName}`);
-    result = parseNecItem(
+    result = buildNecResult(parseNecItem(
       sidoItem, admCd, sdName,
       meta.name, meta.date, meta.type, meta.subType,
-    );
+    ), apiResult.requestUrls, apiResult.statusCode, sdName, admCd, 1);
   } else {
     // 시군구(5자리) / 읍면동(8자리)
     const sigunguCd = admCd.slice(0, 5);
@@ -361,23 +450,22 @@ export async function fetchNecElection(
 
     if (!wiwName) {
       // 매핑이 없는 경우 시도 fallback
-      const items = await fetchNecApi(param.sgId, sgTypecode, sdName);
+      const apiResult = await fetchNecApi(param.sgId, sgTypecode, sdName);
+      const items = apiResult.items;
       const sidoItem = items.find((it) => it.wiwName === '합계');
       if (!sidoItem) throw new Error(`시도 데이터 없음: ${sdName}`);
-      result = parseNecItem(
+      result = buildNecResult(parseNecItem(
         sidoItem, sidoCd, sdName,
         meta.name, meta.date, meta.type, meta.subType,
-      );
+      ), apiResult.requestUrls, apiResult.statusCode, sdName, sidoCd, 1);
     } else if (admCd.length === 8 && admNm) {
       // ─── 읍면동(8자리) 단위 조회 ─────────────────────────────
-      // admNm 마지막 토큰이 동 이름 (예: "서울특별시 강서구 화곡3동" → "화곡3동")
       const dongShortName = admNm.trim().split(/\s+/).pop() ?? '';
       const sdNameForApi = getApiSdName(sidoCd, param.sgId);
 
       if (['1', '7', '8', '9'].includes(sgTypecode)) {
-        // 대통령 / 비례대표 / 광역비례 / 기초비례:
-        // 1차 시도: wiwName=시군구명으로 호출 → 읍면동 단위 응답이 오는 경우 동명 매칭
-        const itemsWithWiw = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi, necWiwName);
+        const apiResult = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi, necWiwName);
+        const itemsWithWiw = apiResult.items;
         let matched: NecItem | null = null;
         if (dongShortName) {
           matched = itemsWithWiw.find((it) => it.wiwName === dongShortName) ?? null;
@@ -387,62 +475,60 @@ export async function fetchNecElection(
             ) ?? null;
           }
         }
-        // 동 매칭 실패 시: wiwName 없이 호출해서 시군구 합계 행 찾기
         if (!matched) {
-          const itemsNoWiw = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi);
-          matched = itemsNoWiw.find((it) => it.wiwName === necWiwName)
-            ?? itemsNoWiw.find((it) => it.wiwName === wiwName)
-            ?? itemsWithWiw[0]  // 마지막 fallback: wiwName 필터 결과의 첫 번째 행
-            ?? null;
+          mappingFailureReason = `NEC exact dong match missing: ${dongShortName}`;
+          throw new ElectionLookupError('NO_DATA', '선거 데이터 없음', {
+            sourceType: 'real',
+            requestUrl: getFirstRequestUrl(apiResult.requestUrls),
+            statusCode: apiResult.statusCode,
+            matchedRegionName: necWiwName,
+            matchedRegionCode: sigunguCd,
+            recordCount: apiResult.items.length,
+            fallbackReason: mappingFailureReason,
+          });
         }
-        if (!matched) throw new Error(`선거 데이터 없음: ${wiwName}`);
-
-        // 동 단위 매칭 여부 확인 (wiwName이 동 이름과 일치하는 경우만 동 단위로 간주)
-        const isExactDong = !!dongShortName && matched.wiwName === dongShortName;
-        const resultAdmNm = isExactDong
-          ? (parentCity ? `${sdNameForApi} ${parentCity} ${wiwName} ${matched.wiwName}` : `${sdNameForApi} ${wiwName} ${matched.wiwName}`)
-          : (parentCity ? `${sdNameForApi} ${parentCity} ${wiwName}` : `${sdNameForApi} ${wiwName}`);
-        const resultAdmCd = isExactDong ? admCd : sigunguCd;
-        result = parseNecItem(
-          matched, resultAdmCd, resultAdmNm,
-          meta.name, meta.date, meta.type, meta.subType,
-        );
-      } else if (['2', '5', '6'].includes(sgTypecode)) {
-        // 지역구 선거: 시도 전체에서 시군구 기준으로 찾은 뒤 동 매칭
-        const items = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi);
-        let matched: NecItem | null = null;
-
-        // 동이 속한 시군구/선거구 내 항목에서 동명 매칭 시도
-        const sigunguItems = items.filter((it) =>
-          it.sggName?.includes(necWiwName) || it.sggName?.includes(wiwName)
-        );
-        if (dongShortName && sigunguItems.length > 0) {
-          matched = sigunguItems.find((it) => it.wiwName === dongShortName)
-            ?? sigunguItems.find((it) => it.wiwName !== '합계' && it.wiwName?.includes(dongShortName))
-            ?? null;
-        }
-        if (!matched) {
-          matched = sigunguItems.find((it) => it.wiwName === '합계') ?? null;
-        }
-        if (!matched) {
-          matched = items.find((it) => it.wiwName === necWiwName)
-            ?? items.find((it) => it.wiwName === wiwName)
-            ?? items.find((it) => it.wiwName === '합계')
-            ?? null;
-        }
-        if (!matched) throw new Error(`선거 데이터 없음: ${wiwName}`);
 
         const resultAdmNm = parentCity
-          ? `${sdNameForApi} ${parentCity} ${wiwName}`
-          : `${sdNameForApi} ${wiwName}`;
-        result = parseNecItem(
-          matched, sigunguCd, resultAdmNm,
+          ? `${sdNameForApi} ${parentCity} ${wiwName} ${matched.wiwName}`
+          : `${sdNameForApi} ${wiwName} ${matched.wiwName}`;
+        result = buildNecResult(parseNecItem(
+          matched, admCd, resultAdmNm,
           meta.name, meta.date, meta.type, meta.subType,
-        );
+        ), apiResult.requestUrls, apiResult.statusCode, matched.wiwName, admCd, 1);
+      } else if (['2', '5', '6'].includes(sgTypecode)) {
+        const apiResult = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi, necWiwName);
+        const items = apiResult.items;
+        let matched: NecItem | null = null;
+
+        if (dongShortName && items.length > 0) {
+          matched = items.find((it) => it.wiwName === dongShortName)
+            ?? items.find((it) => it.wiwName !== '합계' && it.wiwName?.includes(dongShortName))
+            ?? null;
+        }
+        if (!matched) {
+          mappingFailureReason = `district election exact dong match missing: ${dongShortName}`;
+          throw new ElectionLookupError('NO_DATA', '선거 데이터 없음', {
+            sourceType: 'real',
+            requestUrl: getFirstRequestUrl(apiResult.requestUrls),
+            statusCode: apiResult.statusCode,
+            matchedRegionName: necWiwName,
+            matchedRegionCode: sigunguCd,
+            recordCount: items.length,
+            fallbackReason: mappingFailureReason,
+          });
+        }
+
+        const resultAdmNm = parentCity
+          ? `${sdNameForApi} ${parentCity} ${wiwName} ${matched.wiwName}`
+          : `${sdNameForApi} ${wiwName} ${matched.wiwName}`;
+        result = buildNecResult(parseNecItem(
+          matched, admCd, resultAdmNm,
+          meta.name, meta.date, meta.type, meta.subType,
+        ), apiResult.requestUrls, apiResult.statusCode, matched.wiwName, admCd, 1);
       } else {
-        // 기타(단체장 등): 시군구 레벨로 fallback
         const sdNameForApi2 = getApiSdName(sidoCd, param.sgId);
-        const items = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi2);
+        const apiResult = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi2, necWiwName);
+        const items = apiResult.items;
         let matched: NecItem | null = null;
         if (sgTypecode === '4') {
           matched = items.find(
@@ -450,69 +536,114 @@ export async function fetchNecElection(
           ) ?? null;
         } else {
           matched = items.find((it) => it.wiwName === necWiwName)
-            ?? items.find((it) => it.wiwName === wiwName)
-            ?? items.find((it) => it.wiwName === '합계')
             ?? null;
         }
-        if (!matched) throw new Error(`선거 데이터 없음: ${wiwName}`);
+        if (!matched) {
+          mappingFailureReason = `NEC exact region match missing: ${necWiwName}`;
+          throw new ElectionLookupError('NO_DATA', '선거 데이터 없음', {
+            sourceType: 'real',
+            requestUrl: getFirstRequestUrl(apiResult.requestUrls),
+            statusCode: apiResult.statusCode,
+            matchedRegionName: necWiwName,
+            matchedRegionCode: sigunguCd,
+            recordCount: items.length,
+            fallbackReason: mappingFailureReason,
+          });
+        }
         const resultAdmNm = parentCity
           ? `${sdNameForApi2} ${parentCity} ${wiwName}`
           : `${sdNameForApi2} ${wiwName}`;
-        result = parseNecItem(
+        result = buildNecResult(parseNecItem(
           matched, sigunguCd, resultAdmNm,
           meta.name, meta.date, meta.type, meta.subType,
-        );
+        ), apiResult.requestUrls, apiResult.statusCode, matched.sggName || matched.wiwName, sigunguCd, 1);
       }
     } else {
-      // ─── 시군구(5자리) 단위 조회 (기존 로직) ────────────────
       const sdNameForApi = getApiSdName(sidoCd, param.sgId);
-      const items = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi);
+      const directApiResult = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi, necWiwName);
+      const directItems = directApiResult.items;
 
-      let matched: NecItem | null = null;
-
-      if (sgTypecode === '4') {
-        // 구시군장: sggName에 구시군명이 들어감
-        matched = items.find(
-          (it) => it.sggName?.includes(necWiwName) && it.wiwName === '합계',
-        ) ?? null;
-      } else if (['2', '5', '6'].includes(sgTypecode)) {
-        // 지역구 선거
-        matched = items.find(
-          (it) => it.wiwName === necWiwName && it.sggName,
-        ) ?? items.find(
-          (it) => it.wiwName === wiwName,
-        ) ?? null;
-        if (!matched) {
-          matched = items.find(
-            (it) => it.sggName?.includes(necWiwName) && it.wiwName === '합계',
-          ) ?? items.find(
-            (it) => it.sggName?.includes(wiwName) && it.wiwName === '합계',
-          ) ?? null;
+      if (['2', '5', '6'].includes(sgTypecode) || isDistrictElection(electionId)) {
+        if (directItems.length !== 1) {
+          mappingFailureReason = directItems.length > 1
+            ? `multiple district records matched for ${necWiwName}`
+            : `district record missing for ${necWiwName}`;
+          throw new ElectionLookupError(
+            directItems.length > 1 ? 'NEEDS_REVIEW' : 'NO_DATA',
+            directItems.length > 1 ? '선거 데이터 확인 필요' : '선거 데이터 없음',
+            {
+              sourceType: 'real',
+              requestUrl: getFirstRequestUrl(directApiResult.requestUrls),
+              statusCode: directApiResult.statusCode,
+              matchedRegionName: necWiwName,
+              matchedRegionCode: sigunguCd,
+              recordCount: directItems.length,
+              fallbackReason: mappingFailureReason,
+            },
+          );
         }
+
+        const matched = directItems[0];
+        const admNmResult = parentCity
+          ? `${sdNameForApi} ${parentCity} ${wiwName}`
+          : `${sdNameForApi} ${wiwName}`;
+        result = buildNecResult(parseNecItem(
+          matched, sigunguCd, admNmResult,
+          meta.name, meta.date, meta.type, meta.subType,
+        ), directApiResult.requestUrls, directApiResult.statusCode, matched.sggName || matched.wiwName, sigunguCd, 1);
+      } else if (sgTypecode === '4') {
+        const apiResult = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi);
+        const matched = apiResult.items.find(
+          (it) => it.sggName?.includes(necWiwName) && it.wiwName === '합계',
+        );
+        if (!matched) {
+          mappingFailureReason = `NEC local mayor match missing: ${necWiwName}`;
+          throw new ElectionLookupError('NO_DATA', '선거 데이터 없음', {
+            sourceType: 'real',
+            requestUrl: getFirstRequestUrl(apiResult.requestUrls),
+            statusCode: apiResult.statusCode,
+            matchedRegionName: necWiwName,
+            matchedRegionCode: sigunguCd,
+            recordCount: apiResult.items.length,
+            fallbackReason: mappingFailureReason,
+          });
+        }
+
+        const admNmResult = parentCity
+          ? `${sdNameForApi} ${parentCity} ${wiwName}`
+          : `${sdNameForApi} ${wiwName}`;
+        result = buildNecResult(parseNecItem(
+          matched, sigunguCd, admNmResult,
+          meta.name, meta.date, meta.type, meta.subType,
+        ), apiResult.requestUrls, apiResult.statusCode, matched.sggName || matched.wiwName, sigunguCd, 1);
       } else {
-        // 비례대표, 시도지사 등
-        matched = items.find((it) => it.wiwName === necWiwName)
-          ?? items.find((it) => it.wiwName === wiwName)
-          ?? null;
+        const matched = directItems.find((it) => it.wiwName === necWiwName) ?? null;
+        if (!matched) {
+          mappingFailureReason = `NEC exact region match missing: ${necWiwName}`;
+          throw new ElectionLookupError('NO_DATA', '선거 데이터 없음', {
+            sourceType: 'real',
+            requestUrl: getFirstRequestUrl(directApiResult.requestUrls),
+            statusCode: directApiResult.statusCode,
+            matchedRegionName: necWiwName,
+            matchedRegionCode: sigunguCd,
+            recordCount: directItems.length,
+            fallbackReason: mappingFailureReason,
+          });
+        }
+
+        const admNmResult = parentCity
+          ? `${sdNameForApi} ${parentCity} ${wiwName}`
+          : `${sdNameForApi} ${wiwName}`;
+        result = buildNecResult(parseNecItem(
+          matched, sigunguCd, admNmResult,
+          meta.name, meta.date, meta.type, meta.subType,
+        ), directApiResult.requestUrls, directApiResult.statusCode, matched.wiwName, sigunguCd, directItems.length);
       }
-
-      if (!matched) {
-        matched = items.find((it) => it.wiwName === '합계') ?? null;
-      }
-
-      if (!matched) throw new Error(`선거 데이터 없음: ${wiwName}`);
-
-      const admNmResult = parentCity
-        ? `${sdName} ${parentCity} ${wiwName}`
-        : `${sdName} ${wiwName}`;
-      result = parseNecItem(
-        matched, sigunguCd, admNmResult,
-        meta.name, meta.date, meta.type, meta.subType,
-      );
     }
   }
 
   cache.set(cacheKey, { data: result, ts: Date.now() });
+  logElectionDecision(context, result.debug_meta!, { data: result, mappingSucceeded: true });
   return result;
 }
 

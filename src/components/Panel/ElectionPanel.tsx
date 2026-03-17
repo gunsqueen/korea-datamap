@@ -91,7 +91,7 @@ export function ElectionPanel({ admCd, admNm }: Props) {
     return '';
   }, [activeType, selectedPresidentialId, selectedAssemblySuffix, assemblySubType, selectedLocalPrefix, localSubType]);
 
-  const { data, loading } = useElection(admCd, selectedId, admNm);
+  const { data, loading, error } = useElection(admCd, selectedId, admNm);
 
   return (
     <div className="panel-section">
@@ -187,6 +187,8 @@ export function ElectionPanel({ admCd, admNm }: Props) {
       {/* 결과 표시 */}
       {loading ? (
         <div className="loading">불러오는 중...</div>
+      ) : error === '선거 데이터 확인 필요' ? (
+        <div className="empty">선거 데이터 확인 필요</div>
       ) : data ? (
         <ElectionResult data={data} />
       ) : (
@@ -292,8 +294,8 @@ function ElectionResult({ data }: { data: ElectionData }) {
                 align="right"
                 verticalAlign="middle"
                 iconSize={10}
-                formatter={(_, entry: any) =>
-                  <span style={{ fontSize: 11 }}>{entry.payload.name}</span>
+                formatter={(_, entry: { payload?: { name?: string } }) =>
+                  <span style={{ fontSize: 11 }}>{entry.payload?.name ?? ''}</span>
                 }
               />
             </PieChart>

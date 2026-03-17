@@ -2,6 +2,7 @@ import type { AdminGeoCollection, PopulationData, ElectionData, AdminLevel, Data
 import { fetchBoundary } from './sgis';
 import { fetchPopulation } from './population';
 import { fetchElectionResult, getElectionByCode, ELECTIONS_META } from './election';
+import { isElectionLookupError } from './electionDebug';
 import sidoMock from '../data/mock/sido.json';
 import populationMock from '../data/mock/population.json';
 import sigunguPopulationMock from '../data/mock/sigungu_population.json';
@@ -153,15 +154,16 @@ export async function getElection(
 ): Promise<ElectionData> {
   const id = electionId ?? ELECTIONS_META[0]?.id ?? 'presidential_20';
 
-  // 실제 NEC API 우선 시도
   try {
     return await fetchElectionResult(admCd, id, admNm);
   } catch (err) {
-    console.warn('NEC API 실패 → mock fallback', err);
+    if (isElectionLookupError(err)) {
+      throw new Error(err.code === 'NEEDS_REVIEW' ? '선거 데이터 확인 필요' : '선거 데이터 없음');
+    }
+    console.warn('선거 데이터 조회 실패', err);
   }
 
-  // mock fallback
   const result = getElectionByCode(admCd, id);
   if (result) return result;
-  throw new Error(`선거 데이터 없음: ${id}`);
+  throw new Error('선거 데이터 없음');
 }
