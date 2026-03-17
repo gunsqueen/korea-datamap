@@ -88,9 +88,9 @@ export async function lookupLocalElectionDong(
 
   let entry = data[key];
 
-  // assembly 지역구: 선거구명(강서구갑)이 key에 쓰이므로 시군구명(강서구)으로 찾을 수 없음
-  // sido|dong 인덱스로 재시도
-  if (!entry && electionId.endsWith('_district')) {
+  // assembly 지역구만: 선거구명(강서구갑)이 key에 쓰이므로 시군구명(강서구)으로 찾을 수 없음
+  // sido|dong 인덱스로 재시도 (local 선거는 시군구 기반 키이므로 제외)
+  if (!entry && electionId.startsWith('assembly_') && electionId.endsWith('_district')) {
     if (!dongIndexCache.has(electionId)) {
       const idx: Record<string, any> = {};
       for (const [k, v] of Object.entries(data)) {
