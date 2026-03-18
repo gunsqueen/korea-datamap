@@ -1,3 +1,4 @@
+import { GitCompare, X, BarChart2, Vote } from 'lucide-react';
 import type { AdminArea, PanelTab } from '../../types';
 import { usePopulation } from '../../hooks/usePopulation';
 import { PopulationPanel } from './PopulationPanel';
@@ -11,6 +12,21 @@ interface Props {
   onCompare: () => void;
 }
 
+function PopulationSkeleton() {
+  return (
+    <div className="skeleton-wrap">
+      <div className="skeleton skeleton--full" />
+      <div className="skeleton-grid">
+        <div className="skeleton skeleton--half" />
+        <div className="skeleton skeleton--half" />
+        <div className="skeleton skeleton--full" />
+      </div>
+      <div className="skeleton skeleton--chart" />
+      <div className="skeleton skeleton--chart-sm" />
+    </div>
+  );
+}
+
 export function DataPanel({ area, activeTab, onTabChange, onClose, onCompare }: Props) {
   const { data: popData, loading: popLoading } = usePopulation(area.adm_cd);
 
@@ -22,8 +38,12 @@ export function DataPanel({ area, activeTab, onTabChange, onClose, onCompare }: 
           <span className="panel-code">{area.adm_cd}</span>
         </div>
         <div className="panel-actions">
-          <button className="btn-compare" onClick={onCompare} title="비교">⇄</button>
-          <button className="btn-close" onClick={onClose} title="닫기">✕</button>
+          <button className="btn-compare" onClick={onCompare} title="지역 비교">
+            <GitCompare size={15} strokeWidth={2} />
+          </button>
+          <button className="btn-close" onClick={onClose} title="닫기">
+            <X size={15} strokeWidth={2} />
+          </button>
         </div>
       </div>
 
@@ -32,12 +52,14 @@ export function DataPanel({ area, activeTab, onTabChange, onClose, onCompare }: 
           className={`tab-btn ${activeTab === 'population' ? 'active' : ''}`}
           onClick={() => onTabChange('population')}
         >
+          <BarChart2 size={14} strokeWidth={2} />
           인구
         </button>
         <button
           className={`tab-btn ${activeTab === 'election' ? 'active' : ''}`}
           onClick={() => onTabChange('election')}
         >
+          <Vote size={14} strokeWidth={2} />
           선거
         </button>
       </div>
@@ -45,7 +67,7 @@ export function DataPanel({ area, activeTab, onTabChange, onClose, onCompare }: 
       <div className="panel-body">
         {activeTab === 'population' && (
           popLoading
-            ? <div className="loading">불러오는 중...</div>
+            ? <PopulationSkeleton />
             : popData
               ? <PopulationPanel data={popData} />
               : <div className="empty">인구 데이터 없음</div>

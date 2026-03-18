@@ -8,8 +8,7 @@ const SERVICE_KEY = 'fcfb6899040b2dc7f9c3bf04402834c6a83364a827417cad9d2052178fc
 
 /**
  * 행정동 단위 인구 통계 조회
- * admCd: SGIS 8자리 코드 (e.g. 11160580 = 화곡3동)
- * → mois_code_map.json으로 MOIS 10자리 admmCd로 변환
+ * 가장 최신 데이터를 반환하기 위해 최근 6개월을 순차 시도
  */
 export async function fetchPopulation(admCd: string): Promise<PopulationData> {
   if (admCd.length !== 8) {
@@ -21,13 +20,37 @@ export async function fetchPopulation(admCd: string): Promise<PopulationData> {
     throw new Error(`MOIS 코드 매핑 없음: ${admCd}`);
   }
 
-  // 최근 3달 전 데이터 조회 (데이터 제공 지연 감안)
+  // 최신 데이터를 얻기 위해 2개월 전부터 6개월 전까지 순차 시도
   const now = new Date();
-  now.setMonth(now.getMonth() - 3);
-  const targetYear = now.getFullYear();
-  const targetMonth = now.getMonth() + 1;
-  const ymStr = `${targetYear}${String(targetMonth).padStart(2, '0')}`;
+  for (let offset = 2; offset <= 6; offset++) {
+    const target = new Date(now);
+    target.setMonth(target.getMonth() - offset);
+    const targetYear = target.getFullYear();
+    const targetMonth = target.getMonth() + 1;
+    const ymStr = `${targetYear}${String(targetMonth).padStart(2, '0')}`;
 
+    try {
+      const data = await fetchPopulationForMonth(admCd, admmCd, targetYear, targetMonth, ymStr);
+      if (data.total_population > 0) {
+        console.info(`[인구 API] ${admCd} → ${targetYear}년 ${targetMonth}월 데이터 획득`);
+        return data;
+      }
+    } catch {
+      // 해당 월 데이터 없음, 다음 월 시도
+      continue;
+    }
+  }
+
+  throw new Error('최근 6개월 인구 데이터 없음');
+}
+
+async function fetchPopulationForMonth(
+  admCd: string,
+  admmCd: string,
+  targetYear: number,
+  targetMonth: number,
+  ymStr: string,
+): Promise<PopulationData> {
   const params = new URLSearchParams({
     serviceKey: SERVICE_KEY,
     pageNo: '1',
@@ -87,5 +110,6 @@ export async function fetchPopulation(admCd: string): Promise<PopulationData> {
     male_population: malePop,
     female_population: femalePop,
     total_households: households,
+    source_type: 'realtime',
   };
 }

@@ -46,6 +46,8 @@ export interface AdminGeoCollection {
 // 인구 통계 타입
 // ───────────────────────────────────────────
 
+export type PopulationSourceType = 'realtime' | 'snapshot';
+
 export interface PopulationData {
   adm_cd: string;
   adm_nm: string;
@@ -57,6 +59,8 @@ export interface PopulationData {
   total_households: number;
   age_groups?: AgeGroup[];
   household_structure?: HouseholdStructure[];
+  /** 데이터 출처: 실시간 API 또는 스냅샷 */
+  source_type?: PopulationSourceType;
 }
 
 export interface AgeGroup {

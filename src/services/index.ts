@@ -29,7 +29,9 @@ function getEupmyeondongMock(sigunguCd: string): AdminGeoCollection | null {
 // 경계 모드: real(기본) / mock(오프라인 개발용)
 // 인구·선거 모드: mock(기본) / real
 const BOUNDARY_MODE = (import.meta.env.VITE_BOUNDARY_MODE ?? 'real') as 'real' | 'mock';
-const DATA_MODE: DataMode = (import.meta.env.VITE_DATA_MODE as DataMode) ?? 'mock';
+// DATA_MODE: 선거 데이터 등 다른 서비스에서 사용될 수 있으나 인구는 동 레벨 API 직접 사용
+const _DATA_MODE: DataMode = (import.meta.env.VITE_DATA_MODE as DataMode) ?? 'mock';
+void _DATA_MODE;
 
 // ─── 경계 데이터 ───────────────────────────────────────────
 
@@ -66,34 +68,24 @@ export async function getBoundary(
 // ─── 인구 데이터 ───────────────────────────────────────────
 
 export async function getPopulation(admCd: string): Promise<PopulationData> {
-  // 동 단위(8자리)는 DATA_MODE와 무관하게 실제 API 우선 시도
+  // 동 단위(8자리)는 DATA_MODE와 무관하게 실제 API 우선 시도 (가장 최신 월)
   if (admCd.length === 8) {
     try {
       const apiData = await fetchPopulation(admCd);
-      // API 데이터에 연령별/세대원수별이 없으면 시도 비율로 추정
       supplementDemographics(apiData, admCd);
-      return apiData;
+      return { ...apiData, source_type: 'realtime' as const };
     } catch (err) {
-      console.warn('인구 API 실패 → mock fallback', err);
+      console.warn('인구 API 실패 → snapshot fallback', err);
       const mockData = getMockPopulation(admCd);
       supplementDemographics(mockData, admCd);
-      return mockData;
+      return { ...mockData, source_type: 'snapshot' as const };
     }
   }
 
-  // 시도(2자리), 시군구(5자리)는 mock 데이터 사용
-  if (DATA_MODE !== 'mock') {
-    try {
-      const apiData = await fetchPopulation(admCd);
-      supplementDemographics(apiData, admCd);
-      return apiData;
-    } catch (err) {
-      console.warn('인구 API 실패 → mock fallback', err);
-    }
-  }
+  // 시도(2자리), 시군구(5자리)는 snapshot 데이터 사용 (동 레벨 API만 지원)
   const mockData = getMockPopulation(admCd);
   supplementDemographics(mockData, admCd);
-  return mockData;
+  return { ...mockData, source_type: 'snapshot' as const };
 }
 
 /**

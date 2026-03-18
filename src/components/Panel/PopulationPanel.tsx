@@ -1,8 +1,11 @@
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  Cell, PieChart, Pie, Legend,
+  Cell, PieChart, Pie, Legend, CartesianGrid,
 } from 'recharts';
+import { Users, User, UserRound, Home } from 'lucide-react';
 import type { PopulationData } from '../../types';
+import { StatsCard } from '../UI/StatsCard';
+import { ChartCard } from '../UI/ChartCard';
 
 interface Props {
   data: PopulationData;
@@ -33,61 +36,96 @@ export function PopulationPanel({ data }: Props) {
 
   return (
     <div className="panel-section">
-      <h3 className="panel-subtitle">
-        {data.adm_nm} 인구 현황
-        <span className="panel-date">{data.year}년 {data.month}월</span>
-      </h3>
-
-      <div className="stat-grid">
-        <div className="stat-card total">
-          <div className="stat-label">총 인구</div>
-          <div className="stat-value">{fmt(data.total_population)}</div>
-          <div className="stat-unit">명</div>
-        </div>
-        <div className="stat-card male">
-          <div className="stat-label">남성</div>
-          <div className="stat-value">{fmt(data.male_population)}</div>
-          <div className="stat-sub">{maleRatio}%</div>
-        </div>
-        <div className="stat-card female">
-          <div className="stat-label">여성</div>
-          <div className="stat-value">{fmt(data.female_population)}</div>
-          <div className="stat-sub">{femaleRatio}%</div>
-        </div>
-        <div className="stat-card household">
-          <div className="stat-label">세대 수</div>
-          <div className="stat-value">{fmt(data.total_households)}</div>
-          <div className="stat-unit">세대</div>
+      <div className="panel-section-header">
+        <span className="panel-section-title">인구 현황</span>
+        <div className="pop-source-wrap">
+          <span className={`pop-source-badge pop-source-badge--${data.source_type ?? 'snapshot'}`}>
+            {data.source_type === 'realtime' ? '실시간' : '스냅샷'}
+          </span>
+          <span className="panel-section-meta">{data.year}년 {data.month}월 기준</span>
         </div>
       </div>
 
+      <div className="stats-grid">
+        <StatsCard
+          icon={Users}
+          label="총 인구"
+          value={fmt(data.total_population)}
+          sub="명"
+          accentColor="#2563eb"
+          fullWidth
+        />
+        <StatsCard
+          icon={User}
+          label="남성"
+          value={fmt(data.male_population)}
+          sub={`${maleRatio}%`}
+          accentColor="#3b82f6"
+        />
+        <StatsCard
+          icon={UserRound}
+          label="여성"
+          value={fmt(data.female_population)}
+          sub={`${femaleRatio}%`}
+          accentColor="#ec4899"
+        />
+        <StatsCard
+          icon={Home}
+          label="세대 수"
+          value={fmt(data.total_households)}
+          sub="세대"
+          accentColor="#10b981"
+          fullWidth
+        />
+      </div>
+
       {ageData.length > 0 && (
-        <div className="chart-container">
-          <div className="chart-title">연령별 인구 분포</div>
-          <ResponsiveContainer width="100%" height={180}>
-            <BarChart data={ageData} barCategoryGap="20%">
-              <XAxis dataKey="name" tick={{ fontSize: 10 }} />
-              <YAxis tickFormatter={(v) => `${(v / 10000).toFixed(0)}만`} tick={{ fontSize: 10 }} />
-              <Tooltip formatter={(v) => [`${(v as number).toLocaleString('ko-KR')}명`]} />
-              <Bar dataKey="남성" fill="#4A90D9" radius={[2, 2, 0, 0]} />
-              <Bar dataKey="여성" fill="#E85D9A" radius={[2, 2, 0, 0]} />
+        <ChartCard title="연령별 인구 분포">
+          <ResponsiveContainer width="100%" height={190}>
+            <BarChart data={ageData} barCategoryGap="22%" barGap={2} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+              <XAxis
+                dataKey="name"
+                tick={{ fontSize: 9, fill: '#94a3b8' }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <YAxis
+                tickFormatter={(v) => `${(v / 10000).toFixed(0)}만`}
+                tick={{ fontSize: 9, fill: '#94a3b8' }}
+                axisLine={false}
+                tickLine={false}
+                width={30}
+              />
+              <Tooltip
+                formatter={(v) => [`${(v as number).toLocaleString('ko-KR')}명`]}
+                contentStyle={{
+                  borderRadius: 8,
+                  border: '1px solid #e2e8f0',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
+                  fontSize: 12,
+                }}
+                cursor={{ fill: 'rgba(37,99,235,0.04)' }}
+              />
+              <Bar dataKey="남성" fill="#3b82f6" radius={[3, 3, 0, 0]} maxBarSize={12} />
+              <Bar dataKey="여성" fill="#ec4899" radius={[3, 3, 0, 0]} maxBarSize={12} />
             </BarChart>
           </ResponsiveContainer>
-        </div>
+        </ChartCard>
       )}
 
       {householdData.length > 0 && (
-        <div className="chart-container">
-          <div className="chart-title">세대구조 (세대원수별)</div>
+        <ChartCard title="세대구조 (세대원수별)">
           <ResponsiveContainer width="100%" height={180}>
             <PieChart>
               <Pie
                 data={householdData}
                 dataKey="value"
                 nameKey="name"
-                cx="40%"
+                cx="38%"
                 cy="50%"
                 outerRadius={65}
+                innerRadius={32}
                 label={({ payload }) => `${payload?.pct ?? ''}%`}
                 labelLine={false}
               >
@@ -100,17 +138,25 @@ export function PopulationPanel({ data }: Props) {
                   `${(v as number).toLocaleString('ko-KR')}세대 (${props.payload.pct}%)`,
                   name,
                 ]}
+                contentStyle={{
+                  borderRadius: 8,
+                  border: '1px solid #e2e8f0',
+                  fontSize: 12,
+                }}
               />
               <Legend
                 layout="vertical"
                 align="right"
                 verticalAlign="middle"
-                iconSize={10}
-                formatter={(value) => <span style={{ fontSize: 11 }}>{value}</span>}
+                iconSize={8}
+                iconType="circle"
+                formatter={(value) => (
+                  <span style={{ fontSize: 11, color: '#334155' }}>{value}</span>
+                )}
               />
             </PieChart>
           </ResponsiveContainer>
-        </div>
+        </ChartCard>
       )}
     </div>
   );

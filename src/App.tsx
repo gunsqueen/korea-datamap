@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { MapPin, BarChart2 } from 'lucide-react';
 import type { AdminArea, AdminLevel, NavItem, PanelTab } from './types';
 import { useBoundary } from './hooks/useBoundary';
 import { KoreaMap } from './components/Map/KoreaMap';
@@ -12,39 +13,45 @@ const SIDO_COLORS: Record<string, string> = {
   '11': '#E63946', '21': '#457B9D', '31': '#A8DADC', '39': '#95A3B3',
 };
 
-// 드릴다운 가능 레벨 순서
 const NEXT_LEVEL: Record<AdminLevel, AdminLevel | null> = {
   sido: 'sigungu',
   sigungu: 'eupmyeondong',
   eupmyeondong: null,
 };
 
+const LEVEL_LABEL: Record<AdminLevel, string> = {
+  sido: '시도',
+  sigungu: '시군구',
+  eupmyeondong: '읍면동',
+};
+
+const LEVEL_GUIDE: Record<AdminLevel, string> = {
+  sido: '시도를 클릭하면 시군구로 이동합니다',
+  sigungu: '읍·동을 클릭하면 상세 데이터를 확인합니다',
+  eupmyeondong: '읍·동을 클릭하면 상세 데이터를 확인합니다',
+};
+
 export default function App() {
-  // ─── 네비게이션 스택 (드릴다운 히스토리) ────
   const [navStack, setNavStack] = useState<NavItem[]>([]);
 
-  // ─── 현재 지도 레벨 ─────────────────────────
   const currentLevel: AdminLevel = navStack.length === 0
     ? 'sido'
     : navStack.length === 1
       ? 'sigungu'
       : 'eupmyeondong';
 
-  // 경계 조회용 코드: sido면 '0', 하위면 부모의 adm_cd
   const boundaryCode = navStack.length === 0
     ? '0'
     : navStack[navStack.length - 1].adm_cd;
 
   const { data: geoData, loading: mapLoading } = useBoundary(boundaryCode, currentLevel);
 
-  // ─── 선택/비교 상태 ──────────────────────────
   const [selectedArea, setSelectedArea] = useState<AdminArea | null>(null);
   const [hoveredArea, setHoveredArea] = useState<AdminArea | null>(null);
   const [compareArea, setCompareArea] = useState<AdminArea | null>(null);
   const [activeTab, setActiveTab] = useState<PanelTab>('population');
   const [isComparing, setIsComparing] = useState(false);
 
-  // ─── 지도 polygon 클릭 핸들러 ────────────────
   const handleMapClick = useCallback((area: AdminArea) => {
     if (isComparing && selectedArea) {
       setCompareArea(area);
@@ -54,27 +61,21 @@ export default function App() {
     const nextLevel = NEXT_LEVEL[currentLevel];
 
     if (nextLevel) {
-      // 드릴다운: 스택에 현재 클릭한 지역 push → 하위 레벨로 이동
       setNavStack((prev) => [...prev, { adm_cd: area.adm_cd, adm_nm: area.adm_nm, level: currentLevel }]);
-      // 시군구 클릭 시 해당 시군구 데이터도 패널에 표시
       if (currentLevel === 'sigungu') {
         setSelectedArea(area);
       } else {
         setSelectedArea(null);
       }
     } else {
-      // 읍면동 레벨: 데이터 패널 열기
       setSelectedArea(area);
     }
   }, [isComparing, selectedArea, currentLevel]);
 
-  // ─── 브레드크럼 클릭: 특정 단계로 되돌아가기 ──
   const handleNavigate = useCallback((index: number) => {
     if (index === -1) {
-      // 전국으로
       setNavStack([]);
     } else {
-      // index까지만 남기기 (그 위로 pop)
       setNavStack((prev) => prev.slice(0, index + 1));
     }
     setSelectedArea(null);
@@ -99,25 +100,27 @@ export default function App() {
   }, []);
 
   const displayArea = hoveredArea ?? selectedArea;
-
-  const LEVEL_GUIDE: Record<AdminLevel, string> = {
-    sido: '시도를 클릭하면 시군구로 이동합니다',
-    sigungu: '읍동을 클릭하면 상세 데이터를 확인합니다',
-    eupmyeondong: '읍동을 클릭하면 상세 데이터를 확인합니다',
-  };
+  const panelHasContent = selectedArea !== null;
 
   return (
     <div className="app">
       {/* 헤더 */}
       <header className="app-header">
         <div className="header-left">
-          <h1 className="app-title">🗺 Korea DataMap</h1>
+          <div className="app-logo">
+            <MapPin size={18} strokeWidth={2.5} />
+          </div>
+          <h1 className="app-title">Korea <span className="app-title-accent">DataMap</span></h1>
           <span className="app-subtitle">대한민국 행정구역 데이터 탐색</span>
         </div>
         <div className="header-center">
           <SearchBar onSelect={(area) => handleMapClick(area)} />
         </div>
         <div className="header-right">
+          <div className="header-level-badge">
+            <BarChart2 size={13} strokeWidth={2} />
+            <span>{LEVEL_LABEL[currentLevel]}</span>
+          </div>
           <span className="mode-badge">
             {import.meta.env.VITE_DATA_MODE?.toUpperCase() ?? 'MOCK'}
           </span>
@@ -126,7 +129,7 @@ export default function App() {
 
       <div className="app-body">
         {/* 모바일: 패널 오픈 시 지도 dimming */}
-        {selectedArea !== null && (
+        {panelHasContent && (
           <div className="map-overlay" onClick={handleClosePanel} />
         )}
 
@@ -182,8 +185,8 @@ export default function App() {
           )}
         </main>
 
-        {/* 사이드 패널 */}
-        <aside className={`side-panel${selectedArea !== null ? ' panel-open' : ''}`}>
+        {/* 사이드 패널 — 데스크탑: 항상 표시 / 모바일: 선택 시 bottom sheet */}
+        <aside className={`side-panel${panelHasContent ? ' panel-open' : ''}`}>
           {/* 모바일 드래그 핸들 */}
           <div className="mobile-drag-handle" onClick={handleClosePanel} role="button" aria-label="패널 닫기" />
           {isComparing && selectedArea ? (
@@ -206,8 +209,8 @@ export default function App() {
               <p className="placeholder-title">지역을 선택하세요</p>
               <p className="placeholder-desc">
                 {currentLevel === 'sido' && <>시도를 클릭하면<br />시군구 지도로 이동합니다</>}
-                {currentLevel === 'sigungu' && <>읍동을 클릭하면<br />상세 데이터를 확인합니다</>}
-                {currentLevel === 'eupmyeondong' && <>읍동을 클릭하면<br />상세 데이터를 확인합니다</>}
+                {currentLevel === 'sigungu' && <>읍·동을 클릭하면<br />상세 데이터를 확인합니다</>}
+                {currentLevel === 'eupmyeondong' && <>읍·동을 클릭하면<br />상세 데이터를 확인합니다</>}
               </p>
               {navStack.length === 0 && (
                 <div className="placeholder-legend">
@@ -232,7 +235,7 @@ export default function App() {
 
       {/* 상태바 */}
       <div className="status-bar">
-        <span>레벨: {currentLevel === 'sido' ? '시도' : currentLevel === 'sigungu' ? '시군구' : '읍면동'}</span>
+        <span>레벨: {LEVEL_LABEL[currentLevel]}</span>
         {displayArea && (
           <>
             <span>선택: {displayArea.adm_nm}</span>
