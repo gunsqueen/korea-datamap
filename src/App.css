@@ -6,6 +6,7 @@ body {
   background: #f0f2f5;
   color: #1a1a2e;
   height: 100vh;
+  height: 100dvh; /* 모바일 브라우저 주소창 대응 */
   overflow: hidden;
 }
 
@@ -16,6 +17,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
@@ -853,10 +855,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* ─── Mobile / Bottom Sheet ──────────────────── */
 @media (max-width: 768px) {
-  /* Header */
+  /* Header — 노치/다이나믹아일랜드 대응 */
   .app-header {
     padding: 0 12px;
-    height: 52px;
+    padding-top: max(0px, env(safe-area-inset-top));
+    height: calc(52px + env(safe-area-inset-top));
     gap: 10px;
   }
   .app-subtitle { display: none; }
@@ -895,7 +898,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Side panel → bottom sheet */
+  /* Side panel → bottom sheet (홈바 safe-area 포함) */
   .side-panel {
     position: fixed;
     bottom: 0;
@@ -904,6 +907,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     width: 100%;
     height: 82vh;
     max-height: 82vh;
+    padding-bottom: env(safe-area-inset-bottom);
     border-left: none;
     border-top: none;
     border-radius: 20px 20px 0 0;
