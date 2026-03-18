@@ -32,6 +32,9 @@ jobs:
       - name: Build
         env:
           VITE_DATA_MODE: mock
+          VITE_BOUNDARY_MODE: real
+          VITE_SGIS_CONSUMER_KEY: ${{ secrets.VITE_SGIS_CONSUMER_KEY }}
+          VITE_SGIS_CONSUMER_SECRET: ${{ secrets.VITE_SGIS_CONSUMER_SECRET }}
         run: npm run build
 
       - name: Upload artifact
