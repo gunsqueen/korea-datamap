@@ -200,8 +200,6 @@ export function ElectionPanel({ admCd, admNm }: Props) {
 
 function ElectionResult({ data }: { data: ElectionData }) {
   const fmt = (n: number) => n.toLocaleString('ko-KR');
-  // elected: true인 후보만 당선 표시 (지역 1위가 아닌 실제 당선인)
-  const winner = data.candidates.find((c) => c.elected);
 
   const pieData = data.candidates.slice(0, 6).map((c) => ({
     name: c.name,
@@ -229,18 +227,6 @@ function ElectionResult({ data }: { data: ElectionData }) {
         )}
         <span className="election-level-badge">{dataLevel} 기준</span>
       </div>
-
-      {/* 당선자 카드 */}
-      {winner && (
-        <div className="winner-card" style={{ borderLeftColor: winner.party_color }}>
-          <div className="winner-label">당선</div>
-          <div className="winner-name">{winner.name}</div>
-          <div className="winner-party" style={{ color: winner.party_color }}>
-            {winner.party}
-          </div>
-          <div className="winner-rate">{winner.vote_rate.toFixed(2)}%</div>
-        </div>
-      )}
 
       {/* 투개표 현황 */}
       <div className="election-stats-grid">
@@ -313,12 +299,11 @@ function ElectionResult({ data }: { data: ElectionData }) {
               <th>득표수</th>
               <th>득표율</th>
               <th></th>
-              <th>당락</th>
             </tr>
           </thead>
           <tbody>
             {data.candidates.map((c, i) => (
-              <tr key={i} className={c.elected ? 'elected-row' : ''}>
+              <tr key={i}>
                 <td className="col-rank">{c.rank}</td>
                 <td className="col-name">
                   <span className="cand-dot" style={{ background: c.party_color }} />
@@ -335,7 +320,6 @@ function ElectionResult({ data }: { data: ElectionData }) {
                     />
                   </div>
                 </td>
-                <td className="col-elected">{c.elected ? '✓' : ''}</td>
               </tr>
             ))}
           </tbody>
