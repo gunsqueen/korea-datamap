@@ -1,4 +1,13 @@
-import type { AdminGeoCollection, PopulationData, ElectionData, AdminLevel, DataMode, AgeGroup, HouseholdStructure } from '../types';
+import type {
+  AdminGeoCollection,
+  PopulationData,
+  AgeGroup,
+  ElectionData,
+  AdminLevel,
+  DataMode,
+  PopulationFieldSources,
+  PopulationSourceType,
+} from '../types';
 import { fetchBoundary } from './sgis';
 import { fetchPopulation } from './population';
 import { fetchElectionResult, getElectionByCode, ELECTIONS_META } from './election';
@@ -7,6 +16,43 @@ import sidoMock from '../data/mock/sido.json';
 import populationMock from '../data/mock/population.json';
 import sigunguPopulationMock from '../data/mock/sigungu_population.json';
 import emdPopulationSeoulMock from '../data/mock/emd_population_seoul.json';
+import ageDistributionFile from '../data/real/age-distribution.json';
+
+// 파일 기반 연령 분포 데이터 로드
+type AgeDistributionEntry = { ageRange: string; male: number; female: number; total: number };
+type AgeDistributionFile = {
+  meta?: { yearMonth?: string };
+  data?: Record<string, AgeDistributionEntry[]>;
+};
+const ageDistFile = ageDistributionFile as AgeDistributionFile;
+const AGE_FILE_DATA: Record<string, AgeDistributionEntry[]> = ageDistFile.data ?? {};
+const AGE_FILE_YEAR_MONTH: string = ageDistFile.meta?.yearMonth ?? '';
+
+function getAgeGroupsFromFile(admCd: string): AgeGroup[] | null {
+  const entry = AGE_FILE_DATA[admCd];
+  if (!entry?.length) return null;
+  return entry.map((g) => ({ age_range: g.ageRange, male: g.male, female: g.female, total: g.total }));
+}
+
+// 시도/시군구 수준: 하위 코드 집계
+function aggregateAgeGroupsFromFile(admCd: string): AgeGroup[] | null {
+  const prefixLen = admCd.length;
+  const matching = Object.entries(AGE_FILE_DATA).filter(([code]) => code.startsWith(admCd) && code.length === 8);
+  if (matching.length === 0) return null;
+
+  const rangeMap: Record<string, { male: number; female: number; total: number }> = {};
+  for (const [, groups] of matching) {
+    for (const g of groups) {
+      if (!rangeMap[g.ageRange]) rangeMap[g.ageRange] = { male: 0, female: 0, total: 0 };
+      rangeMap[g.ageRange].male += g.male;
+      rangeMap[g.ageRange].female += g.female;
+      rangeMap[g.ageRange].total += g.total;
+    }
+  }
+  const result = Object.entries(rangeMap).map(([age_range, v]) => ({ age_range, ...v }));
+  return result.length > 0 ? result : null;
+  void prefixLen;
+}
 
 // 시군구 mock 데이터 (시도코드 → GeoJSON)
 const sigunguMocks = import.meta.glob('../data/mock/sigungu/*.json', { eager: true }) as
@@ -72,62 +118,127 @@ export async function getPopulation(admCd: string): Promise<PopulationData> {
   if (admCd.length === 8) {
     try {
       const apiData = await fetchPopulation(admCd);
-      supplementDemographics(apiData, admCd);
-      return { ...apiData, source_type: 'realtime' as const };
+      return finalizePopulationData({ ...apiData, source_type: 'real' }, admCd);
     } catch (err) {
       console.warn('인구 API 실패 → snapshot fallback', err);
       const mockData = getMockPopulation(admCd);
-      supplementDemographics(mockData, admCd);
-      return { ...mockData, source_type: 'snapshot' as const };
+      return finalizePopulationData({ ...mockData, source_type: 'snapshot' }, admCd);
     }
   }
 
-  // 시도(2자리), 시군구(5자리)는 snapshot 데이터 사용 (동 레벨 API만 지원)
+  // 시군구(5자리)는 실제 API 시도 후 실패 시 snapshot fallback
+  if (admCd.length === 5) {
+    try {
+      const apiData = await fetchPopulation(admCd);
+      return finalizePopulationData({ ...apiData, source_type: 'real' }, admCd);
+    } catch (err) {
+      console.warn('시군구 인구 API 실패 → snapshot fallback', err);
+    }
+  }
+
+  // 시도(2자리)는 snapshot 데이터 사용
   const mockData = getMockPopulation(admCd);
-  supplementDemographics(mockData, admCd);
-  return { ...mockData, source_type: 'snapshot' as const };
+  return finalizePopulationData({ ...mockData, source_type: 'snapshot' }, admCd);
 }
 
-/**
- * 연령별/세대원수별 데이터가 없으면 상위 시도의 비율로 추정
- */
-function supplementDemographics(data: PopulationData, admCd: string): void {
-  const sidoCd = admCd.slice(0, 2);
-  const sidoList = populationMock as PopulationData[];
-  const sido = sidoList.find((d) => d.adm_cd === sidoCd);
-  if (!sido) return;
+function createPopulationFieldSources(
+  rootSource: PopulationSourceType,
+  ageSource: PopulationSourceType | 'unavailable',
+  data: PopulationData,
+): PopulationFieldSources {
+  const totalsSource = {
+    status: rootSource,
+    note: rootSource === 'real' ? '행정안전부 인구 API' : '저장된 스냅샷 데이터',
+  } as const;
 
-  // 연령별 인구 추정
-  if ((!data.age_groups || data.age_groups.length === 0) && sido.age_groups && sido.age_groups.length > 0) {
-    const sidoTotal = sido.total_population || 1;
-    data.age_groups = sido.age_groups.map((g) => {
-      const ratio = g.total / sidoTotal;
-      const total = Math.round(data.total_population * ratio);
-      const maleRatio = g.total > 0 ? g.male / g.total : 0.5;
-      const male = Math.round(total * maleRatio);
-      return {
-        age_range: g.age_range,
-        male,
-        female: total - male,
-        total,
-      } as AgeGroup;
+  const ageNote: Record<string, string> = {
+    real: '행정안전부 인구 API',
+    snapshot: '저장된 스냅샷 데이터',
+    file: AGE_FILE_YEAR_MONTH
+      ? `공공데이터 기반 (${AGE_FILE_YEAR_MONTH})`
+      : '공공데이터 기반 연령 분포',
+    unavailable: '연령 분포 데이터 없음',
+  };
+
+  const hasAge = (data.age_groups?.length ?? 0) > 0;
+
+  return {
+    total_population: totalsSource,
+    male_population: totalsSource,
+    female_population: totalsSource,
+    total_households: totalsSource,
+    age_distribution: {
+      status: hasAge ? ageSource : 'unavailable',
+      note: hasAge ? ageNote[ageSource] : '연령 분포 데이터 없음',
+    },
+    youth_ratio: {
+      status: hasAge ? ageSource : 'unavailable',
+      note: hasAge ? '연령 분포에서 계산' : '연령 분포 데이터 없음',
+    },
+    elderly_ratio: {
+      status: hasAge ? ageSource : 'unavailable',
+      note: hasAge ? '연령 분포에서 계산' : '연령 분포 데이터 없음',
+    },
+    household_structure: {
+      status: data.household_structure?.length ? rootSource : 'unavailable',
+      note: data.household_structure?.length ? '공식 세대구조 통계' : '세대구조 데이터 미지원',
+    },
+  };
+}
+
+function finalizePopulationData(data: PopulationData, admCd: string): PopulationData {
+  const isSido = admCd.length === 2;
+  const rootSource = data.source_type ?? 'snapshot';
+
+  // ─── 연령 분포: 파일 데이터 우선 ───────────────────────────
+  let ageGroups = data.age_groups;
+  let ageSource: PopulationSourceType | 'unavailable' = isSido
+    ? (ageGroups?.length ? rootSource : 'unavailable')
+    : 'unavailable';
+
+  if (!isSido && Object.keys(AGE_FILE_DATA).length > 0) {
+    // 동 단위: 직접 조회
+    const fileAgeGroups = admCd.length === 8
+      ? getAgeGroupsFromFile(admCd)
+      : aggregateAgeGroupsFromFile(admCd);
+
+    if (fileAgeGroups) {
+      ageGroups = fileAgeGroups;
+      ageSource = 'file';
+    }
+  }
+
+  const fieldSources = createPopulationFieldSources(rootSource, ageSource, {
+    ...data,
+    age_groups: ageGroups,
+  });
+
+  const normalized: PopulationData = {
+    ...data,
+    age_groups: ageGroups,
+    source_type: rootSource,
+    field_sources: fieldSources,
+  };
+
+  // 세대구조: 시도만 mock 보유
+  if (!isSido) {
+    delete normalized.household_structure;
+  }
+
+  if (import.meta.env.DEV) {
+    console.debug('population.lookup', {
+      admCd,
+      admNm: normalized.adm_nm,
+      sourceType: normalized.source_type,
+      ageSource,
+      totalPopulationSource: normalized.field_sources?.total_population.status,
+      ageDistributionSource: normalized.field_sources?.age_distribution.status,
+      ageGroupsCount: normalized.age_groups?.length ?? 0,
+      ageTotalSum: normalized.age_groups?.reduce((s, g) => s + g.total, 0) ?? 0,
     });
   }
 
-  // 세대원수별 세대 추정
-  if ((!data.household_structure || data.household_structure.length === 0) && sido.household_structure && sido.household_structure.length > 0) {
-    const sidoHH = sido.total_households || 1;
-    data.household_structure = sido.household_structure.map((h) => {
-      const ratio = h.count / sidoHH;
-      const count = Math.round(data.total_households * ratio);
-      return {
-        members: h.members,
-        members_label: h.members_label,
-        count,
-        percentage: h.percentage,
-      } as HouseholdStructure;
-    });
-  }
+  return normalized;
 }
 
 function getMockPopulation(admCd: string): PopulationData {

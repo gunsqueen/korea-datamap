@@ -46,7 +46,24 @@ export interface AdminGeoCollection {
 // 인구 통계 타입
 // ───────────────────────────────────────────
 
-export type PopulationSourceType = 'realtime' | 'snapshot';
+export type PopulationSourceType = 'real' | 'snapshot' | 'file';
+export type PopulationFieldStatus = 'real' | 'snapshot' | 'file' | 'estimated' | 'unavailable';
+
+export interface PopulationFieldSource {
+  status: PopulationFieldStatus;
+  note?: string;
+}
+
+export interface PopulationFieldSources {
+  total_population: PopulationFieldSource;
+  male_population: PopulationFieldSource;
+  female_population: PopulationFieldSource;
+  total_households: PopulationFieldSource;
+  age_distribution: PopulationFieldSource;
+  youth_ratio: PopulationFieldSource;
+  elderly_ratio: PopulationFieldSource;
+  household_structure: PopulationFieldSource;
+}
 
 export interface PopulationData {
   adm_cd: string;
@@ -61,6 +78,7 @@ export interface PopulationData {
   household_structure?: HouseholdStructure[];
   /** 데이터 출처: 실시간 API 또는 스냅샷 */
   source_type?: PopulationSourceType;
+  field_sources?: PopulationFieldSources;
 }
 
 export interface AgeGroup {

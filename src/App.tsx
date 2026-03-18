@@ -5,7 +5,6 @@ import { useBoundary } from './hooks/useBoundary';
 import { KoreaMap } from './components/Map/KoreaMap';
 import { Breadcrumb } from './components/Map/Breadcrumb';
 import { DataPanel } from './components/Panel/DataPanel';
-import { ComparePanel } from './components/Compare/ComparePanel';
 import { SearchBar } from './components/Search/SearchBar';
 import './App.css';
 
@@ -48,16 +47,9 @@ export default function App() {
 
   const [selectedArea, setSelectedArea] = useState<AdminArea | null>(null);
   const [hoveredArea, setHoveredArea] = useState<AdminArea | null>(null);
-  const [compareArea, setCompareArea] = useState<AdminArea | null>(null);
   const [activeTab, setActiveTab] = useState<PanelTab>('population');
-  const [isComparing, setIsComparing] = useState(false);
 
   const handleMapClick = useCallback((area: AdminArea) => {
-    if (isComparing && selectedArea) {
-      setCompareArea(area);
-      return;
-    }
-
     const nextLevel = NEXT_LEVEL[currentLevel];
 
     if (nextLevel) {
@@ -70,7 +62,7 @@ export default function App() {
     } else {
       setSelectedArea(area);
     }
-  }, [isComparing, selectedArea, currentLevel]);
+  }, [currentLevel]);
 
   const handleNavigate = useCallback((index: number) => {
     if (index === -1) {
@@ -79,24 +71,10 @@ export default function App() {
       setNavStack((prev) => prev.slice(0, index + 1));
     }
     setSelectedArea(null);
-    setIsComparing(false);
-    setCompareArea(null);
-  }, []);
-
-  const handleCompare = useCallback(() => {
-    setIsComparing(true);
-    setCompareArea(null);
   }, []);
 
   const handleClosePanel = useCallback(() => {
     setSelectedArea(null);
-    setIsComparing(false);
-    setCompareArea(null);
-  }, []);
-
-  const handleCloseCompare = useCallback(() => {
-    setIsComparing(false);
-    setCompareArea(null);
   }, []);
 
   const displayArea = hoveredArea ?? selectedArea;
@@ -135,7 +113,6 @@ export default function App() {
 
         {/* 지도 영역 */}
         <main className="map-container">
-          {/* 브레드크럼 + 뒤로가기 */}
           <div className="map-breadcrumb-wrap">
             <div className="breadcrumb-row-top">
               {navStack.length > 0 && (
@@ -175,33 +152,17 @@ export default function App() {
               <span>{hoveredArea.adm_cd}</span>
             </div>
           )}
-
-          {/* 비교 모드 안내 */}
-          {isComparing && !compareArea && (
-            <div className="compare-hint">
-              비교할 지역을 지도에서 클릭하세요
-              <button onClick={handleCloseCompare} className="btn-cancel-compare">취소</button>
-            </div>
-          )}
         </main>
 
         {/* 사이드 패널 — 데스크탑: 항상 표시 / 모바일: 선택 시 bottom sheet */}
         <aside className={`side-panel${panelHasContent ? ' panel-open' : ''}`}>
-          {/* 모바일 드래그 핸들 */}
           <div className="mobile-drag-handle" onClick={handleClosePanel} role="button" aria-label="패널 닫기" />
-          {isComparing && selectedArea ? (
-            <ComparePanel
-              areaA={selectedArea}
-              areaB={compareArea}
-              onClose={handleCloseCompare}
-            />
-          ) : selectedArea ? (
+          {selectedArea ? (
             <DataPanel
               area={selectedArea}
               activeTab={activeTab}
               onTabChange={setActiveTab}
               onClose={handleClosePanel}
-              onCompare={handleCompare}
             />
           ) : (
             <div className="panel-placeholder">
@@ -209,8 +170,7 @@ export default function App() {
               <p className="placeholder-title">지역을 선택하세요</p>
               <p className="placeholder-desc">
                 {currentLevel === 'sido' && <>시도를 클릭하면<br />시군구 지도로 이동합니다</>}
-                {currentLevel === 'sigungu' && <>읍·동을 클릭하면<br />상세 데이터를 확인합니다</>}
-                {currentLevel === 'eupmyeondong' && <>읍·동을 클릭하면<br />상세 데이터를 확인합니다</>}
+                {currentLevel !== 'sido' && <>읍·동을 클릭하면<br />상세 데이터를 확인합니다</>}
               </p>
               {navStack.length === 0 && (
                 <div className="placeholder-legend">

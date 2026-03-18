@@ -1,4 +1,4 @@
-import { GitCompare, X, BarChart2, Vote } from 'lucide-react';
+import { X, BarChart2, Vote } from 'lucide-react';
 import type { AdminArea, PanelTab } from '../../types';
 import { usePopulation } from '../../hooks/usePopulation';
 import { PopulationPanel } from './PopulationPanel';
@@ -9,7 +9,6 @@ interface Props {
   activeTab: PanelTab;
   onTabChange: (tab: PanelTab) => void;
   onClose: () => void;
-  onCompare: () => void;
 }
 
 function PopulationSkeleton() {
@@ -27,7 +26,7 @@ function PopulationSkeleton() {
   );
 }
 
-export function DataPanel({ area, activeTab, onTabChange, onClose, onCompare }: Props) {
+export function DataPanel({ area, activeTab, onTabChange, onClose }: Props) {
   const { data: popData, loading: popLoading } = usePopulation(area.adm_cd);
 
   return (
@@ -38,9 +37,6 @@ export function DataPanel({ area, activeTab, onTabChange, onClose, onCompare }: 
           <span className="panel-code">{area.adm_cd}</span>
         </div>
         <div className="panel-actions">
-          <button className="btn-compare" onClick={onCompare} title="지역 비교">
-            <GitCompare size={15} strokeWidth={2} />
-          </button>
           <button className="btn-close" onClick={onClose} title="닫기">
             <X size={15} strokeWidth={2} />
           </button>
