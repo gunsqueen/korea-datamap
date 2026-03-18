@@ -12,9 +12,18 @@ import emdPopulationSeoulMock from '../data/mock/emd_population_seoul.json';
 const sigunguMocks = import.meta.glob('../data/mock/sigungu/*.json', { eager: true }) as
   Record<string, { default: AdminGeoCollection }>;
 
+// 읍면동 mock 데이터 (시군구코드 → GeoJSON)
+const eupmyeondongMocks = import.meta.glob('../data/mock/eupmyeondong/*.json', { eager: true }) as
+  Record<string, { default: AdminGeoCollection }>;
+
 function getSigunguMock(sidoCd: string): AdminGeoCollection | null {
   const key = `../data/mock/sigungu/${sidoCd}.json`;
   return sigunguMocks[key]?.default ?? null;
+}
+
+function getEupmyeondongMock(sigunguCd: string): AdminGeoCollection | null {
+  const key = `../data/mock/eupmyeondong/${sigunguCd}.json`;
+  return eupmyeondongMocks[key]?.default ?? null;
 }
 
 // 경계 모드: real(기본) / mock(오프라인 개발용)
@@ -28,11 +37,16 @@ export async function getBoundary(
   admCd: string,
   level: AdminLevel
 ): Promise<AdminGeoCollection> {
-  // mock 모드: sido는 sido.json, sigungu/eupmyeondong은 시군구 파일
+  // mock 모드: 레벨별 사전 생성 파일 사용
   if (BOUNDARY_MODE === 'mock') {
     if (level === 'sido') return sidoMock as AdminGeoCollection;
-    const sidoCd = admCd.slice(0, 2);
-    return getSigunguMock(sidoCd) ?? sidoMock as AdminGeoCollection;
+    if (level === 'sigungu') {
+      const sidoCd = admCd.slice(0, 2);
+      return getSigunguMock(sidoCd) ?? sidoMock as AdminGeoCollection;
+    }
+    // eupmyeondong: 시군구 코드(5자리)로 조회
+    const sigunguCd = admCd.slice(0, 5);
+    return getEupmyeondongMock(sigunguCd) ?? getSigunguMock(admCd.slice(0, 2)) ?? sidoMock as AdminGeoCollection;
   }
 
   try {
@@ -40,8 +54,12 @@ export async function getBoundary(
   } catch (err) {
     console.warn('SGIS 경계 API 실패 → mock fallback', err);
     if (level === 'sido') return sidoMock as AdminGeoCollection;
-    const sidoCd = admCd.slice(0, 2);
-    return getSigunguMock(sidoCd) ?? sidoMock as AdminGeoCollection;
+    if (level === 'sigungu') {
+      const sidoCd = admCd.slice(0, 2);
+      return getSigunguMock(sidoCd) ?? sidoMock as AdminGeoCollection;
+    }
+    const sigunguCd = admCd.slice(0, 5);
+    return getEupmyeondongMock(sigunguCd) ?? getSigunguMock(admCd.slice(0, 2)) ?? sidoMock as AdminGeoCollection;
   }
 }
 
