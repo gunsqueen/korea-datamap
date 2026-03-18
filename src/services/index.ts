@@ -8,28 +8,40 @@ import populationMock from '../data/mock/population.json';
 import sigunguPopulationMock from '../data/mock/sigungu_population.json';
 import emdPopulationSeoulMock from '../data/mock/emd_population_seoul.json';
 
+// 시군구 mock 데이터 (시도코드 → GeoJSON)
+const sigunguMocks = import.meta.glob('../data/mock/sigungu/*.json', { eager: true }) as
+  Record<string, { default: AdminGeoCollection }>;
+
+function getSigunguMock(sidoCd: string): AdminGeoCollection | null {
+  const key = `../data/mock/sigungu/${sidoCd}.json`;
+  return sigunguMocks[key]?.default ?? null;
+}
+
 // 경계 모드: real(기본) / mock(오프라인 개발용)
 // 인구·선거 모드: mock(기본) / real
 const BOUNDARY_MODE = (import.meta.env.VITE_BOUNDARY_MODE ?? 'real') as 'real' | 'mock';
 const DATA_MODE: DataMode = (import.meta.env.VITE_DATA_MODE as DataMode) ?? 'mock';
 
 // ─── 경계 데이터 ───────────────────────────────────────────
-// 경계는 항상 real SGIS API → 메모리 캐시 활용
-// BOUNDARY_MODE=mock 시에만 sido.json fallback
 
 export async function getBoundary(
   admCd: string,
   level: AdminLevel
 ): Promise<AdminGeoCollection> {
+  // mock 모드: sido는 sido.json, sigungu/eupmyeondong은 시군구 파일
   if (BOUNDARY_MODE === 'mock') {
-    return sidoMock as AdminGeoCollection;
+    if (level === 'sido') return sidoMock as AdminGeoCollection;
+    const sidoCd = admCd.slice(0, 2);
+    return getSigunguMock(sidoCd) ?? sidoMock as AdminGeoCollection;
   }
+
   try {
     return await fetchBoundary(admCd, level);
   } catch (err) {
-    console.warn('SGIS 경계 API 실패 → sido mock fallback', err);
-    // API 실패 시 최소한 시도 지도라도 보여줌
-    return sidoMock as AdminGeoCollection;
+    console.warn('SGIS 경계 API 실패 → mock fallback', err);
+    if (level === 'sido') return sidoMock as AdminGeoCollection;
+    const sidoCd = admCd.slice(0, 2);
+    return getSigunguMock(sidoCd) ?? sidoMock as AdminGeoCollection;
   }
 }
 
