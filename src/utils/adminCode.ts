@@ -25,28 +25,71 @@ export function toSgisCode(code: string, level: AdminLevel): string {
   return code.slice(0, 8);
 }
 
-/** 색상 팔레트 - 시도별 구분색 */
-export const SIDO_COLORS: Record<string, string> = {
-  '11': '#E63946', // 서울
-  '21': '#457B9D', // 부산
-  '22': '#2A9D8F', // 대구
-  '23': '#E9C46A', // 인천
-  '24': '#F4A261', // 광주
-  '25': '#264653', // 대전
-  '26': '#6D6875', // 울산
-  '29': '#B5838D', // 세종
-  '31': '#A8DADC', // 경기
-  '32': '#3D405B', // 강원
-  '33': '#81B29A', // 충북
-  '34': '#F2CC8F', // 충남
-  '35': '#E07A5F', // 전북
-  '36': '#3D9970', // 전남
-  '37': '#FF6B6B', // 경북
-  '38': '#4ECDC4', // 경남
-  '39': '#95A3B3', // 제주
+/** 색상 팔레트 - 시도별 구분색 (HSL) */
+const SIDO_COLORS_HSL: Record<string, [number, number, number]> = {
+  '11': [354, 74, 57], // 서울 - 빨강
+  '21': [207, 38, 44], // 부산 - 파랑
+  '22': [171, 58, 39], // 대구 - 청록
+  '23': [43,  74, 66], // 인천 - 노랑
+  '24': [27,  87, 67], // 광주 - 주황
+  '25': [195, 33, 22], // 대전 - 짙은 청
+  '26': [311, 10, 43], // 울산 - 보라
+  '29': [347, 29, 60], // 세종 - 핑크
+  '31': [182, 47, 76], // 경기 - 하늘
+  '32': [234, 20, 29], // 강원 - 남색
+  '33': [150, 26, 60], // 충북 - 녹색
+  '34': [39,  77, 75], // 충남 - 연노랑
+  '35': [14,  67, 62], // 전북 - 연주황
+  '36': [153, 44, 42], // 전라남도 - 초록
+  '37': [0,   100, 71], // 경북 - 연빨강
+  '38': [177, 55, 55], // 경남 - 민트
+  '39': [213, 18, 65], // 제주 - 회청
 };
 
+/** 문자열 → 0~1 사이 결정적 해시값 */
+function codeHash(s: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = (Math.imul(h, 0x01000193)) >>> 0;
+  }
+  return (h & 0xffff) / 0xffff;
+}
+
+function hslToHex(h: number, s: number, l: number): string {
+  h = ((h % 360) + 360) % 360;
+  s = Math.max(0, Math.min(100, s));
+  l = Math.max(15, Math.min(85, l));
+  const sl = s / 100, ll = l / 100;
+  const a = sl * Math.min(ll, 1 - ll);
+  const f = (n: number) => {
+    const k = (n + h / 30) % 12;
+    const v = ll - a * Math.max(-1, Math.min(k - 3, Math.min(9 - k, 1)));
+    return Math.round(v * 255).toString(16).padStart(2, '0');
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
+}
+
+export const SIDO_COLORS: Record<string, string> = Object.fromEntries(
+  Object.entries(SIDO_COLORS_HSL).map(([k, [h, s, l]]) => [k, hslToHex(h, s, l)])
+);
+
+/**
+ * 지역 코드에 따라 색상 반환.
+ * 시도 → 기본색, 시군구/읍면동 → 시도 기본색에서 명도·색조 미세 변형
+ */
 export function getSidoColor(admCd: string): string {
   const sido = admCd.slice(0, 2);
-  return SIDO_COLORS[sido] ?? '#cccccc';
+  const base = SIDO_COLORS_HSL[sido];
+  if (!base) return '#cccccc';
+
+  // 시도 레벨: 기본색 그대로
+  if (admCd.length <= 2) return hslToHex(...base);
+
+  // 시군구 / 읍면동: 명도 ±12%, 색조 ±8° 변형
+  const t = codeHash(admCd);
+  const [h, s, l] = base;
+  const dh = (t - 0.5) * 16;       // -8 ~ +8°
+  const dl = (t - 0.5) * 24;       // -12 ~ +12%
+  return hslToHex(h + dh, s, l + dl);
 }
