@@ -24,7 +24,7 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
     if (!containerRef.current || mapRef.current) return;
 
     mapRef.current = L.map(containerRef.current, {
-      center: [36.0, 127.7],
+      center: [36.48, 127.29],
       zoom: 8,
       zoomControl: true,
       attributionControl: true,

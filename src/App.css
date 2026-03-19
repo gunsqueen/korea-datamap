@@ -239,27 +239,23 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .btn-cancel-compare:hover { background: rgba(146,64,14,0.22); }
 
 /* ─── Side Panel ────────────────────────────────────── */
-/* Desktop default: 패널 닫힘 (지도 최대 너비 확보) */
+/* Desktop default: 패널 항상 표시 (지도와 균형 유지) */
 .side-panel {
-  flex: 0 0 0;
-  width: 0;
-  overflow: hidden;
-  background: var(--bg);
-  border-left: none;
-  display: flex;
-  flex-direction: column;
-  box-shadow: none;
-  transition: flex-basis 0.25s ease, width 0.25s ease;
-}
-
-/* Desktop: 지역 선택 시 패널 열림 */
-.side-panel.panel-open {
-  flex: 0 0 400px;
-  width: 400px;
+  flex: 0 0 380px;
+  width: 380px;
   overflow-y: auto;
   overflow-x: hidden;
+  background: var(--bg);
   border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
   box-shadow: -2px 0 16px rgba(0,0,0,0.04);
+}
+
+/* Desktop: 지역 선택 시 패널 (동일 너비 유지) */
+.side-panel.panel-open {
+  flex: 0 0 380px;
+  width: 380px;
 }
 
 /* ─── Data Panel ────────────────────────────── */
@@ -1394,7 +1390,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .app-header { padding: 0 16px; gap: 12px; }
   .app-subtitle { display: none; }
   .header-center { max-width: 280px; }
-  .side-panel.panel-open { flex: 0 0 340px; width: 340px; }
+  .side-panel { flex: 0 0 320px; width: 320px; }
+  .side-panel.panel-open { flex: 0 0 320px; width: 320px; }
 
   /* 모바일 전용 요소 숨기기 */
   .mobile-header-back { display: none !important; }
