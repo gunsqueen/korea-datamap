@@ -116,12 +116,15 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
         );
         if (target) {
           const bounds = L.geoJSON(target as unknown as GeoJsonObject).getBounds();
-          map.fitBounds(bounds, { padding: [40, 40] });
+          map.fitBounds(bounds, { padding: [40, 40], animate: false });
         } else {
-          map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [20, 20] });
+          map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [20, 20], animate: false });
         }
       } else {
-        map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [20, 20] });
+        // 전체 영역 뷰: fitBounds 후 추가 줌인으로 지도가 더 크게 보이도록
+        // (Mercator 투영 특성상 fitBounds가 zoom ~7.1을 선택해 한국이 화면 52%만 차지)
+        map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [20, 20], animate: false });
+        map.setZoom(map.getZoom() + 0.7, { animate: false });
       }
     });
   }, [geoData, leafletGeoData, selectedCode, level, onHover, onSelect]);
