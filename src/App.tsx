@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { MapPin, BarChart2 } from 'lucide-react';
+import { MapPin, BarChart2, ChevronLeft, Search } from 'lucide-react';
 import type { AdminArea, AdminLevel, NavItem, PanelTab } from './types';
 import { useBoundary } from './hooks/useBoundary';
 import { KoreaMap } from './components/Map/KoreaMap';
@@ -48,6 +48,7 @@ export default function App() {
   const [selectedArea, setSelectedArea] = useState<AdminArea | null>(null);
   const [hoveredArea, setHoveredArea] = useState<AdminArea | null>(null);
   const [activeTab, setActiveTab] = useState<PanelTab>('population');
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   const handleMapClick = useCallback((area: AdminArea) => {
     const nextLevel = NEXT_LEVEL[currentLevel];
@@ -77,13 +78,24 @@ export default function App() {
     setSelectedArea(null);
   }, []);
 
+  const handleMobileSearch = useCallback((area: AdminArea) => {
+    handleMapClick(area);
+    setMobileSearchOpen(false);
+  }, [handleMapClick]);
+
   const displayArea = hoveredArea ?? selectedArea;
   const panelHasContent = selectedArea !== null;
+
+  // 모바일 헤더: 현재 위치명
+  const mobileRegionName = navStack.length === 0
+    ? 'Korea DataMap'
+    : navStack[navStack.length - 1].adm_nm;
 
   return (
     <div className="app">
       {/* 헤더 */}
       <header className="app-header">
+        {/* 데스크탑: 로고 + 타이틀 */}
         <div className="header-left">
           <div className="app-logo">
             <MapPin size={18} strokeWidth={2.5} />
@@ -91,9 +103,38 @@ export default function App() {
           <h1 className="app-title">Korea <span className="app-title-accent">DataMap</span></h1>
           <span className="app-subtitle">대한민국 행정구역 데이터 탐색</span>
         </div>
+
+        {/* 모바일 전용: 뒤로가기 버튼 */}
+        {navStack.length > 0 && (
+          <button
+            className="mobile-header-back"
+            onClick={() => handleNavigate(navStack.length - 2)}
+            aria-label="뒤로가기"
+          >
+            <ChevronLeft size={20} strokeWidth={2.5} />
+          </button>
+        )}
+
+        {/* 모바일 전용: 현재 지역명 */}
+        <div className="mobile-region-title">
+          {mobileRegionName}
+        </div>
+
+        {/* 데스크탑: 검색바 */}
         <div className="header-center">
           <SearchBar onSelect={(area) => handleMapClick(area)} />
         </div>
+
+        {/* 모바일 전용: 검색 아이콘 버튼 */}
+        <button
+          className="mobile-search-toggle"
+          onClick={() => setMobileSearchOpen(true)}
+          aria-label="검색"
+        >
+          <Search size={18} />
+        </button>
+
+        {/* 데스크탑: 뱃지 */}
         <div className="header-right">
           <div className="header-level-badge">
             <BarChart2 size={13} strokeWidth={2} />
@@ -105,12 +146,19 @@ export default function App() {
         </div>
       </header>
 
-      <div className="app-body">
-        {/* 모바일: 패널 오픈 시 지도 dimming */}
-        {panelHasContent && (
-          <div className="map-overlay" onClick={handleClosePanel} />
-        )}
+      {/* 모바일 전용: 전체화면 검색 오버레이 */}
+      {mobileSearchOpen && (
+        <div className="mobile-search-overlay" onClick={(e) => { if (e.target === e.currentTarget) setMobileSearchOpen(false); }}>
+          <div className="mobile-search-inner">
+            <SearchBar autoFocus onSelect={handleMobileSearch} />
+            <button className="mobile-search-cancel" onClick={() => setMobileSearchOpen(false)}>
+              취소
+            </button>
+          </div>
+        </div>
+      )}
 
+      <div className="app-body">
         {/* 지도 영역 */}
         <main className="map-container">
           <div className="map-breadcrumb-wrap">
@@ -145,7 +193,7 @@ export default function App() {
             <div className="map-error">지도 데이터를 불러올 수 없습니다.</div>
           )}
 
-          {/* 호버 툴팁 */}
+          {/* 호버 툴팁 (데스크탑) */}
           {hoveredArea && (
             <div className="map-hover-tooltip">
               <strong>{hoveredArea.adm_nm}</strong>
@@ -154,7 +202,7 @@ export default function App() {
           )}
         </main>
 
-        {/* 사이드 패널 — 데스크탑: 항상 표시 / 모바일: 선택 시 bottom sheet */}
+        {/* 사이드 패널 — 데스크탑: 우측 패널 / 모바일: 지도 아래 카드 영역 */}
         <aside className={`side-panel${panelHasContent ? ' panel-open' : ''}`}>
           <div className="mobile-drag-handle" onClick={handleClosePanel} role="button" aria-label="패널 닫기" />
           {selectedArea ? (
@@ -167,13 +215,15 @@ export default function App() {
           ) : (
             <div className="panel-placeholder">
               <div className="placeholder-icon">🗺</div>
-              <p className="placeholder-title">지역을 선택하세요</p>
-              <p className="placeholder-desc">
-                {currentLevel === 'sido' && <>시도를 클릭하면<br />시군구 지도로 이동합니다</>}
-                {currentLevel !== 'sido' && <>읍·동을 클릭하면<br />상세 데이터를 확인합니다</>}
-              </p>
+              <div className="placeholder-text">
+                <p className="placeholder-title">지역을 선택하세요</p>
+                <p className="placeholder-desc">
+                  {currentLevel === 'sido' && <>시도를 탭하면 시군구로 이동합니다</>}
+                  {currentLevel !== 'sido' && <>읍·동을 탭하면 상세 데이터를 확인합니다</>}
+                </p>
+              </div>
               {navStack.length === 0 && (
-                <div className="placeholder-legend">
+                <div className="placeholder-legend desktop-only">
                   <div className="legend-title">시도 색상 범례</div>
                   {[
                     { code: '11', name: '서울특별시' },
@@ -193,7 +243,7 @@ export default function App() {
         </aside>
       </div>
 
-      {/* 상태바 */}
+      {/* 상태바 (데스크탑) */}
       <div className="status-bar">
         <span>레벨: {LEVEL_LABEL[currentLevel]}</span>
         {displayArea && (

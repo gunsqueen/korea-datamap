@@ -139,6 +139,7 @@ export function PopulationPanel({ data }: Props) {
             </span>
           }
         >
+          <div className="chart-responsive-wrap">
           <ResponsiveContainer width="100%" height={190}>
             <BarChart data={ageData} barCategoryGap="22%" barGap={2} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
@@ -173,6 +174,7 @@ export function PopulationPanel({ data }: Props) {
               <Bar dataKey="여성" fill="#ec4899" radius={[3, 3, 0, 0]} maxBarSize={12} />
             </BarChart>
           </ResponsiveContainer>
+          </div>
         </ChartCard>
       ) : (
         <ChartCard title="연령별 인구 분포">
@@ -195,6 +197,7 @@ export function PopulationPanel({ data }: Props) {
             </span>
           }
         >
+          <div className="chart-responsive-wrap">
           <ResponsiveContainer width="100%" height={180}>
             <BarChart
               data={displayHouseholdData}
@@ -235,6 +238,7 @@ export function PopulationPanel({ data }: Props) {
               </Bar>
             </BarChart>
           </ResponsiveContainer>
+          </div>
         </ChartCard>
       ) : (
         <ChartCard title="세대구조 (세대원수별)">

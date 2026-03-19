@@ -722,6 +722,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   margin-bottom: 10px;
 }
 
+/* ─── Chart Responsive Wrapper ──────────────── */
+.chart-responsive-wrap { /* no-op on desktop */ }
+
 /* ─── Skeleton UI ───────────────────────────── */
 @keyframes shimmer {
   0% { background-position: -400px 0; }
@@ -1123,6 +1126,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .placeholder-icon { font-size: 48px; opacity: 0.5; line-height: 1; }
+.placeholder-text { display: flex; flex-direction: column; gap: 4px; }
 .placeholder-title { font-size: 16px; font-weight: 700; color: var(--text-1); letter-spacing: -0.3px; }
 .placeholder-desc { font-size: 13px; color: var(--text-3); line-height: 1.7; max-width: 200px; }
 
@@ -1378,110 +1382,288 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* ─── Map Overlay (mobile only) ─────────────── */
 .map-overlay { display: none; }
 
-/* ─── Mobile / Bottom Sheet ──────────────────── */
+/* ─── Mobile-only elements (hidden on desktop) ── */
+.mobile-header-back { display: none; }
+.mobile-region-title { display: none; }
+.mobile-search-toggle { display: none; }
+.mobile-search-overlay { display: none; }
+.desktop-only { display: block; }
+
+/* ─── Mobile: 지도 중심형 레이아웃 ────────────────── */
 @media (max-width: 768px) {
+
+  /* === 헤더 === */
   .app-header {
-    padding: 0 16px;
+    padding: 0 12px;
     padding-top: max(0px, env(safe-area-inset-top));
-    height: calc(54px + env(safe-area-inset-top));
-    gap: 10px;
+    height: calc(52px + env(safe-area-inset-top));
+    gap: 8px;
   }
-  .app-subtitle { display: none; }
-  .mode-badge { display: none; }
-  .header-center { max-width: none; flex: 1; }
-  .header-left { gap: 8px; }
-  .app-title { font-size: 14px; }
-  .app-logo { width: 28px; height: 28px; }
-  .header-level-badge { display: none; }
 
-  .status-bar { display: none; }
-  .app-body { position: relative; }
-  .map-container { height: 100%; }
+  /* 데스크탑 전용 요소 숨기기 */
+  .header-left  { display: none; }
+  .header-center { display: none; }
+  .header-right { display: none; }
+  .desktop-only { display: none !important; }
 
-  .btn-back { font-size: 13px; padding: 9px 14px; min-height: 42px; }
-  .breadcrumb { padding: 8px 12px; }
-  .map-hover-tooltip { display: none; }
+  /* 모바일 헤더: 뒤로가기 버튼 */
+  .mobile-header-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius);
+    color: var(--text-1);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s;
+  }
+  .mobile-header-back:active { background: var(--border-light); }
 
-  .map-overlay {
+  /* 모바일 헤더: 현재 지역명 */
+  .mobile-region-title {
     display: block;
+    flex: 1;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    letter-spacing: -0.3px;
+  }
+
+  /* 모바일 헤더: 검색 아이콘 버튼 */
+  .mobile-search-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius);
+    color: var(--text-2);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s;
+  }
+  .mobile-search-toggle:active { background: var(--border-light); }
+
+  /* === 모바일 전체화면 검색 오버레이 === */
+  .mobile-search-overlay {
+    display: flex;
+    flex-direction: column;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.45);
-    z-index: 800;
-    -webkit-tap-highlight-color: transparent;
+    background: rgba(0,0,0,0.6);
+    z-index: 2000;
+    padding: calc(env(safe-area-inset-top) + 52px) 0 0;
+    backdrop-filter: blur(4px);
   }
 
-  /* Mobile: side panel → bottom sheet */
+  .mobile-search-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mobile-search-inner .search-wrap { flex: 1; }
+
+  .mobile-search-cancel {
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+    padding: 8px 4px;
+    min-height: 44px;
+    white-space: nowrap;
+  }
+
+  /* 오버레이 안에서 검색 드롭다운: absolute → 검색바 바로 아래 */
+  .mobile-search-inner .search-dropdown {
+    position: absolute !important;
+    top: calc(100% + 4px) !important;
+    left: 0 !important;
+    right: 0 !important;
+    max-height: 60vh !important;
+    z-index: 2100 !important;
+    border-radius: var(--radius-lg) !important;
+  }
+
+  /* === 바디 레이아웃: 수직 분할 === */
+  .app-body {
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* 지도: 화면의 52% (fixed) */
+  .map-container {
+    flex: 0 0 52%;
+    height: 52%;
+    min-height: 200px;
+    overflow: hidden;
+  }
+
+  /* 지도 오버레이 제거 (바텀시트 아님) */
+  .map-overlay { display: none !important; }
+
+  /* 지도 위 브레드크럼 축소 */
+  .map-breadcrumb-wrap { top: 8px; left: 8px; gap: 4px; }
+  .breadcrumb-row-top { gap: 4px; }
+  .btn-back {
+    font-size: 12px;
+    padding: 7px 11px;
+    min-height: 36px;
+    border-radius: var(--radius-sm);
+  }
+  .breadcrumb { padding: 6px 10px; }
+  .breadcrumb-item { font-size: 11px; }
+  .level-guide { display: none; }
+  .map-hover-tooltip { display: none; }
+
+  /* === 사이드 패널 → 지도 아래 카드 영역 === */
   .side-panel {
-    flex: unset;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 84vh;
-    max-height: 84vh;
-    padding-bottom: env(safe-area-inset-bottom);
-    border-left: none;
-    border-top: none;
-    border-radius: 20px 20px 0 0;
-    box-shadow: 0 -8px 40px rgba(0,0,0,0.16);
-    transform: translateY(100%);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 900;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
+    /* 바텀시트 완전 해제 */
+    position: static !important;
+    flex: 1 !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    transform: none !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-top: 1px solid var(--border) !important;
+    box-shadow: none !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+    padding-bottom: max(env(safe-area-inset-bottom), 16px) !important;
+    transition: none !important;
+    background: var(--bg) !important;
   }
 
   .side-panel.panel-open {
-    transform: translateY(0);
-    width: 100%;
+    transform: none !important;
+    flex: 1 !important;
   }
 
-  .mobile-drag-handle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 28px;
-    cursor: pointer;
-    flex-shrink: 0;
-    background: var(--surface);
-    border-radius: 20px 20px 0 0;
-  }
+  /* 드래그 핸들 숨기기 */
+  .mobile-drag-handle { display: none !important; }
 
-  .mobile-drag-handle::after {
-    content: '';
-    width: 40px;
-    height: 4px;
-    background: var(--border);
-    border-radius: 2px;
-  }
-
+  /* === 데이터 패널 === */
   .data-panel { height: auto; min-height: unset; }
   .compare-panel { min-height: unset; }
-  .panel-body { overflow-y: visible; padding: 14px; }
-  .panel-header { padding: 14px 16px 12px; position: static; }
-  .panel-title { font-size: 17px; }
 
+  .panel-header {
+    padding: 12px 14px 10px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--surface);
+  }
+  .panel-title { font-size: 16px; }
+  .panel-code { font-size: 10px; }
+
+  .btn-close {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius);
+  }
+
+  .panel-tabs { padding: 0 14px; }
+  .tab-btn { padding: 10px 8px; font-size: 13px; min-height: 44px; }
+
+  .panel-body {
+    overflow-y: visible;
+    padding: 12px 12px 4px;
+  }
+
+  /* === 통계 카드 === */
+  .panel-section { gap: 10px; }
+
+  .stats-grid { gap: 8px; }
+
+  .stats-card {
+    padding: 12px;
+    gap: 10px;
+    border-radius: var(--radius);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .stats-card:active { transform: scale(0.98); }
+
+  .stats-card__icon { width: 32px; height: 32px; border-radius: var(--radius-sm); }
+  .stats-card__label { font-size: 10px; }
+  .stats-card__value { font-size: 20px; letter-spacing: -1px; }
+  .stats-card--full .stats-card__value { font-size: 22px; }
+  .stats-card__sub { font-size: 11px; }
+
+  /* === 차트 카드 === */
+  .chart-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .chart-card__header { padding: 11px 12px 8px; }
+  .chart-card__title { font-size: 12px; }
+  .chart-card__body { padding: 8px 2px 6px; }
+
+  /* 차트 높이 모바일 최적화 */
+  .chart-responsive-wrap {
+    height: 155px;
+    overflow: hidden;
+  }
+  .chart-responsive-wrap > * {
+    height: 155px !important;
+  }
+
+  /* === 플레이스홀더: 모바일 수평 레이아웃 === */
+  .panel-placeholder {
+    flex-direction: row;
+    justify-content: flex-start;
+    min-height: 80px;
+    padding: 16px 16px;
+    gap: 14px;
+    align-items: center;
+    text-align: left;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .placeholder-icon { font-size: 28px; opacity: 0.45; line-height: 1; flex-shrink: 0; }
+  .placeholder-text { display: flex; flex-direction: column; gap: 3px; }
+  .placeholder-title { font-size: 14px; font-weight: 700; }
+  .placeholder-desc { font-size: 12px; line-height: 1.5; color: var(--text-3); }
+
+  /* === 선거 패널 === */
+  .election-type-tabs { margin-bottom: 10px; }
   .election-type-tab { padding: 10px 6px; min-height: 44px; font-size: 13px; }
   .election-year-btn { padding: 12px 14px; min-height: 48px; font-size: 14px; }
-  .election-sub-tab { padding: 8px 14px; min-height: 36px; font-size: 12px; }
-  .tab-btn { padding: 12px 10px; font-size: 13px; }
-
-  .election-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .election-sub-tab { padding: 8px 14px; min-height: 40px; font-size: 12px; }
+  .election-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .estat-value { font-size: 13px; }
   .candidates-table-wrap { margin-top: 8px; }
   .col-bar { display: none; }
+  .candidates-table td { padding: 8px 8px; }
 
-  .stats-card__value { font-size: 20px; }
-  .stats-card--full .stats-card__value { font-size: 22px; }
+  /* === 상태바 숨기기 === */
+  .status-bar { display: none; }
 
+  /* === 기존 검색 드롭다운 (헤더 검색 비활성화로 미사용) === */
   .search-dropdown {
     position: fixed;
-    top: 54px;
+    top: 52px;
     left: 0;
     right: 0;
-    border-radius: 0 0 16px 16px;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     max-height: 50vh;
   }
 

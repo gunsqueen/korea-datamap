@@ -4,9 +4,10 @@ import sidoData from '../../data/mock/sido.json';
 
 interface Props {
   onSelect: (area: AdminArea) => void;
+  autoFocus?: boolean;
 }
 
-export function SearchBar({ onSelect }: Props) {
+export function SearchBar({ onSelect, autoFocus }: Props) {
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
 
@@ -40,6 +41,7 @@ export function SearchBar({ onSelect }: Props) {
           className="search-input"
           placeholder="지역 검색 (예: 서울, 부산)"
           value={query}
+          autoFocus={autoFocus}
           onChange={(e) => {
             setQuery(e.target.value);
             setOpen(true);
