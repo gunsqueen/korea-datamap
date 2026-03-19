@@ -145,6 +145,7 @@ function createPopulationFieldSources(
   rootSource: PopulationSourceType,
   ageSource: PopulationSourceType | 'unavailable',
   data: PopulationData,
+  isSido: boolean,
 ): PopulationFieldSources {
   const totalsSource = {
     status: rootSource,
@@ -181,7 +182,11 @@ function createPopulationFieldSources(
     },
     household_structure: {
       status: data.household_structure?.length ? rootSource : 'unavailable',
-      note: data.household_structure?.length ? '공식 세대구조 통계' : '세대구조 데이터 미지원',
+      note: data.household_structure?.length
+        ? `행정안전부 주민등록 세대구조 통계 (${AGE_FILE_YEAR_MONTH || '스냅샷 기준'})`
+        : isSido
+          ? '시도 단위 세대구조 통계 없음'
+          : '세대원수별 통계는 시도(광역자치단체) 단위까지만 공식 제공됩니다. 읍면동·시군구 단위는 실시간 API 미지원입니다.',
     },
   };
 }
@@ -211,7 +216,7 @@ function finalizePopulationData(data: PopulationData, admCd: string): Population
   const fieldSources = createPopulationFieldSources(rootSource, ageSource, {
     ...data,
     age_groups: ageGroups,
-  });
+  }, isSido);
 
   const normalized: PopulationData = {
     ...data,

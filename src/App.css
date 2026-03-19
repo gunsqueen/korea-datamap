@@ -238,16 +238,27 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .btn-cancel-compare:hover { background: rgba(146,64,14,0.22); }
 
-/* ─── Side Panel (Desktop: always visible at ~40%) ─── */
+/* ─── Side Panel ────────────────────────────────────── */
+/* Desktop default: 패널 닫힘 (지도 최대 너비 확보) */
 .side-panel {
-  flex: 0 0 400px;
-  width: 400px;
+  flex: 0 0 0;
+  width: 0;
+  overflow: hidden;
   background: var(--bg);
-  border-left: 1px solid var(--border);
-  overflow-y: auto;
-  overflow-x: hidden;
+  border-left: none;
   display: flex;
   flex-direction: column;
+  box-shadow: none;
+  transition: flex-basis 0.25s ease, width 0.25s ease;
+}
+
+/* Desktop: 지역 선택 시 패널 열림 */
+.side-panel.panel-open {
+  flex: 0 0 400px;
+  width: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-left: 1px solid var(--border);
   box-shadow: -2px 0 16px rgba(0,0,0,0.04);
 }
 
