@@ -104,25 +104,26 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
     }).addTo(mapRef.current);
 
     // 선택된 지역이 있으면 해당 지역으로 이동
-    if (selectedCode) {
-      const target = geoData.features.find(
-        (f) => f.properties.adm_cd === selectedCode
-      );
-      if (target) {
-        const bounds = L.geoJSON(target as unknown as GeoJsonObject).getBounds();
-        mapRef.current.fitBounds(bounds, { padding: [40, 40] });
+    // requestAnimationFrame으로 컨테이너 레이아웃이 완전히 확정된 후 fitBounds 실행
+    const map = mapRef.current;
+    const geoDataSnapshot = leafletGeoData;
+    requestAnimationFrame(() => {
+      if (!map) return;
+      map.invalidateSize({ animate: false });
+      if (selectedCode) {
+        const target = geoData.features.find(
+          (f) => f.properties.adm_cd === selectedCode
+        );
+        if (target) {
+          const bounds = L.geoJSON(target as unknown as GeoJsonObject).getBounds();
+          map.fitBounds(bounds, { padding: [40, 40] });
+        } else {
+          map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [20, 20] });
+        }
       } else {
-        // 현재 레벨의 데이터에 selectedCode가 없을 때 (예: 읍면동 레벨 전환 시)
-        // 전체 피처 범위로 fitBounds
-        mapRef.current.fitBounds(L.geoJSON(leafletGeoData).getBounds(), {
-          padding: [20, 20],
-        });
+        map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [20, 20] });
       }
-    } else {
-      mapRef.current.fitBounds(L.geoJSON(leafletGeoData).getBounds(), {
-        padding: [20, 20],
-      });
-    }
+    });
   }, [geoData, leafletGeoData, selectedCode, level, onHover, onSelect]);
 
   return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />;

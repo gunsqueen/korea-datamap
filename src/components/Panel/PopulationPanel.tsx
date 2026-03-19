@@ -51,6 +51,16 @@ export function PopulationPanel({ data }: Props) {
     value: h.count,
     pct: h.percentage,
   })) ?? [];
+
+  // 5인 이상 세대를 하나로 합산 (1인~4인 + "5인 이상")
+  const displayHouseholdData = (() => {
+    if (householdData.length <= 5) return householdData;
+    const first4 = householdData.slice(0, 4);
+    const fivePlusValue = householdData.slice(4).reduce((sum, h) => sum + h.value, 0);
+    const totalHouseholds = householdData.reduce((sum, h) => sum + h.value, 0) || 1;
+    const fivePlusPct = Math.round((fivePlusValue / totalHouseholds) * 1000) / 10;
+    return [...first4, { name: '5인 이상', value: fivePlusValue, pct: fivePlusPct }];
+  })();
   const youthPopulation = data.age_groups
     ?.filter((group) => ['15-19', '20-29', '30-39'].includes(group.age_range))
     .reduce((sum, group) => sum + group.total, 0);
@@ -187,14 +197,14 @@ export function PopulationPanel({ data }: Props) {
         >
           <ResponsiveContainer width="100%" height={180}>
             <BarChart
-              data={householdData.filter(h => h.value > 0)}
+              data={displayHouseholdData}
               margin={{ top: 4, right: 4, left: 0, bottom: 0 }}
               barCategoryGap="20%"
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
               <XAxis
                 dataKey="name"
-                tick={{ fontSize: 9, fill: '#94a3b8' }}
+                tick={{ fontSize: 10, fill: '#94a3b8' }}
                 axisLine={false}
                 tickLine={false}
               />
@@ -218,8 +228,8 @@ export function PopulationPanel({ data }: Props) {
                 }}
                 cursor={{ fill: 'rgba(99,102,241,0.06)' }}
               />
-              <Bar dataKey="value" radius={[3, 3, 0, 0]} maxBarSize={24}>
-                {householdData.filter(h => h.value > 0).map((_, i) => (
+              <Bar dataKey="value" radius={[3, 3, 0, 0]} maxBarSize={40}>
+                {displayHouseholdData.map((_, i) => (
                   <Cell key={i} fill={HOUSEHOLD_COLORS[i % HOUSEHOLD_COLORS.length]} />
                 ))}
               </Bar>
