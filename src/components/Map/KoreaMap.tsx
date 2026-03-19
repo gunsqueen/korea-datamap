@@ -120,11 +120,14 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
         } else {
           map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [20, 20], animate: false });
         }
-      } else {
-        // 전국 뷰: fitBounds로 적절한 줌 레벨 계산 후 세종시 중심으로 고정
+      } else if (level === 'sido') {
+        // 전국 뷰(sido 레벨, 선택 없음): fitBounds로 줌 계산 후 세종시 중심으로 고정
         map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [20, 20], animate: false });
         const targetZoom = map.getZoom() + 0.7;
         map.setView([36.4800, 127.2890], targetZoom, { animate: false });
+      } else {
+        // 시군구·읍면동 레벨에서 선택 없음: 현재 geoData 전체 영역에 맞게 fitBounds
+        map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [30, 30], animate: false });
       }
     });
   }, [geoData, leafletGeoData, selectedCode, level, onHover, onSelect]);
