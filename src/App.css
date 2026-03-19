@@ -1389,8 +1389,22 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .mobile-search-overlay { display: none; }
 .desktop-only { display: block; }
 
-/* ─── Mobile: 지도 중심형 레이아웃 ────────────────── */
-@media (max-width: 768px) {
+/* ─── Tablet: 768~1023px ─────────────────────────── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .app-header { padding: 0 16px; gap: 12px; }
+  .app-subtitle { display: none; }
+  .header-center { max-width: 280px; }
+  .side-panel.panel-open { flex: 0 0 340px; width: 340px; }
+
+  /* 모바일 전용 요소 숨기기 */
+  .mobile-header-back { display: none !important; }
+  .mobile-region-title { display: none !important; }
+  .mobile-search-toggle { display: none !important; }
+  .mobile-search-overlay { display: none !important; }
+}
+
+/* ─── Mobile: 지도 중심형 레이아웃 (767px 이하) ──── */
+@media (max-width: 767px) {
 
   /* === 헤더 === */
   .app-header {
