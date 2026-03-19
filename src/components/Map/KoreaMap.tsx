@@ -121,10 +121,10 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
           map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [20, 20], animate: false });
         }
       } else {
-        // 전체 영역 뷰: fitBounds 후 추가 줌인으로 지도가 더 크게 보이도록
-        // (Mercator 투영 특성상 fitBounds가 zoom ~7.1을 선택해 한국이 화면 52%만 차지)
+        // 전국 뷰: fitBounds로 적절한 줌 레벨 계산 후 세종시 중심으로 고정
         map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [20, 20], animate: false });
-        map.setZoom(map.getZoom() + 0.7, { animate: false });
+        const targetZoom = map.getZoom() + 0.7;
+        map.setView([36.4800, 127.2890], targetZoom, { animate: false });
       }
     });
   }, [geoData, leafletGeoData, selectedCode, level, onHover, onSelect]);
