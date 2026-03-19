@@ -1,6 +1,6 @@
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  Cell, PieChart, Pie, Legend, CartesianGrid,
+  Cell, CartesianGrid,
 } from 'recharts';
 import { Users, User, UserRound, Home } from 'lucide-react';
 import type { PopulationData, PopulationFieldSource, PopulationFieldStatus } from '../../types';
@@ -11,7 +11,10 @@ interface Props {
   data: PopulationData;
 }
 
-const HOUSEHOLD_COLORS = ['#6366f1', '#3b82f6', '#22c55e', '#f59e0b', '#ef4444'];
+const HOUSEHOLD_COLORS = [
+  '#6366f1', '#3b82f6', '#22c55e', '#f59e0b', '#ef4444',
+  '#8b5cf6', '#06b6d4', '#84cc16', '#f97316', '#64748b',
+];
 const ROOT_SOURCE_LABELS: Record<string, string> = {
   real: '실제값',
   snapshot: '스냅샷',
@@ -174,46 +177,53 @@ export function PopulationPanel({ data }: Props) {
       )}
 
       {householdData.length > 0 && data.field_sources?.household_structure.status !== 'unavailable' ? (
-        <ChartCard title="세대구조 (세대원수별)">
+        <ChartCard
+          title="세대구조 (세대원수별)"
+          action={
+            <span className="age-source-note age-source-note--real">
+              {data.field_sources?.household_structure.note}
+            </span>
+          }
+        >
           <ResponsiveContainer width="100%" height={180}>
-            <PieChart>
-              <Pie
-                data={householdData}
-                dataKey="value"
-                nameKey="name"
-                cx="38%"
-                cy="50%"
-                outerRadius={65}
-                innerRadius={32}
-                label={({ payload }) => `${payload?.pct ?? ''}%`}
-                labelLine={false}
-              >
-                {householdData.map((_, i) => (
-                  <Cell key={i} fill={HOUSEHOLD_COLORS[i % HOUSEHOLD_COLORS.length]} />
-                ))}
-              </Pie>
+            <BarChart
+              data={householdData.filter(h => h.value > 0)}
+              margin={{ top: 4, right: 4, left: 0, bottom: 0 }}
+              barCategoryGap="20%"
+            >
+              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+              <XAxis
+                dataKey="name"
+                tick={{ fontSize: 9, fill: '#94a3b8' }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <YAxis
+                tickFormatter={(v) => v >= 10000 ? `${(v / 10000).toFixed(0)}만` : `${v}`}
+                tick={{ fontSize: 9, fill: '#94a3b8' }}
+                axisLine={false}
+                tickLine={false}
+                width={32}
+              />
               <Tooltip
-                formatter={(v, name, props) => [
+                formatter={(v, _name, props) => [
                   `${(v as number).toLocaleString('ko-KR')}세대 (${props.payload.pct}%)`,
-                  name,
+                  props.payload.name,
                 ]}
                 contentStyle={{
                   borderRadius: 8,
                   border: '1px solid #e2e8f0',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
                   fontSize: 12,
                 }}
+                cursor={{ fill: 'rgba(99,102,241,0.06)' }}
               />
-              <Legend
-                layout="vertical"
-                align="right"
-                verticalAlign="middle"
-                iconSize={8}
-                iconType="circle"
-                formatter={(value) => (
-                  <span style={{ fontSize: 11, color: '#334155' }}>{value}</span>
-                )}
-              />
-            </PieChart>
+              <Bar dataKey="value" radius={[3, 3, 0, 0]} maxBarSize={24}>
+                {householdData.filter(h => h.value > 0).map((_, i) => (
+                  <Cell key={i} fill={HOUSEHOLD_COLORS[i % HOUSEHOLD_COLORS.length]} />
+                ))}
+              </Bar>
+            </BarChart>
           </ResponsiveContainer>
         </ChartCard>
       ) : (

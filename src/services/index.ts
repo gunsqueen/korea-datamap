@@ -17,6 +17,7 @@ import populationMock from '../data/mock/population.json';
 import sigunguPopulationMock from '../data/mock/sigungu_population.json';
 import emdPopulationSeoulMock from '../data/mock/emd_population_seoul.json';
 import ageDistributionFile from '../data/real/age-distribution.json';
+import householdSizeFile from '../data/real/household-size.json';
 
 // 파일 기반 연령 분포 데이터 로드
 type AgeDistributionEntry = { ageRange: string; male: number; female: number; total: number };
@@ -27,6 +28,65 @@ type AgeDistributionFile = {
 const ageDistFile = ageDistributionFile as AgeDistributionFile;
 const AGE_FILE_DATA: Record<string, AgeDistributionEntry[]> = ageDistFile.data ?? {};
 const AGE_FILE_YEAR_MONTH: string = ageDistFile.meta?.yearMonth ?? '';
+
+// 파일 기반 세대원수별 세대수 데이터 로드
+type HouseholdSizeEntry = { moisCode: string; name: string; total: number; sizes: number[] };
+type HouseholdSizeFile = {
+  meta?: { sourceDate?: string; source?: string };
+  data?: Record<string, HouseholdSizeEntry>;
+};
+const hhSizeFile = householdSizeFile as HouseholdSizeFile;
+const HH_SIZE_DATA: Record<string, HouseholdSizeEntry> = hhSizeFile.data ?? {};
+const HH_SOURCE_DATE: string = hhSizeFile.meta?.sourceDate ?? '';
+const HH_SIZE_LABELS = ['1인', '2인', '3인', '4인', '5인', '6인', '7인', '8인', '9인', '10인이상'];
+
+function getHouseholdFromFile(admCd: string) {
+  const entry = HH_SIZE_DATA[admCd];
+  if (!entry) return null;
+
+  const total = entry.total || 1;
+  const distribution = entry.sizes.map((count, i) => ({
+    members: i + 1,
+    members_label: HH_SIZE_LABELS[i] ?? `${i + 1}인`,
+    count,
+    percentage: Math.round((count / total) * 1000) / 10,
+  }));
+
+  // 개발 모드 검증 로그
+  if (import.meta.env.DEV) {
+    const sizeSum = entry.sizes.reduce((a, b) => a + b, 0);
+    console.info(
+      `[세대구조] ${admCd}(${entry.name}) | sourceDate=${HH_SOURCE_DATE}` +
+      ` | total=${entry.total} | sizeSum=${sizeSum} | match=${Math.abs(sizeSum - entry.total) <= 1 ? '✓' : '✗'}`
+    );
+  }
+
+  return { distribution, sourceDate: HH_SOURCE_DATE };
+}
+
+// 시군구 단위: 하위 행정동 집계
+function aggregateHouseholdFromFile(admCd: string) {
+  const matching = Object.entries(HH_SIZE_DATA).filter(
+    ([code]) => code.startsWith(admCd) && code.length === 8
+  );
+  if (matching.length === 0) return null;
+
+  const totalSizes = new Array(10).fill(0);
+  let grandTotal = 0;
+  for (const [, e] of matching) {
+    grandTotal += e.total;
+    e.sizes.forEach((v, i) => { totalSizes[i] += v; });
+  }
+
+  const distribution = totalSizes.map((count, i) => ({
+    members: i + 1,
+    members_label: HH_SIZE_LABELS[i] ?? `${i + 1}인`,
+    count,
+    percentage: Math.round((count / (grandTotal || 1)) * 1000) / 10,
+  }));
+
+  return { distribution, sourceDate: HH_SOURCE_DATE };
+}
 
 function getAgeGroupsFromFile(admCd: string): AgeGroup[] | null {
   const entry = AGE_FILE_DATA[admCd];
@@ -144,6 +204,7 @@ export async function getPopulation(admCd: string): Promise<PopulationData> {
 function createPopulationFieldSources(
   rootSource: PopulationSourceType,
   ageSource: PopulationSourceType | 'unavailable',
+  householdSource: PopulationSourceType | 'unavailable',
   data: PopulationData,
   isSido: boolean,
 ): PopulationFieldSources {
@@ -161,7 +222,19 @@ function createPopulationFieldSources(
     unavailable: '연령 분포 데이터 없음',
   };
 
+  const hhNote: Record<string, string> = {
+    real: '행정안전부 세대구조 API',
+    snapshot: '저장된 스냅샷 데이터',
+    file: HH_SOURCE_DATE
+      ? `행정안전부 공식 데이터 (기준: ${HH_SOURCE_DATE})`
+      : '행정안전부 공식 데이터',
+    unavailable: isSido
+      ? '시도 단위 세대원수별 통계 없음'
+      : '세대원수별 통계는 읍면동·시군구 단위 실시간 API 미지원입니다.',
+  };
+
   const hasAge = (data.age_groups?.length ?? 0) > 0;
+  const hasHH  = (data.household_structure?.length ?? 0) > 0;
 
   return {
     total_population: totalsSource,
@@ -181,12 +254,8 @@ function createPopulationFieldSources(
       note: hasAge ? '연령 분포에서 계산' : '연령 분포 데이터 없음',
     },
     household_structure: {
-      status: data.household_structure?.length ? rootSource : 'unavailable',
-      note: data.household_structure?.length
-        ? `행정안전부 주민등록 세대구조 통계 (${AGE_FILE_YEAR_MONTH || '스냅샷 기준'})`
-        : isSido
-          ? '시도 단위 세대구조 통계 없음'
-          : '세대원수별 통계는 시도(광역자치단체) 단위까지만 공식 제공됩니다. 읍면동·시군구 단위는 실시간 API 미지원입니다.',
+      status: hasHH ? householdSource : 'unavailable',
+      note: hhNote[hasHH ? householdSource : 'unavailable'],
     },
   };
 }
@@ -202,33 +271,46 @@ function finalizePopulationData(data: PopulationData, admCd: string): Population
     : 'unavailable';
 
   if (!isSido && Object.keys(AGE_FILE_DATA).length > 0) {
-    // 동 단위: 직접 조회
     const fileAgeGroups = admCd.length === 8
       ? getAgeGroupsFromFile(admCd)
       : aggregateAgeGroupsFromFile(admCd);
-
     if (fileAgeGroups) {
       ageGroups = fileAgeGroups;
       ageSource = 'file';
     }
   }
 
-  const fieldSources = createPopulationFieldSources(rootSource, ageSource, {
+  // ─── 세대구조: 파일 데이터 우선 ─────────────────────────────
+  // 시도: mock에 household_structure 있으면 유지
+  // 읍면동/시군구: household-size.json에서 조회
+  let householdGroups = isSido ? data.household_structure : undefined;
+  let householdSource: PopulationSourceType | 'unavailable' = 'unavailable';
+
+  if (isSido && householdGroups?.length) {
+    householdSource = rootSource;
+  } else if (!isSido && Object.keys(HH_SIZE_DATA).length > 0) {
+    const result = admCd.length === 8
+      ? getHouseholdFromFile(admCd)
+      : aggregateHouseholdFromFile(admCd);
+    if (result) {
+      householdGroups = result.distribution;
+      householdSource = 'file';
+    }
+  }
+
+  const fieldSources = createPopulationFieldSources(rootSource, ageSource, householdSource, {
     ...data,
     age_groups: ageGroups,
+    household_structure: householdGroups,
   }, isSido);
 
   const normalized: PopulationData = {
     ...data,
     age_groups: ageGroups,
+    household_structure: householdGroups,
     source_type: rootSource,
     field_sources: fieldSources,
   };
-
-  // 세대구조: 시도만 mock 보유
-  if (!isSido) {
-    delete normalized.household_structure;
-  }
 
   if (import.meta.env.DEV) {
     console.debug('population.lookup', {
@@ -236,10 +318,10 @@ function finalizePopulationData(data: PopulationData, admCd: string): Population
       admNm: normalized.adm_nm,
       sourceType: normalized.source_type,
       ageSource,
-      totalPopulationSource: normalized.field_sources?.total_population.status,
-      ageDistributionSource: normalized.field_sources?.age_distribution.status,
+      householdSource,
+      householdCount: normalized.household_structure?.length ?? 0,
+      householdTotal: normalized.household_structure?.reduce((s, h) => s + h.count, 0) ?? 0,
       ageGroupsCount: normalized.age_groups?.length ?? 0,
-      ageTotalSum: normalized.age_groups?.reduce((s, g) => s + g.total, 0) ?? 0,
     });
   }
 
