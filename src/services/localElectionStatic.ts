@@ -104,6 +104,10 @@ function buildStaticLookupKeys(admNm: string): string[] {
     `${sido}|${middleSpaced}|${dong}`,
   ];
 
+  if (middleParts.length >= 1) {
+    keys.push(`${sido}|${middleParts[0]}|${dong}`);
+  }
+
   if (middleParts.length >= 2) {
     keys.push(`${sido}|${middleParts[middleParts.length - 1]}|${dong}`);
     keys.push(`${sido}|${middleParts.slice(-2).join('')}|${dong}`);

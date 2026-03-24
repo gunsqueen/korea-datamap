@@ -381,6 +381,27 @@ function buildNecResult(
   });
 }
 
+function validateNecResult(data: ElectionData, admCd: string): string | null {
+  if (data.total_votes > data.total_voters) {
+    return 'votes exceed electors';
+  }
+
+  if (data.turnout_rate < 0 || data.turnout_rate > 100) {
+    return 'turnout out of range';
+  }
+
+  if (admCd.length === 8) {
+    if (data.total_voters > 300000) {
+      return 'dong electors unrealistically high';
+    }
+    if (data.total_votes > 250000) {
+      return 'dong votes unrealistically high';
+    }
+  }
+
+  return null;
+}
+
 /**
  * 시군구에 지역구 선거구가 여러 개일 때 정당별 득표 합산 집계
  * (광역의원·기초의원 지역구에서 구 단위 조회 시 사용)
@@ -708,6 +729,19 @@ export async function fetchNecElection(
         ), directApiResult.requestUrls, directApiResult.statusCode, matched.wiwName, sigunguCd, directItems.length);
       }
     }
+  }
+
+  const invalidReason = validateNecResult(result, admCd);
+  if (invalidReason) {
+    throw new ElectionLookupError('NO_DATA', '선거 데이터 확인 필요', {
+      sourceType: 'real',
+      requestUrl: result.debug_meta?.requestUrl,
+      statusCode: result.debug_meta?.statusCode,
+      matchedRegionName: result.debug_meta?.matchedRegionName,
+      matchedRegionCode: result.debug_meta?.matchedRegionCode,
+      recordCount: result.debug_meta?.recordCount,
+      fallbackReason: invalidReason,
+    });
   }
 
   cache.set(cacheKey, { data: result, ts: Date.now() });
