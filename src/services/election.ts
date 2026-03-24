@@ -132,12 +132,33 @@ export async function fetchElectionResult(
     electionId,
   };
 
-  // 읍면동(8자리) + admNm → 정적 데이터 우선 조회 (지방선거 + 대통령선거)
-  if (admCd.length === 8 && admNm && (electionId.startsWith('local_') || electionId.startsWith('presidential_') || electionId.startsWith('assembly_'))) {
+  const isDongLevelStaticElection =
+    admCd.length === 8 &&
+    !!admNm &&
+    (electionId.startsWith('local_') || electionId.startsWith('presidential_') || electionId.startsWith('assembly_'));
+
+  // 읍면동(8자리) 선거 결과는 NEC API가 상위 집계값을 잘못 반환하는 경우가 있어
+  // 가공된 실제 스냅샷을 source of truth로 우선 사용한다.
+  if (isDongLevelStaticElection) {
     try {
       const staticResult = await lookupLocalElectionDong(electionId, admCd, admNm);
       if (staticResult) return staticResult;
+      throw new ElectionLookupError('NO_DATA', '선거 데이터 없음', {
+        sourceType: 'snapshot',
+        matchedRegionCode: admCd,
+        matchedRegionName: admNm,
+        fallbackReason: 'static dong election match missing',
+        recordCount: 0,
+      });
     } catch (err) {
+      if (isElectionLookupError(err)) {
+        logElectionDecision(
+          context,
+          err.debugMeta ?? { sourceType: 'snapshot', fallbackReason: err.message },
+          { data: null, mappingSucceeded: false, fallbackReason: err.debugMeta?.fallbackReason ?? err.message },
+        );
+        throw err;
+      }
       console.warn('정적 선거 데이터 조회 실패', err);
     }
   }
