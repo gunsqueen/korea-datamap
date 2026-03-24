@@ -89,6 +89,29 @@ async function loadStaticData(electionId: string): Promise<StaticElectionMap> {
   }
 }
 
+function buildStaticLookupKeys(admNm: string): string[] {
+  const parts = admNm.trim().split(/\s+/).filter(Boolean);
+  if (parts.length < 3) return [];
+
+  const sido = parts[0];
+  const dong = parts[parts.length - 1];
+  const middleParts = parts.slice(1, -1);
+  const middleJoined = middleParts.join('');
+  const middleSpaced = middleParts.join(' ');
+
+  const keys = [
+    `${sido}|${middleJoined}|${dong}`,
+    `${sido}|${middleSpaced}|${dong}`,
+  ];
+
+  if (middleParts.length >= 2) {
+    keys.push(`${sido}|${middleParts[middleParts.length - 1]}|${dong}`);
+    keys.push(`${sido}|${middleParts.slice(-2).join('')}|${dong}`);
+  }
+
+  return [...new Set(keys.filter(Boolean))];
+}
+
 export async function lookupLocalElectionDong(
   electionId: string,
   admCd: string,
@@ -98,16 +121,23 @@ export async function lookupLocalElectionDong(
   if (!meta) return null;
 
   const data = await loadStaticData(electionId);
-  const parts = admNm.trim().split(/\s+/);
+  const parts = admNm.trim().split(/\s+/).filter(Boolean);
   if (parts.length < 3) return null;
 
   const sido = parts[0];
-  const sigungu = parts[1];
   const dong = parts[parts.length - 1];
-  const key = `${sido}|${sigungu}|${dong}`;
+  const candidateKeys = buildStaticLookupKeys(admNm);
 
-  let entry: StaticElectionEntry | undefined = data[key];
-  let matchedKey = key;
+  let matchedKey = candidateKeys[0] ?? admNm;
+  let entry: StaticElectionEntry | undefined;
+
+  for (const key of candidateKeys) {
+    if (data[key]) {
+      matchedKey = key;
+      entry = data[key];
+      break;
+    }
+  }
 
   // assembly 지역구만: 선거구명(강서구갑)이 key에 쓰이므로 시군구명(강서구)으로 찾을 수 없음
   // sido|dong 인덱스로 재시도 (local 선거는 시군구 기반 키이므로 제외)
