@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "build:mobile": "cross-env VITE_BASE_PATH=/ tsc -b && cross-env VITE_BASE_PATH=/ vite build",
-    "cap:sync": "npm run build:mobile && npx cap sync",
-    "cap:android": "npm run build:mobile && npx cap sync android && npx cap open android",
-    "cap:ios": "npm run build:mobile && npx cap sync ios && npx cap open ios",
+    "build": "cross-env BUILD_TARGET=android tsc -b && vite build",
+    "build:web": "cross-env BUILD_TARGET=web tsc -b && vite build",
+    "build:android": "cross-env BUILD_TARGET=android tsc -b && vite build",
+    "build:mobile": "npm run build:android",
+    "cap:sync": "npm run build:android && npx cap sync",
+    "cap:android": "npm run build:android && npx cap sync android && npx cap open android",
+    "cap:ios": "npm run build:android && npx cap sync ios && npx cap open ios",
     "fetch:age-data": "node scripts/fetchPopulationAgeData.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
