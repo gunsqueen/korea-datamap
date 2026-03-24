@@ -30,7 +30,7 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
       attributionControl: true,
     });
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
       attribution: '© OpenStreetMap contributors © CARTO',
       subdomains: 'abcd',
       maxZoom: 18,
@@ -95,10 +95,12 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
           },
         });
 
-        layer.bindTooltip(adm_nm, {
-          permanent: false,
+        const shortName = adm_nm.split(' ').pop() ?? adm_nm;
+        layer.bindTooltip(shortName, {
+          permanent: true,
           direction: 'center',
           className: 'map-tooltip',
+          interactive: false,
         });
       },
     }).addTo(mapRef.current);
