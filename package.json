@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "cross-env BUILD_TARGET=android tsc -b && vite build",
-    "build:web": "cross-env BUILD_TARGET=web tsc -b && vite build",
-    "build:android": "cross-env BUILD_TARGET=android tsc -b && vite build",
+    "build": "cross-env-shell BUILD_TARGET=android \"tsc -b && vite build\"",
+    "build:web": "cross-env-shell BUILD_TARGET=web \"tsc -b && vite build\"",
+    "build:android": "cross-env-shell BUILD_TARGET=android \"tsc -b && vite build\"",
     "build:mobile": "npm run build:android",
     "cap:sync": "npm run build:android && npx cap sync",
     "cap:android": "npm run build:android && npx cap sync android && npx cap open android",
