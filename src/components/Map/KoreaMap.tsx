@@ -4,6 +4,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { AdminArea, AdminGeoCollection, AdminLevel } from '../../types';
 import { getSidoColor } from '../../utils/adminCode';
+import { formatAdminLabel, getAdminLabelLatLng, shouldRenderAdminLabel } from '../../utils/adminLabel';
 
 interface Props {
   geoData: AdminGeoCollection;
@@ -16,6 +17,7 @@ interface Props {
 export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Props) {
   const mapRef = useRef<L.Map | null>(null);
   const layerRef = useRef<L.GeoJSON | null>(null);
+  const labelLayerRef = useRef<L.LayerGroup | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const leafletGeoData = geoData as unknown as GeoJsonObject;
 
@@ -36,6 +38,8 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
       maxZoom: 18,
     }).addTo(mapRef.current);
 
+    labelLayerRef.current = L.layerGroup().addTo(mapRef.current);
+
     // 컨테이너 크기 변화(사이드 패널 열림/닫힘) 시 지도 재조정
     const resizeObserver = new ResizeObserver(() => {
       mapRef.current?.invalidateSize({ animate: false });
@@ -46,6 +50,7 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
       resizeObserver.disconnect();
       mapRef.current?.remove();
       mapRef.current = null;
+      labelLayerRef.current = null;
     };
   }, []);
 
@@ -56,6 +61,7 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
     if (layerRef.current) {
       mapRef.current.removeLayer(layerRef.current);
     }
+    labelLayerRef.current?.clearLayers();
 
     layerRef.current = L.geoJSON(leafletGeoData, {
       style: (feature) => {
@@ -94,16 +100,43 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
             });
           },
         });
-
-        const shortName = adm_nm.split(' ').pop() ?? adm_nm;
-        layer.bindTooltip(shortName, {
-          permanent: true,
-          direction: 'center',
-          className: 'map-tooltip',
-          interactive: false,
-        });
       },
     }).addTo(mapRef.current);
+
+    const renderLabels = () => {
+      if (!mapRef.current || !labelLayerRef.current) return;
+
+      labelLayerRef.current.clearLayers();
+      const placedPoints: L.Point[] = [];
+
+      geoData.features.forEach((feature) => {
+        if (!shouldRenderAdminLabel(feature, mapRef.current!, level, placedPoints, geoData.features.length)) {
+          return;
+        }
+
+        const labelLatLng = getAdminLabelLatLng(feature, mapRef.current!, level);
+        if (!labelLatLng) {
+          return;
+        }
+
+        const label = formatAdminLabel(feature.properties.adm_nm, level);
+        if (!label) {
+          return;
+        }
+
+        const icon = L.divIcon({
+          className: `region-label-marker region-label-${level}`,
+          html: `<span class="region-label-text">${label}</span>`,
+          iconSize: undefined,
+        });
+
+        L.marker(labelLatLng, {
+          icon,
+          interactive: false,
+          keyboard: false,
+        }).addTo(labelLayerRef.current!);
+      });
+    };
 
     // 선택된 지역이 있으면 해당 지역으로 이동
     // requestAnimationFrame으로 컨테이너 레이아웃이 완전히 확정된 후 fitBounds 실행
@@ -131,7 +164,15 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
         // 시군구·읍면동 레벨에서 선택 없음: 현재 geoData 전체 영역에 맞게 fitBounds
         map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [30, 30], animate: false });
       }
+      renderLabels();
     });
+
+    map.on('zoomend moveend', renderLabels);
+
+    return () => {
+      map.off('zoomend moveend', renderLabels);
+      labelLayerRef.current?.clearLayers();
+    };
   }, [geoData, leafletGeoData, selectedCode, level, onHover, onSelect]);
 
   return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />;

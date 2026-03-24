@@ -186,6 +186,42 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   white-space: nowrap;
 }
 
+.region-label-marker {
+  background: transparent;
+  border: none;
+}
+
+.region-label-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: rgba(17, 24, 39, 0.88);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
+  box-shadow: 0 1px 6px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+}
+
+.region-label-sido .region-label-text {
+  font-size: 18px;
+  padding: 5px 10px;
+}
+
+.region-label-sigungu .region-label-text {
+  font-size: 13px;
+}
+
+.region-label-eupmyeondong .region-label-text {
+  font-size: 12px;
+  padding: 2px 7px;
+}
+
 .map-hover-tooltip {
   position: absolute;
   bottom: 20px;
