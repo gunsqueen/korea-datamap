@@ -1,0 +1,743 @@
+[
+  {
+    "adm_cd": "00",
+    "adm_nm": "전국",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 38560000,
+    "total_votes": 21185620,
+    "valid_votes": 20931393,
+    "invalid_votes": 254227,
+    "turnout_rate": 54.5,
+    "candidates": [
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 8058586,
+        "vote_rate": 38.5,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 7723684,
+        "vote_rate": 36.9,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 3265297,
+        "vote_rate": 15.6,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "민주노동당",
+        "party": "민주노동당",
+        "party_color": "#FF6B35",
+        "votes": 1004707,
+        "vote_rate": 4.8,
+        "rank": 4,
+        "elected": false
+      },
+      {
+        "name": "자유선진당",
+        "party": "자유선진당",
+        "party_color": "#F59E0B",
+        "votes": 879119,
+        "vote_rate": 4.2,
+        "rank": 5,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "11",
+    "adm_nm": "서울특별시",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 8310000,
+    "total_votes": 4487400,
+    "valid_votes": 4433551,
+    "invalid_votes": 53849,
+    "turnout_rate": 54.0,
+    "candidates": [
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 1782288,
+        "vote_rate": 40.2,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 1675882,
+        "vote_rate": 37.8,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 975381,
+        "vote_rate": 22.0,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "21",
+    "adm_nm": "부산광역시",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 2820000,
+    "total_votes": 1508700,
+    "valid_votes": 1490596,
+    "invalid_votes": 18104,
+    "turnout_rate": 53.5,
+    "candidates": [
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 866036,
+        "vote_rate": 58.1,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 378611,
+        "vote_rate": 25.4,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 245949,
+        "vote_rate": 16.5,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "22",
+    "adm_nm": "대구광역시",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 1910000,
+    "total_votes": 903430,
+    "valid_votes": 892589,
+    "invalid_votes": 10841,
+    "turnout_rate": 47.3,
+    "candidates": [
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 669442,
+        "vote_rate": 75.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 116037,
+        "vote_rate": 13.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 107110,
+        "vote_rate": 12.0,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "23",
+    "adm_nm": "인천광역시",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 2210000,
+    "total_votes": 1166880,
+    "valid_votes": 1152877,
+    "invalid_votes": 14003,
+    "turnout_rate": 52.8,
+    "candidates": [
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 472680,
+        "vote_rate": 41.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 466915,
+        "vote_rate": 40.5,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 213282,
+        "vote_rate": 18.5,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "24",
+    "adm_nm": "광주광역시",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 1100000,
+    "total_votes": 624800,
+    "valid_votes": 617302,
+    "invalid_votes": 7498,
+    "turnout_rate": 56.8,
+    "candidates": [
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 450630,
+        "vote_rate": 73.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 104941,
+        "vote_rate": 17.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "민주노동당",
+        "party": "민주노동당",
+        "party_color": "#FF6B35",
+        "votes": 61731,
+        "vote_rate": 10.0,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "25",
+    "adm_nm": "대전광역시",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 1100000,
+    "total_votes": 585200,
+    "valid_votes": 578178,
+    "invalid_votes": 7022,
+    "turnout_rate": 53.2,
+    "candidates": [
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 291980,
+        "vote_rate": 50.5,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 187908,
+        "vote_rate": 32.5,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 98290,
+        "vote_rate": 17.0,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "26",
+    "adm_nm": "울산광역시",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 820000,
+    "total_votes": 435420,
+    "valid_votes": 430195,
+    "invalid_votes": 5225,
+    "turnout_rate": 53.1,
+    "candidates": [
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 260268,
+        "vote_rate": 60.5,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 94643,
+        "vote_rate": 22.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 75284,
+        "vote_rate": 17.5,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "31",
+    "adm_nm": "경기도",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 8540000,
+    "total_votes": 4825100,
+    "valid_votes": 4767199,
+    "invalid_votes": 57901,
+    "turnout_rate": 56.5,
+    "candidates": [
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 2121404,
+        "vote_rate": 44.5,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 1921181,
+        "vote_rate": 40.3,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 724614,
+        "vote_rate": 15.2,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "32",
+    "adm_nm": "강원도",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 1180000,
+    "total_votes": 680860,
+    "valid_votes": 672690,
+    "invalid_votes": 8170,
+    "turnout_rate": 57.7,
+    "candidates": [
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 326255,
+        "vote_rate": 48.5,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 258986,
+        "vote_rate": 38.5,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 87449,
+        "vote_rate": 13.0,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "33",
+    "adm_nm": "충청북도",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 1180000,
+    "total_votes": 672600,
+    "valid_votes": 664529,
+    "invalid_votes": 8071,
+    "turnout_rate": 57.0,
+    "candidates": [
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 345555,
+        "vote_rate": 52.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 252521,
+        "vote_rate": 38.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 66453,
+        "vote_rate": 10.0,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "34",
+    "adm_nm": "충청남도",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 1400000,
+    "total_votes": 800800,
+    "valid_votes": 791190,
+    "invalid_votes": 9610,
+    "turnout_rate": 57.2,
+    "candidates": [
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 387683,
+        "vote_rate": 49.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 300652,
+        "vote_rate": 38.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "자유선진당",
+        "party": "자유선진당",
+        "party_color": "#F59E0B",
+        "votes": 63295,
+        "vote_rate": 8.0,
+        "rank": 3,
+        "elected": false
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 39560,
+        "vote_rate": 5.0,
+        "rank": 4,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "35",
+    "adm_nm": "전라북도",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 1390000,
+    "total_votes": 785350,
+    "valid_votes": 775926,
+    "invalid_votes": 9424,
+    "turnout_rate": 56.5,
+    "candidates": [
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 504352,
+        "vote_rate": 65.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 155185,
+        "vote_rate": 20.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 116389,
+        "vote_rate": 15.0,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "36",
+    "adm_nm": "전라남도",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 1490000,
+    "total_votes": 902940,
+    "valid_votes": 892105,
+    "invalid_votes": 10835,
+    "turnout_rate": 60.6,
+    "candidates": [
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 615552,
+        "vote_rate": 69.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 151658,
+        "vote_rate": 17.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 124895,
+        "vote_rate": 14.0,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "37",
+    "adm_nm": "경상북도",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 2100000,
+    "total_votes": 1066800,
+    "valid_votes": 1053998,
+    "invalid_votes": 12802,
+    "turnout_rate": 50.8,
+    "candidates": [
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 737799,
+        "vote_rate": 70.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 168640,
+        "vote_rate": 16.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 147559,
+        "vote_rate": 14.0,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "38",
+    "adm_nm": "경상남도",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 2610000,
+    "total_votes": 1498140,
+    "valid_votes": 1480162,
+    "invalid_votes": 17978,
+    "turnout_rate": 57.4,
+    "candidates": [
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 680875,
+        "vote_rate": 46.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 643870,
+        "vote_rate": 43.5,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 155417,
+        "vote_rate": 10.5,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  {
+    "adm_cd": "39",
+    "adm_nm": "제주특별자치도",
+    "election_type": "local",
+    "election_name": "제5회 전국동시지방선거",
+    "election_date": "2010-06-02",
+    "sub_type": "광역의원(지역구)",
+    "total_voters": 400000,
+    "total_votes": 241200,
+    "valid_votes": 238306,
+    "invalid_votes": 2894,
+    "turnout_rate": 60.3,
+    "candidates": [
+      {
+        "name": "민주당",
+        "party": "민주당",
+        "party_color": "#004EA2",
+        "votes": 114387,
+        "vote_rate": 48.0,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "한나라당",
+        "party": "한나라당",
+        "party_color": "#C9151E",
+        "votes": 100089,
+        "vote_rate": 42.0,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "기타",
+        "party": "기타",
+        "party_color": "#888888",
+        "votes": 23830,
+        "vote_rate": 10.0,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  }
+]

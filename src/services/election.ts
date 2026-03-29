@@ -7,6 +7,7 @@ import {
   isElectionLookupError,
   logElectionDecision,
 } from './electionDebug';
+import { applyPartyColors } from '../utils/partyColors';
 import electionsMeta from '../data/mock/elections_meta.json';
 import presidentialData21 from '../data/mock/election_presidential_21.json';
 import presidentialData20 from '../data/mock/election_presidential_20.json';
@@ -35,6 +36,12 @@ import localData6CouncilDistrict from '../data/mock/election_local_6_council_dis
 import localData6CouncilPr from '../data/mock/election_local_6_council_pr.json';
 import localData6BasicDistrict from '../data/mock/election_local_6_basic_district.json';
 import localData6BasicPr from '../data/mock/election_local_6_basic_pr.json';
+import localData5MetroMayor from '../data/mock/election_local_5_metro_mayor.json';
+import localData5Mayor from '../data/mock/election_local_5_mayor.json';
+import localData5CouncilDistrict from '../data/mock/election_local_5_council_district.json';
+import localData5CouncilPr from '../data/mock/election_local_5_council_pr.json';
+import localData5BasicDistrict from '../data/mock/election_local_5_basic_district.json';
+import localData5BasicPr from '../data/mock/election_local_5_basic_pr.json';
 
 const DATA_BY_ID: Record<string, ElectionData[]> = {
   presidential_21: presidentialData21 as ElectionData[],
@@ -64,9 +71,50 @@ const DATA_BY_ID: Record<string, ElectionData[]> = {
   local_6_council_pr: localData6CouncilPr as ElectionData[],
   local_6_basic_district: localData6BasicDistrict as ElectionData[],
   local_6_basic_pr: localData6BasicPr as ElectionData[],
+  local_5_metro_mayor: localData5MetroMayor as ElectionData[],
+  local_5_mayor: localData5Mayor as ElectionData[],
+  local_5_council_district: localData5CouncilDistrict as ElectionData[],
+  local_5_council_pr: localData5CouncilPr as ElectionData[],
+  local_5_basic_district: localData5BasicDistrict as ElectionData[],
+  local_5_basic_pr: localData5BasicPr as ElectionData[],
 };
 
 export const ELECTIONS_META: ElectionMeta[] = electionsMeta as ElectionMeta[];
+
+const STATIC_DONG_ELECTION_IDS = new Set([
+  'presidential_18',
+  'presidential_19',
+  'presidential_20',
+  'presidential_21',
+  'assembly_19_district',
+  'assembly_19_pr',
+  'assembly_20_district',
+  'assembly_20_pr',
+  'assembly_21_district',
+  'assembly_21_pr',
+  'assembly_22_district',
+  'assembly_22_pr',
+  'local_6_metro_mayor',
+  'local_6_mayor',
+  'local_6_council_district',
+  'local_6_council_pr',
+  'local_6_basic_district',
+  'local_6_basic_pr',
+  'local_7_metro_mayor',
+  'local_7_mayor',
+  'local_7_council_district',
+  'local_7_council_pr',
+  'local_7_basic_district',
+  'local_7_basic_pr',
+  'local_8_metro_mayor',
+  'local_8_mayor',
+  'local_8_council_district',
+  'local_8_council_pr',
+  'local_8_basic_district',
+  'local_8_basic_pr',
+  // local_5 (2010): NEC 공공 API가 시군구 단위 결과만 제공하므로
+  // 정적 동 단위 조회 대상에서 제외 → 시군구 fallback으로 처리
+]);
 
 function isDistrictElection(electionId: string): boolean {
   return electionId.endsWith('_district');
@@ -86,12 +134,12 @@ export function getElectionByCode(admCd: string, electionId: string): ElectionDa
   const find = (cd: string) => rows.find((r) => r.adm_cd === cd) ?? null;
   const exact = find(admCd);
   if (exact) {
-    return attachElectionDebugMeta(exact, {
+    return applyPartyColors(attachElectionDebugMeta(exact, {
       sourceType: 'mock',
       matchedRegionName: exact.adm_nm,
       matchedRegionCode: exact.adm_cd,
       recordCount: 1,
-    });
+    }));
   }
 
   if (!canUseBroadFallback(electionId)) return null;
@@ -106,13 +154,13 @@ export function getElectionByCode(admCd: string, electionId: string): ElectionDa
     const fallback = find(fallbackCode);
     if (!fallback) continue;
 
-    return attachElectionDebugMeta(fallback, {
+    return applyPartyColors(attachElectionDebugMeta(fallback, {
       sourceType: 'mock',
       matchedRegionName: fallback.adm_nm,
       matchedRegionCode: fallback.adm_cd,
       recordCount: 1,
       fallbackReason: `mock fallback to ${fallbackCode}`,
-    });
+    }));
   }
 
   return null;
@@ -135,14 +183,14 @@ export async function fetchElectionResult(
   const isDongLevelStaticElection =
     admCd.length === 8 &&
     !!admNm &&
-    (electionId.startsWith('local_') || electionId.startsWith('presidential_') || electionId.startsWith('assembly_'));
+    STATIC_DONG_ELECTION_IDS.has(electionId);
 
   // 읍면동(8자리) 선거 결과는 NEC API가 상위 집계값을 잘못 반환하는 경우가 있어
   // 가공된 실제 스냅샷을 source of truth로 우선 사용한다.
   if (isDongLevelStaticElection) {
     try {
       const staticResult = await lookupLocalElectionDong(electionId, admCd, admNm);
-      if (staticResult) return staticResult;
+      if (staticResult) return applyPartyColors(staticResult);
       throw new ElectionLookupError('NO_DATA', '선거 데이터 없음', {
         sourceType: 'snapshot',
         matchedRegionCode: admCd,
@@ -166,8 +214,26 @@ export async function fetchElectionResult(
   // NEC API 우선 시도 (나머지)
   let realError: unknown = null;
   try {
-    return await fetchNecElection(admCd, electionId, admNm);
+    return applyPartyColors(await fetchNecElection(admCd, electionId, admNm));
   } catch (err) {
+    if (admCd.length === 8 && electionId.startsWith('local_5_')) {
+      try {
+        const sigunguFallback = await fetchNecElection(admCd.slice(0, 5), electionId);
+        sigunguFallback.debug_meta = {
+          ...sigunguFallback.debug_meta,
+          sourceType: sigunguFallback.debug_meta?.sourceType ?? 'real',
+          fallbackReason: 'local5 dong fallback to sigungu actual',
+        };
+        logElectionDecision(context, sigunguFallback.debug_meta!, {
+          data: sigunguFallback,
+          mappingSucceeded: true,
+          fallbackReason: sigunguFallback.debug_meta?.fallbackReason,
+        });
+        return applyPartyColors(sigunguFallback);
+      } catch (fallbackErr) {
+        console.warn('제5회 지방선거 동 단위 구 fallback 실패', fallbackErr);
+      }
+    }
     realError = err;
     if (isElectionLookupError(err) && err.code === 'NEEDS_REVIEW') {
       logElectionDecision(
@@ -197,7 +263,7 @@ export async function fetchElectionResult(
       mappingSucceeded: true,
       fallbackReason: result.debug_meta?.fallbackReason,
     });
-    return result;
+    return applyPartyColors(result);
   }
 
   if (isElectionLookupError(realError)) {

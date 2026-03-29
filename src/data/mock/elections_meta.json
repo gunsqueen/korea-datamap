@@ -264,5 +264,59 @@
     "date": "2014-06-04",
     "year": 2014,
     "sub_type": "기초의원(비례)"
+  },
+  {
+    "id": "local_5_metro_mayor",
+    "type": "local",
+    "name": "제5회 전국동시지방선거",
+    "short_name": "5회 지방선거",
+    "date": "2010-06-02",
+    "year": 2010,
+    "sub_type": "광역단체장"
+  },
+  {
+    "id": "local_5_mayor",
+    "type": "local",
+    "name": "제5회 전국동시지방선거",
+    "short_name": "5회 지방선거",
+    "date": "2010-06-02",
+    "year": 2010,
+    "sub_type": "단체장"
+  },
+  {
+    "id": "local_5_council_district",
+    "type": "local",
+    "name": "제5회 전국동시지방선거",
+    "short_name": "5회 지방선거",
+    "date": "2010-06-02",
+    "year": 2010,
+    "sub_type": "광역의원(지역구)"
+  },
+  {
+    "id": "local_5_council_pr",
+    "type": "local",
+    "name": "제5회 전국동시지방선거",
+    "short_name": "5회 지방선거",
+    "date": "2010-06-02",
+    "year": 2010,
+    "sub_type": "광역의원(비례)"
+  },
+  {
+    "id": "local_5_basic_district",
+    "type": "local",
+    "name": "제5회 전국동시지방선거",
+    "short_name": "5회 지방선거",
+    "date": "2010-06-02",
+    "year": 2010,
+    "sub_type": "기초의원(지역구)"
+  },
+  {
+    "id": "local_5_basic_pr",
+    "type": "local",
+    "name": "제5회 전국동시지방선거",
+    "short_name": "5회 지방선거",
+    "date": "2010-06-02",
+    "year": 2010,
+    "sub_type": "기초의원(비례)"
   }
 ]

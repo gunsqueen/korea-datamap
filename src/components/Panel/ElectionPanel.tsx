@@ -190,7 +190,7 @@ export function ElectionPanel({ admCd, admNm }: Props) {
       ) : error === '선거 데이터 확인 필요' ? (
         <div className="empty">선거 데이터 확인 필요</div>
       ) : data ? (
-        <ElectionResult data={data} />
+        <ElectionResult data={data} requestedAdmCd={admCd} />
       ) : (
         <div className="empty">선거 데이터 없음</div>
       )}
@@ -198,7 +198,7 @@ export function ElectionPanel({ admCd, admNm }: Props) {
   );
 }
 
-function ElectionResult({ data }: { data: ElectionData }) {
+function ElectionResult({ data, requestedAdmCd }: { data: ElectionData; requestedAdmCd: string }) {
   const fmt = (n: number) => n.toLocaleString('ko-KR');
 
   const pieData = data.candidates.slice(0, 6).map((c) => ({
@@ -213,6 +213,7 @@ function ElectionResult({ data }: { data: ElectionData }) {
     data.adm_cd === '00' ? '전국' :
     data.adm_cd.length === 2 ? '시·도' :
     data.adm_cd.length === 5 ? '시·군·구' : '동';
+  const isBroaderFallback = data.adm_cd !== requestedAdmCd;
 
   return (
     <>
@@ -227,6 +228,11 @@ function ElectionResult({ data }: { data: ElectionData }) {
         )}
         <span className="election-level-badge">{dataLevel} 기준</span>
       </div>
+      {isBroaderFallback && (
+        <div className="election-fallback-note">
+          해당 회차는 하위 행정동 공식 결과가 없어 실제 {dataLevel} 결과를 표시합니다.
+        </div>
+      )}
 
       {/* 투개표 현황 */}
       <div className="election-stats-grid">

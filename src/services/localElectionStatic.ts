@@ -1,5 +1,6 @@
 import type { ElectionData, Candidate } from '../types';
 import { attachElectionDebugMeta, logElectionDecision } from './electionDebug';
+import { getPartyColor } from '../utils/partyColors';
 
 interface StaticCandidateEntry {
   name?: string;
@@ -23,23 +24,6 @@ type StaticElectionMap = Record<string, StaticElectionEntry>;
 const dataCache = new Map<string, StaticElectionMap>();
 // assembly 지역구: sido|dong → entry (선거구명 우회)
 const dongIndexCache = new Map<string, Record<string, StaticElectionEntry | null>>();
-
-const PARTY_COLORS: Record<string, string> = {
-  '더불어민주당': '#004EA2', '민주당': '#004EA2', '더불어민주연합': '#004EA2',
-  '국민의힘': '#E61E2B', '자유한국당': '#E61E2B', '새누리당': '#E61E2B', '국민의미래': '#E61E2B',
-  '정의당': '#FFCC00', '녹색정의당': '#FFCC00',
-  '바른미래당': '#00B0B9', '국민의당': '#EA5504', '안철수신당': '#EA5504',
-  '개혁신당': '#FF7210', '새로운미래': '#0066B2',
-  '진보당': '#D6001C', '노동당': '#D6001C',
-  '기본소득당': '#82C8A0', '시대전환': '#5C2D91',
-  '더불어시민당': '#004EA2', '미래한국당': '#E61E2B',
-  '새정치민주연합': '#004EA2', '통합진보당': '#D6001C', '새정치당': '#999999',
-  '열린민주당': '#003DA5', '민중당': '#D6001C', '무소속': '#999999',
-};
-
-function getPartyColor(party: string): string {
-  return PARTY_COLORS[party] ?? '#888888';
-}
 
 // 선거 ID → 메타정보 매핑
 const ELECTION_META: Record<string, { name: string; date: string; subType: string; electionType: string; nationalWinner?: string }> = {
@@ -65,6 +49,12 @@ const ELECTION_META: Record<string, { name: string; date: string; subType: strin
   local_6_council_pr:       { name: '제6회 전국동시지방선거', date: '2014-06-04', subType: '광역의원(비례)', electionType: 'local' },
   local_6_basic_district:   { name: '제6회 전국동시지방선거', date: '2014-06-04', subType: '기초의원(지역구)', electionType: 'local' },
   local_6_basic_pr:         { name: '제6회 전국동시지방선거', date: '2014-06-04', subType: '기초의원(비례)', electionType: 'local' },
+  local_5_metro_mayor:      { name: '제5회 전국동시지방선거', date: '2010-06-02', subType: '광역단체장', electionType: 'local' },
+  local_5_mayor:            { name: '제5회 전국동시지방선거', date: '2010-06-02', subType: '단체장', electionType: 'local' },
+  local_5_council_district: { name: '제5회 전국동시지방선거', date: '2010-06-02', subType: '광역의원(지역구)', electionType: 'local' },
+  local_5_council_pr:       { name: '제5회 전국동시지방선거', date: '2010-06-02', subType: '광역의원(비례)', electionType: 'local' },
+  local_5_basic_district:   { name: '제5회 전국동시지방선거', date: '2010-06-02', subType: '기초의원(지역구)', electionType: 'local' },
+  local_5_basic_pr:         { name: '제5회 전국동시지방선거', date: '2010-06-02', subType: '기초의원(비례)', electionType: 'local' },
   assembly_22_district: { name: '제22대 국회의원선거', date: '2024-04-10', subType: '지역구', electionType: 'assembly' },
   assembly_22_pr:       { name: '제22대 국회의원선거', date: '2024-04-10', subType: '비례대표', electionType: 'assembly' },
   assembly_21_district: { name: '제21대 국회의원선거', date: '2020-04-15', subType: '지역구', electionType: 'assembly' },

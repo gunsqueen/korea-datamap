@@ -8,6 +8,7 @@ import {
   ElectionLookupError,
   logElectionDecision,
 } from './electionDebug';
+import { getPartyColor } from '../utils/partyColors';
 
 const NEC_BASE = 'https://apis.data.go.kr/9760000/VoteXmntckInfoInqireService2';
 const SERVICE_KEY = 'fcfb6899040b2dc7f9c3bf04402834c6a83364a827417cad9d2052178fce7591';
@@ -50,6 +51,12 @@ const ELECTION_MAP: Record<string, NecElectionParam> = {
   local_6_council_pr:       { sgId: '20140604', sgTypecode: '8' },
   local_6_basic_district:   { sgId: '20140604', sgTypecode: '6' },
   local_6_basic_pr:         { sgId: '20140604', sgTypecode: '9' },
+  local_5_metro_mayor:      { sgId: '20100602', sgTypecode: '3' },
+  local_5_mayor:            { sgId: '20100602', sgTypecode: '3', sgTypecodeLocal: '4' },
+  local_5_council_district: { sgId: '20100602', sgTypecode: '5' },
+  local_5_council_pr:       { sgId: '20100602', sgTypecode: '8' },
+  local_5_basic_district:   { sgId: '20100602', sgTypecode: '6' },
+  local_5_basic_pr:         { sgId: '20100602', sgTypecode: '9' },
 };
 
 // ── 행정코드 → NEC 지역명 매핑 ──────────────────────────────
@@ -183,25 +190,6 @@ const PARENT_CITY: Record<string, string> = {
   // 경남
   '38111': '창원시', '38112': '창원시', '38113': '창원시', '38114': '창원시', '38115': '창원시',
 };
-
-// 정당 색상 매핑
-const PARTY_COLORS: Record<string, string> = {
-  '더불어민주당': '#004EA2', '민주당': '#004EA2', '더불어민주연합': '#004EA2',
-  '국민의힘': '#E61E2B', '자유한국당': '#E61E2B', '새누리당': '#E61E2B',
-  '국민의미래': '#E61E2B',
-  '정의당': '#FFCC00', '녹색정의당': '#FFCC00',
-  '바른미래당': '#00B0B9', '국민의당': '#EA5504', '안철수신당': '#EA5504',
-  '개혁신당': '#FF7210', '새로운미래': '#0066B2',
-  '진보당': '#D6001C', '노동당': '#D6001C',
-  '기본소득당': '#82C8A0', '시대전환': '#5C2D91',
-  '더불어시민당': '#004EA2', '미래한국당': '#E61E2B',
-  '열린민주당': '#003DA5', '비례자유한국당': '#E61E2B',
-  '무소속': '#999999',
-};
-
-function getPartyColor(party: string): string {
-  return PARTY_COLORS[party] ?? '#888888';
-}
 
 // ── 캐시 ─────────────────────────────────────────────────────
 const cache = new Map<string, { data: ElectionData; ts: number }>();
@@ -402,6 +390,38 @@ function validateNecResult(data: ElectionData, admCd: string): string | null {
   return null;
 }
 
+function normalizeNecName(value: string | undefined): string {
+  return (value ?? '').replace(/\s+/g, '').trim();
+}
+
+function isLegacyLocal5Election(electionId: string): boolean {
+  return electionId.startsWith('local_5_');
+}
+
+function getNecRegionNameCandidates(wiwName: string, parentCity?: string): string[] {
+  const candidates = new Set<string>();
+  if (wiwName) candidates.add(wiwName);
+  if (parentCity) {
+    candidates.add(`${parentCity}${wiwName}`);
+    candidates.add(`${parentCity} ${wiwName}`);
+  }
+  return [...candidates];
+}
+
+function matchesNecRegion(item: NecItem, candidates: string[]): boolean {
+  const wiw = normalizeNecName(item.wiwName);
+  const sgg = normalizeNecName(item.sggName);
+  return candidates.some((candidate) => {
+    const normalized = normalizeNecName(candidate);
+    if (!normalized) return false;
+    return wiw === normalized || sgg === normalized || wiw.includes(normalized) || normalized.includes(wiw);
+  });
+}
+
+function pickLegacyLocal5RegionItems(items: NecItem[], candidates: string[]): NecItem[] {
+  return items.filter((item) => normalizeNecName(item.wiwName) !== '합계' && matchesNecRegion(item, candidates));
+}
+
 /**
  * 시군구에 지역구 선거구가 여러 개일 때 정당별 득표 합산 집계
  * (광역의원·기초의원 지역구에서 구 단위 조회 시 사용)
@@ -531,6 +551,8 @@ export async function fetchNecElection(
     const parentCity = PARENT_CITY[sigunguCd];
     // NEC API에서 사용할 구시군명
     const necWiwName = parentCity ?? wiwName;
+    const regionNameCandidates = wiwName ? getNecRegionNameCandidates(wiwName, parentCity) : [];
+    const legacyLocal5 = isLegacyLocal5Election(electionId);
 
     if (!wiwName) {
       // 매핑이 없는 경우 시도 fallback
@@ -548,7 +570,12 @@ export async function fetchNecElection(
       const sdNameForApi = getApiSdName(sidoCd, param.sgId);
 
       if (['1', '7', '8', '9'].includes(sgTypecode)) {
-        const apiResult = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi, necWiwName);
+        const apiResult = await fetchNecApi(
+          param.sgId,
+          sgTypecode,
+          sdNameForApi,
+          legacyLocal5 ? undefined : necWiwName,
+        );
         const itemsWithWiw = apiResult.items;
         let matched: NecItem | null = null;
         if (dongShortName) {
@@ -580,7 +607,12 @@ export async function fetchNecElection(
           meta.name, meta.date, meta.type, meta.subType,
         ), apiResult.requestUrls, apiResult.statusCode, matched.wiwName, admCd, 1);
       } else if (['2', '5', '6'].includes(sgTypecode)) {
-        const apiResult = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi, necWiwName);
+        const apiResult = await fetchNecApi(
+          param.sgId,
+          sgTypecode,
+          sdNameForApi,
+          legacyLocal5 ? undefined : necWiwName,
+        );
         const items = apiResult.items;
         let matched: NecItem | null = null;
 
@@ -611,10 +643,17 @@ export async function fetchNecElection(
         ), apiResult.requestUrls, apiResult.statusCode, matched.wiwName, admCd, 1);
       } else {
         const sdNameForApi2 = getApiSdName(sidoCd, param.sgId);
-        const apiResult = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi2, necWiwName);
+        const apiResult = await fetchNecApi(
+          param.sgId,
+          sgTypecode,
+          sdNameForApi2,
+          legacyLocal5 ? undefined : necWiwName,
+        );
         const items = apiResult.items;
         let matched: NecItem | null = null;
-        if (sgTypecode === '4') {
+        if (legacyLocal5) {
+          matched = items.find((it) => matchesNecRegion(it, regionNameCandidates)) ?? null;
+        } else if (sgTypecode === '4') {
           matched = items.find(
             (it) => it.sggName?.includes(necWiwName) && it.wiwName === '합계',
           ) ?? null;
@@ -644,11 +683,20 @@ export async function fetchNecElection(
       }
     } else {
       const sdNameForApi = getApiSdName(sidoCd, param.sgId);
-      const directApiResult = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi, necWiwName);
+      const directApiResult = await fetchNecApi(
+        param.sgId,
+        sgTypecode,
+        sdNameForApi,
+        legacyLocal5 ? undefined : necWiwName,
+      );
       const directItems = directApiResult.items;
 
       if (['2', '5', '6'].includes(sgTypecode) || isDistrictElection(electionId)) {
-        if (directItems.length === 0) {
+        const regionItems = legacyLocal5
+          ? pickLegacyLocal5RegionItems(directItems, regionNameCandidates)
+          : directItems;
+
+        if (regionItems.length === 0) {
           mappingFailureReason = `district record missing for ${necWiwName}`;
           throw new ElectionLookupError('NO_DATA', '선거 데이터 없음', {
             sourceType: 'real',
@@ -665,8 +713,8 @@ export async function fetchNecElection(
           ? `${sdNameForApi} ${parentCity} ${wiwName}`
           : `${sdNameForApi} ${wiwName}`;
 
-        if (directItems.length === 1) {
-          const matched = directItems[0];
+        if (regionItems.length === 1) {
+          const matched = regionItems[0];
           result = buildNecResult(parseNecItem(
             matched, sigunguCd, admNmResult,
             meta.name, meta.date, meta.type, meta.subType,
@@ -674,17 +722,19 @@ export async function fetchNecElection(
         } else {
           // 시군구에 선거구 여러 개 → 정당별 집계
           const aggregated = aggregateDistrictItems(
-            directItems, sigunguCd, admNmResult,
+            regionItems, sigunguCd, admNmResult,
             meta.name, meta.date, meta.type, meta.subType,
           );
           result = buildNecResult(aggregated, directApiResult.requestUrls, directApiResult.statusCode,
-            `${necWiwName} (${directItems.length}개 선거구 합계)`, sigunguCd, directItems.length);
+            `${wiwName} (${regionItems.length}개 선거구 합계)`, sigunguCd, regionItems.length);
         }
       } else if (sgTypecode === '4') {
         const apiResult = await fetchNecApi(param.sgId, sgTypecode, sdNameForApi);
-        const matched = apiResult.items.find(
-          (it) => it.sggName?.includes(necWiwName) && it.wiwName === '합계',
-        );
+        const matched = legacyLocal5
+          ? apiResult.items.find((it) => matchesNecRegion(it, regionNameCandidates))
+          : apiResult.items.find(
+              (it) => it.sggName?.includes(necWiwName) && it.wiwName === '합계',
+            );
         if (!matched) {
           mappingFailureReason = `NEC local mayor match missing: ${necWiwName}`;
           throw new ElectionLookupError('NO_DATA', '선거 데이터 없음', {
@@ -706,7 +756,9 @@ export async function fetchNecElection(
           meta.name, meta.date, meta.type, meta.subType,
         ), apiResult.requestUrls, apiResult.statusCode, matched.sggName || matched.wiwName, sigunguCd, 1);
       } else {
-        const matched = directItems.find((it) => it.wiwName === necWiwName) ?? null;
+        const matched = legacyLocal5
+          ? directItems.find((it) => matchesNecRegion(it, regionNameCandidates)) ?? null
+          : directItems.find((it) => it.wiwName === necWiwName) ?? null;
         if (!matched) {
           mappingFailureReason = `NEC exact region match missing: ${necWiwName}`;
           throw new ElectionLookupError('NO_DATA', '선거 데이터 없음', {
@@ -775,21 +827,30 @@ function getElectionMeta(electionId: string) {
     assembly_20_pr:       { name: '제20대 국회의원선거', date: '2016-04-13', type: 'assembly', subType: '비례대표' },
     assembly_19_district: { name: '제19대 국회의원선거', date: '2012-04-11', type: 'assembly', subType: '지역구' },
     assembly_19_pr:       { name: '제19대 국회의원선거', date: '2012-04-11', type: 'assembly', subType: '비례대표' },
+    local_8_metro_mayor:      { name: '제8회 전국동시지방선거', date: '2022-06-01', type: 'local', subType: '광역단체장' },
     local_8_mayor:            { name: '제8회 전국동시지방선거', date: '2022-06-01', type: 'local', subType: '단체장' },
     local_8_council_district: { name: '제8회 전국동시지방선거', date: '2022-06-01', type: 'local', subType: '광역의원(지역구)' },
     local_8_council_pr:       { name: '제8회 전국동시지방선거', date: '2022-06-01', type: 'local', subType: '광역의원(비례)' },
     local_8_basic_district:   { name: '제8회 전국동시지방선거', date: '2022-06-01', type: 'local', subType: '기초의원(지역구)' },
     local_8_basic_pr:         { name: '제8회 전국동시지방선거', date: '2022-06-01', type: 'local', subType: '기초의원(비례)' },
+    local_7_metro_mayor:      { name: '제7회 전국동시지방선거', date: '2018-06-13', type: 'local', subType: '광역단체장' },
     local_7_mayor:            { name: '제7회 전국동시지방선거', date: '2018-06-13', type: 'local', subType: '단체장' },
     local_7_council_district: { name: '제7회 전국동시지방선거', date: '2018-06-13', type: 'local', subType: '광역의원(지역구)' },
     local_7_council_pr:       { name: '제7회 전국동시지방선거', date: '2018-06-13', type: 'local', subType: '광역의원(비례)' },
     local_7_basic_district:   { name: '제7회 전국동시지방선거', date: '2018-06-13', type: 'local', subType: '기초의원(지역구)' },
     local_7_basic_pr:         { name: '제7회 전국동시지방선거', date: '2018-06-13', type: 'local', subType: '기초의원(비례)' },
+    local_6_metro_mayor:      { name: '제6회 전국동시지방선거', date: '2014-06-04', type: 'local', subType: '광역단체장' },
     local_6_mayor:            { name: '제6회 전국동시지방선거', date: '2014-06-04', type: 'local', subType: '단체장' },
     local_6_council_district: { name: '제6회 전국동시지방선거', date: '2014-06-04', type: 'local', subType: '광역의원(지역구)' },
     local_6_council_pr:       { name: '제6회 전국동시지방선거', date: '2014-06-04', type: 'local', subType: '광역의원(비례)' },
     local_6_basic_district:   { name: '제6회 전국동시지방선거', date: '2014-06-04', type: 'local', subType: '기초의원(지역구)' },
     local_6_basic_pr:         { name: '제6회 전국동시지방선거', date: '2014-06-04', type: 'local', subType: '기초의원(비례)' },
+    local_5_metro_mayor:      { name: '제5회 전국동시지방선거', date: '2010-06-02', type: 'local', subType: '광역단체장' },
+    local_5_mayor:            { name: '제5회 전국동시지방선거', date: '2010-06-02', type: 'local', subType: '단체장' },
+    local_5_council_district: { name: '제5회 전국동시지방선거', date: '2010-06-02', type: 'local', subType: '광역의원(지역구)' },
+    local_5_council_pr:       { name: '제5회 전국동시지방선거', date: '2010-06-02', type: 'local', subType: '광역의원(비례)' },
+    local_5_basic_district:   { name: '제5회 전국동시지방선거', date: '2010-06-02', type: 'local', subType: '기초의원(지역구)' },
+    local_5_basic_pr:         { name: '제5회 전국동시지방선거', date: '2010-06-02', type: 'local', subType: '기초의원(비례)' },
   };
   return map[electionId] ?? { name: electionId, date: '', type: 'presidential' as const };
 }
