@@ -1,11 +1,12 @@
 import { useState, useCallback } from 'react';
-import { MapPin, BarChart2, ChevronLeft, Search } from 'lucide-react';
+import { MapPin, BarChart2, ChevronLeft, Search, Info } from 'lucide-react';
 import type { AdminArea, AdminLevel, NavItem, PanelTab } from './types';
 import { useBoundary } from './hooks/useBoundary';
 import { KoreaMap } from './components/Map/KoreaMap';
 import { Breadcrumb } from './components/Map/Breadcrumb';
 import { DataPanel } from './components/Panel/DataPanel';
 import { SearchBar } from './components/Search/SearchBar';
+import { AboutModal } from './components/About/AboutModal';
 import './App.css';
 
 const SIDO_COLORS: Record<string, string> = {
@@ -49,6 +50,7 @@ export default function App() {
   const [hoveredArea, setHoveredArea] = useState<AdminArea | null>(null);
   const [activeTab, setActiveTab] = useState<PanelTab>('population');
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   const handleMapClick = useCallback((area: AdminArea) => {
     const nextLevel = NEXT_LEVEL[currentLevel];
@@ -134,7 +136,7 @@ export default function App() {
           <Search size={18} />
         </button>
 
-        {/* 데스크탑: 뱃지 */}
+        {/* 데스크탑: 뱃지 + 앱 정보 버튼 */}
         <div className="header-right">
           <div className="header-level-badge">
             <BarChart2 size={13} strokeWidth={2} />
@@ -143,6 +145,14 @@ export default function App() {
           <span className="mode-badge">
             {import.meta.env.VITE_DATA_MODE?.toUpperCase() ?? 'MOCK'}
           </span>
+          <button
+            className="about-btn"
+            onClick={() => setAboutOpen(true)}
+            aria-label="앱 정보"
+            title="앱 정보 및 데이터 출처"
+          >
+            <Info size={16} strokeWidth={2} />
+          </button>
         </div>
       </header>
 
@@ -253,6 +263,9 @@ export default function App() {
           </>
         )}
       </div>
+
+      {/* 앱 정보 모달 */}
+      {aboutOpen && <AboutModal onClose={() => setAboutOpen(false)} />}
     </div>
   );
 }
