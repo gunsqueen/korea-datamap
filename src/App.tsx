@@ -7,6 +7,8 @@ import { Breadcrumb } from './components/Map/Breadcrumb';
 import { DataPanel } from './components/Panel/DataPanel';
 import { SearchBar } from './components/Search/SearchBar';
 import { AboutModal } from './components/About/AboutModal';
+import { DisclaimerModal } from './components/Disclaimer/DisclaimerModal';
+import { DisclaimerFooter } from './components/Disclaimer/DisclaimerFooter';
 import './App.css';
 
 const SIDO_COLORS: Record<string, string> = {
@@ -210,6 +212,9 @@ export default function App() {
               <span>{hoveredArea.adm_cd}</span>
             </div>
           )}
+
+          {/* 비공식 앱 고정 하단 배너 */}
+          <DisclaimerFooter />
         </main>
 
         {/* 사이드 패널 — 데스크탑: 우측 패널 / 모바일: 지도 아래 카드 영역 */}
@@ -266,6 +271,9 @@ export default function App() {
 
       {/* 앱 정보 모달 */}
       {aboutOpen && <AboutModal onClose={() => setAboutOpen(false)} />}
+
+      {/* 최초 실행 시 1회 면책 조항 모달 */}
+      <DisclaimerModal />
     </div>
   );
 }

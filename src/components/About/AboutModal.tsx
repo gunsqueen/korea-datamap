@@ -9,18 +9,23 @@ interface DataSource {
 const DATA_SOURCES: DataSource[] = [
   {
     name: '중앙선거관리위원회 — 선거 결과',
-    label: '공공데이터포털 선거 API (data.go.kr)',
-    url: 'https://www.data.go.kr/data/15000900/openapi.do',
+    label: 'info.nec.go.kr · 공공데이터포털 API',
+    url: 'https://info.nec.go.kr',
   },
   {
     name: '통계지리정보서비스 (SGIS) — 행정 경계',
-    label: 'SGIS Open API (sgis.kostat.go.kr)',
-    url: 'https://sgis.kostat.go.kr/developer/html/newOpenApi/api/develop/areaService.html',
+    label: 'sgis.kostat.go.kr',
+    url: 'https://sgis.kostat.go.kr',
   },
   {
     name: '행정안전부 — 인구 통계',
-    label: '주민등록 인구통계 API (jumin.mois.go.kr)',
+    label: 'jumin.mois.go.kr',
     url: 'https://jumin.mois.go.kr',
+  },
+  {
+    name: '공공데이터포털 — 오픈 API',
+    label: 'data.go.kr',
+    url: 'https://www.data.go.kr',
   },
 ];
 
