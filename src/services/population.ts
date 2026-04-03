@@ -41,7 +41,14 @@ async function fetchDongForMonth(
     srchToYm: ymS,
   });
 
-  const res = await fetch(`${BASE_URL}?${params}`);
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 3000);
+  let res: Response;
+  try {
+    res = await fetch(`${BASE_URL}?${params}`, { signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
   const json = await res.json();
@@ -86,7 +93,7 @@ async function fetchDongForMonth(
  * 동 코드 하나로 최신 유효 연월 탐색
  */
 async function findLatestMonth(sgisCode: string, admmCd: string): Promise<YearMonth> {
-  for (const ym of recentMonths(6)) {
+  for (const ym of recentMonths(3)) {
     try {
       const data = await fetchDongForMonth(sgisCode, admmCd, ym);
       if (data.total_population > 0) return ym;
@@ -105,7 +112,7 @@ async function fetchForDong(sgisCode: string): Promise<PopulationData> {
   const admmCd = codeMap[sgisCode];
   if (!admmCd) throw new Error(`MOIS 코드 매핑 없음: ${sgisCode}`);
 
-  for (const ym of recentMonths(6)) {
+  for (const ym of recentMonths(3)) {
     try {
       const data = await fetchDongForMonth(sgisCode, admmCd, ym);
       if (data.total_population > 0) {
@@ -116,7 +123,7 @@ async function fetchForDong(sgisCode: string): Promise<PopulationData> {
       continue;
     }
   }
-  throw new Error('최근 6개월 데이터 없음');
+  throw new Error('최근 데이터 없음');
 }
 
 /**

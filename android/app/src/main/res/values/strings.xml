@@ -1,7 +1,39 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Korea DataMap</string>
-    <string name="title_activity_main">Korea DataMap</string>
+    <string name="app_name">한국 데이터맵</string>
+    <string name="title_activity_main">한국 데이터맵</string>
     <string name="package_name">com.koreadatamap.app</string>
     <string name="custom_url_scheme">com.koreadatamap.app</string>
+
+    <!-- About Activity -->
+    <string name="about_title">앱 정보</string>
+    <string name="about_version">버전 1.5</string>
+    <string name="about_button_desc">앱 정보 보기</string>
+
+    <!-- 면책 조항 (Google Play 정책 — 비정부 앱 명시) -->
+    <string name="section_disclaimer">⚠ 면책 조항</string>
+    <string name="disclaimer_text">본 앱은 대한민국 정부 기관과 제휴하거나 정부를 대표하지 않습니다.\n\nThis app is not affiliated with, endorsed by, or representative of any government agency.\n\n제공되는 데이터의 정확성과 최신성을 보장하지 않습니다.\n공식 정보는 각 출처를 직접 확인하시기 바랍니다.</string>
+
+    <!-- 데이터 출처 -->
+    <string name="section_data_sources">📊 데이터 출처</string>
+
+    <string name="source_nec_name">중앙선거관리위원회 — 선거 결과</string>
+    <string name="source_nec_label">info.nec.go.kr · 공공데이터포털 API</string>
+    <string name="source_nec_url">https://info.nec.go.kr</string>
+
+    <string name="source_sgis_name">통계지리정보서비스 (SGIS) — 행정 경계</string>
+    <string name="source_sgis_label">sgis.kostat.go.kr</string>
+    <string name="source_sgis_url">https://sgis.kostat.go.kr</string>
+
+    <string name="source_mois_name">행정안전부 — 인구 통계</string>
+    <string name="source_mois_label">jumin.mois.go.kr</string>
+    <string name="source_mois_url">https://jumin.mois.go.kr</string>
+
+    <string name="source_data_go_name">공공데이터포털 — 오픈 API</string>
+    <string name="source_data_go_label">data.go.kr</string>
+    <string name="source_data_go_url">https://www.data.go.kr</string>
+
+    <!-- 앱 정보 -->
+    <string name="section_app_info">ℹ 앱 소개</string>
+    <string name="app_info_text">한국 데이터맵은 대한민국 전국 행정구역의 인구 통계와 역대 선거 결과를 지도 기반으로 탐색할 수 있는 비영리 오픈소스 앱입니다.\n\n시도 → 시군구 → 읍면동 단계로 드릴다운하며 각 지역의 데이터를 확인할 수 있습니다.</string>
 </resources>

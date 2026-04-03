@@ -53,7 +53,7 @@ export function AboutModal({ onClose }: AboutModalProps) {
           {/* 앱 이름 */}
           <div className="about-app-name">
             <span className="about-app-title">한국 데이터맵</span>
-            <span className="about-app-version">v1.2</span>
+            <span className="about-app-version">v1.5</span>
           </div>
 
           {/* 면책 조항 */}

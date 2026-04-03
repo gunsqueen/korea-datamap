@@ -2006,23 +2006,45 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .dcl-sources {
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 6px;
 }
 
+.dcl-source-item {
+  display: block;
+}
+
 .dcl-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 6px;
   font-size: 12px;
   color: var(--primary);
   text-decoration: none;
   background: var(--primary-50);
-  padding: 4px 9px;
-  border-radius: 99px;
+  padding: 7px 10px;
+  border-radius: var(--radius);
   border: 1px solid var(--primary-100);
 }
-.dcl-link:hover { text-decoration: underline; }
+.dcl-link:hover { text-decoration: underline; background: var(--primary-100); }
+
+.dcl-source-name {
+  flex: 1;
+  font-weight: 500;
+  color: var(--text-1);
+}
+
+.dcl-source-domain {
+  font-size: 11px;
+  color: var(--primary);
+  font-family: monospace;
+}
+
+.dcl-text-en {
+  font-size: 12px;
+  color: var(--text-3);
+  font-style: italic;
+}
 
 .dcl-accept-btn {
   width: 100%;

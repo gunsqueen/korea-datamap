@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/about_background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- 앱 이름 & 버전 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/about_text_primary"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_version"
+            android:textSize="13sp"
+            android:textColor="@color/about_text_secondary"
+            android:layout_marginBottom="24dp" />
+
+        <!-- 비정부 앱 면책 조항 (Google Play 필수) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_disclaimer"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/about_text_primary"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/disclaimer_text"
+            android:textSize="14sp"
+            android:textColor="@color/about_text_secondary"
+            android:lineSpacingMultiplier="1.5"
+            android:background="@color/about_card_bg"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- 구분선 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/about_divider"
+            android:layout_marginBottom="24dp" />
+
+        <!-- 데이터 출처 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_data_sources"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/about_text_primary"
+            android:layout_marginBottom="12dp" />
+
+        <!-- 중앙선거관리위원회 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/about_card_bg"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/source_nec_name"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/about_text_primary"
+                android:layout_marginBottom="2dp" />
+
+            <TextView
+                android:id="@+id/tv_source_nec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="@color/about_link_color"
+                android:autoLink="none" />
+        </LinearLayout>
+
+        <!-- 통계지리정보서비스 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/about_card_bg"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/source_sgis_name"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/about_text_primary"
+                android:layout_marginBottom="2dp" />
+
+            <TextView
+                android:id="@+id/tv_source_sgis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="@color/about_link_color"
+                android:autoLink="none" />
+        </LinearLayout>
+
+        <!-- 행정안전부 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/about_card_bg"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/source_mois_name"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/about_text_primary"
+                android:layout_marginBottom="2dp" />
+
+            <TextView
+                android:id="@+id/tv_source_mois"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="@color/about_link_color"
+                android:autoLink="none" />
+        </LinearLayout>
+
+        <!-- 공공데이터포털 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/about_card_bg"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/source_data_go_name"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/about_text_primary"
+                android:layout_marginBottom="2dp" />
+
+            <TextView
+                android:id="@+id/tv_source_data_go"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="@color/about_link_color"
+                android:autoLink="none" />
+        </LinearLayout>
+
+        <!-- 구분선 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/about_divider"
+            android:layout_marginBottom="24dp" />
+
+        <!-- 앱 정보 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_app_info"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/about_text_primary"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_info_text"
+            android:textSize="14sp"
+            android:textColor="@color/about_text_secondary"
+            android:lineSpacingMultiplier="1.5"
+            android:layout_marginBottom="32dp" />
+
+    </LinearLayout>
+</ScrollView>

@@ -24,6 +24,14 @@
 
         </activity>
 
+        <!-- 앱 정보 화면 — 데이터 출처 및 비정부 면책 조항 (Google Play 정책 준수) -->
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/about_title"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
