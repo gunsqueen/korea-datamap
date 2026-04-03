@@ -2,7 +2,7 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
   Cell, CartesianGrid,
 } from 'recharts';
-import { Users, User, UserRound, Home } from 'lucide-react';
+import { Users, User, UserRound, Home, ExternalLink } from 'lucide-react';
 import type { PopulationData, PopulationFieldSource, PopulationFieldStatus } from '../../types';
 import { StatsCard } from '../UI/StatsCard';
 import { ChartCard } from '../UI/ChartCard';
@@ -268,6 +268,15 @@ export function PopulationPanel({ data }: Props) {
               </div>
             </div>
           ))}
+        </div>
+        <div className="panel-source-links">
+          <span className="panel-source-links-label">공식 출처</span>
+          <a href="https://jumin.mois.go.kr" target="_blank" rel="noopener noreferrer" className="panel-source-link">
+            jumin.mois.go.kr <ExternalLink size={10} />
+          </a>
+          <a href="https://sgis.kostat.go.kr" target="_blank" rel="noopener noreferrer" className="panel-source-link">
+            sgis.kostat.go.kr <ExternalLink size={10} />
+          </a>
         </div>
       </ChartCard>
     </div>

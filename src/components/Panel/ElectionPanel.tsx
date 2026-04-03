@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { ExternalLink } from 'lucide-react';
 import type { ElectionType, ElectionData } from '../../types';
 import { useElection } from '../../hooks/useElection';
 import { ELECTIONS_META } from '../../services';
@@ -330,6 +331,15 @@ function ElectionResult({ data, requestedAdmCd }: { data: ElectionData; requeste
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="panel-source-links">
+        <span className="panel-source-links-label">공식 출처</span>
+        <a href="https://info.nec.go.kr" target="_blank" rel="noopener noreferrer" className="panel-source-link">
+          info.nec.go.kr <ExternalLink size={10} />
+        </a>
+        <a href="https://www.data.go.kr" target="_blank" rel="noopener noreferrer" className="panel-source-link">
+          data.go.kr <ExternalLink size={10} />
+        </a>
       </div>
     </>
   );
