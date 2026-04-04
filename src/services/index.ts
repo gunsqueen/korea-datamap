@@ -186,17 +186,8 @@ export async function getPopulation(admCd: string): Promise<PopulationData> {
     }
   }
 
-  // 시군구(5자리)는 실제 API 시도 후 실패 시 snapshot fallback
-  if (admCd.length === 5) {
-    try {
-      const apiData = await fetchPopulation(admCd);
-      return finalizePopulationData({ ...apiData, source_type: 'real' }, admCd);
-    } catch (err) {
-      console.warn('시군구 인구 API 실패 → snapshot fallback', err);
-    }
-  }
-
-  // 시도(2자리)는 snapshot 데이터 사용
+  // 시군구(5자리)·시도(2자리)는 스냅샷 사용
+  // (병렬 API 호출 시 일부 동만 성공하면 부분합이 반환되는 문제 방지)
   const mockData = getMockPopulation(admCd);
   return finalizePopulationData({ ...mockData, source_type: 'snapshot' }, admCd);
 }
