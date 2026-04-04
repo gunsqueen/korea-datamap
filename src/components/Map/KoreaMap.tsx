@@ -32,7 +32,7 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
       attributionControl: true,
     });
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
       attribution: '© OpenStreetMap contributors © CARTO',
       subdomains: 'abcd',
       maxZoom: 18,
@@ -68,11 +68,11 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
         const adm_cd = feature?.properties?.adm_cd ?? '';
         const isSelected = adm_cd === selectedCode;
         return {
-          fillColor: getSidoColor(adm_cd),
-          fillOpacity: isSelected ? 0.85 : 0.55,
-          color: isSelected ? '#ffffff' : '#ffffff',
-          weight: isSelected ? 2.5 : 1,
-          opacity: 0.9,
+          fillColor: isSelected ? 'rgba(6,182,212,0.20)' : getSidoColor(adm_cd),
+          fillOpacity: isSelected ? 1 : 0.45,
+          color: isSelected ? '#22d3ee' : '#d946ef',
+          weight: isSelected ? 2.5 : 1.5,
+          opacity: 1,
         };
       },
       onEachFeature: (feature, layer) => {
@@ -81,7 +81,7 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
         layer.on({
           mouseover: (e) => {
             const l = e.target;
-            l.setStyle({ fillOpacity: 0.8, weight: 2.5 });
+            l.setStyle({ fillOpacity: 0.65, weight: 2, color: '#22d3ee' });
             onHover({
               adm_cd,
               adm_nm,

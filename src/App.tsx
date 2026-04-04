@@ -144,9 +144,11 @@ export default function App() {
             <BarChart2 size={13} strokeWidth={2} />
             <span>{LEVEL_LABEL[currentLevel]}</span>
           </div>
-          <span className="mode-badge">
-            {import.meta.env.VITE_DATA_MODE?.toUpperCase() ?? 'MOCK'}
-          </span>
+          {import.meta.env.DEV && (
+            <span className="mode-badge">
+              {import.meta.env.VITE_DATA_MODE?.toUpperCase() ?? 'MOCK'}
+            </span>
+          )}
           <button
             className="about-btn"
             onClick={() => setAboutOpen(true)}

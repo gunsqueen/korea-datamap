@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ExternalLink, AlertTriangle } from 'lucide-react';
 
-const SESSION_KEY = 'disclaimer_shown_session';
+const SESSION_KEY = 'disclaimer_shown';
 
 const DATA_SOURCES = [
   { name: '중앙선거관리위원회 선거통계시스템', url: 'https://info.nec.go.kr', domain: 'info.nec.go.kr' },
@@ -14,13 +14,13 @@ export function DisclaimerModal() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (!sessionStorage.getItem(SESSION_KEY)) {
+    if (!localStorage.getItem(SESSION_KEY)) {
       setVisible(true);
     }
   }, []);
 
   function handleAccept() {
-    sessionStorage.setItem(SESSION_KEY, '1');
+    localStorage.setItem(SESSION_KEY, '1');
     setVisible(false);
   }
 

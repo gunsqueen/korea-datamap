@@ -1,43 +1,72 @@
-/* ─── Design System ─────────────────────────── */
+/* ─── Design System (Dark Theme) ────────────── */
 :root {
-  --primary: #2563eb;
-  --primary-50: #eff6ff;
-  --primary-100: #dbeafe;
-  --primary-hover: #1d4ed8;
-  --bg: #f8fafc;
-  --surface: #ffffff;
-  --border: #e5e7eb;
-  --border-light: #f3f4f6;
-  --text-1: #111827;
-  --text-2: #374151;
-  --text-3: #6b7280;
-  --text-4: #9ca3af;
-  --success: #10b981;
-  --danger: #ef4444;
-  --warning: #f59e0b;
-  --male: #3b82f6;
-  --female: #ec4899;
-  --shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
-  --shadow: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+  /* Brand */
+  --primary: #3b82f6;
+  --primary-50: rgba(59,130,246,0.10);
+  --primary-100: rgba(59,130,246,0.20);
+  --primary-hover: #2563eb;
+  --primary-light: #60a5fa;
+
+  /* Accent */
+  --accent-cyan: #22d3ee;
+  --accent-cyan-fill: rgba(6,182,212,0.20);
+  --accent-purple: #d946ef;
+  --accent-purple-fill: rgba(139,92,246,0.10);
+
+  /* Background */
+  --bg: #0b1118;
+  --surface: rgba(15,23,42,0.85);
+  --surface-solid: #0f172a;
+  --card-bg: rgba(30,41,59,0.70);
+  --overlay-ctrl: rgba(30,41,59,0.80);
+
+  /* Border */
+  --border: rgba(51,65,85,0.50);
+  --border-light: rgba(255,255,255,0.05);
+  --border-card: rgba(255,255,255,0.08);
+
+  /* Text */
+  --text-1: #f1f5f9;
+  --text-2: #cbd5e1;
+  --text-3: #94a3b8;
+  --text-4: #64748b;
+
+  /* Semantic */
+  --success: #22c55e;
+  --danger: #f87171;
+  --warning: #fbbf24;
+  --male: #60a5fa;
+  --female: #f472b6;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.4);
+  --shadow: 0 4px 20px rgba(0,0,0,0.5);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.6);
+
   --radius-sm: 6px;
   --radius: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 20px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
 }
 
 /* ─── Reset & Base ─────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Inter', 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: var(--bg);
   color: var(--text-1);
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
+  -webkit-font-smoothing: antialiased;
 }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.25); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(148,163,184,0.4); }
 
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
 
@@ -56,10 +85,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   align-items: center;
   gap: 16px;
   padding: 0 24px;
-  height: 58px;
-  background: var(--surface);
+  height: 56px;
+  background: rgba(15,23,42,0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
-  box-shadow: var(--shadow-xs);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04);
   flex-shrink: 0;
   z-index: 1000;
 }
@@ -75,23 +106,24 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   background: var(--primary);
   color: #fff;
   border-radius: var(--radius-sm);
   flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(59,130,246,0.4);
 }
 
 .app-title {
   font-size: 16px;
-  font-weight: 800;
-  color: var(--text-1);
-  letter-spacing: -0.5px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.3px;
   white-space: nowrap;
 }
 
-.app-title-accent { color: var(--primary); }
+.app-title-accent { color: var(--primary-light); }
 
 .app-subtitle {
   font-size: 12px;
@@ -119,7 +151,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-size: 12px;
   font-weight: 600;
   color: var(--text-3);
-  background: var(--bg);
+  background: var(--overlay-ctrl);
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 4px 10px;
@@ -130,8 +162,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-weight: 700;
   padding: 3px 8px;
   border-radius: 20px;
-  background: var(--danger);
-  color: #fff;
+  background: rgba(127,29,29,0.30);
+  border: 1px solid rgba(239,68,68,0.30);
+  color: var(--danger);
   letter-spacing: 0.5px;
 }
 
@@ -197,15 +230,16 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   justify-content: center;
   padding: 3px 8px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
-  color: rgba(17, 24, 39, 0.88);
-  font-weight: 800;
+  background: rgba(15, 23, 42, 0.75);
+  color: rgba(226, 232, 240, 0.95);
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: -0.02em;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
-  box-shadow: 0 1px 6px rgba(15, 23, 42, 0.08);
-  backdrop-filter: blur(4px);
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  box-shadow: 0 1px 8px rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
   white-space: nowrap;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .region-label-sido .region-label-text {
@@ -277,21 +311,23 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* ─── Side Panel ────────────────────────────────────── */
 /* Desktop default: 패널 항상 표시 (지도와 균형 유지) */
 .side-panel {
-  flex: 0 0 380px;
-  width: 380px;
+  flex: 0 0 400px;
+  width: 400px;
   overflow-y: auto;
   overflow-x: hidden;
-  background: var(--bg);
-  border-left: 1px solid var(--border);
+  background: rgba(15,23,42,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-left: 1px solid var(--border-light);
   display: flex;
   flex-direction: column;
-  box-shadow: -2px 0 16px rgba(0,0,0,0.04);
+  box-shadow: -4px 0 24px rgba(0,0,0,0.4);
 }
 
 /* Desktop: 지역 선택 시 패널 (동일 너비 유지) */
 .side-panel.panel-open {
-  flex: 0 0 380px;
-  width: 380px;
+  flex: 0 0 400px;
+  width: 400px;
 }
 
 /* ─── Data Panel ────────────────────────────── */
@@ -299,7 +335,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  background: var(--bg);
+  background: transparent;
 }
 
 .panel-header {
@@ -309,25 +345,26 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   padding: 18px 20px 14px;
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
-  background: var(--surface);
+  background: rgba(15,23,42,0.60);
   position: sticky;
   top: 0;
   z-index: 10;
+  backdrop-filter: blur(8px);
 }
 
 .panel-title-wrap { display: flex; align-items: baseline; gap: 8px; }
 
 .panel-title {
-  font-size: 19px;
-  font-weight: 800;
-  color: var(--text-1);
-  letter-spacing: -0.5px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.3px;
 }
 
 .panel-code {
   font-size: 11px;
   color: var(--text-4);
-  background: var(--bg);
+  background: rgba(51,65,85,0.60);
   padding: 2px 7px;
   border-radius: 20px;
   border: 1px solid var(--border);
@@ -346,24 +383,25 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--text-3);
   transition: all 0.15s;
   border: 1px solid var(--border);
+  background: rgba(30,41,59,0.50);
 }
 
 .btn-compare:hover {
   background: var(--primary-50);
-  color: var(--primary);
+  color: var(--primary-light);
   border-color: var(--primary-100);
 }
 .btn-close:hover {
-  background: #fef2f2;
+  background: rgba(239,68,68,0.15);
   color: var(--danger);
-  border-color: #fecaca;
+  border-color: rgba(239,68,68,0.30);
 }
 
 .panel-tabs {
   display: flex;
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
-  background: var(--surface);
+  background: rgba(15,23,42,0.40);
   padding: 0 20px;
   gap: 2px;
 }
@@ -376,15 +414,16 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   padding: 12px 10px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-3);
+  color: var(--text-4);
   border-bottom: 2px solid transparent;
   transition: all 0.15s;
   justify-content: center;
 }
 
 .tab-btn.active {
-  color: var(--primary);
+  color: var(--primary-light);
   border-bottom-color: var(--primary);
+  background: rgba(30,41,59,0.30);
 }
 
 .tab-btn:hover:not(.active) { color: var(--text-2); }
@@ -393,7 +432,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   flex: 1;
   overflow-y: auto;
   padding: 16px;
-  background: var(--bg);
+  background: transparent;
 }
 
 .loading, .empty {
@@ -442,13 +481,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .pop-source-badge--real {
-  background: #dcfce7;
-  color: #15803d;
+  background: rgba(34,197,94,0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34,197,94,0.25);
 }
 
 .pop-source-badge--snapshot {
-  background: #fef9c3;
-  color: #a16207;
+  background: rgba(251,191,36,0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(251,191,36,0.25);
 }
 
 /* Legacy subtitle (keep for ElectionPanel) */
@@ -470,8 +511,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .stats-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--card-bg);
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
   padding: 16px;
   display: flex;
@@ -485,6 +526,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .stats-card:hover {
   box-shadow: var(--shadow-sm);
   transform: translateY(-1px);
+  border-color: rgba(255,255,255,0.12);
 }
 
 .stats-card--full {
@@ -520,14 +562,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .stats-card__value {
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -1.5px;
   line-height: 1.1;
-  color: var(--text-1);
+  color: #fff;
 }
 
 .stats-card--full .stats-card__value {
-  font-size: 28px;
+  font-size: 30px;
 }
 
 .stats-card__sub {
@@ -571,8 +613,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* ─── ChartCard Component ────────────────────── */
 .chart-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--card-bg);
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-xs);
@@ -588,7 +630,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .chart-card__title {
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-2);
 }
 
@@ -599,8 +641,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .age-source-note {
   font-size: 10px;
-  color: #f59e0b;
-  background: #fef3c7;
+  color: #fbbf24;
+  background: rgba(251,191,36,0.12);
   border-radius: 4px;
   padding: 1px 6px;
   font-weight: 500;
@@ -613,18 +655,18 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .age-source-note--snapshot {
-  color: #a16207;
-  background: #fef3c7;
+  color: #fbbf24;
+  background: rgba(251,191,36,0.12);
 }
 
 .age-source-note--estimated {
-  color: #92400e;
-  background: #ffedd5;
+  color: #fb923c;
+  background: rgba(251,146,60,0.12);
 }
 
 .age-source-note--unavailable {
-  color: #475569;
-  background: #e2e8f0;
+  color: var(--text-4);
+  background: rgba(100,116,139,0.15);
 }
 
 .age-data-unavailable {
@@ -668,7 +710,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   flex-direction: column;
   gap: 6px;
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border);
 }
 
 .population-source-row:last-child {
@@ -1432,8 +1474,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .app-header { padding: 0 16px; gap: 12px; }
   .app-subtitle { display: none; }
   .header-center { max-width: 280px; }
-  .side-panel { flex: 0 0 320px; width: 320px; }
-  .side-panel.panel-open { flex: 0 0 320px; width: 320px; }
+  .side-panel { flex: 0 0 340px; width: 340px; }
+  .side-panel.panel-open { flex: 0 0 340px; width: 340px; }
 
   /* 모바일 전용 요소 숨기기 */
   .mobile-header-back { display: none !important; }

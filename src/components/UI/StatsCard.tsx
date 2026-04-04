@@ -26,7 +26,7 @@ export function StatsCard({
       </div>
       <div className="stats-card__content">
         <div className="stats-card__label">{label}</div>
-        <div className="stats-card__value" style={{ color: accentColor === '#2563eb' ? '#0f172a' : accentColor }}>
+        <div className="stats-card__value" style={{ color: accentColor }}>
           {value}
         </div>
         {sub && <div className="stats-card__sub">{sub}</div>}
