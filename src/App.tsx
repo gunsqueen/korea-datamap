@@ -59,11 +59,7 @@ export default function App() {
 
     if (nextLevel) {
       setNavStack((prev) => [...prev, { adm_cd: area.adm_cd, adm_nm: area.adm_nm, level: currentLevel }]);
-      if (currentLevel === 'sigungu') {
-        setSelectedArea(area);
-      } else {
-        setSelectedArea(null);
-      }
+      setSelectedArea(area);
     } else {
       setSelectedArea(area);
     }
