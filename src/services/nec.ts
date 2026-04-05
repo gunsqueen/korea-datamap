@@ -384,19 +384,7 @@ function validateNecResult(data: ElectionData, admCd: string): string | null {
   return null;
 }
 
-function normalizeNecName(value: string | undefined): string {
-  return (value ?? '').replace(/\s+/g, '').trim();
-}
 
-function getNecRegionNameCandidates(wiwName: string, parentCity?: string): string[] {
-  const candidates = new Set<string>();
-  if (wiwName) candidates.add(wiwName);
-  if (parentCity) {
-    candidates.add(`${parentCity}${wiwName}`);
-    candidates.add(`${parentCity} ${wiwName}`);
-  }
-  return [...candidates];
-}
 
 /**
  * 시군구에 지역구 선거구가 여러 개일 때 정당별 득표 합산 집계
@@ -527,7 +515,6 @@ export async function fetchNecElection(
     const parentCity = PARENT_CITY[sigunguCd];
     // NEC API에서 사용할 구시군명
     const necWiwName = parentCity ?? wiwName;
-    const regionNameCandidates = wiwName ? getNecRegionNameCandidates(wiwName, parentCity) : [];
 
     if (!wiwName) {
       // 매핑이 없는 경우 시도 fallback

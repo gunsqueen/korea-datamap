@@ -12,9 +12,6 @@ import { DisclaimerModal } from './components/Disclaimer/DisclaimerModal';
 import { DisclaimerFooter } from './components/Disclaimer/DisclaimerFooter';
 import './App.css';
 
-const SIDO_COLORS: Record<string, string> = {
-  '11': '#E63946', '21': '#457B9D', '31': '#A8DADC', '39': '#95A3B3',
-};
 
 const NEXT_LEVEL: Record<AdminLevel, AdminLevel | null> = {
   sido: 'sigungu',
@@ -98,9 +95,6 @@ export default function App() {
     setMobileSearchOpen(false);
   }, []);
 
-  const handleMobileSearch = useCallback((result: SearchResult) => {
-    handleSearchSelect(result);
-  }, [handleSearchSelect]);
 
   const displayArea = hoveredArea ?? selectedArea;
   const panelHasContent = selectedArea !== null;
