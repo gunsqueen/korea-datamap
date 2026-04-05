@@ -79,10 +79,8 @@ export function PopulationPanel({ data }: Props) {
     { label: '남성', source: data.field_sources?.male_population, value: `${fmt(data.male_population)}명` },
     { label: '여성', source: data.field_sources?.female_population, value: `${fmt(data.female_population)}명` },
     { label: '세대 수', source: data.field_sources?.total_households, value: `${fmt(data.total_households)}세대` },
-    { label: '연령 분포', source: data.field_sources?.age_distribution },
     { label: '청년비율', source: data.field_sources?.youth_ratio, value: youthRatio ? `${youthRatio}%` : null },
     { label: '고령화율', source: data.field_sources?.elderly_ratio, value: elderlyRatio ? `${elderlyRatio}%` : null },
-    { label: '세대원수별 세대수', source: data.field_sources?.household_structure },
   ];
 
   return (
@@ -259,12 +257,6 @@ export function PopulationPanel({ data }: Props) {
               <div className="population-source-main">
                 <span className="population-source-label">{row.label}</span>
                 {row.value ? <span className="population-source-value">{row.value}</span> : null}
-              </div>
-              <div className="population-source-meta">
-                <span className={`population-source-badge population-source-badge--${row.source?.status ?? 'unavailable'}`}>
-                  {FIELD_STATUS_LABELS[row.source?.status ?? 'unavailable']}
-                </span>
-                <span className="population-source-note">{row.source?.note ?? '출처 정보 없음'}</span>
               </div>
             </div>
           ))}

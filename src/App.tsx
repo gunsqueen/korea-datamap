@@ -1,11 +1,12 @@
 import { useState, useCallback } from 'react';
-import { MapPin, BarChart2, ChevronLeft, Search, Info } from 'lucide-react';
+import { MapPin, ChevronLeft, Search, Info } from 'lucide-react';
 import type { AdminArea, AdminLevel, NavItem, PanelTab } from './types';
 import { useBoundary } from './hooks/useBoundary';
 import { KoreaMap } from './components/Map/KoreaMap';
 import { Breadcrumb } from './components/Map/Breadcrumb';
 import { DataPanel } from './components/Panel/DataPanel';
 import { SearchBar } from './components/Search/SearchBar';
+import type { SearchResult } from './components/Search/SearchBar';
 import { AboutModal } from './components/About/AboutModal';
 import { DisclaimerModal } from './components/Disclaimer/DisclaimerModal';
 import { DisclaimerFooter } from './components/Disclaimer/DisclaimerFooter';
@@ -78,10 +79,28 @@ export default function App() {
     setSelectedArea(null);
   }, []);
 
-  const handleMobileSearch = useCallback((area: AdminArea) => {
-    handleMapClick(area);
+  /** 검색 결과 선택 시 해당 레벨로 직접 이동 */
+  const handleSearchSelect = useCallback((result: SearchResult) => {
+    if (result.level === 'sido') {
+      // 시도 선택: navStack 초기화 후 시도로 이동
+      setNavStack([]);
+      setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'sido' });
+    } else if (result.level === 'sigungu') {
+      // 시군구 선택: sido를 navStack에 추가하고 sigungu 선택
+      const sidoEntry: NavItem = {
+        adm_cd: result.sido_cd!,
+        adm_nm: result.sido_nm!,
+        level: 'sido',
+      };
+      setNavStack([sidoEntry]);
+      setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'sigungu' });
+    }
     setMobileSearchOpen(false);
-  }, [handleMapClick]);
+  }, []);
+
+  const handleMobileSearch = useCallback((result: SearchResult) => {
+    handleSearchSelect(result);
+  }, [handleSearchSelect]);
 
   const displayArea = hoveredArea ?? selectedArea;
   const panelHasContent = selectedArea !== null;
@@ -122,7 +141,7 @@ export default function App() {
 
         {/* 데스크탑: 검색바 */}
         <div className="header-center">
-          <SearchBar onSelect={(area) => handleMapClick(area)} />
+          <SearchBar onSelect={handleSearchSelect} />
         </div>
 
         {/* 모바일 전용: 검색 아이콘 버튼 */}
@@ -136,15 +155,8 @@ export default function App() {
 
         {/* 데스크탑: 뱃지 + 앱 정보 버튼 */}
         <div className="header-right">
-          <div className="header-level-badge">
-            <BarChart2 size={13} strokeWidth={2} />
-            <span>{LEVEL_LABEL[currentLevel]}</span>
-          </div>
-          {import.meta.env.DEV && (
-            <span className="mode-badge">
-              {import.meta.env.VITE_DATA_MODE?.toUpperCase() ?? 'MOCK'}
-            </span>
-          )}
+
+
           <button
             className="about-btn"
             onClick={() => setAboutOpen(true)}
@@ -160,7 +172,7 @@ export default function App() {
       {mobileSearchOpen && (
         <div className="mobile-search-overlay" onClick={(e) => { if (e.target === e.currentTarget) setMobileSearchOpen(false); }}>
           <div className="mobile-search-inner">
-            <SearchBar autoFocus onSelect={handleMobileSearch} />
+            <SearchBar autoFocus onSelect={handleSearchSelect} />
             <button className="mobile-search-cancel" onClick={() => setMobileSearchOpen(false)}>
               취소
             </button>
@@ -227,30 +239,46 @@ export default function App() {
             />
           ) : (
             <div className="panel-placeholder">
-              <div className="placeholder-icon">🗺</div>
-              <div className="placeholder-text">
-                <p className="placeholder-title">지역을 선택하세요</p>
-                <p className="placeholder-desc">
-                  {currentLevel === 'sido' && <>시도를 탭하면 시군구로 이동합니다</>}
-                  {currentLevel !== 'sido' && <>읍·동을 탭하면 상세 데이터를 확인합니다</>}
+              <div className="intro-hero">
+                <div className="intro-logo">🗺</div>
+                <h1 className="intro-title">대한민국 데이터맵</h1>
+                <p className="intro-subtitle">전국 행정구역의 인구·선거 데이터를<br />지도로 한눈에 탐색하세요</p>
+              </div>
+
+              <div className="intro-features">
+                <div className="intro-feature">
+                  <span className="intro-feature-icon">👥</span>
+                  <div className="intro-feature-body">
+                    <p className="intro-feature-title">인구 통계</p>
+                    <p className="intro-feature-desc">총 인구, 성별·연령 분포, 세대 구성</p>
+                  </div>
+                </div>
+                <div className="intro-feature">
+                  <span className="intro-feature-icon">🗳</span>
+                  <div className="intro-feature-body">
+                    <p className="intro-feature-title">선거 결과</p>
+                    <p className="intro-feature-desc">역대 대선·국선·지방선거 당선인 및 득표율</p>
+                  </div>
+                </div>
+                <div className="intro-feature">
+                  <span className="intro-feature-icon">📍</span>
+                  <div className="intro-feature-body">
+                    <p className="intro-feature-title">읍·면·동 단위</p>
+                    <p className="intro-feature-desc">시도 → 시군구 → 읍면동 드릴다운 탐색</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="intro-hint">
+                <span className="intro-hint-icon">
+                  {currentLevel === 'sido' ? '👆' : '👆'}
+                </span>
+                <p>
+                  {currentLevel === 'sido'
+                    ? '지도에서 시도를 탭해 시작하세요'
+                    : '읍·면·동을 탭하면 상세 데이터를 확인할 수 있어요'}
                 </p>
               </div>
-              {navStack.length === 0 && (
-                <div className="placeholder-legend desktop-only">
-                  <div className="legend-title">시도 색상 범례</div>
-                  {[
-                    { code: '11', name: '서울특별시' },
-                    { code: '21', name: '부산광역시' },
-                    { code: '31', name: '경기도' },
-                    { code: '39', name: '제주특별자치도' },
-                  ].map(({ code, name }) => (
-                    <div key={code} className="legend-item">
-                      <span className="legend-dot" style={{ background: SIDO_COLORS[code] ?? '#ccc' }} />
-                      <span>{name}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           )}
         </aside>

@@ -37,6 +37,14 @@ export function formatAdminLabel(name: string, level: AdminLevel): string {
   return shortName;
 }
 
+/**
+ * 섬 포함 등으로 bounding box 중심이 실제 육지와 멀어지는 시도는 직접 좌표 지정.
+ * 예) 경상북도: 울릉도(130.9°E)가 포함돼 bbox 중심이 동해로 치우침 → 안동 인근 내륙으로 고정
+ */
+const SIDO_CUSTOM_CENTER: Record<string, [number, number]> = {
+  경상북도: [36.50, 128.55],  // 울릉도 영향 배제, 내륙 중심
+};
+
 const SIDO_LABEL_OFFSET: Record<string, [number, number]> = {
   서울특별시: [0, -28],
   인천광역시: [-40, 2],
@@ -45,8 +53,8 @@ const SIDO_LABEL_OFFSET: Record<string, [number, number]> = {
   대전광역시: [0, 18],
   광주광역시: [0, 18],
   대구광역시: [2, 20],
-  울산광역시: [28, 4],
-  부산광역시: [22, 12],
+  울산광역시: [-30, 4],   // 기존 [28, 4] → 동해 방향이라 수정
+  부산광역시: [-22, 12],  // 기존 [22, 12] → 동해 방향이라 수정
   제주특별자치도: [0, 10],
 };
 
@@ -60,18 +68,22 @@ export function getAdminLabelLatLng(
     return null;
   }
 
-  const center = bounds.getCenter();
-
   if (level !== 'sido') {
-    return center;
+    return bounds.getCenter();
   }
+
+  // 커스텀 중심 좌표가 있으면 사용 (울릉도 등 도서 포함 시도)
+  const customCenter = SIDO_CUSTOM_CENTER[feature.properties.adm_nm];
+  const baseCenter = customCenter
+    ? L.latLng(customCenter[0], customCenter[1])
+    : bounds.getCenter();
 
   const offset = SIDO_LABEL_OFFSET[feature.properties.adm_nm];
   if (!offset) {
-    return center;
+    return baseCenter;
   }
 
-  const centerPoint = map.latLngToContainerPoint(center);
+  const centerPoint = map.latLngToContainerPoint(baseCenter);
   return map.containerPointToLatLng(L.point(centerPoint.x + offset[0], centerPoint.y + offset[1]));
 }
 
@@ -80,74 +92,48 @@ export function shouldRenderAdminLabel(
   map: L.Map,
   level: AdminLevel,
   placedPoints: L.Point[],
-  totalFeatureCount: number,
+  _totalFeatureCount: number,
 ): boolean {
   const bounds = L.geoJSON(feature as unknown as GeoJsonObject).getBounds();
-  if (!bounds.isValid()) {
-    return false;
-  }
+  if (!bounds.isValid()) return false;
 
-  if (level === 'sido') {
-    return true;
-  }
+  // 시도는 항상 표시
+  if (level === 'sido') return true;
 
-  if (level === 'sigungu' && totalFeatureCount <= 50) {
-    return true;
-  }
+  const zoom = map.getZoom();
 
-  if (level === 'eupmyeondong' && totalFeatureCount <= 24) {
-    return true;
-  }
+  // ③ 행정구역 계층 판별: 이름의 마지막 단어가 "구"로 끝나면 자치구/행정구
+  const shortName = (feature.properties.adm_nm ?? '').split(/\s+/).pop() ?? '';
+  const isGu = shortName.endsWith('구');
 
-  const northWest = map.latLngToContainerPoint(bounds.getNorthWest());
-  const southEast = map.latLngToContainerPoint(bounds.getSouthEast());
-  const width = Math.abs(southEast.x - northWest.x);
-  const height = Math.abs(southEast.y - northWest.y);
+  // ④ 줌 레벨 기반
+  // - 구(자치구/행정구): zoom 8 미만이면 숨김 (전국 시도 뷰에서 구 레이블 제거)
+  // - 읍면동: zoom 제한 없음 — 면적·충돌 감지로 자연스럽게 솎아냄
+  if (level === 'sigungu' && isGu && zoom < 8) return false;
+
+  // ① 폴리곤 면적 기반 필터링
+  const nw = map.latLngToContainerPoint(bounds.getNorthWest());
+  const se = map.latLngToContainerPoint(bounds.getSouthEast());
+  const width = Math.abs(se.x - nw.x);
+  const height = Math.abs(se.y - nw.y);
   const area = width * height;
 
-  const minAreaByLevel: Record<AdminLevel, number> = {
-    sido: 1200,
-    sigungu: totalFeatureCount <= 40 ? 420 : 900,
-    eupmyeondong: 900,
-  };
+  // 구는 일반 시/군보다 큰 폴리곤일 때만 레이블 표시 (zoom 8 기준 완산구·덕진구 등도 통과)
+  const minArea   = level === 'eupmyeondong' ? 150  : isGu ? 800 : 700;
+  const minWidth  = level === 'eupmyeondong' ? 16   : isGu ? 30  : 26;
+  const minHeight = level === 'eupmyeondong' ? 10   : isGu ? 18  : 15;
 
-  const minWidthByLevel: Record<AdminLevel, number> = {
-    sido: 34,
-    sigungu: totalFeatureCount <= 40 ? 24 : 34,
-    eupmyeondong: 36,
-  };
+  if (area < minArea || width < minWidth || height < minHeight) return false;
 
-  const minHeightByLevel: Record<AdminLevel, number> = {
-    sido: 16,
-    sigungu: totalFeatureCount <= 40 ? 12 : 16,
-    eupmyeondong: 18,
-  };
-
-  if (area < minAreaByLevel[level] || width < minWidthByLevel[level] || height < minHeightByLevel[level]) {
-    return false;
-  }
-
+  // 충돌 감지: 이미 배치된 레이블과 너무 가까우면 숨김
   const center = map.latLngToContainerPoint(bounds.getCenter());
-  const minDistanceByLevel: Record<AdminLevel, number> = {
-    sido: 28,
-    sigungu: totalFeatureCount <= 40 ? 0 : 28,
-    eupmyeondong: 40,
-  };
+  const minDist = level === 'eupmyeondong' ? 32 : isGu ? 44 : 30;
 
-  if (minDistanceByLevel[level] <= 0) {
-    placedPoints.push(center);
-    return true;
-  }
-
-  if (
-    placedPoints.some((point) => {
-      const dx = point.x - center.x;
-      const dy = point.y - center.y;
-      return Math.sqrt(dx * dx + dy * dy) < minDistanceByLevel[level];
-    })
-  ) {
-    return false;
-  }
+  if (placedPoints.some((p) => {
+    const dx = p.x - center.x;
+    const dy = p.y - center.y;
+    return Math.sqrt(dx * dx + dy * dy) < minDist;
+  })) return false;
 
   placedPoints.push(center);
   return true;

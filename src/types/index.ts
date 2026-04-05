@@ -136,6 +136,10 @@ export interface ElectionData {
   turnout_rate: number;
   candidates: Candidate[];
   debug_meta?: ElectionDebugMeta;
+  /** 무투표당선 선거구 여부 */
+  is_uncontested?: boolean;
+  /** 무투표당선 선거구명 */
+  uncontested_district?: string;
 }
 
 export interface Candidate {

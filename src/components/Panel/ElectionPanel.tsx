@@ -190,6 +190,8 @@ export function ElectionPanel({ admCd, admNm }: Props) {
         <div className="loading">불러오는 중...</div>
       ) : error === '선거 데이터 확인 필요' ? (
         <div className="empty">선거 데이터 확인 필요</div>
+      ) : data?.is_uncontested ? (
+        <UncandidateResult data={data} />
       ) : data ? (
         <ElectionResult data={data} requestedAdmCd={admCd} />
       ) : (
@@ -342,5 +344,46 @@ function ElectionResult({ data, requestedAdmCd }: { data: ElectionData; requeste
         </a>
       </div>
     </>
+  );
+}
+
+function UncandidateResult({ data }: { data: ElectionData }) {
+  return (
+    <div className="panel-section">
+      <div className="uncontested-banner">
+        <span className="uncontested-badge">무투표당선</span>
+        <p className="uncontested-desc">
+          이 선거구는 후보자 수가 당선인 수와 같아 투표 없이 당선이 결정되었습니다.
+        </p>
+        {data.uncontested_district && (
+          <p className="uncontested-sgg">선거구: {data.uncontested_district}</p>
+        )}
+      </div>
+
+      {data.candidates.length > 0 ? (
+        <div className="uncontested-candidates">
+          {data.candidates.map((c, i) => (
+            <div key={i} className="uncontested-candidate-row">
+              <span
+                className="uncontested-party-dot"
+                style={{ background: c.party_color }}
+              />
+              <span className="uncontested-name">{c.name}</span>
+              <span className="uncontested-party">{c.party}</span>
+              <span className="uncontested-elected-badge">당선</span>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p className="uncontested-no-data">당선인 정보를 불러오는 중입니다.</p>
+      )}
+
+      <div className="panel-source-links" style={{ marginTop: 16 }}>
+        <span className="panel-source-links-label">공식 출처</span>
+        <a href="https://info.nec.go.kr" target="_blank" rel="noopener noreferrer" className="panel-source-link">
+          info.nec.go.kr <ExternalLink size={10} />
+        </a>
+      </div>
+    </div>
   );
 }

@@ -1,6 +1,28 @@
 import type { ElectionData, Candidate } from '../types';
 import { attachElectionDebugMeta, logElectionDecision } from './electionDebug';
 import { getPartyColor } from '../utils/partyColors';
+import { fetchUncandidates } from './necUncontested';
+
+// 동→선거구 매핑 캐시 (파일별 lazy load)
+const dongDistrictMapCache = new Map<string, Record<string, Record<string, string>>>();
+
+async function getDongDistrict(electionId: string, admNm: string): Promise<string | null> {
+  const filePrefix = electionId.split('_').slice(0, 2).join('_');
+  const cacheKey = filePrefix;
+  if (!dongDistrictMapCache.has(cacheKey)) {
+    try {
+      const mod = await import(`../data/static/${filePrefix}_dong_district_map.json`);
+      dongDistrictMapCache.set(cacheKey, mod.default as Record<string, Record<string, string>>);
+    } catch {
+      dongDistrictMapCache.set(cacheKey, {});
+    }
+  }
+  const mapForPrefix = dongDistrictMapCache.get(cacheKey)!;
+  const mapForId = mapForPrefix[electionId];
+  if (!mapForId) return null;
+  const key = admNm.trim().split(/\s+/).filter(Boolean).join('|');
+  return mapForId[key] ?? null;
+}
 
 interface StaticCandidateEntry {
   name?: string;
@@ -49,12 +71,6 @@ const ELECTION_META: Record<string, { name: string; date: string; subType: strin
   local_6_council_pr:       { name: '제6회 전국동시지방선거', date: '2014-06-04', subType: '광역의원(비례)', electionType: 'local' },
   local_6_basic_district:   { name: '제6회 전국동시지방선거', date: '2014-06-04', subType: '기초의원(지역구)', electionType: 'local' },
   local_6_basic_pr:         { name: '제6회 전국동시지방선거', date: '2014-06-04', subType: '기초의원(비례)', electionType: 'local' },
-  local_5_metro_mayor:      { name: '제5회 전국동시지방선거', date: '2010-06-02', subType: '광역단체장', electionType: 'local' },
-  local_5_mayor:            { name: '제5회 전국동시지방선거', date: '2010-06-02', subType: '단체장', electionType: 'local' },
-  local_5_council_district: { name: '제5회 전국동시지방선거', date: '2010-06-02', subType: '광역의원(지역구)', electionType: 'local' },
-  local_5_council_pr:       { name: '제5회 전국동시지방선거', date: '2010-06-02', subType: '광역의원(비례)', electionType: 'local' },
-  local_5_basic_district:   { name: '제5회 전국동시지방선거', date: '2010-06-02', subType: '기초의원(지역구)', electionType: 'local' },
-  local_5_basic_pr:         { name: '제5회 전국동시지방선거', date: '2010-06-02', subType: '기초의원(비례)', electionType: 'local' },
   assembly_22_district: { name: '제22대 국회의원선거', date: '2024-04-10', subType: '지역구', electionType: 'assembly' },
   assembly_22_pr:       { name: '제22대 국회의원선거', date: '2024-04-10', subType: '비례대표', electionType: 'assembly' },
   assembly_21_district: { name: '제21대 국회의원선거', date: '2020-04-15', subType: '지역구', electionType: 'assembly' },
@@ -221,4 +237,80 @@ export async function lookupLocalElectionDong(
   );
 
   return result;
+}
+
+/**
+ * 무투표당선 선거구 조회
+ * - `lookupLocalElectionDong`이 null을 반환했을 때 호출
+ * - NEC 무투표선거구 API로 당선인 정보를 조회
+ * - admNm 형태: "서울특별시 강서구 발산1동"
+ */
+export async function lookupUncandidateDong(
+  electionId: string,
+  admCd: string,
+  admNm: string,
+): Promise<ElectionData | null> {
+  const meta = ELECTION_META[electionId];
+  if (!meta) return null;
+
+  // 지역구 선거만 무투표 가능
+  if (!electionId.endsWith('_district') && !electionId.includes('_mayor')) return null;
+
+  const parts = admNm.trim().split(/\s+/).filter(Boolean);
+  if (parts.length < 2) return null;
+  const sdName = parts[0]; // 시도명
+
+  const candidates = await fetchUncandidates(electionId, sdName);
+  if (candidates.length === 0) return null;
+
+  // 1. 동 단위 선거구 매핑 우선 확인 (정확한 매핑)
+  const exactDistrict = await getDongDistrict(electionId, admNm);
+
+  // 2. 시군구명으로 1차 필터링
+  const sigungu = parts.length >= 2 ? parts[1] : '';
+  const sggFiltered = candidates.filter(
+    (c) => !sigungu || c.sggName.includes(sigungu.replace(/[시군구]$/, ''))
+  );
+  if (sggFiltered.length === 0) return null;
+
+  // 3. 동 단위 매핑이 있으면 해당 선거구만, 없으면 첫 번째 선거구 그룹만 사용
+  const targetDistrict = exactDistrict ?? sggFiltered[0].sggName;
+  const matched = sggFiltered.filter((c) => c.sggName === targetDistrict);
+
+  if (matched.length === 0) return null;
+
+  const electionCandidates = matched.map((c, i) => ({
+    name: c.name || c.party,
+    party: c.party,
+    party_color: getPartyColor(c.party),
+    votes: 0,
+    vote_rate: 0,
+    rank: i + 1,
+    elected: true,
+  }));
+
+  const result: ElectionData = {
+    adm_cd: admCd,
+    adm_nm: admNm,
+    election_type: meta.electionType as 'presidential' | 'assembly' | 'local',
+    election_name: meta.name,
+    election_date: meta.date,
+    sub_type: meta.subType || undefined,
+    total_voters: 0,
+    total_votes: 0,
+    valid_votes: 0,
+    invalid_votes: 0,
+    turnout_rate: 0,
+    candidates: electionCandidates,
+    is_uncontested: true,
+    uncontested_district: matched[0]?.sggName,
+  };
+
+  return attachElectionDebugMeta(result, {
+    sourceType: 'real',
+    matchedRegionName: matched[0]?.sggName,
+    matchedRegionCode: admCd,
+    recordCount: matched.length,
+    fallbackReason: 'uncontested election',
+  });
 }
