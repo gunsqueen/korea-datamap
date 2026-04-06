@@ -10,7 +10,6 @@ import { SearchBar } from './components/Search/SearchBar';
 import type { SearchResult } from './components/Search/SearchBar';
 import { AboutModal } from './components/About/AboutModal';
 import { DisclaimerModal } from './components/Disclaimer/DisclaimerModal';
-import { DisclaimerFooter } from './components/Disclaimer/DisclaimerFooter';
 import './App.css';
 
 
@@ -244,8 +243,6 @@ export default function App() {
             </div>
           )}
 
-          {/* 비공식 앱 고정 하단 배너 */}
-          <DisclaimerFooter />
         </main>
 
         {/* 사이드 패널 — 데스크탑: 우측 패널 / 모바일: 지도 아래 카드 영역 */}

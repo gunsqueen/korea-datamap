@@ -50,10 +50,14 @@ export function AboutModal({ onClose }: AboutModalProps) {
 
         {/* 본문 */}
         <div className="about-modal-body">
-          {/* 앱 이름 */}
+          {/* 앱 이름 + 비공식 앱 배지 */}
           <div className="about-app-name">
             <span className="about-app-title">한국 데이터맵</span>
             <span className="about-app-version">v1.5</span>
+          </div>
+          <div className="about-unofficial-badge">
+            <AlertTriangle size={13} strokeWidth={2.5} />
+            비공식 앱 — 정부·선관위·행안부와 무관합니다
           </div>
 
           {/* 면책 조항 */}

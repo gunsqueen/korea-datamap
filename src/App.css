@@ -2194,7 +2194,25 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex;
   align-items: baseline;
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+.about-unofficial-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #b45309;
+  background: rgba(251,191,36,0.12);
+  border: 1px solid rgba(251,191,36,0.30);
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin-bottom: 18px;
+}
+[data-theme="light"] .about-unofficial-badge {
+  color: #92400e;
+  background: rgba(245,158,11,0.10);
+  border-color: rgba(245,158,11,0.30);
 }
 .about-app-title {
   font-size: 20px;
