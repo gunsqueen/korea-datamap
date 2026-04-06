@@ -1957,6 +1957,80 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
 }
 
+/* ─── 라이트 테마: 컴포넌트 하드코딩 색상 오버라이드 ── */
+[data-theme="light"] .app-header {
+  background: rgba(255,255,255,0.96);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.06);
+}
+
+[data-theme="light"] .side-panel {
+  background: #f8fafc;
+  border-left: 1px solid rgba(148,163,184,0.30);
+  box-shadow: -2px 0 16px rgba(0,0,0,0.06);
+}
+
+[data-theme="light"] .panel-header {
+  background: rgba(255,255,255,0.97);
+  border-bottom: 1px solid rgba(148,163,184,0.25);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+[data-theme="light"] .panel-title {
+  color: #0f172a;
+}
+
+[data-theme="light"] .panel-code {
+  background: rgba(226,232,240,0.70);
+  color: #475569;
+  border-color: rgba(148,163,184,0.35);
+}
+
+[data-theme="light"] .btn-compare,
+[data-theme="light"] .btn-close {
+  background: rgba(241,245,249,0.80);
+  border-color: rgba(148,163,184,0.35);
+  color: #475569;
+}
+
+[data-theme="light"] .btn-close:hover {
+  background: rgba(239,68,68,0.10);
+  border-color: rgba(239,68,68,0.25);
+}
+
+[data-theme="light"] .panel-tabs {
+  background: rgba(241,245,249,0.80);
+  border-bottom: 1px solid rgba(148,163,184,0.25);
+}
+
+[data-theme="light"] .tab-btn {
+  color: #64748b;
+}
+
+[data-theme="light"] .tab-btn.active {
+  color: var(--primary);
+  background: rgba(37,99,235,0.07);
+  border-bottom-color: var(--primary);
+}
+
+[data-theme="light"] .tab-btn:hover:not(.active) {
+  color: #334155;
+}
+
+[data-theme="light"] .stats-card {
+  background: #ffffff;
+  border-color: rgba(148,163,184,0.22);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+
+[data-theme="light"] .stats-card:hover {
+  border-color: rgba(37,99,235,0.25);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.10);
+}
+
+[data-theme="light"] .stats-card__value {
+  color: inherit;
+}
+
 /* ─── 테마 토글 버튼 ─────────────────────────── */
 .theme-toggle {
   display: flex;
