@@ -158,6 +158,15 @@ export default function App() {
           {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
         </button>
 
+        {/* 모바일 전용: 앱 정보 버튼 */}
+        <button
+          className="mobile-info-btn"
+          onClick={() => setAboutOpen(true)}
+          aria-label="앱 정보"
+        >
+          <Info size={18} />
+        </button>
+
         {/* 데스크탑: 테마 토글 + 앱 정보 버튼 */}
         <div className="header-right">
           <button

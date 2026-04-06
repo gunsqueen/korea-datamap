@@ -1644,6 +1644,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .mobile-region-title { display: none; }
 .mobile-search-toggle { display: none; }
 .mobile-theme-toggle { display: none; }
+.mobile-info-btn { display: none; }
 .mobile-search-overlay { display: none; }
 .desktop-only { display: block; }
 
@@ -1660,6 +1661,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .mobile-region-title { display: none !important; }
   .mobile-search-toggle { display: none !important; }
   .mobile-theme-toggle { display: none !important; }
+  .mobile-info-btn { display: none !important; }
   .mobile-search-overlay { display: none !important; }
 }
 
@@ -1744,6 +1746,23 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     transition: background 0.15s, color 0.15s;
   }
   .mobile-theme-toggle:active { background: var(--primary-50); color: var(--primary); }
+
+  /* 모바일 헤더: 앱 정보 버튼 */
+  .mobile-info-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius);
+    color: var(--text-2);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s, color 0.15s;
+  }
+  .mobile-info-btn:active { background: var(--primary-50); color: var(--primary); }
 
   /* === 모바일 전체화면 검색 오버레이 === */
   .mobile-search-overlay {
