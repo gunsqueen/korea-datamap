@@ -1,5 +1,5 @@
-/* ─── Design System (Dark Theme) ────────────── */
-:root {
+/* ─── Design System (Dark Theme — default) ──── */
+:root, [data-theme="dark"] {
   /* Brand */
   --primary: #3b82f6;
   --primary-50: rgba(59,130,246,0.10);
@@ -48,6 +48,54 @@
   --radius: 10px;
   --radius-lg: 12px;
   --radius-xl: 16px;
+}
+
+/* ─── Design System (Light Theme) ───────────── */
+[data-theme="light"] {
+  /* Brand — 라이트에서도 동일 사용 */
+  --primary: #2563eb;
+  --primary-50: rgba(37,99,235,0.10);
+  --primary-100: rgba(37,99,235,0.18);
+  --primary-hover: #1d4ed8;
+  --primary-light: #3b82f6;
+
+  /* Accent */
+  --accent-cyan: #0891b2;
+  --accent-cyan-fill: rgba(8,145,178,0.15);
+  --accent-purple: #a21caf;
+  --accent-purple-fill: rgba(162,28,175,0.10);
+
+  /* Background */
+  --bg: #f1f5f9;
+  --surface: rgba(255,255,255,0.94);
+  --surface-solid: #ffffff;
+  --card-bg: rgba(248,250,252,0.97);
+  --overlay-ctrl: rgba(255,255,255,0.94);
+
+  /* Border */
+  --border: rgba(148,163,184,0.45);
+  --border-light: rgba(0,0,0,0.06);
+  --border-card: rgba(0,0,0,0.07);
+  --border-focus: #2563eb;
+
+  /* Text */
+  --text-1: #0f172a;
+  --text-2: #1e293b;
+  --text-3: #475569;
+  --text-4: #94a3b8;
+
+  /* Semantic */
+  --success: #16a34a;
+  --danger: #dc2626;
+  --warning: #d97706;
+  --male: #2563eb;
+  --female: #db2777;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.10);
+  --shadow: 0 4px 20px rgba(0,0,0,0.12);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
 }
 
 /* ─── Reset & Base ─────────────────────────── */
@@ -1907,6 +1955,43 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     font-size: 13px;
     padding: 10px 14px;
   }
+}
+
+/* ─── 테마 토글 버튼 ─────────────────────────── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: var(--text-3);
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.theme-toggle:hover {
+  background: var(--primary-50);
+  color: var(--primary);
+}
+
+/* ─── 라이트 테마: 지도 레이블 ───────────────── */
+[data-theme="light"] .region-label-text {
+  background: rgba(255,255,255,0.88);
+  color: #0f172a;
+  text-shadow: none;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+  border: 1px solid rgba(0,0,0,0.10);
+}
+
+/* ─── 라이트 테마: Leaflet 지도 컨트롤 ───────── */
+[data-theme="light"] .leaflet-bar a,
+[data-theme="light"] .leaflet-bar a:hover {
+  background: #ffffff;
+  color: #334155;
+  border-color: rgba(0,0,0,0.15);
+}
+[data-theme="light"] .leaflet-bar a:hover {
+  background: #f1f5f9;
 }
 
 /* ─── About 버튼 (헤더) ──────────────────────── */

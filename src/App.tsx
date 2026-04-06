@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react';
-import { MapPin, ChevronLeft, Search, Info } from 'lucide-react';
+import { MapPin, ChevronLeft, Search, Info, Sun, Moon } from 'lucide-react';
 import type { AdminArea, AdminLevel, NavItem, PanelTab } from './types';
 import { useBoundary } from './hooks/useBoundary';
+import { useTheme } from './hooks/useTheme';
 import { KoreaMap } from './components/Map/KoreaMap';
 import { Breadcrumb } from './components/Map/Breadcrumb';
 import { DataPanel } from './components/Panel/DataPanel';
@@ -32,6 +33,7 @@ const LEVEL_GUIDE: Record<AdminLevel, string> = {
 };
 
 export default function App() {
+  const { theme, toggle: toggleTheme } = useTheme();
   const [navStack, setNavStack] = useState<NavItem[]>([]);
 
   const currentLevel: AdminLevel = navStack.length === 0
@@ -147,10 +149,16 @@ export default function App() {
           <Search size={18} />
         </button>
 
-        {/* 데스크탑: 뱃지 + 앱 정보 버튼 */}
+        {/* 데스크탑: 테마 토글 + 앱 정보 버튼 */}
         <div className="header-right">
-
-
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환'}
+            title={theme === 'dark' ? '라이트 모드' : '다크 모드'}
+          >
+            {theme === 'dark' ? <Sun size={16} strokeWidth={2} /> : <Moon size={16} strokeWidth={2} />}
+          </button>
           <button
             className="about-btn"
             onClick={() => setAboutOpen(true)}
@@ -202,6 +210,7 @@ export default function App() {
               geoData={geoData}
               level={currentLevel}
               selectedCode={selectedArea?.adm_cd ?? null}
+              theme={theme}
               onSelect={handleMapClick}
               onHover={setHoveredArea}
             />

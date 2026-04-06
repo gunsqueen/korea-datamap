@@ -10,14 +10,16 @@ interface Props {
   geoData: AdminGeoCollection;
   level: AdminLevel;
   selectedCode: string | null;
+  theme?: 'dark' | 'light';
   onSelect: (area: AdminArea) => void;
   onHover: (area: AdminArea | null) => void;
 }
 
-export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Props) {
+export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelect, onHover }: Props) {
   const mapRef = useRef<L.Map | null>(null);
   const layerRef = useRef<L.GeoJSON | null>(null);
   const labelLayerRef = useRef<L.LayerGroup | null>(null);
+  const tileLayerRef = useRef<L.TileLayer | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const leafletGeoData = geoData as unknown as GeoJsonObject;
 
@@ -32,11 +34,11 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
       attributionControl: true,
     });
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
-      attribution: '© OpenStreetMap contributors © CARTO',
-      subdomains: 'abcd',
-      maxZoom: 18,
-    }).addTo(mapRef.current);
+    const tileStyle = theme === 'light' ? 'light_nolabels' : 'dark_nolabels';
+    tileLayerRef.current = L.tileLayer(
+      `https://{s}.basemaps.cartocdn.com/${tileStyle}/{z}/{x}/{y}{r}.png`,
+      { attribution: '© OpenStreetMap contributors © CARTO', subdomains: 'abcd', maxZoom: 18 }
+    ).addTo(mapRef.current);
 
     labelLayerRef.current = L.layerGroup().addTo(mapRef.current);
 
@@ -53,6 +55,14 @@ export function KoreaMap({ geoData, level, selectedCode, onSelect, onHover }: Pr
       labelLayerRef.current = null;
     };
   }, []);
+
+  // 테마 변경 시 타일 레이어 교체
+  useEffect(() => {
+    if (!mapRef.current || !tileLayerRef.current) return;
+    const tileStyle = theme === 'light' ? 'light_nolabels' : 'dark_nolabels';
+    const newUrl = `https://{s}.basemaps.cartocdn.com/${tileStyle}/{z}/{x}/{y}{r}.png`;
+    tileLayerRef.current.setUrl(newUrl);
+  }, [theme]);
 
   // GeoJSON 레이어 업데이트
   useEffect(() => {
