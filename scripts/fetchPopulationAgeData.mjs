@@ -42,26 +42,42 @@ function getDefaultYearMonth() {
   return `${yyyy}${mm}`;
 }
 
-// ─── 10년 단위 그룹 정의 ─────────────────────────────────────
+// ─── 5세 단위 그룹 정의 (sltArgTypes=5) ───────────────────────
 // CSV 컬럼 인덱스 (0-based):
-// [3]  계_0~9세    [4]  계_10~19세  [5]  계_20~29세  [6]  계_30~39세
-// [7]  계_40~49세  [8]  계_50~59세  [9]  계_60~69세  [10] 계_70~79세
-// [11] 계_80~89세  [12] 계_90~99세  [13] 계_100세이상
-// 남: offset +13, 여: offset +26
+// [0] 행정구역  [1] 계_총인구수  [2] 계_연령구간인구수
+// [3]  계_0~4세   [4]  계_5~9세   [5]  계_10~14세  [6]  계_15~19세
+// [7]  계_20~24세 [8]  계_25~29세 [9]  계_30~34세  [10] 계_35~39세
+// [11] 계_40~44세 [12] 계_45~49세 [13] 계_50~54세  [14] 계_55~59세
+// [15] 계_60~64세 [16] 계_65~69세 [17] 계_70~74세  [18] 계_75~79세
+// [19] 계_80~84세 [20] 계_85~89세 [21] 계_90~94세  [22] 계_95~99세
+// [23] 계_100세이상
+// 남: offset +23 (= [24]남_총인구수, [25]남_연령구간인구수, [26]~[46] 남_5세구간)
+// 여: offset +46 (= [47]여_총인구수, [48]여_연령구간인구수, [49]~[69] 여_5세구간)
 const AGE_RANGE_COLS = [
-  { range: '0-9',   totalIdx: 3 },
-  { range: '10-19', totalIdx: 4 },
-  { range: '20-29', totalIdx: 5 },
-  { range: '30-39', totalIdx: 6 },
-  { range: '40-49', totalIdx: 7 },
-  { range: '50-59', totalIdx: 8 },
-  { range: '60-69', totalIdx: 9 },
-  { range: '70-79', totalIdx: 10 },
-  // 80+: 80~89 + 90~99 + 100세이상 합산
-  { range: '80+',   totalIdx: null, multiIdx: [11, 12, 13] },
+  { range: '0-4',   totalIdx: 3  },
+  { range: '5-9',   totalIdx: 4  },
+  { range: '10-14', totalIdx: 5  },
+  { range: '15-19', totalIdx: 6  },
+  { range: '20-24', totalIdx: 7  },
+  { range: '25-29', totalIdx: 8  },
+  { range: '30-34', totalIdx: 9  },
+  { range: '35-39', totalIdx: 10 },
+  { range: '40-44', totalIdx: 11 },
+  { range: '45-49', totalIdx: 12 },
+  { range: '50-54', totalIdx: 13 },
+  { range: '55-59', totalIdx: 14 },
+  { range: '60-64', totalIdx: 15 },
+  { range: '65-69', totalIdx: 16 },
+  { range: '70-74', totalIdx: 17 },
+  { range: '75-79', totalIdx: 18 },
+  { range: '80-84', totalIdx: 19 },
+  { range: '85-89', totalIdx: 20 },
+  { range: '90-94', totalIdx: 21 },
+  { range: '95-99', totalIdx: 22 },
+  { range: '100+',  totalIdx: 23 },
 ];
-const MALE_OFFSET = 13;   // 남 컬럼 = 계 컬럼 + 13
-const FEMALE_OFFSET = 26; // 여 컬럼 = 계 컬럼 + 26
+const MALE_OFFSET = 23;   // 남 컬럼 = 계 컬럼 + 23
+const FEMALE_OFFSET = 46; // 여 컬럼 = 계 컬럼 + 46
 
 // ─── CSV 파싱 ────────────────────────────────────────────────
 function parseRow(line) {
@@ -94,7 +110,7 @@ function parseMoisCsv(csvText) {
     const line = lines[i].trim();
     if (!line) continue;
     const cols = parseRow(line);
-    if (cols.length < 40) continue;
+    if (cols.length < 70) continue; // 5세 단위: 70컬럼 (21그룹×3성별 + 헤더)
 
     // 행정구역 이름에서 10자리 MOIS 코드 추출
     // 형식: "서울특별시 종로구 청운효자동(1111051500)"
@@ -165,7 +181,7 @@ async function downloadFromMois(yyyymm) {
     searchMonthEnd: mm,
     sltOrderType: '1',
     sltOrderValue: 'ASC',
-    sltArgTypes: '10',
+    sltArgTypes: '5',
     sltArgTypeA: '0',
     sltArgTypeB: '100',
     category: 'month',
@@ -291,7 +307,7 @@ async function main() {
     meta: {
       yearMonth: `${yyyy}-${mm}`,
       source: '행정안전부 주민등록 연령별 인구현황 (jumin.mois.go.kr)',
-      url: `https://jumin.mois.go.kr/downloadCsvAge.do?searchYearMonth=${yyyymm}&xlsStats=3`,
+      url: `https://jumin.mois.go.kr/downloadCsvAge.do?searchYearMonth=${yyyymm}&xlsStats=3 (sltArgTypes=5, 5세 단위)`,
       generatedAt: new Date().toISOString(),
       count,
     },

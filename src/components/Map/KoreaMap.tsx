@@ -30,9 +30,10 @@ export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelec
     mapRef.current = L.map(containerRef.current, {
       center: [36.48, 127.29],
       zoom: 8,
-      zoomControl: true,
+      zoomControl: false,   // 좌상단 기본 위치 비활성 → 우하단으로 재배치
       attributionControl: true,
     });
+    L.control.zoom({ position: 'bottomright' }).addTo(mapRef.current);
 
     const tileStyle = theme === 'light' ? 'light_nolabels' : 'dark_nolabels';
     tileLayerRef.current = L.tileLayer(

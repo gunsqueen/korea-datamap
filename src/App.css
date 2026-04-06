@@ -1868,6 +1868,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .level-guide { display: none; }
   .map-hover-tooltip { display: none; }
 
+  /* 모바일 줌 컨트롤: 우하단으로 이동했으므로 위치 보정 */
+  .leaflet-bottom.leaflet-right { margin-bottom: 8px; margin-right: 8px; }
+
   /* === 사이드 패널 → 지도 아래 카드 영역 === */
   .side-panel {
     /* 바텀시트 완전 해제 */
@@ -1955,13 +1958,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .chart-card__title { font-size: 12px; }
   .chart-card__body { padding: 8px 2px 6px; }
 
-  /* 차트 높이 모바일 최적화 */
+  /* 차트 높이 모바일 최적화 — overflow: visible로 X축 레이블 표시 */
   .chart-responsive-wrap {
-    height: 155px;
-    overflow: hidden;
+    height: 210px;
+    overflow: visible;
   }
   .chart-responsive-wrap > * {
-    height: 155px !important;
+    height: 210px !important;
   }
 
   /* === 플레이스홀더: 모바일 레이아웃 === */

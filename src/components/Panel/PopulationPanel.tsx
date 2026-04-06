@@ -38,13 +38,45 @@ export function PopulationPanel({ data }: Props) {
     : '0';
 
   const totalPop = data.total_population || 1;
-  const ageData = data.age_groups?.map((g) => ({
-    name: g.age_range,
-    남성: g.male,
-    여성: g.female,
-    남성Pct: totalPop > 0 ? ((g.male / totalPop) * 100).toFixed(1) : '0',
-    여성Pct: totalPop > 0 ? ((g.female / totalPop) * 100).toFixed(1) : '0',
-  })) ?? [];
+
+  // 5세 단위(21구간)는 10년 단위로 묶어 차트 표시
+  const AGE_10YR_BUCKETS: { label: string; ranges: string[] }[] = [
+    { label: '0-9',   ranges: ['0-4',   '5-9']   },
+    { label: '10-19', ranges: ['10-14', '15-19']  },
+    { label: '20-29', ranges: ['20-24', '25-29']  },
+    { label: '30-39', ranges: ['30-34', '35-39']  },
+    { label: '40-49', ranges: ['40-44', '45-49']  },
+    { label: '50-59', ranges: ['50-54', '55-59']  },
+    { label: '60-69', ranges: ['60-64', '65-69']  },
+    { label: '70-79', ranges: ['70-74', '75-79']  },
+    { label: '80+',   ranges: ['80-84', '85-89', '90-94', '95-99', '100+'] },
+  ];
+  const rawGroups = data.age_groups ?? [];
+  const is5yr = rawGroups.some((g) => ['0-4', '5-9'].includes(g.age_range));
+
+  const ageData = (() => {
+    if (!rawGroups.length) return [];
+    const buckets = is5yr ? AGE_10YR_BUCKETS : null;
+    if (!buckets) {
+      // 10년 단위 그대로
+      return rawGroups.map((g) => ({
+        name: g.age_range, 남성: g.male, 여성: g.female,
+        남성Pct: ((g.male   / totalPop) * 100).toFixed(1),
+        여성Pct: ((g.female / totalPop) * 100).toFixed(1),
+      }));
+    }
+    // 5년 → 10년 합산
+    return buckets.map(({ label, ranges }) => {
+      const matched = rawGroups.filter((g) => ranges.includes(g.age_range));
+      const male   = matched.reduce((s, g) => s + g.male,   0);
+      const female = matched.reduce((s, g) => s + g.female, 0);
+      return {
+        name: label, 남성: male, 여성: female,
+        남성Pct: ((male   / totalPop) * 100).toFixed(1),
+        여성Pct: ((female / totalPop) * 100).toFixed(1),
+      };
+    });
+  })();
 
   const householdData = data.household_structure?.map((h) => ({
     name: h.members_label,
@@ -61,12 +93,27 @@ export function PopulationPanel({ data }: Props) {
     const fivePlusPct = Math.round((fivePlusValue / totalHouseholds) * 1000) / 10;
     return [...first4, { name: '5인 이상', value: fivePlusValue, pct: fivePlusPct }];
   })();
-  const youthPopulation = data.age_groups
-    ?.filter((group) => ['15-19', '20-29', '30-39'].includes(group.age_range))
-    .reduce((sum, group) => sum + group.total, 0);
-  const elderlyPopulation = data.age_groups
-    ?.filter((group) => ['65-69', '70-79', '80+'].includes(group.age_range))
-    .reduce((sum, group) => sum + group.total, 0);
+  // 청년(15~39세): 5세 단위(실API) or 10년 단위(mock) 모두 대응
+  const YOUTH_5YR  = ['15-19', '20-24', '25-29', '30-34', '35-39'];
+  const YOUTH_10YR = ['20-29', '30-39']; // mock fallback (10년 단위엔 15-19 없음)
+  const youthPopulation = (() => {
+    const groups = data.age_groups ?? [];
+    const has5yr = groups.some((g) => YOUTH_5YR.includes(g.age_range));
+    return groups
+      .filter((g) => (has5yr ? YOUTH_5YR : YOUTH_10YR).includes(g.age_range))
+      .reduce((sum, g) => sum + g.total, 0);
+  })();
+
+  // 고령(65세 이상): 5세 단위 실API → 정확한 65+ / 10년 단위 mock → 70+ 근사
+  const ELDERLY_5YR  = ['65-69', '70-74', '75-79', '80-84', '85-89', '90-94', '95-99', '100+'];
+  const ELDERLY_10YR = ['70-79', '80+']; // mock fallback (60-69는 60~64 포함)
+  const elderlyPopulation = (() => {
+    const groups = data.age_groups ?? [];
+    const has5yr = groups.some((g) => ELDERLY_5YR.includes(g.age_range));
+    return groups
+      .filter((g) => (has5yr ? ELDERLY_5YR : ELDERLY_10YR).includes(g.age_range))
+      .reduce((sum, g) => sum + g.total, 0);
+  })();
   const youthRatio = youthPopulation !== undefined
     ? ((youthPopulation / totalPop) * 100).toFixed(1)
     : null;
@@ -74,13 +121,18 @@ export function PopulationPanel({ data }: Props) {
     ? ((elderlyPopulation / totalPop) * 100).toFixed(1)
     : null;
 
+  // 데이터 단위에 따라 레이블 기준 표시
+  const has5yrData = (data.age_groups ?? []).some((g) => ELDERLY_5YR.includes(g.age_range));
+  const elderlyLabel = has5yrData ? '고령화율 (65세 이상)' : '고령화율 (70세 이상, 근사치)';
+  const youthLabel   = has5yrData ? '청년비율 (15–39세)'  : '청년비율 (20–39세, 근사치)';
+
   const sourceRows: Array<{ label: string; source?: PopulationFieldSource; value?: string | null }> = [
     { label: '총 인구', source: data.field_sources?.total_population, value: `${fmt(data.total_population)}명` },
     { label: '남성', source: data.field_sources?.male_population, value: `${fmt(data.male_population)}명` },
     { label: '여성', source: data.field_sources?.female_population, value: `${fmt(data.female_population)}명` },
     { label: '세대 수', source: data.field_sources?.total_households, value: `${fmt(data.total_households)}세대` },
-    { label: '청년비율', source: data.field_sources?.youth_ratio, value: youthRatio ? `${youthRatio}%` : null },
-    { label: '고령화율', source: data.field_sources?.elderly_ratio, value: elderlyRatio ? `${elderlyRatio}%` : null },
+    { label: youthLabel,   source: data.field_sources?.youth_ratio,   value: youthRatio   ? `${youthRatio}%`   : null },
+    { label: elderlyLabel, source: data.field_sources?.elderly_ratio, value: elderlyRatio ? `${elderlyRatio}%` : null },
   ];
 
   return (
@@ -139,7 +191,7 @@ export function PopulationPanel({ data }: Props) {
         >
           <div className="chart-responsive-wrap">
           <ResponsiveContainer width="100%" height={190}>
-            <BarChart data={ageData} barCategoryGap="22%" barGap={2} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
+            <BarChart data={ageData} barCategoryGap="22%" barGap={2} margin={{ top: 4, right: 4, left: 0, bottom: 20 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
               <XAxis
                 dataKey="name"
@@ -199,7 +251,7 @@ export function PopulationPanel({ data }: Props) {
           <ResponsiveContainer width="100%" height={180}>
             <BarChart
               data={displayHouseholdData}
-              margin={{ top: 4, right: 4, left: 0, bottom: 0 }}
+              margin={{ top: 4, right: 4, left: 0, bottom: 20 }}
               barCategoryGap="20%"
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
