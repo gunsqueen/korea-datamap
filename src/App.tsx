@@ -149,6 +149,15 @@ export default function App() {
           <Search size={18} />
         </button>
 
+        {/* 모바일 전용: 테마 토글 버튼 */}
+        <button
+          className="mobile-theme-toggle"
+          onClick={toggleTheme}
+          aria-label={theme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환'}
+        >
+          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+        </button>
+
         {/* 데스크탑: 테마 토글 + 앱 정보 버튼 */}
         <div className="header-right">
           <button
