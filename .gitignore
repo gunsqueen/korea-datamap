@@ -38,3 +38,4 @@ ios/.xcode.env.local
 *.njsproj
 *.sln
 *.sw?
+.vercel

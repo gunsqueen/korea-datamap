@@ -255,16 +255,16 @@ function finalizePopulationData(data: PopulationData, admCd: string): Population
   const isSido = admCd.length === 2;
   const rootSource = data.source_type ?? 'snapshot';
 
-  // ─── 연령 분포: 파일 데이터 우선 ───────────────────────────
+  // ─── 연령 분포: 파일 데이터 우선 (시도 포함) ──────────────────
   let ageGroups = data.age_groups;
-  let ageSource: PopulationSourceType | 'unavailable' = isSido
-    ? (ageGroups?.length ? rootSource : 'unavailable')
+  let ageSource: PopulationSourceType | 'unavailable' = ageGroups?.length
+    ? rootSource
     : 'unavailable';
 
-  if (!isSido && Object.keys(AGE_FILE_DATA).length > 0) {
+  if (Object.keys(AGE_FILE_DATA).length > 0) {
     const fileAgeGroups = admCd.length === 8
       ? getAgeGroupsFromFile(admCd)
-      : aggregateAgeGroupsFromFile(admCd);
+      : aggregateAgeGroupsFromFile(admCd); // 시도(2자리)도 하위 읍면동 집계
     if (fileAgeGroups) {
       ageGroups = fileAgeGroups;
       ageSource = 'file';

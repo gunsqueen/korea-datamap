@@ -191,13 +191,14 @@ export function PopulationPanel({ data }: Props) {
         >
           <div className="chart-responsive-wrap">
           <ResponsiveContainer width="100%" height={190}>
-            <BarChart data={ageData} barCategoryGap="22%" barGap={2} margin={{ top: 4, right: 4, left: 0, bottom: 20 }}>
+            <BarChart data={ageData} barCategoryGap="22%" barGap={2} margin={{ top: 4, right: 4, left: 0, bottom: 4 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
               <XAxis
                 dataKey="name"
                 tick={{ fontSize: 9, fill: '#94a3b8' }}
                 axisLine={false}
                 tickLine={false}
+                height={18}
               />
               <YAxis
                 tickFormatter={(v) => `${(v / 10000).toFixed(0)}만`}
@@ -251,7 +252,7 @@ export function PopulationPanel({ data }: Props) {
           <ResponsiveContainer width="100%" height={180}>
             <BarChart
               data={displayHouseholdData}
-              margin={{ top: 4, right: 4, left: 0, bottom: 20 }}
+              margin={{ top: 4, right: 4, left: 0, bottom: 4 }}
               barCategoryGap="20%"
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
@@ -260,6 +261,7 @@ export function PopulationPanel({ data }: Props) {
                 tick={{ fontSize: 10, fill: '#94a3b8' }}
                 axisLine={false}
                 tickLine={false}
+                height={18}
               />
               <YAxis
                 tickFormatter={(v) => v >= 10000 ? `${(v / 10000).toFixed(0)}만` : `${v}`}

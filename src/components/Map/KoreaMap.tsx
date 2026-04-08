@@ -162,7 +162,12 @@ export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelec
         );
         if (target) {
           const bounds = L.geoJSON(target as unknown as GeoJsonObject).getBounds();
-          map.fitBounds(bounds, { padding: [40, 40], animate: false });
+          // 읍면동 레벨(구 클릭)은 zoom 12 고정, 그 외는 fitBounds 자동 계산
+          if (level === 'eupmyeondong') {
+            map.setView(bounds.getCenter(), 12, { animate: false });
+          } else {
+            map.fitBounds(bounds, { padding: [40, 40], animate: false });
+          }
         } else {
           map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [20, 20], animate: false });
         }
