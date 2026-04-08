@@ -480,6 +480,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: rgba(15,23,42,0.40);
   padding: 0 20px;
   gap: 2px;
+  position: sticky;
+  top: 63px; /* panel-header height: 18px top + 30px content + 14px bottom + 1px border */
+  z-index: 9;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .tab-btn {
@@ -1483,6 +1488,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .search-item-name { font-size: 14px; font-weight: 600; color: var(--text-1); flex: 1; min-width: 0; }
 .search-item-name mark { background: rgba(34,211,238,0.25); color: var(--text-1); border-radius: 2px; }
 .search-item-parent { font-size: 12px; color: var(--text-3); margin: 0 8px; white-space: nowrap; }
+.search-item-party { font-size: 12px; font-weight: 600; margin: 0 6px; white-space: nowrap; }
 .search-item-badge {
   font-size: 10px;
   font-weight: 600;
@@ -1570,8 +1576,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   align-items: center;
   gap: 5px;
   background: rgba(255,255,255,0.96);
-  color: var(--text-1);
-  border: 1px solid var(--border);
+  color: #1e293b;
+  border: 1px solid rgba(0,0,0,0.15);
   border-radius: var(--radius);
   padding: 7px 14px;
   font-size: 13px;
@@ -1596,7 +1602,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   flex-wrap: wrap;
   gap: 2px;
   background: rgba(255,255,255,0.96);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(0,0,0,0.15);
   border-radius: var(--radius);
   padding: 7px 12px;
   pointer-events: all;
@@ -1605,10 +1611,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .breadcrumb-row { display: flex; align-items: center; }
-.breadcrumb-sep { color: var(--text-4); margin: 0 3px; font-size: 12px; }
+.breadcrumb-sep { color: #94a3b8; margin: 0 3px; font-size: 12px; }
 
 .breadcrumb-item {
-  color: var(--text-3);
+  color: #475569;
   font-size: 12px;
   font-weight: 600;
   padding: 2px 7px;
@@ -1620,24 +1626,24 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   cursor: pointer;
 }
 
-.breadcrumb-item:hover { background: var(--bg); color: var(--text-1); }
-.breadcrumb-item.root { color: var(--text-3); }
+.breadcrumb-item:hover { background: rgba(0,0,0,0.06); color: #1e293b; }
+.breadcrumb-item.root { color: #64748b; }
 .breadcrumb-item.current { color: var(--primary); font-weight: 700; cursor: default; }
 .breadcrumb-item.current:hover { background: none; }
 
 .breadcrumb-level {
   font-size: 9px;
-  color: var(--text-4);
-  background: var(--bg);
+  color: #64748b;
+  background: rgba(0,0,0,0.07);
   padding: 1px 5px;
   border-radius: 4px;
 }
 
 .level-guide {
   font-size: 11px;
-  color: var(--text-2);
+  color: #475569;
   background: rgba(255,255,255,0.92);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(0,0,0,0.12);
   border-radius: var(--radius-sm);
   padding: 5px 12px;
   pointer-events: none;
@@ -1922,7 +1928,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     border-radius: var(--radius);
   }
 
-  .panel-tabs { padding: 0 14px; }
+  .panel-tabs {
+    padding: 0 14px;
+    top: 59px; /* mobile panel-header: 12px top + 36px content + 10px bottom + 1px border */
+  }
   .tab-btn { padding: 10px 8px; font-size: 13px; min-height: 44px; }
 
   .panel-body {
@@ -1958,13 +1967,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .chart-card__title { font-size: 12px; }
   .chart-card__body { padding: 8px 2px 6px; }
 
-  /* 차트 높이 모바일 최적화 — overflow: visible로 X축 레이블 표시 */
+  /* 차트: 고정 높이 제거 → recharts 자체 높이(190/180px) 그대로 사용 */
   .chart-responsive-wrap {
-    height: 210px;
     overflow: visible;
   }
   .chart-responsive-wrap > * {
-    height: 210px !important;
+    /* 높이 오버라이드 제거 — recharts inline height 그대로 유지 */
   }
 
   /* === 플레이스홀더: 모바일 레이아웃 === */

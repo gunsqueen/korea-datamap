@@ -80,11 +80,9 @@ export default function App() {
   /** 검색 결과 선택 시 해당 레벨로 직접 이동 */
   const handleSearchSelect = useCallback((result: SearchResult) => {
     if (result.level === 'sido') {
-      // 시도 선택: navStack 초기화 후 시도로 이동
       setNavStack([]);
       setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'sido' });
     } else if (result.level === 'sigungu') {
-      // 시군구 선택: sido를 navStack에 추가하고 sigungu 선택
       const sidoEntry: NavItem = {
         adm_cd: result.sido_cd!,
         adm_nm: result.sido_nm!,
@@ -92,6 +90,20 @@ export default function App() {
       };
       setNavStack([sidoEntry]);
       setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'sigungu' });
+    } else if (result.level === 'eupmyeondong') {
+      // 읍면동 선택: sido + sigungu를 navStack에 추가 후 읍면동 선택
+      const sidoEntry: NavItem = {
+        adm_cd: result.sido_cd!,
+        adm_nm: result.sido_nm!,
+        level: 'sido',
+      };
+      const sigunguEntry: NavItem = {
+        adm_cd: result.sigungu_cd!,
+        adm_nm: result.sigungu_nm!,
+        level: 'sigungu',
+      };
+      setNavStack([sidoEntry, sigunguEntry]);
+      setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'eupmyeondong' });
     }
     setMobileSearchOpen(false);
   }, []);
