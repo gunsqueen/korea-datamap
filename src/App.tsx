@@ -105,9 +105,21 @@ export default function App() {
         level: 'sigungu',
       };
       setNavStack([sidoEntry, sigunguEntry]);
-      setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'eupmyeondong' });
-      // 국회의원 후보자 선택 시 선거구 하이라이트
-      setAssemblyDistrictKey(result.assemblyDistrictKey ?? null);
+
+      if (result.assemblyDistrictKey) {
+        // 국회의원 후보자 검색: 시군구 레벨 데이터를 패널에 표시
+        // (선거구 하이라이트는 유지, selectedArea는 시군구로 설정)
+        const sigunguShortNm = result.sigungu_nm?.split(' ').pop() ?? result.sigungu_nm ?? '';
+        setSelectedArea({
+          adm_cd: result.sigungu_cd!,
+          adm_nm: sigunguShortNm,
+          level: 'sigungu',
+        });
+        setAssemblyDistrictKey(result.assemblyDistrictKey);
+      } else {
+        setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'eupmyeondong' });
+        setAssemblyDistrictKey(null);
+      }
     }
     setMobileSearchOpen(false);
   }, []);
