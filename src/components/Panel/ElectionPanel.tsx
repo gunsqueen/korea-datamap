@@ -24,12 +24,12 @@ const ASSEMBLY_SUB_LABELS = [
 ];
 
 const LOCAL_SUB_LABELS = [
-  { key: 'metro_mayor', label: '광역단체장' },
-  { key: 'mayor', label: '기초단체장' },
-  { key: 'council_district', label: '광역의원' },
-  { key: 'council_pr', label: '광역비례' },
-  { key: 'basic_district', label: '기초의원' },
-  { key: 'basic_pr', label: '기초비례' },
+  { key: 'metro_mayor', label: '광역\n단체장' },
+  { key: 'mayor', label: '기초\n단체장' },
+  { key: 'council_district', label: '광역 의원' },
+  { key: 'council_pr', label: '광역 비례' },
+  { key: 'basic_district', label: '기초 의원' },
+  { key: 'basic_pr', label: '기초 비례' },
 ];
 
 export function ElectionPanel({ admCd, admNm }: Props) {

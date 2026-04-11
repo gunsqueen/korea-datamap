@@ -18,6 +18,8 @@ export interface SearchResult {
     election_label: string;  // e.g. '22대 총선 지역구', '8회 지방선거 기초의원'
     election_district: string;
   };
+  /** 국회의원 선거구 하이라이트용: "22_서울_강서갑" 형식 */
+  assemblyDistrictKey?: string;
 }
 
 /** cidx_*.json 공통 엔트리 형식 (필드명 축약) */
@@ -51,6 +53,25 @@ function partyColor(party: string): string {
   return PARTY_COLOR[party] ?? '#888888';
 }
 
+const SIDO_NORM: Record<string, string> = {
+  '서울특별시': '서울', '부산광역시': '부산', '대구광역시': '대구',
+  '인천광역시': '인천', '광주광역시': '광주', '대전광역시': '대전',
+  '울산광역시': '울산', '세종특별자치시': '세종', '경기도': '경기',
+  '강원도': '강원', '강원특별자치도': '강원', '충청북도': '충북',
+  '충청남도': '충남', '전라북도': '전북', '전북특별자치도': '전북',
+  '전라남도': '전남', '경상북도': '경북', '경상남도': '경남',
+  '제주특별자치도': '제주',
+};
+
+function getAssemblyDistrictKey(c: CidxEntry): string | undefined {
+  // "22대 총선 지역구" → "22"
+  const genMatch = c.e.match(/^(\d+)대 총선/);
+  if (!genMatch) return undefined;
+  const gen = genMatch[1];
+  const sido = SIDO_NORM[c.rn] || c.rn;
+  return `${gen}_${sido}_${c.d}`;
+}
+
 function cidxToResult(c: CidxEntry): SearchResult {
   return {
     adm_cd: c.cd,
@@ -68,6 +89,7 @@ function cidxToResult(c: CidxEntry): SearchResult {
       election_label: c.e,
       election_district: c.d,
     },
+    assemblyDistrictKey: getAssemblyDistrictKey(c),
   };
 }
 

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { MapPin, ChevronLeft, Search, Info, Sun, Moon } from 'lucide-react';
 import type { AdminArea, AdminLevel, NavItem, PanelTab } from './types';
 import { useBoundary } from './hooks/useBoundary';
@@ -10,6 +10,7 @@ import { SearchBar } from './components/Search/SearchBar';
 import type { SearchResult } from './components/Search/SearchBar';
 import { AboutModal } from './components/About/AboutModal';
 import { DisclaimerModal } from './components/Disclaimer/DisclaimerModal';
+import assemblyEmdMapping from './data/static/assembly_district_emd_mapping.json';
 import './App.css';
 
 
@@ -52,10 +53,11 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<PanelTab>('population');
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [assemblyDistrictKey, setAssemblyDistrictKey] = useState<string | null>(null);
 
   const handleMapClick = useCallback((area: AdminArea) => {
     const nextLevel = NEXT_LEVEL[currentLevel];
-
+    setAssemblyDistrictKey(null); // 지도 클릭 시 선거구 하이라이트 초기화
     if (nextLevel) {
       setNavStack((prev) => [...prev, { adm_cd: area.adm_cd, adm_nm: area.adm_nm, level: currentLevel }]);
       setSelectedArea(area);
@@ -104,6 +106,8 @@ export default function App() {
       };
       setNavStack([sidoEntry, sigunguEntry]);
       setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'eupmyeondong' });
+      // 국회의원 후보자 선택 시 선거구 하이라이트
+      setAssemblyDistrictKey(result.assemblyDistrictKey ?? null);
     }
     setMobileSearchOpen(false);
   }, []);
@@ -111,6 +115,16 @@ export default function App() {
 
   const displayArea = hoveredArea ?? selectedArea;
   const panelHasContent = selectedArea !== null;
+
+  // 국회의원 선거구 하이라이트: 선거구 키 → 읍면동 코드 Set
+  const highlightedEmdCodes = useMemo(() => {
+    if (!assemblyDistrictKey) return undefined;
+    const [gen, ...rest] = assemblyDistrictKey.split('_');
+    const districtKey = rest.join('_');
+    const mapping = (assemblyEmdMapping as Record<string, Record<string, string[]>>)[gen];
+    const codes = mapping?.[districtKey];
+    return codes ? new Set(codes) : undefined;
+  }, [assemblyDistrictKey]);
 
   // 모바일 헤더: 현재 위치명
   const mobileRegionName = navStack.length === 0
@@ -242,6 +256,7 @@ export default function App() {
               theme={theme}
               onSelect={handleMapClick}
               onHover={setHoveredArea}
+              highlightedEmdCodes={highlightedEmdCodes}
             />
           ) : (
             <div className="map-error">지도 데이터를 불러올 수 없습니다.</div>

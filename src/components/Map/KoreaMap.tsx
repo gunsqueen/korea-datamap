@@ -13,9 +13,10 @@ interface Props {
   theme?: 'dark' | 'light';
   onSelect: (area: AdminArea) => void;
   onHover: (area: AdminArea | null) => void;
+  highlightedEmdCodes?: Set<string>;
 }
 
-export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelect, onHover }: Props) {
+export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelect, onHover, highlightedEmdCodes }: Props) {
   const mapRef = useRef<L.Map | null>(null);
   const layerRef = useRef<L.GeoJSON | null>(null);
   const labelLayerRef = useRef<L.LayerGroup | null>(null);
@@ -78,11 +79,14 @@ export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelec
       style: (feature) => {
         const adm_cd = feature?.properties?.adm_cd ?? '';
         const isSelected = adm_cd === selectedCode;
+        const isHighlighted = highlightedEmdCodes?.has(adm_cd) ?? false;
         return {
-          fillColor: isSelected ? 'rgba(6,182,212,0.20)' : getSidoColor(adm_cd),
-          fillOpacity: isSelected ? 1 : 0.45,
-          color: isSelected ? '#22d3ee' : '#d946ef',
-          weight: isSelected ? 2.5 : 1.5,
+          fillColor: isHighlighted
+            ? 'rgba(251,191,36,0.35)'
+            : isSelected ? 'rgba(6,182,212,0.20)' : getSidoColor(adm_cd),
+          fillOpacity: isHighlighted ? 1 : isSelected ? 1 : 0.45,
+          color: isHighlighted ? '#f59e0b' : isSelected ? '#22d3ee' : '#d946ef',
+          weight: isHighlighted ? 2.5 : isSelected ? 2.5 : 1.5,
           opacity: 1,
         };
       },
@@ -189,7 +193,7 @@ export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelec
       map.off('zoomend moveend', renderLabels);
       labelLayerRef.current?.clearLayers();
     };
-  }, [geoData, leafletGeoData, selectedCode, level, onHover, onSelect]);
+  }, [geoData, leafletGeoData, selectedCode, level, onHover, onSelect, highlightedEmdCodes]);
 
   return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />;
 }

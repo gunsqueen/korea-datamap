@@ -173,6 +173,8 @@ export interface SearchResult {
   adm_nm: string;
   level: AdminLevel;
   parent_nm?: string;
+  /** 국회의원 선거구 하이라이트용: "22_서울_강서갑" 형식 */
+  assemblyDistrictKey?: string;
 }
 
 /** 네비게이션 스택 아이템 (드릴다운 히스토리) */
