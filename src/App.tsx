@@ -305,6 +305,7 @@ export default function App() {
               onClose={handleClosePanel}
               defaultElectionType={assemblyElectionHint ? 'assembly' : undefined}
               defaultAssemblySuffix={assemblyElectionHint?.gen}
+              assemblyDistrictKey={assemblyDistrictKey ?? undefined}
             />
           ) : (
             <div className="panel-placeholder">

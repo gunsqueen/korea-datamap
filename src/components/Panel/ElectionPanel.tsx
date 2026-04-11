@@ -4,12 +4,15 @@ import { ExternalLink } from 'lucide-react';
 import type { ElectionType, ElectionData } from '../../types';
 import { useElection } from '../../hooks/useElection';
 import { ELECTIONS_META } from '../../services';
+import districtResults from '../../data/static/assembly_district_results.json';
 
 interface Props {
   admCd: string;
   admNm?: string;
   defaultType?: ElectionType;
   defaultAssemblySuffix?: string;
+  /** "22_서울_강서구갑" 형식 — 설정 시 해당 선거구 정적 데이터 우선 표시 */
+  assemblyDistrictKey?: string;
 }
 
 const TYPE_LABELS: Record<ElectionType, string> = {
@@ -34,7 +37,7 @@ const LOCAL_SUB_LABELS = [
   { key: 'basic_pr', label: '기초 비례' },
 ];
 
-export function ElectionPanel({ admCd, admNm, defaultType, defaultAssemblySuffix }: Props) {
+export function ElectionPanel({ admCd, admNm, defaultType, defaultAssemblySuffix, assemblyDistrictKey }: Props) {
   const [activeType, setActiveType] = useState<ElectionType>(defaultType ?? 'presidential');
 
   // ── 대통령 ───────────────────────────────────────────
@@ -100,7 +103,17 @@ export function ElectionPanel({ admCd, admNm, defaultType, defaultAssemblySuffix
     return '';
   }, [activeType, selectedPresidentialId, selectedAssemblySuffix, assemblySubType, selectedLocalPrefix, localSubType]);
 
-  const { data, loading, error } = useElection(admCd, selectedId, admNm);
+  // 국회의원 탭에서 선거구 키가 있으면 정적 데이터 우선 사용
+  const districtData: ElectionData | null = useMemo(() => {
+    if (activeType !== 'assembly' || !assemblyDistrictKey) return null;
+    const gen = assemblyDistrictKey.split('_')[0];
+    if (gen !== selectedAssemblySuffix) return null;
+    const raw = (districtResults as Record<string, unknown>)[assemblyDistrictKey];
+    return raw ? (raw as ElectionData) : null;
+  }, [activeType, assemblyDistrictKey, selectedAssemblySuffix]);
+
+  const { data: apiData, loading, error } = useElection(admCd, selectedId, admNm);
+  const data = districtData ?? apiData;
 
   return (
     <div className="panel-section">

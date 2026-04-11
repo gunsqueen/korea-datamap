@@ -1,0 +1,110 @@
+{
+  "22_서울_강서구갑": {
+    "adm_cd": "11160",
+    "adm_nm": "강서구갑",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 168119,
+    "total_votes": 111747,
+    "valid_votes": 110414,
+    "invalid_votes": 1333,
+    "turnout_rate": 66.5,
+    "candidates": [
+      {
+        "name": "강선우",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 64651,
+        "vote_rate": 58.55326317314833,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "구상찬",
+        "party": "국민의힘",
+        "party_color": "#E61E2B",
+        "votes": 42703,
+        "vote_rate": 38.67534914050754,
+        "rank": 2,
+        "elected": false
+      },
+      {
+        "name": "남평오",
+        "party": "새로운미래",
+        "party_color": "#0095DA",
+        "votes": 3060,
+        "vote_rate": 2.771387686344123,
+        "rank": 3,
+        "elected": false
+      }
+    ]
+  },
+  "22_서울_강서구을": {
+    "adm_cd": "11160",
+    "adm_nm": "강서구을",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 171060,
+    "total_votes": 117702,
+    "valid_votes": 115955,
+    "invalid_votes": 1747,
+    "turnout_rate": 68.8,
+    "candidates": [
+      {
+        "name": "진성준",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 63601,
+        "vote_rate": 54.84972618688284,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "박민식",
+        "party": "국민의힘",
+        "party_color": "#E61E2B",
+        "votes": 52354,
+        "vote_rate": 45.15027381311716,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  },
+  "22_서울_강서구병": {
+    "adm_cd": "11160",
+    "adm_nm": "강서구병",
+    "election_type": "assembly",
+    "election_name": "제22대 국회의원선거",
+    "election_date": "2024-04-10",
+    "sub_type": "지역구",
+    "total_voters": 158668,
+    "total_votes": 106810,
+    "valid_votes": 105343,
+    "invalid_votes": 1467,
+    "turnout_rate": 67.3,
+    "candidates": [
+      {
+        "name": "한정애",
+        "party": "더불어민주당",
+        "party_color": "#004EA2",
+        "votes": 62297,
+        "vote_rate": 59.13729436222626,
+        "rank": 1,
+        "elected": true
+      },
+      {
+        "name": "김일호",
+        "party": "국민의힘",
+        "party_color": "#E61E2B",
+        "votes": 43046,
+        "vote_rate": 40.86270563777375,
+        "rank": 2,
+        "elected": false
+      }
+    ]
+  }
+}

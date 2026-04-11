@@ -11,6 +11,7 @@ interface Props {
   onClose: () => void;
   defaultElectionType?: ElectionType;
   defaultAssemblySuffix?: string;
+  assemblyDistrictKey?: string;
 }
 
 function PopulationSkeleton() {
@@ -28,7 +29,7 @@ function PopulationSkeleton() {
   );
 }
 
-export function DataPanel({ area, activeTab, onTabChange, onClose, defaultElectionType, defaultAssemblySuffix }: Props) {
+export function DataPanel({ area, activeTab, onTabChange, onClose, defaultElectionType, defaultAssemblySuffix, assemblyDistrictKey }: Props) {
   const { data: popData, loading: popLoading } = usePopulation(area.adm_cd);
 
   return (
@@ -76,6 +77,7 @@ export function DataPanel({ area, activeTab, onTabChange, onClose, defaultElecti
             admNm={area.adm_nm}
             defaultType={defaultElectionType}
             defaultAssemblySuffix={defaultAssemblySuffix}
+            assemblyDistrictKey={assemblyDistrictKey}
           />
         )}
       </div>
