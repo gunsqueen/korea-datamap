@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { ExternalLink } from 'lucide-react';
 import type { ElectionType, ElectionData } from '../../types';
@@ -8,6 +8,8 @@ import { ELECTIONS_META } from '../../services';
 interface Props {
   admCd: string;
   admNm?: string;
+  defaultType?: ElectionType;
+  defaultAssemblySuffix?: string;
 }
 
 const TYPE_LABELS: Record<ElectionType, string> = {
@@ -32,8 +34,8 @@ const LOCAL_SUB_LABELS = [
   { key: 'basic_pr', label: '기초 비례' },
 ];
 
-export function ElectionPanel({ admCd, admNm }: Props) {
-  const [activeType, setActiveType] = useState<ElectionType>('presidential');
+export function ElectionPanel({ admCd, admNm, defaultType, defaultAssemblySuffix }: Props) {
+  const [activeType, setActiveType] = useState<ElectionType>(defaultType ?? 'presidential');
 
   // ── 대통령 ───────────────────────────────────────────
   const presidentialMetas = useMemo(
@@ -60,9 +62,15 @@ export function ElectionPanel({ admCd, admNm }: Props) {
     return groups;
   }, []);
   const [selectedAssemblySuffix, setSelectedAssemblySuffix] = useState(
-    assemblyGroups[0]?.suffix ?? '22'
+    defaultAssemblySuffix ?? assemblyGroups[0]?.suffix ?? '22'
   );
   const [assemblySubType, setAssemblySubType] = useState('district');
+
+  // 후보자 선택 시 탭 자동 전환
+  useEffect(() => {
+    if (defaultType) setActiveType(defaultType);
+    if (defaultAssemblySuffix) setSelectedAssemblySuffix(defaultAssemblySuffix);
+  }, [defaultType, defaultAssemblySuffix]);
 
   // ── 지방선거: 선거(prefix) + 세부 유형 ─────────────────
   const localGroups = useMemo(() => {

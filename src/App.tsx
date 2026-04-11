@@ -54,10 +54,13 @@ export default function App() {
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [assemblyDistrictKey, setAssemblyDistrictKey] = useState<string | null>(null);
+  // 후보자 선택 시 선거 탭 자동 전환용: { gen: '22' } 형태
+  const [assemblyElectionHint, setAssemblyElectionHint] = useState<{ gen: string } | null>(null);
 
   const handleMapClick = useCallback((area: AdminArea) => {
     const nextLevel = NEXT_LEVEL[currentLevel];
-    setAssemblyDistrictKey(null); // 지도 클릭 시 선거구 하이라이트 초기화
+    setAssemblyDistrictKey(null);
+    setAssemblyElectionHint(null);
     if (nextLevel) {
       setNavStack((prev) => [...prev, { adm_cd: area.adm_cd, adm_nm: area.adm_nm, level: currentLevel }]);
       setSelectedArea(area);
@@ -77,6 +80,8 @@ export default function App() {
 
   const handleClosePanel = useCallback(() => {
     setSelectedArea(null);
+    setAssemblyDistrictKey(null);
+    setAssemblyElectionHint(null);
   }, []);
 
   /** 검색 결과 선택 시 해당 레벨로 직접 이동 */
@@ -116,9 +121,14 @@ export default function App() {
           level: 'sigungu',
         });
         setAssemblyDistrictKey(result.assemblyDistrictKey);
+        // 선거 탭 자동 전환 + 해당 총선 회차 선택
+        const gen = result.assemblyDistrictKey.split('_')[0];
+        setActiveTab('election');
+        setAssemblyElectionHint({ gen });
       } else {
         setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'eupmyeondong' });
         setAssemblyDistrictKey(null);
+        setAssemblyElectionHint(null);
       }
     }
     setMobileSearchOpen(false);
@@ -293,6 +303,8 @@ export default function App() {
               activeTab={activeTab}
               onTabChange={setActiveTab}
               onClose={handleClosePanel}
+              defaultElectionType={assemblyElectionHint ? 'assembly' : undefined}
+              defaultAssemblySuffix={assemblyElectionHint?.gen}
             />
           ) : (
             <div className="panel-placeholder">

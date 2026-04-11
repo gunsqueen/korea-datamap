@@ -1,5 +1,5 @@
 import { X, BarChart2, Vote } from 'lucide-react';
-import type { AdminArea, PanelTab } from '../../types';
+import type { AdminArea, ElectionType, PanelTab } from '../../types';
 import { usePopulation } from '../../hooks/usePopulation';
 import { PopulationPanel } from './PopulationPanel';
 import { ElectionPanel } from './ElectionPanel';
@@ -9,6 +9,8 @@ interface Props {
   activeTab: PanelTab;
   onTabChange: (tab: PanelTab) => void;
   onClose: () => void;
+  defaultElectionType?: ElectionType;
+  defaultAssemblySuffix?: string;
 }
 
 function PopulationSkeleton() {
@@ -26,7 +28,7 @@ function PopulationSkeleton() {
   );
 }
 
-export function DataPanel({ area, activeTab, onTabChange, onClose }: Props) {
+export function DataPanel({ area, activeTab, onTabChange, onClose, defaultElectionType, defaultAssemblySuffix }: Props) {
   const { data: popData, loading: popLoading } = usePopulation(area.adm_cd);
 
   return (
@@ -69,7 +71,12 @@ export function DataPanel({ area, activeTab, onTabChange, onClose }: Props) {
               : <div className="empty">인구 데이터 없음</div>
         )}
         {activeTab === 'election' && (
-          <ElectionPanel admCd={area.adm_cd} admNm={area.adm_nm} />
+          <ElectionPanel
+            admCd={area.adm_cd}
+            admNm={area.adm_nm}
+            defaultType={defaultElectionType}
+            defaultAssemblySuffix={defaultAssemblySuffix}
+          />
         )}
       </div>
     </div>
