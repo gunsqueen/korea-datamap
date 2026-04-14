@@ -329,11 +329,12 @@ function ElectionResult({ data, requestedAdmCd }: { data: ElectionData; requeste
               <th>득표수</th>
               <th>득표율</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {data.candidates.map((c, i) => (
-              <tr key={i}>
+              <tr key={i} className={c.elected ? 'elected-row' : ''}>
                 <td className="col-rank">{c.rank}</td>
                 <td className="col-name">
                   <span className="cand-dot" style={{ background: c.party_color }} />
@@ -350,6 +351,7 @@ function ElectionResult({ data, requestedAdmCd }: { data: ElectionData; requeste
                     />
                   </div>
                 </td>
+                <td className="col-elected">{c.elected ? '당선' : ''}</td>
               </tr>
             ))}
           </tbody>

@@ -50,16 +50,19 @@ const DATA_BY_ID: Record<string, ElectionData[]> = {
   assembly_20_pr: assemblyData20Pr as ElectionData[],
   assembly_19_district: assemblyData19District as ElectionData[],
   assembly_19_pr: assemblyData19Pr as ElectionData[],
+  local_8_metro_mayor: localData8Mayor as ElectionData[],
   local_8_mayor: localData8Mayor as ElectionData[],
   local_8_council_district: localData8CouncilDistrict as ElectionData[],
   local_8_council_pr: localData8CouncilPr as ElectionData[],
   local_8_basic_district: localData8BasicDistrict as ElectionData[],
   local_8_basic_pr: localData8BasicPr as ElectionData[],
+  local_7_metro_mayor: localData7Mayor as ElectionData[],
   local_7_mayor: localData7Mayor as ElectionData[],
   local_7_council_district: localData7CouncilDistrict as ElectionData[],
   local_7_council_pr: localData7CouncilPr as ElectionData[],
   local_7_basic_district: localData7BasicDistrict as ElectionData[],
   local_7_basic_pr: localData7BasicPr as ElectionData[],
+  local_6_metro_mayor: localData6Mayor as ElectionData[],
   local_6_mayor: localData6Mayor as ElectionData[],
   local_6_council_district: localData6CouncilDistrict as ElectionData[],
   local_6_council_pr: localData6CouncilPr as ElectionData[],
@@ -106,8 +109,11 @@ function isDistrictElection(electionId: string): boolean {
   return electionId.endsWith('_district');
 }
 
-function canUseBroadFallback(electionId: string): boolean {
-  return !isDistrictElection(electionId);
+function canUseBroadFallback(electionId: string, admCd: string): boolean {
+  // district 선거(지역구)는 동(8자리) 레벨에서만 상위 집계 fallback 금지.
+  // 시도(2자리)·시군구(5자리) 레벨에서는 NEC API 실패 시 sido-level mock 데이터로 표시.
+  if (isDistrictElection(electionId) && admCd.length === 8) return false;
+  return true;
 }
 
 /**
@@ -128,7 +134,7 @@ export function getElectionByCode(admCd: string, electionId: string): ElectionDa
     }));
   }
 
-  if (!canUseBroadFallback(electionId)) return null;
+  if (!canUseBroadFallback(electionId, admCd)) return null;
 
   const fallbackCandidates = [
     admCd.length === 8 ? admCd.slice(0, 5) : null,

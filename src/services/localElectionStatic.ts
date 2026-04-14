@@ -2,6 +2,41 @@ import type { ElectionData, Candidate } from '../types';
 import { attachElectionDebugMeta, logElectionDecision } from './electionDebug';
 import { getPartyColor } from '../utils/partyColors';
 import { fetchUncandidates } from './necUncontested';
+import quotaMap from '../data/electionQuotaMap.json';
+import local8WinnersData from '../data/static/local_8_winners.json';
+import local7WinnersData from '../data/static/local_7_winners.json';
+import local6WinnersData from '../data/static/local_6_winners.json';
+
+interface ElectionQuotaFile {
+  quotas: Record<string, number | string>;
+  comment?: string;
+  format?: string;
+  example?: string;
+}
+
+const ELECTION_QUOTAS = (quotaMap as ElectionQuotaFile).quotas;
+const local8Winners = local8WinnersData as Record<string, string[]>;
+const local7Winners = local7WinnersData as Record<string, string[]>;
+const local6Winners = local6WinnersData as Record<string, string[]>;
+
+const LOCAL_WINNERS: Record<string, Record<string, string[]>> = {
+  'local_8': local8Winners,
+  'local_7': local7Winners,
+  'local_6': local6Winners,
+};
+
+// 행정구역 명칭 변경 대응: 현재 명칭 → 선거 당시 명칭(s) 매핑
+// - 강원특별자치도: 2023-06-11 이전 '강원도'
+// - 전북특별자치도: 2024-01-18 이전 '전라북도'
+const SIDO_HISTORICAL_ALIASES: Record<string, string[]> = {
+  '강원특별자치도': ['강원도'],
+  '전북특별자치도': ['전라북도'],
+};
+
+function getQuotaValue(key: string): number | undefined {
+  const value = ELECTION_QUOTAS[key];
+  return typeof value === 'number' ? value : undefined;
+}
 
 // 동→선거구 매핑 캐시 (파일별 lazy load)
 const dongDistrictMapCache = new Map<string, Record<string, Record<string, string>>>();
@@ -20,8 +55,15 @@ async function getDongDistrict(electionId: string, admNm: string): Promise<strin
   const mapForPrefix = dongDistrictMapCache.get(cacheKey)!;
   const mapForId = mapForPrefix[electionId];
   if (!mapForId) return null;
-  const key = admNm.trim().split(/\s+/).filter(Boolean).join('|');
-  return mapForId[key] ?? null;
+  const parts = admNm.trim().split(/\s+/).filter(Boolean);
+  // 현재 명칭과 역사적 별칭 모두 시도
+  const sido = parts[0];
+  const sidoCandidates = [sido, ...(SIDO_HISTORICAL_ALIASES[sido] ?? [])];
+  for (const s of sidoCandidates) {
+    const key = [s, ...parts.slice(1)].join('|');
+    if (mapForId[key]) return mapForId[key];
+  }
+  return null;
 }
 
 interface StaticCandidateEntry {
@@ -48,6 +90,7 @@ const dataCache = new Map<string, StaticElectionMap>();
 const dongIndexCache = new Map<string, Record<string, StaticElectionEntry | null>>();
 
 // 선거 ID → 메타정보 매핑
+
 const ELECTION_META: Record<string, { name: string; date: string; subType: string; electionType: string; nationalWinner?: string }> = {
   presidential_18: { name: '제18대 대통령선거', date: '2012-12-19', subType: '', electionType: 'presidential', nationalWinner: '박근혜' },
   presidential_19: { name: '제19대 대통령선거', date: '2017-05-09', subType: '', electionType: 'presidential', nationalWinner: '문재인' },
@@ -95,6 +138,56 @@ async function loadStaticData(electionId: string): Promise<StaticElectionMap> {
   }
 }
 
+const SIDO_QUOTA_NAMES: Record<string, string> = {
+  '서울특별시': '서울',
+  '부산광역시': '부산',
+  '대구광역시': '대구',
+  '인천광역시': '인천',
+  '광주광역시': '광주',
+  '대전광역시': '대전',
+  '울산광역시': '울산',
+  '세종특별자치시': '세종',
+  '경기도': '경기',
+  '강원도': '강원',           // 8회 지방선거 당시 명칭
+  '강원특별자치도': '강원',   // 2023년 이후 명칭
+  '충청북도': '충북',
+  '충청남도': '충남',
+  '전라북도': '전북',
+  '전북특별자치도': '전북',   // 2024년 이후 명칭
+  '전라남도': '전남',
+  '경상북도': '경북',
+  '경상남도': '경남',
+  '제주특별자치도': '제주',
+};
+
+function getQuotaKeyForDistrict(electionId: string, electionDistrict: string, admNm: string): string | null {
+  const parts = electionId.split('_');
+  if (parts[0] !== 'local' || parts.length < 3) return null;
+
+  const generation = parts[1];
+  const subtype = parts[2];
+  const sido = admNm.trim().split(/\s+/)[0];
+  // 현재 명칭 + 역사적 별칭 순서로 시도
+  const sidoCandidates = [sido, ...(SIDO_HISTORICAL_ALIASES[sido] ?? [])];
+  const city = sidoCandidates.map(s => SIDO_QUOTA_NAMES[s]).find(Boolean);
+  if (!city) return null;
+
+  return `${generation}_${city}_${subtype}_${electionDistrict}`;
+}
+
+function getSeatCountForDistrict(electionId: string, electionDistrict: string | undefined, admNm: string): number {
+  if (!electionDistrict) return 1;
+  const quotaKey = getQuotaKeyForDistrict(electionId, electionDistrict, admNm);
+  if (quotaKey) {
+    const quotaValue = getQuotaValue(quotaKey);
+    if (quotaValue !== undefined) return quotaValue;
+  }
+
+  const fallbackKey = `${electionId}_${electionDistrict}`;
+  const fallbackValue = getQuotaValue(fallbackKey);
+  return fallbackValue ?? 1;
+}
+
 function buildStaticLookupKeys(admNm: string): string[] {
   const parts = admNm.trim().split(/\s+/).filter(Boolean);
   if (parts.length < 3) return [];
@@ -105,18 +198,20 @@ function buildStaticLookupKeys(admNm: string): string[] {
   const middleJoined = middleParts.join('');
   const middleSpaced = middleParts.join(' ');
 
-  const keys = [
-    `${sido}|${middleJoined}|${dong}`,
-    `${sido}|${middleSpaced}|${dong}`,
-  ];
+  // 현재 시도명 + 역사적 별칭 시도명 모두 시도
+  const sidoCandidates = [sido, ...(SIDO_HISTORICAL_ALIASES[sido] ?? [])];
 
-  if (middleParts.length >= 1) {
-    keys.push(`${sido}|${middleParts[0]}|${dong}`);
-  }
-
-  if (middleParts.length >= 2) {
-    keys.push(`${sido}|${middleParts[middleParts.length - 1]}|${dong}`);
-    keys.push(`${sido}|${middleParts.slice(-2).join('')}|${dong}`);
+  const keys: string[] = [];
+  for (const s of sidoCandidates) {
+    keys.push(`${s}|${middleJoined}|${dong}`);
+    keys.push(`${s}|${middleSpaced}|${dong}`);
+    if (middleParts.length >= 1) {
+      keys.push(`${s}|${middleParts[0]}|${dong}`);
+    }
+    if (middleParts.length >= 2) {
+      keys.push(`${s}|${middleParts[middleParts.length - 1]}|${dong}`);
+      keys.push(`${s}|${middleParts.slice(-2).join('')}|${dong}`);
+    }
   }
 
   return [...new Set(keys.filter(Boolean))];
@@ -195,7 +290,10 @@ export async function lookupLocalElectionDong(
       rank: 0,
       elected: false,
     }))
-    .sort((a, b) => b.votes - a.votes);
+    .sort((a, b) => {
+      if (a.votes !== b.votes) return b.votes - a.votes;
+      return a.name.localeCompare(b.name, 'ko');
+    });
 
   candidates.forEach((c, i) => { c.rank = i + 1; });
 
@@ -204,8 +302,30 @@ export async function lookupLocalElectionDong(
     const winnerCand = candidates.find((c) => c.name === nationalWinner);
     if (winnerCand) winnerCand.elected = true;
   } else {
-    // 지방선거 등 지역 당선자: 1위
-    if (candidates.length > 0) candidates[0].elected = true;
+    // 지방선거 지역구 당선인 판별
+    const quotaKey = getQuotaKeyForDistrict(electionId, entry.election_district, admNm);
+    let usedExactMatch = false;
+
+    // 6~8회 지방선거: 당선인 명단 파일로 정확한 당선 여부 표기
+    const genPrefix = electionId.match(/^(local_\d+)_/)?.[1];
+    const winnersMap = genPrefix ? LOCAL_WINNERS[genPrefix] : undefined;
+    if (winnersMap && quotaKey && winnersMap[quotaKey]) {
+      const officialWinners = winnersMap[quotaKey];
+      candidates.forEach((c) => {
+        if (officialWinners.includes(c.name)) {
+          c.elected = true;
+        }
+      });
+      usedExactMatch = true;
+    }
+
+    // 그 외 선거이거나 명단 매핑이 실패한 경우 정원 개수만큼 상위 후보를 elected로 표시 (Fallback)
+    if (!usedExactMatch || !candidates.some(c => c.elected)) {
+      const seatCount = getSeatCountForDistrict(electionId, entry.election_district, admNm);
+      for (let i = 0; i < Math.min(seatCount, candidates.length); i += 1) {
+        candidates[i].elected = true;
+      }
+    }
   }
 
   const turnout = entry.total_voters > 0 ? Math.round((entry.total_votes / entry.total_voters) * 10000) / 100 : 0;
