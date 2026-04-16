@@ -1,5 +1,5 @@
 import { X, BarChart2, Vote } from 'lucide-react';
-import type { AdminArea, ElectionType, PanelTab } from '../../types';
+import type { AdminArea, PanelTab, ElectionHint } from '../../types';
 import { usePopulation } from '../../hooks/usePopulation';
 import { PopulationPanel } from './PopulationPanel';
 import { ElectionPanel } from './ElectionPanel';
@@ -9,9 +9,9 @@ interface Props {
   activeTab: PanelTab;
   onTabChange: (tab: PanelTab) => void;
   onClose: () => void;
-  defaultElectionType?: ElectionType;
-  defaultAssemblySuffix?: string;
+  electionHint?: ElectionHint | null;
   assemblyDistrictKey?: string;
+  localDistrictKey?: string | null;
 }
 
 function PopulationSkeleton() {
@@ -29,7 +29,7 @@ function PopulationSkeleton() {
   );
 }
 
-export function DataPanel({ area, activeTab, onTabChange, onClose, defaultElectionType, defaultAssemblySuffix, assemblyDistrictKey }: Props) {
+export function DataPanel({ area, activeTab, onTabChange, onClose, electionHint, assemblyDistrictKey, localDistrictKey }: Props) {
   const { data: popData, loading: popLoading } = usePopulation(area.adm_cd);
 
   return (
@@ -75,9 +75,9 @@ export function DataPanel({ area, activeTab, onTabChange, onClose, defaultElecti
           <ElectionPanel
             admCd={area.adm_cd}
             admNm={area.adm_nm}
-            defaultType={defaultElectionType}
-            defaultAssemblySuffix={defaultAssemblySuffix}
+            electionHint={electionHint}
             assemblyDistrictKey={assemblyDistrictKey}
+            localDistrictKey={localDistrictKey}
           />
         )}
       </div>

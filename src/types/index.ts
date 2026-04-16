@@ -183,3 +183,21 @@ export interface NavItem {
   adm_nm: string;
   level: AdminLevel;
 }
+
+/**
+ * 후보자 검색 결과 클릭 시 ElectionPanel에 전달할 선거 힌트.
+ * 선거 종류·회차·세부 유형을 담아 패널이 올바른 탭으로 자동 전환하게 한다.
+ */
+export interface ElectionHint {
+  type: ElectionType;
+  /** 대선용: 'presidential_21' 등 */
+  presidentialId?: string;
+  /** 총선용: '22' (대수) */
+  assemblySuffix?: string;
+  /** 총선용: 'district' | 'pr' */
+  assemblySubType?: 'district' | 'pr';
+  /** 지방선거용: 'local_8' 등 */
+  localPrefix?: string;
+  /** 지방선거용: 'metro_mayor' | 'mayor' | 'council_district' | 'council_pr' | 'basic_district' | 'basic_pr' */
+  localSubType?: string;
+}

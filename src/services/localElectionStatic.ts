@@ -434,3 +434,170 @@ export async function lookupUncandidateDong(
     fallbackReason: 'uncontested election',
   });
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 지방의원 선거구 전체 집계
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * 시도 약칭 → 시도 전체명 (local_council_emd_mapping.json 키 파싱용)
+ * 강원/전북은 현재 명칭(특별자치) 기준으로 매핑하고, SIDO_HISTORICAL_ALIASES로 구 명칭도 커버.
+ */
+const SIDO_ABBR_TO_FULL: Record<string, string> = {
+  '서울': '서울특별시', '부산': '부산광역시', '대구': '대구광역시',
+  '인천': '인천광역시', '광주': '광주광역시', '대전': '대전광역시',
+  '울산': '울산광역시', '세종': '세종특별자치시', '경기': '경기도',
+  '강원': '강원특별자치도', '충북': '충청북도', '충남': '충청남도',
+  '전북': '전북특별자치도', '전남': '전라남도', '경북': '경상북도',
+  '경남': '경상남도', '제주': '제주특별자치도',
+};
+
+/**
+ * 복수 동으로 구성된 선거구의 득표 데이터를 합산한다.
+ */
+function aggregateStaticEntries(entries: StaticElectionEntry[]): {
+  total_voters: number;
+  total_votes: number;
+  valid_votes: number;
+  invalid_votes: number;
+  candidates: StaticCandidateEntry[];
+} {
+  const candidateMap = new Map<string, { name?: string; party: string; votes: number }>();
+  let total_voters = 0, total_votes = 0, valid_votes = 0, invalid_votes = 0;
+
+  for (const entry of entries) {
+    total_voters += entry.total_voters;
+    total_votes += entry.total_votes;
+    valid_votes += entry.valid_votes;
+    invalid_votes += entry.invalid_votes;
+    for (const cand of entry.candidates) {
+      const key = cand.name ?? cand.party;
+      const existing = candidateMap.get(key);
+      if (existing) {
+        existing.votes += cand.votes;
+      } else {
+        candidateMap.set(key, { name: cand.name, party: cand.party, votes: cand.votes });
+      }
+    }
+  }
+
+  return {
+    total_voters,
+    total_votes,
+    valid_votes,
+    invalid_votes,
+    candidates: Array.from(candidateMap.values()),
+  };
+}
+
+/**
+ * 지방의원(기초/광역) 선거구 전체 집계 결과 반환.
+ *
+ * 동별로 분리 저장된 득표 데이터를 선거구 단위로 합산하여 ElectionData를 반환한다.
+ * local_council_emd_mapping.json 키 형식에 맞는 localDistrictKey를 사용.
+ *
+ * @param electionId       "local_8_basic_district" 등
+ * @param localDistrictKey "8_basic_서울_강서구나선거구" 형식
+ * @param admCd            대표 동의 행정구역 코드 (debug용)
+ */
+export async function lookupLocalDistrictAggregated(
+  electionId: string,
+  localDistrictKey: string,
+  admCd: string,
+): Promise<ElectionData | null> {
+  const meta = ELECTION_META[electionId];
+  if (!meta) return null;
+
+  // localDistrictKey 파싱: "8_basic_서울_강서구나선거구"
+  const parts = localDistrictKey.split('_');
+  if (parts.length < 4) return null;
+  // parts[0] = "8", parts[1] = "basic"|"council", parts[2] = 시도약칭, parts[3..] = 선거구명
+  const sidoAbbr = parts[2];
+  const districtName = parts.slice(3).join('_');
+
+  const sidoFull = SIDO_ABBR_TO_FULL[sidoAbbr];
+  if (!sidoFull) return null;
+
+  // 역사적 시도명 포함 (강원도, 전라북도 등 구 명칭으로 저장된 데이터 대응)
+  const sidoCandidates = [sidoFull, ...(SIDO_HISTORICAL_ALIASES[sidoFull] ?? [])];
+
+  const data = await loadStaticData(electionId);
+
+  // 선거구 내 모든 동 엔트리 수집
+  const matchingEntries = Object.values(
+    Object.fromEntries(
+      Object.entries(data).filter(([key, value]) =>
+        sidoCandidates.some((s) => key.startsWith(s + '|')) &&
+        value.election_district === districtName
+      )
+    )
+  );
+
+  if (matchingEntries.length === 0) return null;
+
+  const aggregated = aggregateStaticEntries(matchingEntries);
+
+  // 후보 목록 생성
+  const candidates: Candidate[] = aggregated.candidates
+    .filter((c) => c.votes > 0 || c.party)
+    .map((c) => ({
+      name: c.name || c.party,
+      party: c.party,
+      party_color: getPartyColor(c.party),
+      votes: c.votes,
+      vote_rate: aggregated.valid_votes > 0
+        ? Math.round((c.votes / aggregated.valid_votes) * 10000) / 100
+        : 0,
+      rank: 0,
+      elected: false,
+    }))
+    .sort((a, b) => {
+      if (a.votes !== b.votes) return b.votes - a.votes;
+      return a.name.localeCompare(b.name, 'ko');
+    });
+
+  candidates.forEach((c, i) => { c.rank = i + 1; });
+
+  // 당선인 결정: 공식 당선자 명단 우선, 없으면 정원수만큼 상위 후보
+  const genPrefix = electionId.match(/^(local_\d+)_/)?.[1];
+  const winnersMap = genPrefix ? LOCAL_WINNERS[genPrefix] : undefined;
+  // getSeatCountForDistrict / getQuotaKeyForDistrict는 admNm 첫 토큰(시도명)만 사용하므로 fakeAdmNm 사용
+  const fakeAdmNm = sidoFull + ' 구 dummy동';
+  const quotaKey = getQuotaKeyForDistrict(electionId, districtName, fakeAdmNm);
+
+  let usedOfficialWinners = false;
+  if (winnersMap && quotaKey && winnersMap[quotaKey]) {
+    const officialWinners = winnersMap[quotaKey];
+    candidates.forEach((c) => { if (officialWinners.includes(c.name)) c.elected = true; });
+    usedOfficialWinners = true;
+  }
+
+  if (!usedOfficialWinners || !candidates.some((c) => c.elected)) {
+    const seatCount = getSeatCountForDistrict(electionId, districtName, fakeAdmNm);
+    for (let i = 0; i < Math.min(seatCount, candidates.length); i++) candidates[i].elected = true;
+  }
+
+  const turnout = aggregated.total_voters > 0
+    ? Math.round((aggregated.total_votes / aggregated.total_voters) * 10000) / 100
+    : 0;
+
+  return attachElectionDebugMeta({
+    adm_cd: admCd,
+    adm_nm: districtName,   // 패널에 "강서구나선거구 선거 결과"로 표시
+    election_type: 'local',
+    election_name: meta.name,
+    election_date: meta.date,
+    sub_type: meta.subType || undefined,
+    total_voters: aggregated.total_voters,
+    total_votes: aggregated.total_votes,
+    valid_votes: aggregated.valid_votes,
+    invalid_votes: aggregated.invalid_votes,
+    turnout_rate: turnout,
+    candidates,
+  }, {
+    sourceType: 'snapshot',
+    matchedRegionName: districtName,
+    matchedRegionCode: admCd,
+    recordCount: matchingEntries.length,
+  });
+}

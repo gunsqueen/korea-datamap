@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
-import type { AdminLevel } from '../../types';
+import type { AdminLevel, ElectionHint } from '../../types';
 import searchIndex from '../../data/static/search_index.json';
 
 export interface SearchResult {
@@ -20,6 +20,13 @@ export interface SearchResult {
   };
   /** 국회의원 선거구 하이라이트용: "22_서울_강서갑" 형식 */
   assemblyDistrictKey?: string;
+  /**
+   * 지방의원(기초/광역) 선거구 하이라이트용: "8_basic_서울_강서구나선거구" 형식.
+   * local_council_emd_mapping.json의 [회차][basic|council][시도_선거구명] 키와 대응.
+   */
+  localDistrictKey?: string;
+  /** 선거 패널 자동 전환용 힌트 */
+  electionHint?: ElectionHint;
 }
 
 /** cidx_*.json 공통 엔트리 형식 (필드명 축약) */
@@ -33,6 +40,7 @@ interface CidxEntry {
   sn: string;  // sigungu_nm
   rc: string;  // sido_cd
   rn: string;  // sido_nm
+  an: string;  // emd adm_nm (예: "서울특별시 강서구 화곡3동") — election data lookup 필수
 }
 
 const PARTY_COLOR: Record<string, string> = {
@@ -72,10 +80,78 @@ function getAssemblyDistrictKey(c: CidxEntry): string | undefined {
   return `${gen}_${sido}_${c.d}`;
 }
 
+/**
+ * 지방의원(기초/광역) 지역구 후보의 경우 local_council_emd_mapping.json 조회용 키 반환.
+ * 형식: "{회차}_{basic|council}_{시도약칭}_{선거구명}"
+ * 예: "8_basic_서울_강서구나선거구"
+ * 단체장·비례·대선·총선은 undefined 반환.
+ */
+function getLocalDistrictKey(c: CidxEntry): string | undefined {
+  const sido = SIDO_NORM[c.rn] || c.rn;
+  const basicMatch = c.e.match(/^(\d+)회 지방선거 기초의원\(지역구\)/);
+  if (basicMatch) return `${basicMatch[1]}_basic_${sido}_${c.d}`;
+  const councilMatch = c.e.match(/^(\d+)회 지방선거 광역의원\(지역구\)/);
+  if (councilMatch) return `${councilMatch[1]}_council_${sido}_${c.d}`;
+  return undefined;
+}
+
+/**
+ * cidx 엔트리의 선거 라벨(e 필드)을 파싱해 ElectionPanel 자동 전환용 힌트 반환.
+ *
+ * 지원 형식 예시:
+ *   "21대 대선"
+ *   "22대 총선 지역구"
+ *   "8회 지방선거 기초의원(지역구)"
+ *   "8회 지방선거 광역단체장"
+ *   "8회 지방선거 단체장"
+ *   "local_5_basic_district"  (5회 이전 레거시 포맷)
+ */
+function getElectionHint(e: string): ElectionHint | undefined {
+  // 레거시 "local_X_Y" 포맷
+  if (e.startsWith('local_')) {
+    const parts = e.split('_');
+    if (parts.length >= 3) {
+      const prefix = `local_${parts[1]}`;
+      const subType = parts.slice(2).join('_');
+      return { type: 'local', localPrefix: prefix, localSubType: subType };
+    }
+  }
+
+  // 대선: "21대 대선"
+  const presMatch = e.match(/^(\d+)대 대선/);
+  if (presMatch) {
+    return { type: 'presidential', presidentialId: `presidential_${presMatch[1]}` };
+  }
+
+  // 총선: "22대 총선 지역구" / "22대 총선 비례"
+  const assemblyMatch = e.match(/^(\d+)대 총선\s*(지역구|비례)?/);
+  if (assemblyMatch) {
+    const subType = assemblyMatch[2] === '비례' ? 'pr' : 'district';
+    return { type: 'assembly', assemblySuffix: assemblyMatch[1], assemblySubType: subType };
+  }
+
+  // 지방선거: "8회 지방선거 기초의원(지역구)" / "8회 지방선거 광역단체장" 등
+  const localMatch = e.match(/^(\d+)회 지방선거\s*(광역단체장|단체장|기초단체장|광역의원|기초의원)?\s*(\(지역구\)|\(비례\))?/);
+  if (localMatch) {
+    const num = localMatch[1];
+    const kind = localMatch[2] ?? '';
+    const variant = localMatch[3] ?? '';
+    let localSubType: string;
+    if (kind === '광역단체장') localSubType = 'metro_mayor';
+    else if (kind === '단체장' || kind === '기초단체장') localSubType = 'mayor';
+    else if (kind === '광역의원') localSubType = variant.includes('비례') ? 'council_pr' : 'council_district';
+    else if (kind === '기초의원') localSubType = variant.includes('비례') ? 'basic_pr' : 'basic_district';
+    else localSubType = 'metro_mayor';
+    return { type: 'local', localPrefix: `local_${num}`, localSubType };
+  }
+
+  return undefined;
+}
+
 function cidxToResult(c: CidxEntry): SearchResult {
   return {
     adm_cd: c.cd,
-    adm_nm: '',  // 드롭다운에서 election_district 표시
+    adm_nm: c.an,  // 읍면동 전체명 (예: "서울특별시 강서구 화곡3동") — 선거 데이터 조회 필수
     level: 'eupmyeondong',
     sido_cd: c.rc,
     sido_nm: c.rn,
@@ -90,6 +166,8 @@ function cidxToResult(c: CidxEntry): SearchResult {
       election_district: c.d,
     },
     assemblyDistrictKey: getAssemblyDistrictKey(c),
+    localDistrictKey: getLocalDistrictKey(c),
+    electionHint: getElectionHint(c.e),
   };
 }
 

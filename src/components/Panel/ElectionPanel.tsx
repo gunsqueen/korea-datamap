@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { ExternalLink } from 'lucide-react';
-import type { ElectionType, ElectionData } from '../../types';
+import type { ElectionType, ElectionData, ElectionHint } from '../../types';
 import { useElection } from '../../hooks/useElection';
 import { ELECTIONS_META } from '../../services';
 import districtResults from '../../data/static/assembly_district_results.json';
@@ -9,10 +9,12 @@ import districtResults from '../../data/static/assembly_district_results.json';
 interface Props {
   admCd: string;
   admNm?: string;
-  defaultType?: ElectionType;
-  defaultAssemblySuffix?: string;
+  /** 후보자 검색 클릭 시 자동 전환할 선거 힌트 */
+  electionHint?: ElectionHint | null;
   /** "22_서울_강서구갑" 형식 — 설정 시 해당 선거구 정적 데이터 우선 표시 */
   assemblyDistrictKey?: string;
+  /** "8_basic_서울_강서구나선거구" 형식 — 설정 시 선거구 전체 동 집계 결과 표시 */
+  localDistrictKey?: string | null;
 }
 
 const TYPE_LABELS: Record<ElectionType, string> = {
@@ -23,7 +25,7 @@ const TYPE_LABELS: Record<ElectionType, string> = {
 
 const TYPE_ORDER: ElectionType[] = ['presidential', 'assembly', 'local'];
 
-const ASSEMBLY_SUB_LABELS = [
+const ASSEMBLY_SUB_LABELS: { key: 'district' | 'pr'; label: string }[] = [
   { key: 'district', label: '지역구' },
   { key: 'pr', label: '비례대표' },
 ];
@@ -37,8 +39,8 @@ const LOCAL_SUB_LABELS = [
   { key: 'basic_pr', label: '기초 비례' },
 ];
 
-export function ElectionPanel({ admCd, admNm, defaultType, defaultAssemblySuffix, assemblyDistrictKey }: Props) {
-  const [activeType, setActiveType] = useState<ElectionType>(defaultType ?? 'presidential');
+export function ElectionPanel({ admCd, admNm, electionHint, assemblyDistrictKey, localDistrictKey }: Props) {
+  const [activeType, setActiveType] = useState<ElectionType>(electionHint?.type ?? 'presidential');
 
   // ── 대통령 ───────────────────────────────────────────
   const presidentialMetas = useMemo(
@@ -46,7 +48,9 @@ export function ElectionPanel({ admCd, admNm, defaultType, defaultAssemblySuffix
     []
   );
   const [selectedPresidentialId, setSelectedPresidentialId] = useState(
-    presidentialMetas[0]?.id ?? ''
+    (electionHint?.type === 'presidential' && electionHint.presidentialId)
+      ? electionHint.presidentialId
+      : (presidentialMetas[0]?.id ?? '')
   );
 
   // ── 국회의원: 선거(suffix) + 지역구/비례 ──────────────
@@ -65,15 +69,15 @@ export function ElectionPanel({ admCd, admNm, defaultType, defaultAssemblySuffix
     return groups;
   }, []);
   const [selectedAssemblySuffix, setSelectedAssemblySuffix] = useState(
-    defaultAssemblySuffix ?? assemblyGroups[0]?.suffix ?? '22'
+    (electionHint?.type === 'assembly' && electionHint.assemblySuffix)
+      ? electionHint.assemblySuffix
+      : (assemblyGroups[0]?.suffix ?? '22')
   );
-  const [assemblySubType, setAssemblySubType] = useState('district');
-
-  // 후보자 선택 시 탭 자동 전환
-  useEffect(() => {
-    if (defaultType) setActiveType(defaultType);
-    if (defaultAssemblySuffix) setSelectedAssemblySuffix(defaultAssemblySuffix);
-  }, [defaultType, defaultAssemblySuffix]);
+  const [assemblySubType, setAssemblySubType] = useState<'district' | 'pr'>(
+    (electionHint?.type === 'assembly' && electionHint.assemblySubType)
+      ? electionHint.assemblySubType
+      : 'district'
+  );
 
   // ── 지방선거: 선거(prefix) + 세부 유형 ─────────────────
   const localGroups = useMemo(() => {
@@ -91,9 +95,30 @@ export function ElectionPanel({ admCd, admNm, defaultType, defaultAssemblySuffix
     return groups;
   }, []);
   const [selectedLocalPrefix, setSelectedLocalPrefix] = useState(
-    localGroups[0]?.prefix ?? 'local_8'
+    (electionHint?.type === 'local' && electionHint.localPrefix)
+      ? electionHint.localPrefix
+      : (localGroups[0]?.prefix ?? 'local_8')
   );
-  const [localSubType, setLocalSubType] = useState('metro_mayor');
+  const [localSubType, setLocalSubType] = useState(
+    (electionHint?.type === 'local' && electionHint.localSubType)
+      ? electionHint.localSubType
+      : 'metro_mayor'
+  );
+
+  // 후보자 선택 시 탭 자동 전환 (electionHint가 바뀔 때마다 모든 관련 상태 업데이트)
+  useEffect(() => {
+    if (!electionHint) return;
+    setActiveType(electionHint.type);
+    if (electionHint.type === 'presidential') {
+      if (electionHint.presidentialId) setSelectedPresidentialId(electionHint.presidentialId);
+    } else if (electionHint.type === 'assembly') {
+      if (electionHint.assemblySuffix) setSelectedAssemblySuffix(electionHint.assemblySuffix);
+      if (electionHint.assemblySubType) setAssemblySubType(electionHint.assemblySubType);
+    } else if (electionHint.type === 'local') {
+      if (electionHint.localPrefix) setSelectedLocalPrefix(electionHint.localPrefix);
+      if (electionHint.localSubType) setLocalSubType(electionHint.localSubType);
+    }
+  }, [electionHint]);
 
   // ── selectedId 도출 ────────────────────────────────────
   const selectedId = useMemo(() => {
@@ -112,7 +137,7 @@ export function ElectionPanel({ admCd, admNm, defaultType, defaultAssemblySuffix
     return raw ? (raw as ElectionData) : null;
   }, [activeType, assemblyDistrictKey, selectedAssemblySuffix]);
 
-  const { data: apiData, loading, error } = useElection(admCd, selectedId, admNm);
+  const { data: apiData, loading, error } = useElection(admCd, selectedId, admNm, localDistrictKey);
   const data = districtData ?? apiData;
 
   return (

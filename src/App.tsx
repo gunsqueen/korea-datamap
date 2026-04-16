@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from 'react';
 import { MapPin, ChevronLeft, Search, Info, Sun, Moon } from 'lucide-react';
-import type { AdminArea, AdminLevel, NavItem, PanelTab } from './types';
+import type { AdminArea, AdminLevel, NavItem, PanelTab, ElectionHint } from './types';
 import { useBoundary } from './hooks/useBoundary';
 import { useTheme } from './hooks/useTheme';
 import { KoreaMap } from './components/Map/KoreaMap';
@@ -11,6 +11,7 @@ import type { SearchResult } from './components/Search/SearchBar';
 import { AboutModal } from './components/About/AboutModal';
 import { DisclaimerModal } from './components/Disclaimer/DisclaimerModal';
 import assemblyEmdMapping from './data/static/assembly_district_emd_mapping.json';
+import localCouncilEmdMapping from './data/static/local_council_emd_mapping.json';
 import './App.css';
 
 
@@ -54,13 +55,16 @@ export default function App() {
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [assemblyDistrictKey, setAssemblyDistrictKey] = useState<string | null>(null);
-  // 후보자 선택 시 선거 탭 자동 전환용: { gen: '22' } 형태
-  const [assemblyElectionHint, setAssemblyElectionHint] = useState<{ gen: string } | null>(null);
+  // 지방의원(기초/광역) 선거구 하이라이트용: "8_basic_서울_강서구나선거구" 형식
+  const [localDistrictKey, setLocalDistrictKey] = useState<string | null>(null);
+  // 후보자 선택 시 ElectionPanel 자동 전환용 힌트 (대선·총선·지방선거 통합)
+  const [electionHint, setElectionHint] = useState<ElectionHint | null>(null);
 
   const handleMapClick = useCallback((area: AdminArea) => {
     const nextLevel = NEXT_LEVEL[currentLevel];
     setAssemblyDistrictKey(null);
-    setAssemblyElectionHint(null);
+    setLocalDistrictKey(null);
+    setElectionHint(null);
     if (nextLevel) {
       setNavStack((prev) => [...prev, { adm_cd: area.adm_cd, adm_nm: area.adm_nm, level: currentLevel }]);
       setSelectedArea(area);
@@ -81,7 +85,8 @@ export default function App() {
   const handleClosePanel = useCallback(() => {
     setSelectedArea(null);
     setAssemblyDistrictKey(null);
-    setAssemblyElectionHint(null);
+    setLocalDistrictKey(null);
+    setElectionHint(null);
   }, []);
 
   /** 검색 결과 선택 시 해당 레벨로 직접 이동 */
@@ -121,14 +126,30 @@ export default function App() {
           level: 'sigungu',
         });
         setAssemblyDistrictKey(result.assemblyDistrictKey);
-        // 선거 탭 자동 전환 + 해당 총선 회차 선택
-        const gen = result.assemblyDistrictKey.split('_')[0];
+        // 선거 탭 자동 전환 + 힌트 설정
         setActiveTab('election');
-        setAssemblyElectionHint({ gen });
+        setElectionHint(result.electionHint ?? {
+          type: 'assembly',
+          assemblySuffix: result.assemblyDistrictKey.split('_')[0],
+          assemblySubType: 'district',
+        });
       } else {
-        setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'eupmyeondong' });
         setAssemblyDistrictKey(null);
-        setAssemblyElectionHint(null);
+        if (result.candidate) {
+          // 지방의원 선거구 후보: 선거구 하이라이트 + 동 레벨 데이터 표시
+          if (result.localDistrictKey) {
+            setLocalDistrictKey(result.localDistrictKey);
+          } else {
+            setLocalDistrictKey(null);
+          }
+          setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'eupmyeondong' });
+          setActiveTab('election');
+          setElectionHint(result.electionHint ?? null);
+        } else {
+          setLocalDistrictKey(null);
+          setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'eupmyeondong' });
+          setElectionHint(null);
+        }
       }
     }
     setMobileSearchOpen(false);
@@ -138,15 +159,29 @@ export default function App() {
   const displayArea = hoveredArea ?? selectedArea;
   const panelHasContent = selectedArea !== null;
 
-  // 국회의원 선거구 하이라이트: 선거구 키 → 읍면동 코드 Set
+  // 선거구 하이라이트: 국회의원 또는 지방의원 선거구 키 → 읍면동 코드 Set
   const highlightedEmdCodes = useMemo(() => {
-    if (!assemblyDistrictKey) return undefined;
-    const [gen, ...rest] = assemblyDistrictKey.split('_');
-    const districtKey = rest.join('_');
-    const mapping = (assemblyEmdMapping as Record<string, Record<string, string[]>>)[gen];
-    const codes = mapping?.[districtKey];
-    return codes ? new Set(codes) : undefined;
-  }, [assemblyDistrictKey]);
+    if (assemblyDistrictKey) {
+      // "22_서울_강서갑" 형식
+      const [gen, ...rest] = assemblyDistrictKey.split('_');
+      const districtKey = rest.join('_');
+      const mapping = (assemblyEmdMapping as Record<string, Record<string, string[]>>)[gen];
+      const codes = mapping?.[districtKey];
+      return codes ? new Set(codes) : undefined;
+    }
+    if (localDistrictKey) {
+      // "8_basic_서울_강서구나선거구" 형식
+      // local_council_emd_mapping.json 구조: { "8": { "basic": { "서울_강서구나선거구": [...] } } }
+      const parts = localDistrictKey.split('_');
+      const num = parts[0];         // "8"
+      const type = parts[1];        // "basic" or "council"
+      const districtKey = parts.slice(2).join('_');  // "서울_강서구나선거구"
+      const localMapping = localCouncilEmdMapping as Record<string, Record<string, Record<string, string[]>>>;
+      const codes = localMapping[num]?.[type]?.[districtKey];
+      return codes ? new Set(codes) : undefined;
+    }
+    return undefined;
+  }, [assemblyDistrictKey, localDistrictKey]);
 
   // 모바일 헤더: 현재 위치명
   const mobileRegionName = navStack.length === 0
@@ -303,9 +338,9 @@ export default function App() {
               activeTab={activeTab}
               onTabChange={setActiveTab}
               onClose={handleClosePanel}
-              defaultElectionType={assemblyElectionHint ? 'assembly' : undefined}
-              defaultAssemblySuffix={assemblyElectionHint?.gen}
+              electionHint={electionHint}
               assemblyDistrictKey={assemblyDistrictKey ?? undefined}
+              localDistrictKey={localDistrictKey}
             />
           ) : (
             <div className="panel-placeholder">
