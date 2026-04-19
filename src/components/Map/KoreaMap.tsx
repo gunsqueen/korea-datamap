@@ -6,6 +6,13 @@ import type { AdminArea, AdminGeoCollection, AdminLevel } from '../../types';
 import { getSidoColor } from '../../utils/adminCode';
 import { formatAdminLabel, getAdminLabelLatLng, shouldRenderAdminLabel } from '../../utils/adminLabel';
 
+export interface ChoroplethEntry {
+  color: string;
+  party: string;
+  voteRate: number;
+  winnerName?: string;
+}
+
 interface Props {
   geoData: AdminGeoCollection;
   level: AdminLevel;
@@ -14,9 +21,16 @@ interface Props {
   onSelect: (area: AdminArea) => void;
   onHover: (area: AdminArea | null) => void;
   highlightedEmdCodes?: Set<string>;
+  /** 선거 결과 코로플레스 채색: adm_cd → 승자 정당 정보 */
+  choroplethMap?: Map<string, ChoroplethEntry>;
+  /**
+   * 하단에 가려진 영역(px). 모바일 바텀시트가 있을 때 지도의 시각적 중심을
+   * 보이는 영역(지도 컨테이너 상단 ~ (height - bottomInset))에 맞추기 위해 사용.
+   */
+  bottomInset?: number;
 }
 
-export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelect, onHover, highlightedEmdCodes }: Props) {
+export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelect, onHover, highlightedEmdCodes, choroplethMap, bottomInset = 0 }: Props) {
   const mapRef = useRef<L.Map | null>(null);
   const layerRef = useRef<L.GeoJSON | null>(null);
   const labelLayerRef = useRef<L.LayerGroup | null>(null);
@@ -80,13 +94,20 @@ export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelec
         const adm_cd = feature?.properties?.adm_cd ?? '';
         const isSelected = adm_cd === selectedCode;
         const isHighlighted = highlightedEmdCodes?.has(adm_cd) ?? false;
+        const choro = choroplethMap?.get(adm_cd);
+        // 코로플레스 색 (정당색) 적용: 득표율 기반 투명도 (35~75%)
+        const choroOpacity = choro
+          ? Math.min(0.78, Math.max(0.38, 0.38 + (choro.voteRate / 100) * 0.5))
+          : 0.45;
         return {
           fillColor: isHighlighted
             ? 'rgba(251,191,36,0.35)'
-            : isSelected ? 'rgba(6,182,212,0.20)' : getSidoColor(adm_cd),
-          fillOpacity: isHighlighted ? 1 : isSelected ? 1 : 0.45,
-          color: isHighlighted ? '#f59e0b' : isSelected ? '#22d3ee' : '#d946ef',
-          weight: isHighlighted ? 2.5 : isSelected ? 2.5 : 1.5,
+            : isSelected
+              ? (choro ? choro.color : 'rgba(6,182,212,0.20)')
+              : (choro ? choro.color : getSidoColor(adm_cd)),
+          fillOpacity: isHighlighted ? 1 : isSelected ? Math.min(1, choroOpacity + 0.18) : choroOpacity,
+          color: isHighlighted ? '#f59e0b' : isSelected ? '#22d3ee' : (choro ? '#ffffff66' : '#d946ef'),
+          weight: isHighlighted ? 2.5 : isSelected ? 2.8 : (choro ? 0.8 : 1.5),
           opacity: 1,
         };
       },
@@ -157,6 +178,23 @@ export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelec
     // requestAnimationFrame으로 컨테이너 레이아웃이 완전히 확정된 후 fitBounds 실행
     const map = mapRef.current;
     const geoDataSnapshot = leafletGeoData;
+
+    // 바텀시트에 가려지는 아래쪽 영역만큼 보정: 하단에 padding을 더해
+    // fitBounds가 실제로 "보이는 영역"을 기준으로 맞추도록 한다.
+    const insetPadding = (pad: [number, number]): L.FitBoundsOptions => ({
+      paddingTopLeft: [pad[0], pad[1]],
+      paddingBottomRight: [pad[0], pad[1] + bottomInset],
+      animate: false,
+    });
+
+    // setView 시 center를 보이는 영역의 가운데로 맞추기 위해 pixel 공간에서 아래로 이동 보정
+    const offsetCenter = (center: L.LatLng, zoom: number): L.LatLng => {
+      if (!bottomInset) return center;
+      const point = map.project(center, zoom);
+      const shifted = L.point(point.x, point.y + bottomInset / 2);
+      return map.unproject(shifted, zoom);
+    };
+
     requestAnimationFrame(() => {
       if (!map) return;
       map.invalidateSize({ animate: false });
@@ -168,21 +206,21 @@ export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelec
           const bounds = L.geoJSON(target as unknown as GeoJsonObject).getBounds();
           // 읍면동 레벨(구 클릭)은 zoom 12 고정, 그 외는 fitBounds 자동 계산
           if (level === 'eupmyeondong') {
-            map.setView(bounds.getCenter(), 12, { animate: false });
+            map.setView(offsetCenter(bounds.getCenter(), 12), 12, { animate: false });
           } else {
-            map.fitBounds(bounds, { padding: [40, 40], animate: false });
+            map.fitBounds(bounds, insetPadding([40, 40]));
           }
         } else {
-          map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [20, 20], animate: false });
+          map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), insetPadding([20, 20]));
         }
       } else if (level === 'sido') {
-        // 전국 뷰(sido 레벨, 선택 없음): fitBounds로 줌 계산 후 세종시 중심으로 고정
-        map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [20, 20], animate: false });
+        // 전국 뷰(sido 레벨, 선택 없음): fitBounds로 줌 계산 후 세종시 중심으로 고정 (바텀시트 보정)
+        map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), insetPadding([20, 20]));
         const targetZoom = map.getZoom() + 0.7;
-        map.setView([36.4800, 127.2890], targetZoom, { animate: false });
+        map.setView(offsetCenter(L.latLng(36.4800, 127.2890), targetZoom), targetZoom, { animate: false });
       } else {
         // 시군구·읍면동 레벨에서 선택 없음: 현재 geoData 전체 영역에 맞게 fitBounds
-        map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), { padding: [30, 30], animate: false });
+        map.fitBounds(L.geoJSON(geoDataSnapshot).getBounds(), insetPadding([30, 30]));
       }
       renderLabels();
     });
@@ -193,7 +231,52 @@ export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelec
       map.off('zoomend moveend', renderLabels);
       labelLayerRef.current?.clearLayers();
     };
-  }, [geoData, leafletGeoData, selectedCode, level, onHover, onSelect, highlightedEmdCodes]);
+  // bottomInset은 별도 useEffect에서 처리 (전체 GeoJSON 재생성 방지)
+  }, [geoData, leafletGeoData, selectedCode, level, onHover, onSelect, highlightedEmdCodes, choroplethMap]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // 바텀시트 스냅 변경(= bottomInset 변경) 시 현재 뷰를 보이는 영역에 맞춰 재중앙화
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !geoData.features.length) return;
+
+    const run = () => {
+      map.invalidateSize({ animate: false });
+      const insetPadding = (pad: [number, number]): L.FitBoundsOptions => ({
+        paddingTopLeft: [pad[0], pad[1]],
+        paddingBottomRight: [pad[0], pad[1] + bottomInset],
+        animate: false,
+      });
+      const offsetCenter = (center: L.LatLng, zoom: number): L.LatLng => {
+        if (!bottomInset) return center;
+        const point = map.project(center, zoom);
+        const shifted = L.point(point.x, point.y + bottomInset / 2);
+        return map.unproject(shifted, zoom);
+      };
+
+      if (selectedCode) {
+        const target = geoData.features.find((f) => f.properties.adm_cd === selectedCode);
+        if (target) {
+          const bounds = L.geoJSON(target as unknown as GeoJsonObject).getBounds();
+          if (level === 'eupmyeondong') {
+            map.setView(offsetCenter(bounds.getCenter(), 12), 12, { animate: false });
+          } else {
+            map.fitBounds(bounds, insetPadding([40, 40]));
+          }
+          return;
+        }
+      }
+      if (level === 'sido') {
+        map.fitBounds(L.geoJSON(leafletGeoData).getBounds(), insetPadding([20, 20]));
+        const targetZoom = map.getZoom() + 0.7;
+        map.setView(offsetCenter(L.latLng(36.4800, 127.2890), targetZoom), targetZoom, { animate: false });
+      } else {
+        map.fitBounds(L.geoJSON(leafletGeoData).getBounds(), insetPadding([30, 30]));
+      }
+    };
+
+    // 첫 렌더 직후는 메인 useEffect에서 이미 처리되므로 생략, 이후 bottomInset 변경 시에만 실행
+    requestAnimationFrame(run);
+  }, [bottomInset]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />;
 }

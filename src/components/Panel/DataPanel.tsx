@@ -1,8 +1,11 @@
 import { X, BarChart2, Vote } from 'lucide-react';
+import { useMemo } from 'react';
 import type { AdminArea, PanelTab, ElectionHint } from '../../types';
 import { usePopulation } from '../../hooks/usePopulation';
 import { PopulationPanel } from './PopulationPanel';
 import { ElectionPanel } from './ElectionPanel';
+import assemblyEmdMapping from '../../data/static/assembly_district_emd_mapping.json';
+import localCouncilEmdMapping from '../../data/static/local_council_emd_mapping.json';
 
 interface Props {
   area: AdminArea;
@@ -12,6 +15,7 @@ interface Props {
   electionHint?: ElectionHint | null;
   assemblyDistrictKey?: string;
   localDistrictKey?: string | null;
+  onElectionIdChange?: (electionId: string | null) => void;
 }
 
 function PopulationSkeleton() {
@@ -29,8 +33,35 @@ function PopulationSkeleton() {
   );
 }
 
-export function DataPanel({ area, activeTab, onTabChange, onClose, electionHint, assemblyDistrictKey, localDistrictKey }: Props) {
-  const { data: popData, loading: popLoading } = usePopulation(area.adm_cd);
+export function DataPanel({ area, activeTab, onTabChange, onClose, electionHint, assemblyDistrictKey, localDistrictKey, onElectionIdChange }: Props) {
+  const aggregatedPopulation = useMemo(() => {
+    if (localDistrictKey) {
+      const parts = localDistrictKey.split('_');
+      const num = parts[0];
+      const kind = parts[1];
+      const districtKey = parts.slice(2).join('_');
+      const mapping = localCouncilEmdMapping as Record<string, Record<string, Record<string, string[]>>>;
+      const sourceNum = mapping[num]?.[kind] ? num : (num === '9' ? '8' : num);
+      const admCds = mapping[sourceNum]?.[kind]?.[districtKey] ?? [];
+      if (admCds.length > 0) {
+        return { admCds, admNm: area.adm_nm };
+      }
+    }
+
+    if (assemblyDistrictKey) {
+      const [num, ...rest] = assemblyDistrictKey.split('_');
+      const districtKey = rest.join('_');
+      const mapping = assemblyEmdMapping as Record<string, Record<string, string[]>>;
+      const admCds = mapping[num]?.[districtKey] ?? [];
+      if (admCds.length > 0) {
+        return { admCds, admNm: area.adm_nm };
+      }
+    }
+
+    return null;
+  }, [area.adm_nm, assemblyDistrictKey, localDistrictKey]);
+
+  const { data: popData, loading: popLoading } = usePopulation(area.adm_cd, aggregatedPopulation);
 
   return (
     <div className="data-panel">
@@ -48,18 +79,18 @@ export function DataPanel({ area, activeTab, onTabChange, onClose, electionHint,
 
       <div className="panel-tabs">
         <button
-          className={`tab-btn ${activeTab === 'population' ? 'active' : ''}`}
-          onClick={() => onTabChange('population')}
-        >
-          <BarChart2 size={14} strokeWidth={2} />
-          인구
-        </button>
-        <button
           className={`tab-btn ${activeTab === 'election' ? 'active' : ''}`}
           onClick={() => onTabChange('election')}
         >
           <Vote size={14} strokeWidth={2} />
           선거
+        </button>
+        <button
+          className={`tab-btn ${activeTab === 'population' ? 'active' : ''}`}
+          onClick={() => onTabChange('population')}
+        >
+          <BarChart2 size={14} strokeWidth={2} />
+          인구
         </button>
       </div>
 
@@ -78,6 +109,7 @@ export function DataPanel({ area, activeTab, onTabChange, onClose, electionHint,
             electionHint={electionHint}
             assemblyDistrictKey={assemblyDistrictKey}
             localDistrictKey={localDistrictKey}
+            onElectionIdChange={onElectionIdChange}
           />
         )}
       </div>

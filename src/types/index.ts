@@ -152,6 +152,34 @@ export interface Candidate {
   elected?: boolean;
 }
 
+export interface CandidateRegistrationCandidate {
+  name: string;
+  party: string;
+  district: string;
+  age: number;
+  gender: string;
+  job: string;
+  education: string;
+  career: string;
+  status: string;
+  registration_date?: string;
+}
+
+export interface CandidateRegistrationData {
+  election_id: string;
+  election_name: string;
+  election_date: string;
+  adm_cd: string;
+  adm_nm: string;
+  sub_type: string;
+  total_count: number;
+  candidates: CandidateRegistrationCandidate[];
+  request_scope: {
+    sdName: string;
+    sggName?: string;
+  };
+}
+
 // ───────────────────────────────────────────
 // UI 상태 타입
 // ───────────────────────────────────────────
@@ -161,11 +189,9 @@ export type PanelTab = 'population' | 'election';
 export interface AppState {
   selectedArea: AdminArea | null;
   hoveredArea: AdminArea | null;
-  compareArea: AdminArea | null;
   currentLevel: AdminLevel;
   parentCode: string | null;
   activeTab: PanelTab;
-  isComparing: boolean;
 }
 
 export interface SearchResult {

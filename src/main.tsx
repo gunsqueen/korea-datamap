@@ -1,11 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
+import { AppRouter } from './router/AppRouter'
 
 declare const __APP_BUILD_TARGET__: string
 
-const routerMode = 'none'
+const routerMode = 'react-router-dom/browser'
 const baseUrl = import.meta.env.BASE_URL
 const buildTarget = __APP_BUILD_TARGET__
 
@@ -58,6 +58,6 @@ console.info('[startup] Root element', {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <AppRouter />
   </StrictMode>,
 )

@@ -1,8 +1,13 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { MapPin, ChevronLeft, Search, Info, Sun, Moon } from 'lucide-react';
 import type { AdminArea, AdminLevel, NavItem, PanelTab, ElectionHint } from './types';
 import { useBoundary } from './hooks/useBoundary';
 import { useTheme } from './hooks/useTheme';
+import { useChoropleth } from './hooks/useChoropleth';
+import { useRegionHistory } from './hooks/useRegionHistory';
+import { useCandidateAlertMonitor } from './hooks/useCandidateAlertMonitor';
+import { useUrlSync } from './hooks/useUrlSync';
+import { ShareButton } from './components/Share/ShareButton';
 import { KoreaMap } from './components/Map/KoreaMap';
 import { Breadcrumb } from './components/Map/Breadcrumb';
 import { DataPanel } from './components/Panel/DataPanel';
@@ -35,6 +40,8 @@ const LEVEL_GUIDE: Record<AdminLevel, string> = {
 
 export default function App() {
   const { theme, toggle: toggleTheme } = useTheme();
+  const { addRecent } = useRegionHistory();
+  useCandidateAlertMonitor();
   const [navStack, setNavStack] = useState<NavItem[]>([]);
 
   const currentLevel: AdminLevel = navStack.length === 0
@@ -59,6 +66,37 @@ export default function App() {
   const [localDistrictKey, setLocalDistrictKey] = useState<string | null>(null);
   // 후보자 선택 시 ElectionPanel 자동 전환용 힌트 (대선·총선·지방선거 통합)
   const [electionHint, setElectionHint] = useState<ElectionHint | null>(null);
+  // 코로플레스: 현재 ElectionPanel에서 선택된 선거 ID
+  const [activeElectionId, setActiveElectionId] = useState<string | null>(null);
+
+  // URL ↔ 상태 양방향 동기화 (공유·딥링크·뒤로가기 지원)
+  useUrlSync({
+    navStack,
+    selectedArea,
+    activeTab,
+    activeElectionId,
+    assemblyDistrictKey,
+    localDistrictKey,
+    electionHint,
+    setNavStack,
+    setSelectedArea,
+    setActiveTab,
+    setActiveElectionId,
+    setAssemblyDistrictKey,
+    setLocalDistrictKey,
+    setElectionHint,
+  });
+
+  // 모바일 바텀시트 스냅 포인트: 'collapsed' (12%) | 'mid' (55%) | 'expanded' (92%)
+  type SheetSnap = 'collapsed' | 'mid' | 'expanded';
+  const [sheetSnap, setSheetSnap] = useState<SheetSnap>('mid');
+  const sheetDragRef = useRef<{
+    startY: number;
+    startSnap: SheetSnap;
+    currentDelta: number;
+    dragging: boolean;
+  } | null>(null);
+  const sheetEl = useRef<HTMLElement | null>(null);
 
   const handleMapClick = useCallback((area: AdminArea) => {
     const nextLevel = NEXT_LEVEL[currentLevel];
@@ -71,7 +109,21 @@ export default function App() {
     } else {
       setSelectedArea(area);
     }
-  }, [currentLevel]);
+    // 최근 방문에 기록 (시도/시군구/읍면동 모두 추적)
+    const sidoEntry = navStack[0];
+    const sigunguEntry = navStack[1];
+    addRecent({
+      adm_cd: area.adm_cd,
+      adm_nm: area.adm_nm,
+      level: currentLevel,
+      sido_cd: sidoEntry?.adm_cd ?? null,
+      sido_nm: sidoEntry?.adm_nm ?? null,
+      sigungu_cd: sigunguEntry?.adm_cd ?? null,
+      sigungu_nm: sigunguEntry?.adm_nm ?? null,
+    });
+    // 동 선택 시 모바일에서 바텀시트를 mid로 스냅
+    setSheetSnap('mid');
+  }, [currentLevel, navStack, addRecent]);
 
   const handleNavigate = useCallback((index: number) => {
     if (index === -1) {
@@ -91,9 +143,33 @@ export default function App() {
 
   /** 검색 결과 선택 시 해당 레벨로 직접 이동 */
   const handleSearchSelect = useCallback((result: SearchResult) => {
+    const isCandidateResult = !!result.candidate;
+    const isElectionShortcut = !!result.electionHint || !!result.assemblyDistrictKey || !!result.localDistrictKey;
+    const displayName = result.searchLabel ?? result.adm_nm;
+
+    // 후보/선거 바로가기가 아닌 순수 지역 검색만 recent에 기록
+    if (!isCandidateResult && !isElectionShortcut) {
+      addRecent({
+        adm_cd: result.adm_cd,
+        adm_nm: result.adm_nm,
+        level: result.level,
+        sido_cd: result.sido_cd,
+        sido_nm: result.sido_nm,
+        sigungu_cd: result.sigungu_cd,
+        sigungu_nm: result.sigungu_nm,
+      });
+    }
+
+    setAssemblyDistrictKey(result.assemblyDistrictKey ?? null);
+    setLocalDistrictKey(result.localDistrictKey ?? null);
+    setElectionHint(isElectionShortcut ? (result.electionHint ?? null) : null);
+    if (isElectionShortcut) {
+      setActiveTab('election');
+    }
+
     if (result.level === 'sido') {
       setNavStack([]);
-      setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'sido' });
+      setSelectedArea({ adm_cd: result.adm_cd, adm_nm: displayName, level: 'sido' });
     } else if (result.level === 'sigungu') {
       const sidoEntry: NavItem = {
         adm_cd: result.sido_cd!,
@@ -101,7 +177,7 @@ export default function App() {
         level: 'sido',
       };
       setNavStack([sidoEntry]);
-      setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'sigungu' });
+      setSelectedArea({ adm_cd: result.adm_cd, adm_nm: displayName, level: 'sigungu' });
     } else if (result.level === 'eupmyeondong') {
       // 읍면동 선택: sido + sigungu를 navStack에 추가 후 읍면동 선택
       const sidoEntry: NavItem = {
@@ -117,43 +193,18 @@ export default function App() {
       setNavStack([sidoEntry, sigunguEntry]);
 
       if (result.assemblyDistrictKey) {
-        // 국회의원 후보자 검색: 시군구 레벨 데이터를 패널에 표시
-        // (선거구 하이라이트는 유지, selectedArea는 시군구로 설정)
-        const sigunguShortNm = result.sigungu_nm?.split(' ').pop() ?? result.sigungu_nm ?? '';
+        const sigunguShortNm = result.searchLabel ?? result.sigungu_nm?.split(' ').pop() ?? result.sigungu_nm ?? '';
         setSelectedArea({
           adm_cd: result.sigungu_cd!,
           adm_nm: sigunguShortNm,
           level: 'sigungu',
         });
-        setAssemblyDistrictKey(result.assemblyDistrictKey);
-        // 선거 탭 자동 전환 + 힌트 설정
-        setActiveTab('election');
-        setElectionHint(result.electionHint ?? {
-          type: 'assembly',
-          assemblySuffix: result.assemblyDistrictKey.split('_')[0],
-          assemblySubType: 'district',
-        });
       } else {
-        setAssemblyDistrictKey(null);
-        if (result.candidate) {
-          // 지방의원 선거구 후보: 선거구 하이라이트 + 동 레벨 데이터 표시
-          if (result.localDistrictKey) {
-            setLocalDistrictKey(result.localDistrictKey);
-          } else {
-            setLocalDistrictKey(null);
-          }
-          setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'eupmyeondong' });
-          setActiveTab('election');
-          setElectionHint(result.electionHint ?? null);
-        } else {
-          setLocalDistrictKey(null);
-          setSelectedArea({ adm_cd: result.adm_cd, adm_nm: result.adm_nm, level: 'eupmyeondong' });
-          setElectionHint(null);
-        }
+        setSelectedArea({ adm_cd: result.adm_cd, adm_nm: displayName, level: 'eupmyeondong' });
       }
     }
     setMobileSearchOpen(false);
-  }, []);
+  }, [addRecent]);
 
 
   const displayArea = hoveredArea ?? selectedArea;
@@ -173,15 +224,119 @@ export default function App() {
       // "8_basic_서울_강서구나선거구" 형식
       // local_council_emd_mapping.json 구조: { "8": { "basic": { "서울_강서구나선거구": [...] } } }
       const parts = localDistrictKey.split('_');
-      const num = parts[0];         // "8"
+      const num = parts[0];         // "8" or "9"
       const type = parts[1];        // "basic" or "council"
       const districtKey = parts.slice(2).join('_');  // "서울_강서구나선거구"
       const localMapping = localCouncilEmdMapping as Record<string, Record<string, Record<string, string[]>>>;
-      const codes = localMapping[num]?.[type]?.[districtKey];
+      const sourceNum = localMapping[num]?.[type] ? num : (num === '9' ? '8' : num);
+      const codes = localMapping[sourceNum]?.[type]?.[districtKey];
       return codes ? new Set(codes) : undefined;
     }
     return undefined;
   }, [assemblyDistrictKey, localDistrictKey]);
+
+  // ── 코로플레스 채색: 선거 탭 + electionId 선택 + 토글 on ───
+  const choroplethActive =
+    activeTab === 'election' && !!activeElectionId && panelHasContent;
+  const { map: choroplethMap } =
+    useChoropleth(
+      choroplethActive ? activeElectionId : null,
+      geoData?.features ?? [],
+      choroplethActive,
+    );
+
+  // 스냅 변경 시 인라인 높이/transition 리셋 (드래그 종료 후 CSS 클래스가 책임지도록)
+  useEffect(() => {
+    if (sheetEl.current) {
+      sheetEl.current.style.height = '';
+      sheetEl.current.style.transition = '';
+    }
+  }, [sheetSnap]);
+
+  // 뷰포트 크기 추적 (반응형 bottomInset 계산용)
+  const [viewport, setViewport] = useState<{ w: number; h: number }>(() => ({
+    w: typeof window !== 'undefined' ? window.innerWidth : 1280,
+    h: typeof window !== 'undefined' ? window.innerHeight : 800,
+  }));
+  useEffect(() => {
+    const onResize = () => setViewport({ w: window.innerWidth, h: window.innerHeight });
+    window.addEventListener('resize', onResize);
+    window.addEventListener('orientationchange', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+      window.removeEventListener('orientationchange', onResize);
+    };
+  }, []);
+
+  // 모바일에서 바텀시트가 가리는 px 높이 — 지도 중앙 보정용
+  const bottomInset = useMemo(() => {
+    if (viewport.w > 767) return 0;
+    if (!selectedArea) return 0;
+    const pct = { collapsed: 0.12, mid: 0.55, expanded: 0.92 }[sheetSnap];
+    return Math.round(viewport.h * pct);
+  }, [viewport, sheetSnap, selectedArea]);
+
+  // ── 바텀 시트 드래그 핸들러 ─────────────────────
+  const snapToHeight: Record<SheetSnap, number> = { collapsed: 0.12, mid: 0.55, expanded: 0.92 };
+
+  const handleSheetDragStart = useCallback((clientY: number) => {
+    sheetDragRef.current = {
+      startY: clientY,
+      startSnap: sheetSnap,
+      currentDelta: 0,
+      dragging: true,
+    };
+    if (sheetEl.current) {
+      sheetEl.current.style.transition = 'none';
+    }
+  }, [sheetSnap]);
+
+  const handleSheetDragMove = useCallback((clientY: number) => {
+    const drag = sheetDragRef.current;
+    if (!drag || !drag.dragging || !sheetEl.current) return;
+    const viewportH = window.innerHeight;
+    const startHeightPct = snapToHeight[drag.startSnap];
+    const startHeightPx = viewportH * startHeightPct;
+    const delta = drag.startY - clientY; // 위로 드래그 = delta 양수
+    const newHeightPx = Math.max(
+      viewportH * 0.08,
+      Math.min(viewportH * 0.95, startHeightPx + delta),
+    );
+    drag.currentDelta = delta;
+    sheetEl.current.style.height = `${newHeightPx}px`;
+  }, []);
+
+  const handleSheetDragEnd = useCallback(() => {
+    const drag = sheetDragRef.current;
+    if (!drag || !sheetEl.current) return;
+    const viewportH = window.innerHeight;
+    const currentHeightPx = sheetEl.current.offsetHeight;
+    const currentPct = currentHeightPx / viewportH;
+
+    // 가장 가까운 스냅 포인트 결정
+    let nearest: SheetSnap = 'mid';
+    let minDist = Infinity;
+    (Object.keys(snapToHeight) as SheetSnap[]).forEach((snap) => {
+      const dist = Math.abs(snapToHeight[snap] - currentPct);
+      if (dist < minDist) {
+        minDist = dist;
+        nearest = snap;
+      }
+    });
+
+    // 빠른 플릭(velocity) 보정: 드래그 폭이 50px 이상이면 방향에 따라 이동
+    if (Math.abs(drag.currentDelta) > 50) {
+      const order: SheetSnap[] = ['collapsed', 'mid', 'expanded'];
+      const startIdx = order.indexOf(drag.startSnap);
+      if (drag.currentDelta > 0 && startIdx < 2) nearest = order[startIdx + 1];
+      else if (drag.currentDelta < 0 && startIdx > 0) nearest = order[startIdx - 1];
+    }
+
+    sheetEl.current.style.transition = '';
+    sheetEl.current.style.height = '';
+    setSheetSnap(nearest);
+    sheetDragRef.current = null;
+  }, []);
 
   // 모바일 헤더: 현재 위치명
   const mobileRegionName = navStack.length === 0
@@ -240,6 +395,9 @@ export default function App() {
           {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
         </button>
 
+        {/* 모바일 전용: 공유 버튼 */}
+        <ShareButton className="mobile-share-btn" title={mobileRegionName} ariaLabel="URL 공유" />
+
         {/* 모바일 전용: 앱 정보 버튼 */}
         <button
           className="mobile-info-btn"
@@ -249,8 +407,9 @@ export default function App() {
           <Info size={18} />
         </button>
 
-        {/* 데스크탑: 테마 토글 + 앱 정보 버튼 */}
+        {/* 데스크탑: 공유 + 테마 토글 + 앱 정보 버튼 */}
         <div className="header-right">
+          <ShareButton className="share-btn" title={mobileRegionName} />
           <button
             className="theme-toggle"
             onClick={toggleTheme}
@@ -314,9 +473,20 @@ export default function App() {
               onSelect={handleMapClick}
               onHover={setHoveredArea}
               highlightedEmdCodes={highlightedEmdCodes}
+              choroplethMap={choroplethActive ? choroplethMap : undefined}
+              bottomInset={bottomInset}
             />
           ) : (
             <div className="map-error">지도 데이터를 불러올 수 없습니다.</div>
+          )}
+
+          {/* 코로플레스 범례 — 선거 탭 + 선거 선택 시에만 표시 */}
+          {activeTab === 'election' && !!activeElectionId && panelHasContent && (
+            <div className="choropleth-control">
+              {choroplethMap.size > 0 && (
+                <ChoroplethLegend map={choroplethMap} />
+              )}
+            </div>
           )}
 
           {/* 호버 툴팁 (데스크탑) */}
@@ -329,9 +499,39 @@ export default function App() {
 
         </main>
 
-        {/* 사이드 패널 — 데스크탑: 우측 패널 / 모바일: 지도 아래 카드 영역 */}
-        <aside className={`side-panel${panelHasContent ? ' panel-open' : ''}`}>
-          <div className="mobile-drag-handle" onClick={handleClosePanel} role="button" aria-label="패널 닫기" />
+        {/* 사이드 패널 — 데스크탑: 우측 패널 / 모바일: 스와이프 바텀시트 */}
+        <aside
+          ref={sheetEl}
+          className={`side-panel${panelHasContent ? ' panel-open' : ''} sheet-snap-${sheetSnap}`}
+          data-sheet-snap={sheetSnap}
+        >
+          <div
+            className="mobile-drag-handle"
+            role="button"
+            aria-label="패널 높이 조절"
+            onTouchStart={(e) => handleSheetDragStart(e.touches[0].clientY)}
+            onTouchMove={(e) => handleSheetDragMove(e.touches[0].clientY)}
+            onTouchEnd={handleSheetDragEnd}
+            onMouseDown={(e) => {
+              handleSheetDragStart(e.clientY);
+              const onMove = (ev: MouseEvent) => handleSheetDragMove(ev.clientY);
+              const onUp = () => {
+                handleSheetDragEnd();
+                window.removeEventListener('mousemove', onMove);
+                window.removeEventListener('mouseup', onUp);
+              };
+              window.addEventListener('mousemove', onMove);
+              window.addEventListener('mouseup', onUp);
+            }}
+            onClick={() => {
+              // 탭 시 스냅 순환: collapsed → mid → expanded → collapsed
+              setSheetSnap((prev) =>
+                prev === 'collapsed' ? 'mid' : prev === 'mid' ? 'expanded' : 'collapsed'
+              );
+            }}
+          >
+            <div className="drag-handle-bar" />
+          </div>
           {selectedArea ? (
             <DataPanel
               area={selectedArea}
@@ -341,6 +541,7 @@ export default function App() {
               electionHint={electionHint}
               assemblyDistrictKey={assemblyDistrictKey ?? undefined}
               localDistrictKey={localDistrictKey}
+              onElectionIdChange={setActiveElectionId}
             />
           ) : (
             <div className="panel-placeholder">
@@ -405,6 +606,36 @@ export default function App() {
 
       {/* 최초 실행 시 1회 면책 조항 모달 */}
       <DisclaimerModal />
+    </div>
+  );
+}
+
+/**
+ * 코로플레스 범례: 현재 지도에 표시된 정당 색 요약.
+ * 화면 내 지역별 1위 정당을 카운트하여 상위 6개 정당만 표시.
+ */
+function ChoroplethLegend({ map }: { map: Map<string, { color: string; party: string }> }) {
+  const counts = new Map<string, { color: string; count: number }>();
+  for (const entry of map.values()) {
+    const existing = counts.get(entry.party);
+    if (existing) existing.count += 1;
+    else counts.set(entry.party, { color: entry.color, count: 1 });
+  }
+  const sorted = Array.from(counts.entries())
+    .sort((a, b) => b[1].count - a[1].count)
+    .slice(0, 6);
+
+  if (sorted.length === 0) return null;
+
+  return (
+    <div className="choropleth-legend">
+      {sorted.map(([party, { color, count }]) => (
+        <div key={party} className="choropleth-legend-item">
+          <span className="choropleth-legend-swatch" style={{ background: color }} />
+          <span className="choropleth-legend-party">{party}</span>
+          <span className="choropleth-legend-count">{count}</span>
+        </div>
+      ))}
     </div>
   );
 }

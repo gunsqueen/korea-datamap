@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import type { PopulationData } from '../types';
-import { getPopulation } from '../services';
+import { getAggregatedPopulation, getPopulation } from '../services';
 
-export function usePopulation(admCd: string | null) {
+export function usePopulation(admCd: string | null, aggregate?: { admCds: string[]; admNm: string } | null) {
   const [data, setData] = useState<PopulationData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -13,12 +13,15 @@ export function usePopulation(admCd: string | null) {
       .then(() => {
         setLoading(true);
         setError(null);
+        if (aggregate?.admCds?.length) {
+          return getAggregatedPopulation(aggregate.admCds, aggregate.admNm, admCd);
+        }
         return getPopulation(admCd);
       })
       .then(setData)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
-  }, [admCd]);
+  }, [admCd, aggregate]);
 
   return { data, loading, error };
 }

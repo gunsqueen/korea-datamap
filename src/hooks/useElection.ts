@@ -24,7 +24,7 @@ export function useElection(
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!admCd) return;
+    if (!admCd || electionId?.startsWith('local_9_')) return;
 
     // 선거구 집계 조건:
     // 1. localDistrictKey가 있고

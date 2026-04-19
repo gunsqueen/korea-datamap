@@ -5,6 +5,8 @@ import type { ElectionType, ElectionData, ElectionHint } from '../../types';
 import { useElection } from '../../hooks/useElection';
 import { ELECTIONS_META } from '../../services';
 import districtResults from '../../data/static/assembly_district_results.json';
+import { ElectionTab as Local9CandidateTab } from '../CandidateRegistration/ElectionTab';
+import type { LocalCandidateElectionId } from '../../services/candidateRegistration';
 
 interface Props {
   admCd: string;
@@ -15,6 +17,8 @@ interface Props {
   assemblyDistrictKey?: string;
   /** "8_basic_서울_강서구나선거구" 형식 — 설정 시 선거구 전체 동 집계 결과 표시 */
   localDistrictKey?: string | null;
+  /** 현재 선택된 electionId를 상위로 알려 지도 코로플레스 채색에 사용 */
+  onElectionIdChange?: (electionId: string | null) => void;
 }
 
 const TYPE_LABELS: Record<ElectionType, string> = {
@@ -23,7 +27,7 @@ const TYPE_LABELS: Record<ElectionType, string> = {
   local: '지방선거',
 };
 
-const TYPE_ORDER: ElectionType[] = ['presidential', 'assembly', 'local'];
+const TYPE_ORDER: ElectionType[] = ['local', 'assembly', 'presidential'];
 
 const ASSEMBLY_SUB_LABELS: { key: 'district' | 'pr'; label: string }[] = [
   { key: 'district', label: '지역구' },
@@ -39,8 +43,8 @@ const LOCAL_SUB_LABELS = [
   { key: 'basic_pr', label: '기초 비례' },
 ];
 
-export function ElectionPanel({ admCd, admNm, electionHint, assemblyDistrictKey, localDistrictKey }: Props) {
-  const [activeType, setActiveType] = useState<ElectionType>(electionHint?.type ?? 'presidential');
+export function ElectionPanel({ admCd, admNm, electionHint, assemblyDistrictKey, localDistrictKey, onElectionIdChange }: Props) {
+  const [activeType, setActiveType] = useState<ElectionType>(electionHint?.type ?? 'local');
 
   // ── 대통령 ───────────────────────────────────────────
   const presidentialMetas = useMemo(
@@ -108,6 +112,7 @@ export function ElectionPanel({ admCd, admNm, electionHint, assemblyDistrictKey,
   // 후보자 선택 시 탭 자동 전환 (electionHint가 바뀔 때마다 모든 관련 상태 업데이트)
   useEffect(() => {
     if (!electionHint) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setActiveType(electionHint.type);
     if (electionHint.type === 'presidential') {
       if (electionHint.presidentialId) setSelectedPresidentialId(electionHint.presidentialId);
@@ -139,6 +144,13 @@ export function ElectionPanel({ admCd, admNm, electionHint, assemblyDistrictKey,
 
   const { data: apiData, loading, error } = useElection(admCd, selectedId, admNm, localDistrictKey);
   const data = districtData ?? apiData;
+  const isLocal9CandidateTab = activeType === 'local' && selectedLocalPrefix === 'local_9';
+
+  // 현재 선거 ID를 상위로 전달 (코로플레스 채색용)
+  useEffect(() => {
+    onElectionIdChange?.(isLocal9CandidateTab ? null : (selectedId || null));
+    return () => { onElectionIdChange?.(null); };
+  }, [isLocal9CandidateTab, selectedId, onElectionIdChange]);
 
   return (
     <div className="panel-section">
@@ -209,7 +221,7 @@ export function ElectionPanel({ admCd, admNm, electionHint, assemblyDistrictKey,
             {localGroups.map((g) => (
               <button
                 key={g.prefix}
-                className={`election-year-btn ${selectedLocalPrefix === g.prefix ? 'active' : ''}`}
+                className={`election-year-btn ${selectedLocalPrefix === g.prefix ? 'active' : ''} ${g.prefix === 'local_9' ? 'election-year-btn--future' : ''}`}
                 onClick={() => setSelectedLocalPrefix(g.prefix)}
               >
                 <span className="election-year-name">{g.short_name}</span>
@@ -232,7 +244,9 @@ export function ElectionPanel({ admCd, admNm, electionHint, assemblyDistrictKey,
       )}
 
       {/* 결과 표시 */}
-      {loading ? (
+      {isLocal9CandidateTab ? (
+        <Local9CandidateTab key={`${selectedId}-${admCd}`} admCd={admCd} electionId={selectedId as LocalCandidateElectionId} />
+      ) : loading ? (
         <div className="loading">불러오는 중...</div>
       ) : error === '선거 데이터 확인 필요' ? (
         <div className="empty">선거 데이터 확인 필요</div>
@@ -249,6 +263,14 @@ export function ElectionPanel({ admCd, admNm, electionHint, assemblyDistrictKey,
 
 function ElectionResult({ data, requestedAdmCd }: { data: ElectionData; requestedAdmCd: string }) {
   const fmt = (n: number) => n.toLocaleString('ko-KR');
+  const topTwo = [...data.candidates]
+    .sort((a, b) => {
+      if (b.votes !== a.votes) return b.votes - a.votes;
+      return b.vote_rate - a.vote_rate;
+    })
+    .slice(0, 2);
+  const voteGap = topTwo.length === 2 ? topTwo[0].votes - topTwo[1].votes : null;
+  const rateGap = topTwo.length === 2 ? topTwo[0].vote_rate - topTwo[1].vote_rate : null;
 
   const pieData = data.candidates.slice(0, 6).map((c) => ({
     name: c.name,
@@ -309,39 +331,56 @@ function ElectionResult({ data, requestedAdmCd }: { data: ElectionData; requeste
 
       {/* 파이 차트 */}
       {pieData.length > 1 && (
-        <div className="chart-container">
-          <ResponsiveContainer width="100%" height={180}>
-            <PieChart>
-              <Pie
-                data={pieData}
-                cx="45%"
-                cy="50%"
-                innerRadius={45}
-                outerRadius={75}
-                dataKey="value"
+        <>
+          <div className="chart-container">
+            <ResponsiveContainer width="100%" height={180}>
+              <PieChart>
+                <Pie
+                  data={pieData}
+                  cx="45%"
+                  cy="50%"
+                  innerRadius={45}
+                  outerRadius={75}
+                  dataKey="value"
+                >
+                  {pieData.map((entry, i) => (
+                    <Cell key={i} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip
+                  formatter={(v, _n, props) => [
+                    `${fmt(v as number)}표 (${props.payload.vote_rate?.toFixed(2) ?? ''}%)`,
+                    `${props.payload.name} (${props.payload.party})`
+                  ]}
+                />
+                <Legend
+                  layout="vertical"
+                  align="right"
+                  verticalAlign="middle"
+                  iconSize={10}
+                  formatter={(_, entry: { payload?: { name?: string } }) =>
+                    <span style={{ fontSize: 11 }}>{entry.payload?.name ?? ''}</span>
+                  }
+                />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+          {voteGap !== null && rateGap !== null && (
+            <div className="election-gap-card">
+              <span className="election-gap-label">1,2위 격차</span>
+              <div
+                className="election-gap-rate"
+                style={{ color: topTwo[0].party_color }}
               >
-                {pieData.map((entry, i) => (
-                  <Cell key={i} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip
-                formatter={(v, _n, props) => [
-                  `${fmt(v as number)}표 (${props.payload.vote_rate?.toFixed(2) ?? ''}%)`,
-                  `${props.payload.name} (${props.payload.party})`
-                ]}
-              />
-              <Legend
-                layout="vertical"
-                align="right"
-                verticalAlign="middle"
-                iconSize={10}
-                formatter={(_, entry: { payload?: { name?: string } }) =>
-                  <span style={{ fontSize: 11 }}>{entry.payload?.name ?? ''}</span>
-                }
-              />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
+                {rateGap.toFixed(2)}%p
+              </div>
+              <div className="election-gap-votes">{fmt(voteGap)}표 차이</div>
+              <div className="election-gap-names">
+                {topTwo[0].name} vs {topTwo[1].name}
+              </div>
+            </div>
+          )}
+        </>
       )}
 
       {/* 전체 후보 결과 테이블 */}

@@ -353,37 +353,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .map-hover-tooltip strong { font-weight: 700; font-size: 14px; }
 .map-hover-tooltip span { color: rgba(255,255,255,0.5); font-size: 11px; }
 
-.compare-hint {
-  position: absolute;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #fef3c7;
-  color: #92400e;
-  border: 1px solid #fde68a;
-  border-radius: var(--radius);
-  padding: 10px 18px;
-  font-size: 13px;
-  font-weight: 600;
-  z-index: 500;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  box-shadow: var(--shadow);
-  white-space: nowrap;
-}
-
-.btn-cancel-compare {
-  background: rgba(146,64,14,0.12);
-  border-radius: var(--radius-sm);
-  padding: 4px 10px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #92400e;
-  transition: background 0.15s;
-}
-.btn-cancel-compare:hover { background: rgba(146,64,14,0.22); }
-
 /* ─── Side Panel ────────────────────────────────────── */
 /* Desktop default: 패널 항상 표시 (지도와 균형 유지) */
 .side-panel {
@@ -449,7 +418,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .panel-actions { display: flex; gap: 6px; }
 
-.btn-compare, .btn-close {
+.btn-close {
   width: 30px;
   height: 30px;
   border-radius: var(--radius-sm);
@@ -460,12 +429,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transition: all 0.15s;
   border: 1px solid var(--border);
   background: rgba(30,41,59,0.50);
-}
-
-.btn-compare:hover {
-  background: var(--primary-50);
-  color: var(--primary-light);
-  border-color: var(--primary-100);
 }
 .btn-close:hover {
   background: rgba(239,68,68,0.15);
@@ -992,6 +955,22 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   box-shadow: 0 0 0 2px rgba(37,99,235,0.1);
 }
 
+.election-year-btn--future {
+  border-color: rgba(217, 119, 6, 0.28);
+  background: rgba(245, 158, 11, 0.07);
+}
+
+.election-year-btn--future .election-year-name {
+  color: #b45309;
+}
+
+.election-year-btn--future.active {
+  background: rgba(245, 158, 11, 0.14);
+  border-color: rgba(217, 119, 6, 0.45);
+  color: #92400e;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.12);
+}
+
 .election-year-btn:hover:not(.active) {
   background: var(--bg);
   border-color: #d1d5db;
@@ -1080,6 +1059,46 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .estat-value.highlight {
   color: var(--primary);
   font-size: 16px;
+}
+
+.election-gap-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin: -2px 0 14px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-xs);
+  text-align: center;
+}
+
+.election-gap-label {
+  font-size: 11px;
+  color: var(--text-3);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.election-gap-rate {
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.8px;
+}
+
+.election-gap-votes {
+  font-size: 12px;
+  color: var(--text-2);
+  font-weight: 700;
+}
+
+.election-gap-names {
+  font-size: 11px;
+  color: var(--text-3);
+  font-weight: 600;
 }
 
 .candidate-row.elected {
@@ -1521,44 +1540,63 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   z-index: 1000;
 }
 
-/* ─── Compare Panel ─────────────────────────── */
-.compare-panel { display: flex; flex-direction: column; min-height: 100%; background: var(--bg); }
+/* ─── Search: 즐겨찾기 / 최근 검색 ─────────────── */
+.search-item-fav {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--text-4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  margin-left: auto;
+  transition: all 0.15s;
+}
+.search-item-fav:hover { color: var(--warning); background: rgba(251,191,36,0.12); }
+.search-item-fav.active { color: var(--warning); }
 
-.compare-grid {
+.search-history {
+  padding: 4px 0;
+}
+.search-history-section:not(:last-child) {
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+}
+.search-history-header {
   display: flex;
   align-items: center;
-  padding: 14px 20px;
-  border-bottom: 1px solid var(--border);
-  gap: 8px;
-  background: var(--surface);
+  gap: 6px;
+  padding: 8px 14px 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
-
-.compare-col.header { flex: 1; }
-.compare-col.divider { color: var(--text-4); font-size: 12px; font-weight: 700; text-align: center; min-width: 24px; }
-.compare-area-name { font-size: 15px; font-weight: 700; color: var(--text-1); }
-
-.compare-section {
-  padding: 14px 20px;
-  border-bottom: 1px solid var(--border-light);
-  background: var(--surface);
-  margin-bottom: 8px;
+.search-history-clear {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  padding: 3px;
+  cursor: pointer;
+  color: var(--text-4);
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
 }
+.search-history-clear:hover { color: var(--danger); background: rgba(248,113,113,0.1); }
 
-.compare-section-title { font-size: 11px; font-weight: 700; color: var(--text-4); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
-.compare-row { display: flex; align-items: center; margin-bottom: 8px; font-size: 13px; }
-.compare-cell { flex: 1; font-weight: 600; color: var(--text-1); }
-.compare-cell:last-child { text-align: right; }
-.compare-cell.winner { color: var(--primary); }
-.compare-label { color: var(--text-4); font-size: 11px; min-width: 70px; text-align: center; font-weight: 600; }
-
-.compare-winner { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
-.cw-item { flex: 1; display: flex; flex-direction: column; gap: 2px; }
-.cw-item:last-child { text-align: right; align-items: flex-end; }
-.cw-party { font-size: 11px; font-weight: 700; }
-.cw-name { font-size: 13px; font-weight: 700; color: var(--text-1); }
-.cw-rate { font-size: 20px; font-weight: 800; color: var(--text-1); letter-spacing: -0.5px; }
-.cw-vs { font-size: 10px; color: var(--text-4); min-width: 32px; text-align: center; }
-.cw-empty { color: var(--text-4); }
+.search-history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.search-history-item {
+  padding: 8px 14px;
+}
 
 /* ─── Breadcrumb ────────────────────────────── */
 .map-breadcrumb-wrap {
@@ -1673,6 +1711,78 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   gap: 20px;
   flex-shrink: 0;
   border-top: 1px solid var(--border);
+}
+
+/* ─── Choropleth Control (지도 위 플로팅) ───── */
+.choropleth-control {
+  position: absolute;
+  right: 14px;
+  bottom: 60px;
+  z-index: 450;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  pointer-events: none;
+}
+.choropleth-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--overlay-ctrl);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-2);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s;
+}
+.choropleth-toggle:hover { color: var(--text-1); border-color: var(--primary); }
+.choropleth-toggle.active { color: var(--primary-light); border-color: var(--primary); background: var(--primary-50); }
+.choropleth-progress {
+  font-size: 10px;
+  color: var(--text-3);
+  margin-left: 2px;
+}
+.choropleth-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 10px;
+  background: var(--overlay-ctrl);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  pointer-events: auto;
+  max-width: 200px;
+}
+.choropleth-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-2);
+}
+.choropleth-legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.choropleth-legend-party { flex: 1; font-weight: 600; }
+.choropleth-legend-count {
+  font-size: 10px;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ─── Mobile Drag Handle ─────────────────────── */
@@ -1850,22 +1960,22 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     border-radius: var(--radius-lg) !important;
   }
 
-  /* === 바디 레이아웃: 수직 분할 === */
+  /* === 바디 레이아웃: 지도 풀 사이즈 + 위에 바텀시트 === */
   .app-body {
     flex-direction: column;
     overflow: hidden;
     position: relative;
   }
 
-  /* 지도: 화면의 52% (fixed) */
+  /* 지도: 전체 영역 차지 (바텀시트가 오버레이) */
   .map-container {
-    flex: 0 0 52%;
-    height: 52%;
-    min-height: 200px;
+    flex: 1 !important;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
     overflow: hidden;
   }
 
-  /* 지도 오버레이 제거 (바텀시트 아님) */
   .map-overlay { display: none !important; }
 
   /* 지도 위 브레드크럼 축소 */
@@ -1882,43 +1992,102 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .level-guide { display: none; }
   .map-hover-tooltip { display: none; }
 
-  /* 모바일 줌 컨트롤: 우하단으로 이동했으므로 위치 보정 */
+  /* 모바일 줌 컨트롤: 우하단 */
   .leaflet-bottom.leaflet-right { margin-bottom: 8px; margin-right: 8px; }
 
-  /* === 사이드 패널 → 지도 아래 카드 영역 === */
+  /* === 모바일 바텀시트 === */
   .side-panel {
-    /* 바텀시트 완전 해제 */
-    position: static !important;
-    flex: 1 !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    flex: unset !important;
     width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
     min-height: 0 !important;
+    max-height: 95vh !important;
     transform: none !important;
-    border-radius: 0 !important;
+    border-radius: 18px 18px 0 0 !important;
     border-left: none !important;
     border-top: 1px solid var(--border) !important;
-    box-shadow: none !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    -webkit-overflow-scrolling: touch !important;
-    overscroll-behavior: contain !important;
-    padding-bottom: max(env(safe-area-inset-bottom), 16px) !important;
-    transition: none !important;
-    background: var(--bg) !important;
+    box-shadow: 0 -8px 32px rgba(0,0,0,0.35) !important;
+    overflow: hidden !important;
+    background: var(--surface-solid) !important;
+    z-index: 500 !important;
+    transition: height 0.28s cubic-bezier(0.22, 0.9, 0.35, 1.0) !important;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: env(safe-area-inset-bottom) !important;
   }
 
-  .side-panel.panel-open {
-    transform: none !important;
-    flex: 1 !important;
+  /* 패널 닫힘 상태: 완전히 숨김 */
+  .side-panel:not(.panel-open) {
+    height: 0 !important;
+    border-top: none !important;
+  }
+  .side-panel:not(.panel-open) .mobile-drag-handle { display: none !important; }
+
+  /* 스냅 포인트별 높이 */
+  .side-panel.panel-open.sheet-snap-collapsed { height: 12vh !important; }
+  .side-panel.panel-open.sheet-snap-mid { height: 55vh !important; }
+  .side-panel.panel-open.sheet-snap-expanded { height: 92vh !important; }
+
+  /* 확장 상태에서 지도를 숨김 (성능/집중) - 선택사항, 현재는 유지 */
+
+  /* 드래그 핸들 표시 */
+  .mobile-drag-handle {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+    height: 26px !important;
+    flex-shrink: 0 !important;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    background: transparent !important;
+    border: none !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+  .mobile-drag-handle:active { cursor: grabbing; }
+  .drag-handle-bar {
+    width: 44px;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--text-4);
+    opacity: 0.55;
+  }
+  .side-panel.panel-open.sheet-snap-collapsed .drag-handle-bar { opacity: 0.85; }
+
+  /* 바텀시트 내부 스크롤 - 핸들을 제외한 영역만 스크롤 */
+  .side-panel.panel-open .data-panel,
+  .side-panel.panel-open .panel-placeholder {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 
-  /* 드래그 핸들 숨기기 */
-  .mobile-drag-handle { display: none !important; }
+  /* collapsed 상태에서는 헤더 타이틀만 살짝 보이도록 */
+  .side-panel.panel-open.sheet-snap-collapsed .panel-body,
+  .side-panel.panel-open.sheet-snap-collapsed .panel-tabs { display: none !important; }
+
+  /* 코로플레스 컨트롤: 모바일에서는 좌상단(지도 상단)으로 */
+  .choropleth-control {
+    right: 8px;
+    bottom: auto;
+    top: 56px;
+    align-items: flex-end;
+    gap: 6px;
+  }
+  .choropleth-toggle { font-size: 11px; padding: 6px 10px; }
+  .choropleth-legend { max-width: 160px; padding: 6px 8px; }
+  .choropleth-legend-item { font-size: 10px; }
 
   /* === 데이터 패널 === */
   .data-panel { height: auto; min-height: unset; }
-  .compare-panel { min-height: unset; }
 
   .panel-header {
     padding: 12px 14px 10px;
@@ -2032,14 +2201,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     max-height: 50vh;
   }
 
-  .compare-hint {
-    top: 8px;
-    left: 12px;
-    right: 12px;
-    transform: none;
-    font-size: 13px;
-    padding: 10px 14px;
-  }
 }
 
 /* ─── 라이트 테마: 컴포넌트 하드코딩 색상 오버라이드 ── */
@@ -2070,7 +2231,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border-color: rgba(148,163,184,0.35);
 }
 
-[data-theme="light"] .btn-compare,
 [data-theme="light"] .btn-close {
   background: rgba(241,245,249,0.80);
   border-color: rgba(148,163,184,0.35);
@@ -2131,6 +2291,69 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .theme-toggle:hover {
   background: var(--primary-50);
   color: var(--primary);
+}
+
+/* ─── URL 공유 버튼 (데스크탑) ───────────────── */
+.share-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: var(--text-3);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.share-btn:hover {
+  background: var(--primary-50);
+  color: var(--primary);
+}
+.share-btn-feedback {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--text-1);
+  color: var(--bg);
+  font-size: 11px;
+  font-weight: 500;
+  pointer-events: none;
+  z-index: 30;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+/* ─── URL 공유 버튼 (모바일) ─────────────────── */
+.mobile-share-btn {
+  display: none;
+}
+@media (max-width: 767px) {
+  .mobile-share-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius);
+    color: var(--text-2);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s, color 0.15s;
+  }
+  .mobile-share-btn:active { background: var(--primary-50); color: var(--primary); }
+  .share-btn { display: none !important; }
+}
+@media (min-width: 768px) {
+  .mobile-share-btn { display: none !important; }
 }
 
 /* ─── 라이트 테마: 지도 레이블 ───────────────── */
@@ -2654,4 +2877,190 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--text-3);
   text-align: center;
   padding: 20px 0;
+}
+
+.candidate-registration-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.candidate-region-selector {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.candidate-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.candidate-filter span {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.candidate-filter select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  color: var(--text-1);
+  font-size: 13px;
+}
+
+.candidate-filter select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.candidate-stats-grid {
+  margin-top: 0;
+}
+
+.candidate-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.candidate-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.candidate-card__toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.candidate-card__toggle:hover {
+  background: rgba(148, 163, 184, 0.06);
+}
+
+.candidate-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 14px 10px;
+}
+
+.candidate-card__title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.candidate-card__party {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.candidate-card__name {
+  font-size: 16px;
+  color: var(--text-1);
+}
+
+.candidate-card__toggle-icon {
+  font-size: 22px;
+  line-height: 1;
+  color: var(--text-3);
+}
+
+.candidate-status-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.candidate-status-badge--registered {
+  color: #0f766e;
+  background: rgba(20, 184, 166, 0.12);
+  border: 1px solid rgba(20, 184, 166, 0.25);
+}
+
+.candidate-status-badge--withdrawn {
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.candidate-status-badge--other {
+  color: var(--text-2);
+  background: rgba(148, 163, 184, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.candidate-card__meta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin: 0;
+  padding: 0 14px 14px;
+}
+
+.candidate-card__meta div {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 8px;
+}
+
+.candidate-card__meta dt {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.candidate-card__meta dd {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-1);
+  line-height: 1.5;
+}
+
+.candidate-filter__locked {
+  display: flex;
+  align-items: center;
+  min-height: 41px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: rgba(245, 158, 11, 0.08);
+  color: #92400e;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .candidate-region-selector {
+    grid-template-columns: 1fr;
+  }
+
+  .candidate-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .candidate-card__meta div {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
 }
