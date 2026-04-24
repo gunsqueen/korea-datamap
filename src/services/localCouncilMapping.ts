@@ -7,6 +7,25 @@ const LOCAL_COUNCIL_EMD_MAPPING = localCouncilEmdMapping as Record<
   Partial<Record<LocalCouncilKind, Record<string, string[]>>>
 >;
 
+// admCd → { districtKey, codes } 역방향 맵: 모듈 로드 시 1회 계산
+// 키: `${generation}:${kind}:${admCd}`
+const REVERSE_MAP = new Map<string, { districtKey: string; codes: string[] }>();
+
+(function buildReverseMap() {
+  for (const [generation, kinds] of Object.entries(LOCAL_COUNCIL_EMD_MAPPING)) {
+    for (const [kind, districts] of Object.entries(kinds ?? {})) {
+      for (const [districtKey, codes] of Object.entries(districts ?? {})) {
+        for (const admCd of codes) {
+          const key = `${generation}:${kind}:${admCd}`;
+          if (!REVERSE_MAP.has(key)) {
+            REVERSE_MAP.set(key, { districtKey, codes });
+          }
+        }
+      }
+    }
+  }
+})();
+
 function getLookupSources(generation: string): string[] {
   return generation === '9' ? ['9', '8'] : [generation];
 }
@@ -65,13 +84,10 @@ export function findLocalCouncilDistrictByAdmCd(
   generation: string,
   kind: LocalCouncilKind,
 ): { districtKey: string; codes: string[] } | null {
+  // 역방향 맵으로 O(1) 조회
   for (const source of getLookupSources(generation)) {
-    for (const [districtKey, codes] of Object.entries(LOCAL_COUNCIL_EMD_MAPPING[source]?.[kind] ?? {})) {
-      if (codes.includes(admCd)) {
-        return { districtKey, codes };
-      }
-    }
+    const hit = REVERSE_MAP.get(`${source}:${kind}:${admCd}`);
+    if (hit) return hit;
   }
-
   return null;
 }

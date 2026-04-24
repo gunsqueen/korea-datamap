@@ -148,9 +148,9 @@ export function ElectionPanel({ admCd, admNm, electionHint, assemblyDistrictKey,
 
   // 현재 선거 ID를 상위로 전달 (코로플레스 채색용)
   useEffect(() => {
-    onElectionIdChange?.(isLocal9CandidateTab ? null : (selectedId || null));
+    onElectionIdChange?.(selectedId || null);
     return () => { onElectionIdChange?.(null); };
-  }, [isLocal9CandidateTab, selectedId, onElectionIdChange]);
+  }, [selectedId, onElectionIdChange]);
 
   return (
     <div className="panel-section">

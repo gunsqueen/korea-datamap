@@ -1802,6 +1802,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   pointer-events: auto;
   max-width: 200px;
 }
+.district-legend {
+  max-height: 240px;
+  overflow-y: auto;
+}
 .choropleth-legend-item {
   display: flex;
   align-items: center;
@@ -1817,6 +1821,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border: 1px solid rgba(255,255,255,0.15);
 }
 .choropleth-legend-party { flex: 1; font-weight: 600; }
+.district-legend .choropleth-legend-party {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .choropleth-legend-count {
   font-size: 10px;
   color: var(--text-3);
@@ -2126,6 +2136,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
   .choropleth-toggle { font-size: 11px; padding: 6px 10px; }
   .choropleth-legend { max-width: 160px; padding: 6px 8px; }
+  .district-legend { max-height: 180px; }
   .choropleth-legend-item { font-size: 10px; }
 
   /* === 데이터 패널 === */
@@ -3047,7 +3058,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: rgba(245, 158, 11, 0.12);
   border: 1px solid rgba(245, 158, 11, 0.25);
 }
-
 .candidate-status-badge--other {
   color: var(--text-2);
   background: rgba(148, 163, 184, 0.12);

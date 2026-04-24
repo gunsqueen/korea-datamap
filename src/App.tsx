@@ -1,15 +1,15 @@
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
-import { MapPin, ChevronLeft, Search, Info, Sun, Moon, Rows3, LayoutGrid } from 'lucide-react';
+import { MapPin, ChevronLeft, Search, Info, Sun, Moon } from 'lucide-react';
 import type { AdminArea, AdminLevel, NavItem, PanelTab, ElectionHint } from './types';
 import { useBoundary } from './hooks/useBoundary';
 import { useTheme } from './hooks/useTheme';
-import { useDensity } from './hooks/useDensity';
 import { useChoropleth } from './hooks/useChoropleth';
 import { useRegionHistory } from './hooks/useRegionHistory';
 import { useCandidateAlertMonitor } from './hooks/useCandidateAlertMonitor';
 import { useUrlSync } from './hooks/useUrlSync';
 import { ShareButton } from './components/Share/ShareButton';
 import { KoreaMap } from './components/Map/KoreaMap';
+import type { DistrictColorEntry } from './components/Map/KoreaMap';
 import { Breadcrumb } from './components/Map/Breadcrumb';
 import { DataPanel } from './components/Panel/DataPanel';
 import { SearchBar } from './components/Search/SearchBar';
@@ -17,7 +17,7 @@ import type { SearchResult } from './components/Search/SearchBar';
 import { AboutModal } from './components/About/AboutModal';
 import { DisclaimerModal } from './components/Disclaimer/DisclaimerModal';
 import assemblyEmdMapping from './data/static/assembly_district_emd_mapping.json';
-import { getLocalCouncilDistrictCodes, type LocalCouncilKind } from './services/localCouncilMapping';
+import { findLocalCouncilDistrictByAdmCd, getLocalCouncilDistrictCodes, type LocalCouncilKind } from './services/localCouncilMapping';
 import './App.css';
 
 
@@ -39,9 +39,47 @@ const LEVEL_GUIDE: Record<AdminLevel, string> = {
   eupmyeondong: '읍·동을 클릭하면 상세 데이터를 확인합니다',
 };
 
+const DISTRICT_COLORS = [
+  '#8b5cf6',
+  '#38bdf8',
+  '#f97316',
+  '#22c55e',
+  '#ec4899',
+  '#eab308',
+  '#14b8a6',
+  '#ef4444',
+  '#6366f1',
+  '#84cc16',
+  '#f59e0b',
+  '#06b6d4',
+];
+
+function getDistrictColor(index: number) {
+  return DISTRICT_COLORS[index % DISTRICT_COLORS.length];
+}
+
+function parseLocalCouncilDistrictElection(electionId: string | null): { generation: string; kind: LocalCouncilKind } | null {
+  const match = electionId?.match(/^local_(\d+)_(basic|council)_district$/);
+  if (!match) return null;
+  return { generation: match[1], kind: match[2] as LocalCouncilKind };
+}
+
+/**
+ * districtKey에서 선거구 레이블 추출
+ * "서울_강서구가선거구" → "가선거구"
+ * "서울_종로구제1선거구" → "제1선거구"
+ * 시군구명(구/시/군으로 끝나는 접두어) 제거 후 선거구 부분만 반환
+ */
+function formatLocalDistrictLabel(districtKey: string) {
+  // districtKey 형식: "시도_시군구명선거구명" (e.g. "서울_강서구가선거구")
+  const withoutSido = districtKey.split('_').slice(1).join('_') || districtKey;
+  // 시군구명 제거: 구/시/군으로 끝나는 접두어 탐지
+  const match = withoutSido.match(/^.+?[구시군읍면](.+)$/);
+  return match ? match[1] : withoutSido;
+}
+
 export default function App() {
   const { theme, toggle: toggleTheme } = useTheme();
-  const { density, toggle: toggleDensity } = useDensity();
   const { addRecent } = useRegionHistory();
   useCandidateAlertMonitor();
   const [navStack, setNavStack] = useState<NavItem[]>([]);
@@ -235,9 +273,52 @@ export default function App() {
     return undefined;
   }, [assemblyDistrictKey, localDistrictKey]);
 
+  // 선거구 색상 구분은 9회(제9회 지방선거) 지역구에만 적용
+  // - 9회 구/시의원 지역구 선택 또는 기본값 → 선거구별 색상 그룹 채색
+  // - 6/7/8회 및 다른 선거(대선·총선·교육감 등) → districtColorMap = null → choropleth(정당 득표 1위 색) 활성
+  const localDistrictElection = useMemo<{ generation: string; kind: LocalCouncilKind } | null>(() => {
+    const selected = parseLocalCouncilDistrictElection(activeElectionId);
+    if (selected) return selected.generation === '9' ? selected : null;
+    // 활성 선거가 있지만 지역구 선거가 아님 (대선·총선·교육감 등) → choropleth로 전환
+    if (activeElectionId) return null;
+    // 선거 미선택(기본 상태): 9회 기초의원 지역구로 자동 채색
+    return { generation: '9', kind: 'basic' };
+  }, [activeElectionId]);
+
+  const districtColorMap = useMemo(() => {
+    if (currentLevel !== 'eupmyeondong' || !geoData || !localDistrictElection) {
+      return undefined;
+    }
+
+    const districtOrder = new Map<string, number>();
+    const result = new Map<string, DistrictColorEntry>();
+
+    geoData.features.forEach((feature) => {
+      const admCd = feature.properties.adm_cd;
+      const match = findLocalCouncilDistrictByAdmCd(
+        admCd,
+        localDistrictElection.generation,
+        localDistrictElection.kind,
+      );
+      if (!match) return;
+
+      if (!districtOrder.has(match.districtKey)) {
+        districtOrder.set(match.districtKey, districtOrder.size);
+      }
+      const colorIndex = districtOrder.get(match.districtKey)!;
+      result.set(admCd, {
+        color: getDistrictColor(colorIndex),
+        districtKey: match.districtKey,
+        label: formatLocalDistrictLabel(match.districtKey),
+      });
+    });
+
+    return result.size ? result : undefined;
+  }, [currentLevel, geoData, localDistrictElection]);
+
   // ── 코로플레스 채색: 선거 탭 + electionId 선택 + 토글 on ───
   const choroplethActive =
-    activeTab === 'election' && !!activeElectionId && panelHasContent;
+    activeTab === 'election' && !!activeElectionId && panelHasContent && !districtColorMap;
   const { map: choroplethMap } =
     useChoropleth(
       choroplethActive ? activeElectionId : null,
@@ -345,7 +426,6 @@ export default function App() {
 
   return (
     <div className="app">
-      {/* 헤더 */}
       <header className="app-header">
         {/* 데스크탑: 로고 + 타이틀 */}
         <div className="header-left">
@@ -372,7 +452,6 @@ export default function App() {
           {mobileRegionName}
         </div>
 
-        {/* 데스크탑: 검색바 */}
         <div className="header-center">
           <SearchBar onSelect={handleSearchSelect} />
         </div>
@@ -393,15 +472,6 @@ export default function App() {
           aria-label={theme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환'}
         >
           {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-        </button>
-
-        {/* 모바일 전용: 밀도 토글 버튼 */}
-        <button
-          className="mobile-density-toggle"
-          onClick={toggleDensity}
-          aria-label={density === 'comfortable' ? '컴팩트 모드로 전환' : '편안 모드로 전환'}
-        >
-          {density === 'comfortable' ? <Rows3 size={18} /> : <LayoutGrid size={18} />}
         </button>
 
         {/* 모바일 전용: 공유 버튼 */}
@@ -426,14 +496,6 @@ export default function App() {
             title={theme === 'dark' ? '라이트 모드' : '다크 모드'}
           >
             {theme === 'dark' ? <Sun size={16} strokeWidth={2} /> : <Moon size={16} strokeWidth={2} />}
-          </button>
-          <button
-            className="density-toggle"
-            onClick={toggleDensity}
-            aria-label={density === 'comfortable' ? '컴팩트 모드로 전환' : '편안 모드로 전환'}
-            title={density === 'comfortable' ? '컴팩트 모드' : '편안 모드'}
-          >
-            {density === 'comfortable' ? <Rows3 size={16} strokeWidth={2} /> : <LayoutGrid size={16} strokeWidth={2} />}
           </button>
           <button
             className="about-btn"
@@ -490,6 +552,7 @@ export default function App() {
               onSelect={handleMapClick}
               onHover={setHoveredArea}
               highlightedEmdCodes={highlightedEmdCodes}
+              districtColorMap={districtColorMap}
               choroplethMap={choroplethActive ? choroplethMap : undefined}
               bottomInset={bottomInset}
             />
@@ -497,12 +560,14 @@ export default function App() {
             <div className="map-error">지도 데이터를 불러올 수 없습니다.</div>
           )}
 
-          {/* 코로플레스 범례 — 선거 탭 + 선거 선택 시에만 표시 */}
-          {activeTab === 'election' && !!activeElectionId && panelHasContent && (
+          {/* 지도 범례 — 선거구 색상(읍면동 레벨 기본) 또는 코로플레스(선거 선택 시) */}
+          {(districtColorMap && districtColorMap.size > 0) ? (
             <div className="choropleth-control">
-              {choroplethMap.size > 0 && (
-                <ChoroplethLegend map={choroplethMap} />
-              )}
+              <DistrictLegend map={districtColorMap} />
+            </div>
+          ) : (activeTab === 'election' && !!activeElectionId && panelHasContent && choroplethMap.size > 0) && (
+            <div className="choropleth-control">
+              <ChoroplethLegend map={choroplethMap} />
             </div>
           )}
 
@@ -650,6 +715,30 @@ function ChoroplethLegend({ map }: { map: Map<string, { color: string; party: st
         <div key={party} className="choropleth-legend-item">
           <span className="choropleth-legend-swatch" style={{ background: color }} />
           <span className="choropleth-legend-party">{party}</span>
+          <span className="choropleth-legend-count">{count}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function DistrictLegend({ map }: { map: Map<string, DistrictColorEntry> }) {
+  const districts = new Map<string, { color: string; label: string; count: number }>();
+  for (const entry of map.values()) {
+    const existing = districts.get(entry.districtKey);
+    if (existing) existing.count += 1;
+    else districts.set(entry.districtKey, { color: entry.color, label: entry.label, count: 1 });
+  }
+
+  const sorted = Array.from(districts.entries()).sort((a, b) => a[1].label.localeCompare(b[1].label, 'ko'));
+  if (sorted.length === 0) return null;
+
+  return (
+    <div className="choropleth-legend district-legend">
+      {sorted.map(([districtKey, { color, label, count }]) => (
+        <div key={districtKey} className="choropleth-legend-item district-legend-item">
+          <span className="choropleth-legend-swatch" style={{ background: color }} />
+          <span className="choropleth-legend-party">{label}</span>
           <span className="choropleth-legend-count">{count}</span>
         </div>
       ))}
