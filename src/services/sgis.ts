@@ -3,10 +3,22 @@ import { convertCoordinates } from '../utils/projection';
 
 const SGIS_AUTH_URL = 'https://sgisapi.mods.go.kr/OpenAPI3/auth/authentication.json';
 const SGIS_BOUNDARY_URL = 'https://sgisapi.mods.go.kr/OpenAPI3/boundary/hadmarea.geojson';
+const SGIS_FETCH_TIMEOUT_MS = 5000;
 
 // ─── 토큰 캐시 ────────────────────────────────
 let cachedToken: string | null = null;
 let tokenExpiry = 0;
+
+async function fetchWithTimeout(url: string, timeoutMs = SGIS_FETCH_TIMEOUT_MS): Promise<Response> {
+  const controller = new AbortController();
+  const timeoutId = globalThis.setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(url, { signal: controller.signal });
+  } finally {
+    globalThis.clearTimeout(timeoutId);
+  }
+}
 
 async function getAccessToken(): Promise<string> {
   if (cachedToken && Date.now() < tokenExpiry - 60000) {
@@ -18,7 +30,7 @@ async function getAccessToken(): Promise<string> {
     consumer_secret: import.meta.env.VITE_SGIS_CONSUMER_SECRET,
   });
 
-  const res = await fetch(`${SGIS_AUTH_URL}?${params}`);
+  const res = await fetchWithTimeout(`${SGIS_AUTH_URL}?${params}`);
   const data = await res.json();
 
   if (data.errCd !== 0) {
@@ -79,7 +91,7 @@ export async function fetchBoundary(
     low_search: '1',
   });
 
-  const res = await fetch(`${SGIS_BOUNDARY_URL}?${params}`);
+  const res = await fetchWithTimeout(`${SGIS_BOUNDARY_URL}?${params}`);
   const raw = await res.json() as SgisBoundaryResponse;
 
   if (raw.errCd !== 0) {

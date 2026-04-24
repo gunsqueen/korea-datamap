@@ -1,8 +1,9 @@
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
-import { MapPin, ChevronLeft, Search, Info, Sun, Moon } from 'lucide-react';
+import { MapPin, ChevronLeft, Search, Info, Sun, Moon, Rows3, LayoutGrid } from 'lucide-react';
 import type { AdminArea, AdminLevel, NavItem, PanelTab, ElectionHint } from './types';
 import { useBoundary } from './hooks/useBoundary';
 import { useTheme } from './hooks/useTheme';
+import { useDensity } from './hooks/useDensity';
 import { useChoropleth } from './hooks/useChoropleth';
 import { useRegionHistory } from './hooks/useRegionHistory';
 import { useCandidateAlertMonitor } from './hooks/useCandidateAlertMonitor';
@@ -16,7 +17,7 @@ import type { SearchResult } from './components/Search/SearchBar';
 import { AboutModal } from './components/About/AboutModal';
 import { DisclaimerModal } from './components/Disclaimer/DisclaimerModal';
 import assemblyEmdMapping from './data/static/assembly_district_emd_mapping.json';
-import localCouncilEmdMapping from './data/static/local_council_emd_mapping.json';
+import { getLocalCouncilDistrictCodes, type LocalCouncilKind } from './services/localCouncilMapping';
 import './App.css';
 
 
@@ -40,6 +41,7 @@ const LEVEL_GUIDE: Record<AdminLevel, string> = {
 
 export default function App() {
   const { theme, toggle: toggleTheme } = useTheme();
+  const { density, toggle: toggleDensity } = useDensity();
   const { addRecent } = useRegionHistory();
   useCandidateAlertMonitor();
   const [navStack, setNavStack] = useState<NavItem[]>([]);
@@ -225,12 +227,10 @@ export default function App() {
       // local_council_emd_mapping.json 구조: { "8": { "basic": { "서울_강서구나선거구": [...] } } }
       const parts = localDistrictKey.split('_');
       const num = parts[0];         // "8" or "9"
-      const type = parts[1];        // "basic" or "council"
+      const type = parts[1] as LocalCouncilKind; // "basic" or "council"
       const districtKey = parts.slice(2).join('_');  // "서울_강서구나선거구"
-      const localMapping = localCouncilEmdMapping as Record<string, Record<string, Record<string, string[]>>>;
-      const sourceNum = localMapping[num]?.[type] ? num : (num === '9' ? '8' : num);
-      const codes = localMapping[sourceNum]?.[type]?.[districtKey];
-      return codes ? new Set(codes) : undefined;
+      const codes = getLocalCouncilDistrictCodes(num, type, districtKey);
+      return codes.length ? new Set(codes) : undefined;
     }
     return undefined;
   }, [assemblyDistrictKey, localDistrictKey]);
@@ -395,6 +395,15 @@ export default function App() {
           {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
         </button>
 
+        {/* 모바일 전용: 밀도 토글 버튼 */}
+        <button
+          className="mobile-density-toggle"
+          onClick={toggleDensity}
+          aria-label={density === 'comfortable' ? '컴팩트 모드로 전환' : '편안 모드로 전환'}
+        >
+          {density === 'comfortable' ? <Rows3 size={18} /> : <LayoutGrid size={18} />}
+        </button>
+
         {/* 모바일 전용: 공유 버튼 */}
         <ShareButton className="mobile-share-btn" title={mobileRegionName} ariaLabel="URL 공유" />
 
@@ -417,6 +426,14 @@ export default function App() {
             title={theme === 'dark' ? '라이트 모드' : '다크 모드'}
           >
             {theme === 'dark' ? <Sun size={16} strokeWidth={2} /> : <Moon size={16} strokeWidth={2} />}
+          </button>
+          <button
+            className="density-toggle"
+            onClick={toggleDensity}
+            aria-label={density === 'comfortable' ? '컴팩트 모드로 전환' : '편안 모드로 전환'}
+            title={density === 'comfortable' ? '컴팩트 모드' : '편안 모드'}
+          >
+            {density === 'comfortable' ? <Rows3 size={16} strokeWidth={2} /> : <LayoutGrid size={16} strokeWidth={2} />}
           </button>
           <button
             className="about-btn"

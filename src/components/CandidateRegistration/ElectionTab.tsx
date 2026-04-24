@@ -13,24 +13,31 @@ interface Props {
 
 export function ElectionTab({ admCd, electionId }: Props) {
   const defaults = useMemo(() => getDefaultCandidateRegion(admCd, electionId), [admCd, electionId]);
+  const requiresDistrictMapping = electionId === 'local_9_council_district' || electionId === 'local_9_basic_district';
   const [selectedSidoCode, setSelectedSidoCode] = useState(defaults.selectedSidoCode);
   const [selectedSigunguCode, setSelectedSigunguCode] = useState(
     defaults.requiresSigungu ? defaults.selectedSigunguCode : '',
   );
 
-  const canQuery = !defaults.requiresSigungu || !!selectedSigunguCode;
+  const canQuery = requiresDistrictMapping
+    ? !!defaults.districtName
+    : !defaults.requiresSigungu || !!selectedSigunguCode;
   const lockedToDistrict = !!defaults.districtName;
-  const selectedAdmCd = lockedToDistrict
+  const selectedAdmCd = requiresDistrictMapping
     ? admCd
-    : defaults.requiresSigungu
-      ? selectedSigunguCode
-      : selectedSidoCode;
+    : lockedToDistrict
+      ? admCd
+      : defaults.requiresSigungu
+        ? selectedSigunguCode
+        : selectedSidoCode;
   const selectedSdName = SIDO_NAME[selectedSidoCode] ?? defaults.sdName;
-  const selectedSggName = lockedToDistrict
+  const selectedSggName = requiresDistrictMapping
     ? defaults.districtName
-    : defaults.requiresSigungu
-      ? getSigunguNameByCode(selectedAdmCd) || defaults.sggName
-      : undefined;
+    : lockedToDistrict
+      ? defaults.districtName
+      : defaults.requiresSigungu
+        ? getSigunguNameByCode(selectedAdmCd) || defaults.sggName
+        : undefined;
 
   const { data, loading, error, refetch } = useCandidateRegistrationQuery({
     admCd: selectedAdmCd || (lockedToDistrict ? admCd : defaults.selectedSigunguCode),

@@ -5,7 +5,7 @@ import { usePopulation } from '../../hooks/usePopulation';
 import { PopulationPanel } from './PopulationPanel';
 import { ElectionPanel } from './ElectionPanel';
 import assemblyEmdMapping from '../../data/static/assembly_district_emd_mapping.json';
-import localCouncilEmdMapping from '../../data/static/local_council_emd_mapping.json';
+import { getLocalCouncilDistrictCodes, type LocalCouncilKind } from '../../services/localCouncilMapping';
 
 interface Props {
   area: AdminArea;
@@ -38,11 +38,9 @@ export function DataPanel({ area, activeTab, onTabChange, onClose, electionHint,
     if (localDistrictKey) {
       const parts = localDistrictKey.split('_');
       const num = parts[0];
-      const kind = parts[1];
+      const kind = parts[1] as LocalCouncilKind;
       const districtKey = parts.slice(2).join('_');
-      const mapping = localCouncilEmdMapping as Record<string, Record<string, Record<string, string[]>>>;
-      const sourceNum = mapping[num]?.[kind] ? num : (num === '9' ? '8' : num);
-      const admCds = mapping[sourceNum]?.[kind]?.[districtKey] ?? [];
+      const admCds = getLocalCouncilDistrictCodes(num, kind, districtKey);
       if (admCds.length > 0) {
         return { admCds, admNm: area.adm_nm };
       }

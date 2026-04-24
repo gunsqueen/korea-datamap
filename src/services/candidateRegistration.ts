@@ -1,8 +1,8 @@
 import axios from 'axios';
 import type { AdminLevel, CandidateRegistrationCandidate, CandidateRegistrationData, ElectionHint } from '../types';
 import { NEC_API_KEY, PARENT_CITY, SIDO_NAME, getNecQueryRegion, getSidoNameByCode, getSigunguNameByCode } from './necRegion';
-import localCouncilEmdMapping from '../data/static/local_council_emd_mapping.json';
 import searchIndex from '../data/static/search_index.json';
+import { findLocalCouncilDistrictByAdmCd, getLocalCouncilDistrictCodes } from './localCouncilMapping';
 
 const CANDIDATE_REGISTRATION_BASE = 'https://apis.data.go.kr/9760000/PofelcddInfoInqireService';
 
@@ -85,8 +85,6 @@ const LOCAL_9_CANDIDATE_MAP: Record<LocalCandidateElectionId, LocalCandidatePara
     scope: 'sigungu',
   },
 };
-
-const LOCAL_COUNCIL_EMD_MAPPING = localCouncilEmdMapping as Record<string, Record<string, Record<string, string[]>>>;
 
 interface CandidateRegistrationApiItem {
   name?: string;
@@ -248,9 +246,9 @@ function getLocal9DistrictKey(item: CandidateRegistrationApiItem, electionId: Lo
   const kind = electionId === 'local_9_council_district' ? 'council' : 'basic';
   const sidoShort = SIDO_SHORT[item.sdName] ?? item.sdName;
   const districtKey = `${sidoShort}_${item.sggName}`;
-  const codes = LOCAL_COUNCIL_EMD_MAPPING['8']?.[kind]?.[districtKey];
-  if (!codes?.length) return undefined;
-  return `8_${kind}_${districtKey}`;
+  const codes = getLocalCouncilDistrictCodes('9', kind, districtKey);
+  if (!codes.length) return undefined;
+  return `9_${kind}_${districtKey}`;
 }
 
 function toSearchEntry(area: SearchIndexEntry, item: CandidateRegistrationApiItem, electionId: LocalCandidateElectionId): Local9CandidateSearchEntry {
@@ -290,8 +288,8 @@ function findDistrictRepresentativeArea(item: CandidateRegistrationApiItem, elec
   const kind = electionId === 'local_9_council_district' ? 'council' : 'basic';
   const sidoShort = SIDO_SHORT[item.sdName] ?? item.sdName;
   const districtKey = `${sidoShort}_${item.sggName}`;
-  const codes = LOCAL_COUNCIL_EMD_MAPPING['8']?.[kind]?.[districtKey];
-  if (!codes?.length) return null;
+  const codes = getLocalCouncilDistrictCodes('9', kind, districtKey);
+  if (!codes.length) return null;
 
   const exactArea = SEARCH_INDEX_BY_CODE.get(codes[0]);
   if (exactArea) return exactArea;
@@ -409,6 +407,10 @@ function normalizeScope(admCd: string, electionId: LocalCandidateElectionId, sdN
   };
 }
 
+function isLocalCouncilDistrictElection(electionId: LocalCandidateElectionId) {
+  return electionId === 'local_9_council_district' || electionId === 'local_9_basic_district';
+}
+
 export function getLocal9CandidateMeta(electionId: LocalCandidateElectionId) {
   return LOCAL_9_CANDIDATE_MAP[electionId];
 }
@@ -434,15 +436,12 @@ export function findLocalCouncilDistrict(admCd: string, electionId: LocalCandida
   if (!['local_9_council_district', 'local_9_basic_district'].includes(electionId)) return null;
 
   const kind = electionId === 'local_9_council_district' ? 'council' : 'basic';
-  const districts = LOCAL_COUNCIL_EMD_MAPPING['8']?.[kind];
-  if (!districts) return null;
-
-  const match = Object.entries(districts).find(([, codes]) => codes.includes(admCd));
+  const match = findLocalCouncilDistrictByAdmCd(admCd, '9', kind);
   if (!match) return null;
 
   return {
-    districtKey: `8_${kind}_${match[0]}`,
-    districtName: match[0].split('_').slice(1).join('_'),
+    districtKey: `9_${kind}_${match.districtKey}`,
+    districtName: match.districtKey.split('_').slice(1).join('_'),
   };
 }
 
@@ -458,7 +457,26 @@ export async function fetchCandidateRegistration(
     throw new Error(`지원하지 않는 선거 ID입니다: ${query.electionId}`);
   }
 
-  const { sdName, sggName } = normalizeScope(query.admCd, query.electionId, query.sdName, query.sggName);
+  const { sdName, sggName, districtMatch } = normalizeScope(
+    query.admCd,
+    query.electionId,
+    query.sdName,
+    query.sggName,
+  );
+  if (isLocalCouncilDistrictElection(query.electionId) && query.admCd.length === 8 && !districtMatch) {
+    return {
+      election_id: query.electionId,
+      election_name: meta.electionName,
+      election_date: meta.electionDate,
+      adm_cd: query.admCd,
+      adm_nm: `${sdName} 선거구 매핑 없음`,
+      sub_type: meta.subType,
+      total_count: 0,
+      candidates: [],
+      request_scope: { sdName },
+    };
+  }
+
   const params: Record<string, string | number> = {
     ServiceKey: NEC_API_KEY,
     sgId: meta.sgId,

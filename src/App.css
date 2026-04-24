@@ -48,6 +48,43 @@
   --radius: 10px;
   --radius-lg: 12px;
   --radius-xl: 16px;
+
+  /* Typography scale */
+  --fs-xs: 10px;
+  --fs-sm: 11px;
+  --fs-base: 12px;
+  --fs-md: 13px;
+  --fs-lg: 14px;
+  --fs-xl: 16px;
+  --fs-2xl: 20px;
+  --fs-3xl: 24px;
+  --fs-4xl: 30px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-heavy: 800;
+
+  --tracking-tight: -1.5px;
+  --tracking-snug: -0.3px;
+  --tracking-normal: 0;
+  --tracking-wide: 0.3px;
+
+  /* Density tokens (default: comfortable) */
+  --panel-padding: 16px;
+  --panel-section-gap: 14px;
+  --stats-card-padding: 16px;
+  --stats-grid-gap: 10px;
+  --chart-card-header-padding: 14px 16px 10px;
+}
+
+[data-density="compact"] {
+  --panel-padding: 12px;
+  --panel-section-gap: 10px;
+  --stats-card-padding: 12px;
+  --stats-grid-gap: 6px;
+  --chart-card-header-padding: 10px 12px 8px;
 }
 
 /* ─── Design System (Light Theme) ───────────── */
@@ -475,7 +512,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .panel-body {
   flex: 1;
   overflow-y: auto;
-  padding: 16px;
+  padding: var(--panel-padding);
   background: transparent;
 }
 
@@ -489,7 +526,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 /* ─── Panel Section ─────────────────────────── */
-.panel-section { display: flex; flex-direction: column; gap: 14px; }
+.panel-section { display: flex; flex-direction: column; gap: var(--panel-section-gap); }
 
 .panel-section-header {
   display: flex;
@@ -499,15 +536,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .panel-section-title {
-  font-size: 14px;
-  font-weight: 700;
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
   color: var(--text-2);
 }
 
 .panel-section-meta {
-  font-size: 11px;
+  font-size: var(--fs-sm);
   color: var(--text-4);
-  font-weight: 400;
+  font-weight: var(--fw-regular);
 }
 
 .pop-source-wrap {
@@ -538,27 +575,27 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* Legacy subtitle (keep for ElectionPanel) */
 .panel-subtitle {
-  font-size: 14px;
-  font-weight: 700;
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
   color: var(--text-2);
   display: flex;
   align-items: baseline;
   gap: 8px;
 }
-.panel-date { font-size: 11px; color: var(--text-4); font-weight: 400; }
+.panel-date { font-size: var(--fs-sm); color: var(--text-4); font-weight: var(--fw-regular); }
 
 /* ─── StatsCard Component ────────────────────── */
 .stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: var(--stats-grid-gap);
 }
 
 .stats-card {
   background: var(--card-bg);
   border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
-  padding: 16px;
+  padding: var(--stats-card-padding);
   display: flex;
   align-items: flex-start;
   gap: 12px;
@@ -596,30 +633,30 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .stats-card__label {
-  font-size: 11px;
+  font-size: var(--fs-sm);
   color: var(--text-3);
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.4px;
   white-space: nowrap;
 }
 
 .stats-card__value {
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: -1.5px;
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-heavy);
+  letter-spacing: var(--tracking-tight);
   line-height: 1.1;
   color: #fff;
 }
 
 .stats-card--full .stats-card__value {
-  font-size: 30px;
+  font-size: var(--fs-4xl);
 }
 
 .stats-card__sub {
-  font-size: 12px;
+  font-size: var(--fs-base);
   color: var(--text-3);
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   margin-top: 2px;
 }
 
@@ -646,14 +683,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .stat-card.female { border-top: 3px solid var(--female); }
 .stat-card.household { border-top: 3px solid var(--success); }
 .stat-card-icon { font-size: 18px; line-height: 1; margin-bottom: 2px; }
-.stat-label { font-size: 11px; color: var(--text-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
-.stat-value { font-size: 24px; font-weight: 800; color: var(--text-1); letter-spacing: -1.5px; line-height: 1.1; }
+.stat-label { font-size: var(--fs-sm); color: var(--text-3); font-weight: var(--fw-semibold); text-transform: uppercase; letter-spacing: 0.4px; }
+.stat-value { font-size: var(--fs-3xl); font-weight: var(--fw-heavy); color: var(--text-1); letter-spacing: var(--tracking-tight); line-height: 1.1; }
 .stat-card.total .stat-value { font-size: 28px; color: #1e40af; }
 .stat-card.male .stat-value { color: var(--male); }
 .stat-card.female .stat-value { color: var(--female); }
 .stat-card.household .stat-value { color: var(--success); }
-.stat-unit { font-size: 12px; color: var(--text-3); font-weight: 500; }
-.stat-sub { font-size: 12px; color: var(--text-3); font-weight: 600; }
+.stat-unit { font-size: var(--fs-base); color: var(--text-3); font-weight: var(--fw-medium); }
+.stat-sub { font-size: var(--fs-base); color: var(--text-3); font-weight: var(--fw-semibold); }
 
 /* ─── ChartCard Component ────────────────────── */
 .chart-card {
@@ -668,18 +705,18 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px 10px;
+  padding: var(--chart-card-header-padding);
   border-bottom: 1px solid var(--border-light);
 }
 
 .chart-card__title {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
   color: var(--text-2);
 }
 
 .chart-card__action {
-  font-size: 11px;
+  font-size: var(--fs-sm);
   color: var(--text-3);
 }
 
@@ -1042,23 +1079,24 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .estat-label {
-  font-size: 10px;
+  font-size: var(--fs-xs);
   color: var(--text-3);
-  font-weight: 700;
+  font-weight: var(--fw-bold);
   text-transform: uppercase;
   letter-spacing: 0.3px;
 }
 
 .estat-value {
-  font-size: 14px;
-  font-weight: 800;
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
   color: var(--text-1);
-  letter-spacing: -0.3px;
+  letter-spacing: var(--tracking-snug);
 }
 
 .estat-value.highlight {
   color: var(--primary);
-  font-size: 16px;
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-heavy);
 }
 
 .election-gap-card {
@@ -1076,23 +1114,23 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .election-gap-label {
-  font-size: 11px;
+  font-size: var(--fs-sm);
   color: var(--text-3);
-  font-weight: 700;
+  font-weight: var(--fw-bold);
   letter-spacing: 0.2px;
 }
 
 .election-gap-rate {
-  font-size: 28px;
+  font-size: var(--fs-4xl);
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.8px;
 }
 
 .election-gap-votes {
-  font-size: 12px;
+  font-size: var(--fs-base);
   color: var(--text-2);
-  font-weight: 700;
+  font-weight: var(--fw-bold);
 }
 
 .election-gap-names {
@@ -1796,6 +1834,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .mobile-region-title { display: none; }
 .mobile-search-toggle { display: none; }
 .mobile-theme-toggle { display: none; }
+.mobile-density-toggle { display: none; }
 .mobile-info-btn { display: none; }
 .mobile-search-overlay { display: none; }
 .desktop-only { display: block; }
@@ -1813,6 +1852,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .mobile-region-title { display: none !important; }
   .mobile-search-toggle { display: none !important; }
   .mobile-theme-toggle { display: none !important; }
+  .mobile-density-toggle { display: none !important; }
   .mobile-info-btn { display: none !important; }
   .mobile-search-overlay { display: none !important; }
 }
@@ -1882,8 +1922,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
   .mobile-search-toggle:active { background: var(--border-light); }
 
-  /* 모바일 헤더: 테마 토글 버튼 */
-  .mobile-theme-toggle {
+  /* 모바일 헤더: 테마 토글 + 밀도 토글 버튼 */
+  .mobile-theme-toggle,
+  .mobile-density-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1897,7 +1938,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     -webkit-tap-highlight-color: transparent;
     transition: background 0.15s, color 0.15s;
   }
-  .mobile-theme-toggle:active { background: var(--primary-50); color: var(--primary); }
+  .mobile-theme-toggle:active,
+  .mobile-density-toggle:active { background: var(--primary-50); color: var(--primary); }
 
   /* 모바일 헤더: 앱 정보 버튼 */
   .mobile-info-btn {
@@ -2277,7 +2319,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 /* ─── 테마 토글 버튼 ─────────────────────────── */
-.theme-toggle {
+.theme-toggle,
+.density-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2288,7 +2331,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transition: background 0.15s, color 0.15s;
   flex-shrink: 0;
 }
-.theme-toggle:hover {
+.theme-toggle:hover,
+.density-toggle:hover {
   background: var(--primary-50);
   color: var(--primary);
 }

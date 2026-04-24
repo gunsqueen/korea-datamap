@@ -89,25 +89,34 @@ export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelec
     }
     labelLayerRef.current?.clearLayers();
 
+    const isDark = theme !== 'light';
+    const baseBorder = isDark ? 'rgba(255,255,255,0.32)' : 'rgba(71,85,105,0.55)';
+    const choroBorder = isDark ? 'rgba(255,255,255,0.45)' : 'rgba(30,41,59,0.55)';
+    const selectBorder = isDark ? '#22d3ee' : '#0891b2';
+
     layerRef.current = L.geoJSON(leafletGeoData, {
       style: (feature) => {
         const adm_cd = feature?.properties?.adm_cd ?? '';
         const isSelected = adm_cd === selectedCode;
         const isHighlighted = highlightedEmdCodes?.has(adm_cd) ?? false;
         const choro = choroplethMap?.get(adm_cd);
-        // 코로플레스 색 (정당색) 적용: 득표율 기반 투명도 (35~75%)
+        // 코로플레스 색 (정당색) 적용: 득표율 기반 투명도
         const choroOpacity = choro
-          ? Math.min(0.78, Math.max(0.38, 0.38 + (choro.voteRate / 100) * 0.5))
+          ? Math.min(0.82, Math.max(0.40, 0.40 + (choro.voteRate / 100) * 0.5))
           : 0.45;
         return {
           fillColor: isHighlighted
-            ? 'rgba(251,191,36,0.35)'
+            ? (isDark ? 'rgba(251,191,36,0.35)' : 'rgba(234,179,8,0.30)')
             : isSelected
-              ? (choro ? choro.color : 'rgba(6,182,212,0.20)')
+              ? (choro ? choro.color : 'rgba(6,182,212,0.22)')
               : (choro ? choro.color : getSidoColor(adm_cd)),
-          fillOpacity: isHighlighted ? 1 : isSelected ? Math.min(1, choroOpacity + 0.18) : choroOpacity,
-          color: isHighlighted ? '#f59e0b' : isSelected ? '#22d3ee' : (choro ? '#ffffff66' : '#d946ef'),
-          weight: isHighlighted ? 2.5 : isSelected ? 2.8 : (choro ? 0.8 : 1.5),
+          fillOpacity: isHighlighted ? 1 : isSelected ? Math.min(1, choroOpacity + 0.20) : choroOpacity,
+          color: isHighlighted
+            ? '#f59e0b'
+            : isSelected
+              ? selectBorder
+              : (choro ? choroBorder : baseBorder),
+          weight: isHighlighted ? 2.5 : isSelected ? 3.2 : (choro ? 0.9 : 1.2),
           opacity: 1,
         };
       },
@@ -117,7 +126,7 @@ export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelec
         layer.on({
           mouseover: (e) => {
             const l = e.target;
-            l.setStyle({ fillOpacity: 0.65, weight: 2, color: '#22d3ee' });
+            l.setStyle({ fillOpacity: 0.65, weight: 2.2, color: selectBorder });
             onHover({
               adm_cd,
               adm_nm,
@@ -232,7 +241,7 @@ export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelec
       labelLayerRef.current?.clearLayers();
     };
   // bottomInset은 별도 useEffect에서 처리 (전체 GeoJSON 재생성 방지)
-  }, [geoData, leafletGeoData, selectedCode, level, onHover, onSelect, highlightedEmdCodes, choroplethMap]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [geoData, leafletGeoData, selectedCode, level, theme, onHover, onSelect, highlightedEmdCodes, choroplethMap]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // 바텀시트 스냅 변경(= bottomInset 변경) 시 현재 뷰를 보이는 영역에 맞춰 재중앙화
   useEffect(() => {

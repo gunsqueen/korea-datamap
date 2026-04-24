@@ -5,7 +5,11 @@ import searchIndex from '../../data/static/search_index.json';
 import { useRegionHistory, type RegionHistoryItem } from '../../hooks/useRegionHistory';
 import { loadLocal9CandidateSearchIndex, type Local9CandidateSearchEntry } from '../../services/candidateRegistration';
 import assemblyEmdMapping from '../../data/static/assembly_district_emd_mapping.json';
-import localCouncilEmdMapping from '../../data/static/local_council_emd_mapping.json';
+import {
+  getLocalCouncilDistrictEntries,
+  getLocalCouncilGenerations,
+  getLocalCouncilKinds,
+} from '../../services/localCouncilMapping';
 
 export interface SearchResult {
   adm_cd: string;
@@ -270,15 +274,12 @@ function buildAssemblyShortcutEntries(): ShortcutEntry[] {
 
 function buildLocalShortcutEntries(): ShortcutEntry[] {
   const entries: ShortcutEntry[] = [];
-  const mapping = localCouncilEmdMapping as Record<string, Record<string, Record<string, string[]>>>;
-  const sourceGenerations = Object.keys(mapping).sort((a, b) => Number(b) - Number(a));
+  const sourceGenerations = getLocalCouncilGenerations().filter((generation) => generation !== '9');
   const generations = ['9', ...sourceGenerations];
 
   for (const generation of generations) {
-    const sourceGeneration = generation === '9' ? '8' : generation;
-    for (const kind of Object.keys(mapping[sourceGeneration] ?? {})) {
-      for (const key of Object.keys(mapping[sourceGeneration][kind] ?? {})) {
-        const codes = mapping[sourceGeneration][kind][key];
+    for (const kind of getLocalCouncilKinds(generation)) {
+      for (const [key, codes] of getLocalCouncilDistrictEntries(generation, kind)) {
         if (!codes?.length) continue;
         const label = key.replace('_', ' ');
         const area = resolveAreaFromCode(codes[0], label);
