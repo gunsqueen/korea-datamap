@@ -1,19 +1,32 @@
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  Cell, CartesianGrid,
+  Cell,
 } from 'recharts';
-import { Users, User, UserRound, Home, ExternalLink } from 'lucide-react';
+import { Users, User, UserRound, Home, ExternalLink, Vote, Scale } from 'lucide-react';
 import type { PopulationData, PopulationFieldSource, PopulationFieldStatus } from '../../types';
 import { StatsCard } from '../UI/StatsCard';
 import { ChartCard } from '../UI/ChartCard';
+import { chartTheme, theme } from '../../theme';
+
+export interface CouncilDistrictInfo {
+  /** 선거구 키 (예: "서울_강서구나선거구") */
+  districtKey: string;
+  /** 표시용 라벨 (시도 제거, 예: "강서구나선거구") */
+  districtLabel: string;
+  /** 기초의원 정수 = 8회 지방선거 당선자 수 */
+  seatCount: number;
+  /** 선거구 전체 합산 인구 */
+  totalPopulation: number;
+}
 
 interface Props {
   data: PopulationData;
+  councilDistrict?: CouncilDistrictInfo | null;
 }
 
 const HOUSEHOLD_COLORS = [
-  '#6366f1', '#3b82f6', '#22c55e', '#f59e0b', '#ef4444',
-  '#8b5cf6', '#06b6d4', '#84cc16', '#f97316', '#64748b',
+  theme.colors.primary, theme.colors.secondary, theme.colors.success, theme.colors.warning, theme.colors.danger,
+  '#7c3aed', '#06b6d4', '#84cc16', '#f97316', theme.colors.textSecondary,
 ];
 const ROOT_SOURCE_LABELS: Record<string, string> = {
   real: '실제값',
@@ -28,7 +41,7 @@ const FIELD_STATUS_LABELS: Record<PopulationFieldStatus, string> = {
   unavailable: '데이터 미지원',
 };
 
-export function PopulationPanel({ data }: Props) {
+export function PopulationPanel({ data, councilDistrict }: Props) {
   const fmt = (n: number) => n.toLocaleString('ko-KR');
   const maleRatio = data.total_population > 0
     ? ((data.male_population / data.total_population) * 100).toFixed(1)
@@ -135,6 +148,11 @@ export function PopulationPanel({ data }: Props) {
     { label: elderlyLabel, source: data.field_sources?.elderly_ratio, value: elderlyRatio ? `${elderlyRatio}%` : null },
   ];
 
+  // 의원 1인당 인구 (선거구 인구 ÷ 정수)
+  const councilPerSeat = councilDistrict && councilDistrict.seatCount > 0
+    ? Math.round(councilDistrict.totalPopulation / councilDistrict.seatCount)
+    : 0;
+
   return (
     <div className="panel-section">
       <div className="panel-section-header">
@@ -180,6 +198,41 @@ export function PopulationPanel({ data }: Props) {
         />
       </div>
 
+      {councilDistrict && councilDistrict.seatCount > 0 && (
+        <>
+          <div className="panel-section-header">
+            <span className="panel-section-title">기초의원 대표성</span>
+            <div className="pop-source-wrap">
+              <span className="panel-section-meta">{councilDistrict.districtLabel} · 8회 기준</span>
+            </div>
+          </div>
+          <div className="stats-grid">
+            <StatsCard
+              icon={Vote}
+              label="기초의원 정수"
+              value={`${councilDistrict.seatCount}`}
+              sub="명"
+              accentColor="#8b5cf6"
+            />
+            <StatsCard
+              icon={Users}
+              label="선거구 인구"
+              value={fmt(councilDistrict.totalPopulation)}
+              sub="명"
+              accentColor="#06b6d4"
+            />
+            <StatsCard
+              icon={Scale}
+              label="의원 1인당 인구"
+              value={fmt(councilPerSeat)}
+              sub="명/의원"
+              accentColor="#f59e0b"
+              fullWidth
+            />
+          </div>
+        </>
+      )}
+
       {ageData.length > 0 && data.field_sources?.age_distribution.status !== 'unavailable' ? (
         <ChartCard
           title="연령별 인구 분포"
@@ -191,18 +244,17 @@ export function PopulationPanel({ data }: Props) {
         >
           <div className="chart-responsive-wrap">
           <ResponsiveContainer width="100%" height={190}>
-            <BarChart data={ageData} barCategoryGap="22%" barGap={2} margin={{ top: 4, right: 4, left: 0, bottom: 4 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+            <BarChart data={ageData} barCategoryGap="24%" barGap={3} margin={{ top: 8, right: 4, left: 0, bottom: 4 }}>
               <XAxis
                 dataKey="name"
-                tick={{ fontSize: 9, fill: '#94a3b8' }}
+                tick={{ fontSize: 10, fill: chartTheme.axis }}
                 axisLine={false}
                 tickLine={false}
                 height={18}
               />
               <YAxis
                 tickFormatter={(v) => `${(v / 10000).toFixed(0)}만`}
-                tick={{ fontSize: 9, fill: '#94a3b8' }}
+                tick={{ fontSize: 10, fill: chartTheme.axis }}
                 axisLine={false}
                 tickLine={false}
                 width={30}
@@ -213,16 +265,11 @@ export function PopulationPanel({ data }: Props) {
                   const pct = props.payload[pctKey];
                   return [`${(v as number).toLocaleString('ko-KR')}명 (${pct}%)`, name as string];
                 }}
-                contentStyle={{
-                  borderRadius: 8,
-                  border: '1px solid #e2e8f0',
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
-                  fontSize: 12,
-                }}
-                cursor={{ fill: 'rgba(37,99,235,0.04)' }}
+                contentStyle={{ ...chartTheme.tooltipStyle }}
+                cursor={chartTheme.cursor}
               />
-              <Bar dataKey="남성" fill="#3b82f6" radius={[3, 3, 0, 0]} maxBarSize={12} />
-              <Bar dataKey="여성" fill="#ec4899" radius={[3, 3, 0, 0]} maxBarSize={12} />
+              <Bar dataKey="남성" fill={theme.colors.male} radius={[6, 6, 0, 0]} maxBarSize={12} />
+              <Bar dataKey="여성" fill={theme.colors.female} radius={[6, 6, 0, 0]} maxBarSize={12} />
             </BarChart>
           </ResponsiveContainer>
           </div>
@@ -255,17 +302,16 @@ export function PopulationPanel({ data }: Props) {
               margin={{ top: 4, right: 4, left: 0, bottom: 4 }}
               barCategoryGap="20%"
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
               <XAxis
                 dataKey="name"
-                tick={{ fontSize: 10, fill: '#94a3b8' }}
+                tick={{ fontSize: 10, fill: chartTheme.axis }}
                 axisLine={false}
                 tickLine={false}
                 height={18}
               />
               <YAxis
                 tickFormatter={(v) => v >= 10000 ? `${(v / 10000).toFixed(0)}만` : `${v}`}
-                tick={{ fontSize: 9, fill: '#94a3b8' }}
+                tick={{ fontSize: 10, fill: chartTheme.axis }}
                 axisLine={false}
                 tickLine={false}
                 width={32}
@@ -275,15 +321,10 @@ export function PopulationPanel({ data }: Props) {
                   `${(v as number).toLocaleString('ko-KR')}세대 (${props.payload.pct}%)`,
                   props.payload.name,
                 ]}
-                contentStyle={{
-                  borderRadius: 8,
-                  border: '1px solid #e2e8f0',
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
-                  fontSize: 12,
-                }}
-                cursor={{ fill: 'rgba(99,102,241,0.06)' }}
+                contentStyle={{ ...chartTheme.tooltipStyle }}
+                cursor={chartTheme.cursor}
               />
-              <Bar dataKey="value" radius={[3, 3, 0, 0]} maxBarSize={40}>
+              <Bar dataKey="value" radius={[7, 7, 0, 0]} maxBarSize={40}>
                 {displayHouseholdData.map((_, i) => (
                   <Cell key={i} fill={HOUSEHOLD_COLORS[i % HOUSEHOLD_COLORS.length]} />
                 ))}

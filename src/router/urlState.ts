@@ -91,6 +91,38 @@ export function decodeElectionHint(raw: string | null): ElectionHint | null {
   }
 }
 
+function deriveElectionHintFromElectionId(electionId: string | null): ElectionHint | null {
+  if (!electionId) return null;
+
+  const presidentialMatch = electionId.match(/^presidential_(\d+)$/);
+  if (presidentialMatch) {
+    return {
+      type: 'presidential',
+      presidentialId: electionId,
+    };
+  }
+
+  const assemblyMatch = electionId.match(/^assembly_(\d+)_(district|pr)$/);
+  if (assemblyMatch) {
+    return {
+      type: 'assembly',
+      assemblySuffix: assemblyMatch[1],
+      assemblySubType: assemblyMatch[2] as 'district' | 'pr',
+    };
+  }
+
+  const localMatch = electionId.match(/^(local_\d+)_(.+)$/);
+  if (localMatch) {
+    return {
+      type: 'local',
+      localPrefix: localMatch[1],
+      localSubType: localMatch[2],
+    };
+  }
+
+  return null;
+}
+
 export function serializePageState(state: PageState): SerializedUrl {
   const parts = state.navStack.map((item) => encodeURIComponent(item.adm_cd));
   const pathname = parts.length === 0 ? '/' : `/r/${parts.join('/')}`;
@@ -193,7 +225,8 @@ export function parsePageState(
 
   const assemblyDistrictKey = searchParams.get('ad');
   const localDistrictKey = searchParams.get('ld');
-  let electionHint = decodeElectionHint(searchParams.get('hint'));
+  const activeElectionId = searchParams.get('election');
+  let electionHint = decodeElectionHint(searchParams.get('hint')) ?? deriveElectionHintFromElectionId(activeElectionId);
 
   // 수동 URL 진입 등으로 hint가 누락된 경우 ad/ld에서 최소 힌트 파생
   if (!electionHint && assemblyDistrictKey) {
@@ -223,7 +256,7 @@ export function parsePageState(
     selectedArea,
     selectedAreaLevel,
     activeTab,
-    activeElectionId: searchParams.get('election'),
+    activeElectionId,
     assemblyDistrictKey,
     localDistrictKey,
     electionHint,

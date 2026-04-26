@@ -86,7 +86,7 @@ function manualCopyPrompt(url: string): boolean {
   }
 }
 
-export function ShareButton({ title = 'Korea DataMap', className, ariaLabel }: ShareButtonProps) {
+export function ShareButton({ title = '선거지도', className, ariaLabel }: ShareButtonProps) {
   const [state, setState] = useState<ShareState>('idle');
 
   useEffect(() => {

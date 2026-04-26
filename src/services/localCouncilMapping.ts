@@ -1,6 +1,32 @@
 import localCouncilEmdMapping from '../data/static/local_council_emd_mapping.json';
+import local8Winners from '../data/static/local_8_winners.json';
 
 export type LocalCouncilKind = 'basic' | 'council';
+
+// 8회 지방선거 당선자 데이터: '8_{시도}_{kind}_{선거구명}' → 당선자명 배열
+const LOCAL_8_WINNERS = local8Winners as Record<string, string[]>;
+
+/**
+ * 선거구의 의원 정수(=당선자 수)를 8회 지방선거 결과 기준으로 반환.
+ * 9회 데이터가 부분적이므로, 정수는 8회 당선자 수로 추정.
+ *
+ * districtKey 형식 예: "서울_강서구나선거구"
+ * 변환된 winners 키: "8_서울_basic_강서구나선거구"
+ *
+ * @returns 정수 (당선자 수). 데이터 없으면 0.
+ */
+export function getLocalCouncilSeatCount(
+  kind: LocalCouncilKind,
+  districtKey: string,
+): number {
+  const sepIndex = districtKey.indexOf('_');
+  if (sepIndex === -1) return 0;
+  const sido = districtKey.slice(0, sepIndex);
+  const rest = districtKey.slice(sepIndex + 1);
+  if (!sido || !rest) return 0;
+  const winnersKey = `8_${sido}_${kind}_${rest}`;
+  return LOCAL_8_WINNERS[winnersKey]?.length ?? 0;
+}
 
 const LOCAL_COUNCIL_EMD_MAPPING = localCouncilEmdMapping as Record<
   string,

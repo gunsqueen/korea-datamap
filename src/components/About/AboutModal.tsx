@@ -52,8 +52,8 @@ export function AboutModal({ onClose }: AboutModalProps) {
         <div className="about-modal-body">
           {/* 앱 이름 + 비공식 앱 배지 */}
           <div className="about-app-name">
-            <span className="about-app-title">한국 데이터맵</span>
-            <span className="about-app-version">v1.5</span>
+            <span className="about-app-title">선거지도</span>
+            <span className="about-app-version">v2.8</span>
           </div>
           <div className="about-unofficial-badge">
             <AlertTriangle size={13} strokeWidth={2.5} />
@@ -108,7 +108,7 @@ export function AboutModal({ onClose }: AboutModalProps) {
           {/* 앱 소개 */}
           <section className="about-section">
             <p className="about-app-desc">
-              한국 데이터맵은 대한민국 전국 행정구역의 인구 통계와 역대 선거 결과를
+              선거지도는 대한민국 전국 행정구역의 인구 통계와 역대 선거 결과를
               지도 기반으로 탐색할 수 있는 비영리 오픈소스 앱입니다.
               시도 → 시군구 → 읍면동 단계로 드릴다운하며 각 지역의 데이터를 확인할 수 있습니다.
             </p>

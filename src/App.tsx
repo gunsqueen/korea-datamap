@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
-import { MapPin, ChevronLeft, Search, Info, Sun, Moon } from 'lucide-react';
+import { MapPin, ChevronLeft, Search, Info, Sun, Moon, Users, Vote, MapPinned } from 'lucide-react';
 import type { AdminArea, AdminLevel, NavItem, PanelTab, ElectionHint } from './types';
 import { useBoundary } from './hooks/useBoundary';
 import { useTheme } from './hooks/useTheme';
@@ -17,7 +17,7 @@ import type { SearchResult } from './components/Search/SearchBar';
 import { AboutModal } from './components/About/AboutModal';
 import { DisclaimerModal } from './components/Disclaimer/DisclaimerModal';
 import assemblyEmdMapping from './data/static/assembly_district_emd_mapping.json';
-import { findLocalCouncilDistrictByAdmCd, getLocalCouncilDistrictCodes, type LocalCouncilKind } from './services/localCouncilMapping';
+import { findLocalCouncilDistrictByAdmCd, getLocalCouncilDistrictCodes, getLocalCouncilSeatCount, type LocalCouncilKind } from './services/localCouncilMapping';
 import './App.css';
 
 
@@ -273,17 +273,19 @@ export default function App() {
     return undefined;
   }, [assemblyDistrictKey, localDistrictKey]);
 
-  // 선거구 색상 구분은 9회(제9회 지방선거) 지역구에만 적용
-  // - 9회 구/시의원 지역구 선택 또는 기본값 → 선거구별 색상 그룹 채색
-  // - 6/7/8회 및 다른 선거(대선·총선·교육감 등) → districtColorMap = null → choropleth(정당 득표 1위 색) 활성
+  // 선거구 색상 구분은 선거 탭에서만 적용한다.
+  // - 인구 탭: 행정구역 기본 지도 유지
+  // - 선거 탭 + 9회 구/시의원 지역구 선택 또는 선거 미선택: 선거구별 색상 그룹 채색
+  // - 6/7/8회 및 다른 선거(대선·총선·교육감 등): districtColorMap = null → choropleth 활성
   const localDistrictElection = useMemo<{ generation: string; kind: LocalCouncilKind } | null>(() => {
+    if (activeTab !== 'election') return null;
     const selected = parseLocalCouncilDistrictElection(activeElectionId);
     if (selected) return selected.generation === '9' ? selected : null;
     // 활성 선거가 있지만 지역구 선거가 아님 (대선·총선·교육감 등) → choropleth로 전환
     if (activeElectionId) return null;
     // 선거 미선택(기본 상태): 9회 기초의원 지역구로 자동 채색
     return { generation: '9', kind: 'basic' };
-  }, [activeElectionId]);
+  }, [activeElectionId, activeTab]);
 
   const districtColorMap = useMemo(() => {
     if (currentLevel !== 'eupmyeondong' || !geoData || !localDistrictElection) {
@@ -318,7 +320,11 @@ export default function App() {
 
   // ── 코로플레스 채색: 선거 탭 + electionId 선택 + 토글 on ───
   const choroplethActive =
-    activeTab === 'election' && !!activeElectionId && panelHasContent && !districtColorMap;
+    activeTab === 'election' &&
+    !!activeElectionId &&
+    !activeElectionId.startsWith('local_9_') &&
+    panelHasContent &&
+    !districtColorMap;
   const { map: choroplethMap } =
     useChoropleth(
       choroplethActive ? activeElectionId : null,
@@ -421,7 +427,7 @@ export default function App() {
 
   // 모바일 헤더: 현재 위치명
   const mobileRegionName = navStack.length === 0
-    ? 'Korea DataMap'
+    ? '선거지도'
     : navStack[navStack.length - 1].adm_nm;
 
   return (
@@ -432,8 +438,8 @@ export default function App() {
           <div className="app-logo">
             <MapPin size={18} strokeWidth={2.5} />
           </div>
-          <h1 className="app-title">Korea <span className="app-title-accent">DataMap</span></h1>
-          <span className="app-subtitle">대한민국 행정구역 데이터 탐색</span>
+          <h1 className="app-title">선거<span className="app-title-accent">지도</span></h1>
+          <span className="app-subtitle">대한민국 선거 데이터 탐색</span>
         </div>
 
         {/* 모바일 전용: 뒤로가기 버튼 */}
@@ -561,9 +567,9 @@ export default function App() {
           )}
 
           {/* 지도 범례 — 선거구 색상(읍면동 레벨 기본) 또는 코로플레스(선거 선택 시) */}
-          {(districtColorMap && districtColorMap.size > 0) ? (
+          {(districtColorMap && districtColorMap.size > 0 && localDistrictElection) ? (
             <div className="choropleth-control">
-              <DistrictLegend map={districtColorMap} />
+              <DistrictLegend map={districtColorMap} kind={localDistrictElection.kind} />
             </div>
           ) : (activeTab === 'election' && !!activeElectionId && panelHasContent && choroplethMap.size > 0) && (
             <div className="choropleth-control">
@@ -628,28 +634,30 @@ export default function App() {
           ) : (
             <div className="panel-placeholder">
               <div className="intro-hero">
-                <div className="intro-logo">🗺</div>
-                <h1 className="intro-title">대한민국 데이터맵</h1>
+                <div className="intro-logo">
+                  <MapPin size={28} strokeWidth={2.4} />
+                </div>
+                <h1 className="intro-title">대한민국 선거지도</h1>
                 <p className="intro-subtitle">전국 행정구역의 인구·선거 데이터를<br />지도로 한눈에 탐색하세요</p>
               </div>
 
               <div className="intro-features">
                 <div className="intro-feature">
-                  <span className="intro-feature-icon">👥</span>
+                  <span className="intro-feature-icon"><Users size={19} strokeWidth={2.2} /></span>
                   <div className="intro-feature-body">
                     <p className="intro-feature-title">인구 통계</p>
                     <p className="intro-feature-desc">총 인구, 성별·연령 분포, 세대 구성</p>
                   </div>
                 </div>
                 <div className="intro-feature">
-                  <span className="intro-feature-icon">🗳</span>
+                  <span className="intro-feature-icon"><Vote size={19} strokeWidth={2.2} /></span>
                   <div className="intro-feature-body">
                     <p className="intro-feature-title">선거 결과</p>
                     <p className="intro-feature-desc">역대 대선·국선·지방선거 당선인 및 득표율</p>
                   </div>
                 </div>
                 <div className="intro-feature">
-                  <span className="intro-feature-icon">📍</span>
+                  <span className="intro-feature-icon"><MapPinned size={19} strokeWidth={2.2} /></span>
                   <div className="intro-feature-body">
                     <p className="intro-feature-title">읍·면·동 단위</p>
                     <p className="intro-feature-desc">시도 → 시군구 → 읍면동 드릴다운 탐색</p>
@@ -659,7 +667,7 @@ export default function App() {
 
               <div className="intro-hint">
                 <span className="intro-hint-icon">
-                  {currentLevel === 'sido' ? '👆' : '👆'}
+                  <MapPinned size={16} strokeWidth={2.2} />
                 </span>
                 <p>
                   {currentLevel === 'sido'
@@ -722,24 +730,32 @@ function ChoroplethLegend({ map }: { map: Map<string, { color: string; party: st
   );
 }
 
-function DistrictLegend({ map }: { map: Map<string, DistrictColorEntry> }) {
-  const districts = new Map<string, { color: string; label: string; count: number }>();
+/**
+ * 선거구 범례.
+ * 옆 숫자는 8회 지방선거 당선자 수(=기초/광역의원 정수)를 표시.
+ */
+function DistrictLegend({ map, kind }: { map: Map<string, DistrictColorEntry>; kind: LocalCouncilKind }) {
+  const districts = new Map<string, { color: string; label: string; seats: number }>();
   for (const entry of map.values()) {
-    const existing = districts.get(entry.districtKey);
-    if (existing) existing.count += 1;
-    else districts.set(entry.districtKey, { color: entry.color, label: entry.label, count: 1 });
+    if (districts.has(entry.districtKey)) continue;
+    const seats = getLocalCouncilSeatCount(kind, entry.districtKey);
+    districts.set(entry.districtKey, { color: entry.color, label: entry.label, seats });
   }
 
   const sorted = Array.from(districts.entries()).sort((a, b) => a[1].label.localeCompare(b[1].label, 'ko'));
   if (sorted.length === 0) return null;
 
+  const seatLabel = kind === 'basic' ? '기초의원 정수' : '광역의원 정수';
+
   return (
-    <div className="choropleth-legend district-legend">
-      {sorted.map(([districtKey, { color, label, count }]) => (
+    <div className="choropleth-legend district-legend" title={`${seatLabel} (8회 지방선거 당선자 수 기준)`}>
+      {sorted.map(([districtKey, { color, label, seats }]) => (
         <div key={districtKey} className="choropleth-legend-item district-legend-item">
           <span className="choropleth-legend-swatch" style={{ background: color }} />
           <span className="choropleth-legend-party">{label}</span>
-          <span className="choropleth-legend-count">{count}</span>
+          <span className="choropleth-legend-count" title={`${seatLabel}: ${seats}명`}>
+            {seats > 0 ? `${seats}명` : '-'}
+          </span>
         </div>
       ))}
     </div>

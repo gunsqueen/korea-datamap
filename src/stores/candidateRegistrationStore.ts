@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { useCallback } from 'react';
 import type { CandidateRegistrationData } from '../types';
 import { fetchCandidateRegistration } from '../services/candidateRegistration';
 import type { LocalCandidateElectionId } from '../services/candidateRegistration';
@@ -63,16 +64,21 @@ export function useCandidateRegistrationQuery(params: {
   sdName?: string;
   sggName?: string;
 }) {
+  const { admCd, electionId, sdName, sggName } = params;
   const key = getCacheKey(params);
   const data = useCandidateRegistrationStore((state) => state.cache[key] ?? null);
   const loading = useCandidateRegistrationStore((state) => state.loading[key] ?? false);
   const error = useCandidateRegistrationStore((state) => state.errors[key] ?? null);
   const fetch = useCandidateRegistrationStore((state) => state.fetch);
+  const refetch = useCallback(
+    () => fetch({ admCd, electionId, sdName, sggName }),
+    [admCd, electionId, fetch, sdName, sggName],
+  );
 
   return {
     data,
     loading,
     error,
-    refetch: () => fetch(params),
+    refetch,
   };
 }

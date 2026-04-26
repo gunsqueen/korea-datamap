@@ -6,6 +6,8 @@ import { useElection } from '../../hooks/useElection';
 import { ELECTIONS_META } from '../../services';
 import districtResults from '../../data/static/assembly_district_results.json';
 import { ElectionTab as Local9CandidateTab } from '../CandidateRegistration/ElectionTab';
+import { ChartCard } from '../UI/ChartCard';
+import { chartTheme } from '../../theme';
 import type { LocalCandidateElectionId } from '../../services/candidateRegistration';
 
 interface Props {
@@ -332,7 +334,7 @@ function ElectionResult({ data, requestedAdmCd }: { data: ElectionData; requeste
       {/* 파이 차트 */}
       {pieData.length > 1 && (
         <>
-          <div className="chart-container">
+          <ChartCard title="득표 구성">
             <ResponsiveContainer width="100%" height={180}>
               <PieChart>
                 <Pie
@@ -352,6 +354,7 @@ function ElectionResult({ data, requestedAdmCd }: { data: ElectionData; requeste
                     `${fmt(v as number)}표 (${props.payload.vote_rate?.toFixed(2) ?? ''}%)`,
                     `${props.payload.name} (${props.payload.party})`
                   ]}
+                  contentStyle={{ ...chartTheme.tooltipStyle }}
                 />
                 <Legend
                   layout="vertical"
@@ -364,7 +367,7 @@ function ElectionResult({ data, requestedAdmCd }: { data: ElectionData; requeste
                 />
               </PieChart>
             </ResponsiveContainer>
-          </div>
+          </ChartCard>
           {voteGap !== null && rateGap !== null && (
             <div className="election-gap-card">
               <span className="election-gap-label">1,2위 격차</span>

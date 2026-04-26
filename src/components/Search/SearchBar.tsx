@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
-import { Star, Clock, X } from 'lucide-react';
+import { Search, Star, Clock, X } from 'lucide-react';
 import type { AdminLevel, ElectionHint } from '../../types';
 import searchIndex from '../../data/static/search_index.json';
 import { useRegionHistory, type RegionHistoryItem } from '../../hooks/useRegionHistory';
@@ -593,7 +593,7 @@ export function SearchBar({ onSelect, autoFocus }: Props) {
   return (
     <div className="search-wrap">
       <div className="search-box">
-        <span className="search-icon">🔍</span>
+        <span className="search-icon"><Search size={15} strokeWidth={2.2} /></span>
         <input
           ref={inputRef}
           type="text"
@@ -611,7 +611,9 @@ export function SearchBar({ onSelect, autoFocus }: Props) {
           onKeyDown={handleKeyDown}
         />
         {query && (
-          <button className="search-clear" onClick={() => { setQuery(''); setOpen(false); }}>✕</button>
+          <button className="search-clear" onClick={() => { setQuery(''); setOpen(false); }} aria-label="검색어 지우기">
+            <X size={14} strokeWidth={2.2} />
+          </button>
         )}
       </div>
 
