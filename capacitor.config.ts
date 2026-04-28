@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.koreadatamap.app',
-  appName: 'Korea DataMap',
+  appName: '선거지도',
   webDir: 'dist',
   server: {
     // https 스킴 사용 - localStorage, CORS 등 보안 정책 정상 동작

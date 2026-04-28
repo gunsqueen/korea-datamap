@@ -366,7 +366,14 @@ export default function App() {
   // ── 바텀 시트 드래그 핸들러 ─────────────────────
   const snapToHeight: Record<SheetSnap, number> = { collapsed: 0.12, mid: 0.55, expanded: 0.92 };
 
-  const handleSheetDragStart = useCallback((clientY: number) => {
+  // touchend 이후 합성된 click이 snap 사이클을 한 번 더 돌리는 것을 막기 위한 플래그.
+  // 드래그가 발생했으면 짧은 시간 동안 click을 무시한다.
+  const justDraggedRef = useRef(false);
+  // mousedown으로 시작된 드래그 중에 touch 이벤트 추가 fallback으로 onClick이 또 호출되는 것 방지
+  const dragSourceRef = useRef<'touch' | 'mouse' | null>(null);
+
+  const handleSheetDragStart = useCallback((clientY: number, source: 'touch' | 'mouse') => {
+    dragSourceRef.current = source;
     sheetDragRef.current = {
       startY: clientY,
       startSnap: sheetSnap,
@@ -421,8 +428,14 @@ export default function App() {
 
     sheetEl.current.style.transition = '';
     sheetEl.current.style.height = '';
+    // 의미있는 드래그가 있었으면 이어서 발생하는 click(synthetic) 무시
+    if (Math.abs(drag.currentDelta) > 5) {
+      justDraggedRef.current = true;
+      window.setTimeout(() => { justDraggedRef.current = false; }, 350);
+    }
     setSheetSnap(nearest);
     sheetDragRef.current = null;
+    dragSourceRef.current = null;
   }, []);
 
   // 모바일 헤더: 현재 위치명
@@ -597,11 +610,14 @@ export default function App() {
             className="mobile-drag-handle"
             role="button"
             aria-label="패널 높이 조절"
-            onTouchStart={(e) => handleSheetDragStart(e.touches[0].clientY)}
+            onTouchStart={(e) => handleSheetDragStart(e.touches[0].clientY, 'touch')}
             onTouchMove={(e) => handleSheetDragMove(e.touches[0].clientY)}
             onTouchEnd={handleSheetDragEnd}
+            onTouchCancel={handleSheetDragEnd}
             onMouseDown={(e) => {
-              handleSheetDragStart(e.clientY);
+              // touch 이벤트로 이미 드래그가 시작된 경우 mousedown 무시 (Android/iOS의 합성 mouse 이벤트 차단)
+              if (dragSourceRef.current === 'touch') return;
+              handleSheetDragStart(e.clientY, 'mouse');
               const onMove = (ev: MouseEvent) => handleSheetDragMove(ev.clientY);
               const onUp = () => {
                 handleSheetDragEnd();
@@ -612,6 +628,11 @@ export default function App() {
               window.addEventListener('mouseup', onUp);
             }}
             onClick={() => {
+              // 드래그 직후 합성된 click이라면 snap 사이클을 또 돌리지 않는다
+              if (justDraggedRef.current) {
+                justDraggedRef.current = false;
+                return;
+              }
               // 탭 시 스냅 순환: collapsed → mid → expanded → collapsed
               setSheetSnap((prev) =>
                 prev === 'collapsed' ? 'mid' : prev === 'mid' ? 'expanded' : 'collapsed'

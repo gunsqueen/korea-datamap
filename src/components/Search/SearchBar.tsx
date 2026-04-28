@@ -162,15 +162,76 @@ function getElectionHint(e: string): ElectionHint | undefined {
   return undefined;
 }
 
-function cidxToResult(c: CidxEntry): SearchResult {
+function getScopedAreaForCandidate(c: CidxEntry, electionHint?: ElectionHint): Pick<
+  SearchResult,
+  'adm_cd' | 'adm_nm' | 'level' | 'sido_cd' | 'sido_nm' | 'sigungu_cd' | 'sigungu_nm' | 'searchLabel' | 'searchParent' | 'searchBadge'
+> {
+  if (electionHint?.type === 'presidential') {
+    return {
+      adm_cd: '00',
+      adm_nm: '전국',
+      level: 'sido',
+      sido_cd: null,
+      sido_nm: null,
+      sigungu_cd: null,
+      sigungu_nm: null,
+      searchLabel: '전국',
+      searchParent: electionHint.presidentialId
+        ? `${electionHint.presidentialId.replace('presidential_', '')}대 대선`
+        : '대통령선거',
+      searchBadge: '대통령선거',
+    };
+  }
+
+  if (electionHint?.type === 'local') {
+    if (electionHint.localSubType === 'metro_mayor' || electionHint.localSubType === 'council_pr') {
+      return {
+        adm_cd: c.rc,
+        adm_nm: c.rn,
+        level: 'sido',
+        sido_cd: c.rc,
+        sido_nm: c.rn,
+        sigungu_cd: null,
+        sigungu_nm: null,
+        searchLabel: c.rn,
+        searchParent: c.e,
+        searchBadge: electionHint.localSubType === 'metro_mayor' ? '광역단체장' : '광역비례',
+      };
+    }
+
+    if (electionHint.localSubType === 'mayor' || electionHint.localSubType === 'basic_pr') {
+      return {
+        adm_cd: c.sc,
+        adm_nm: c.sn,
+        level: 'sigungu',
+        sido_cd: c.rc,
+        sido_nm: c.rn,
+        sigungu_cd: c.sc,
+        sigungu_nm: c.sn,
+        searchLabel: c.sn,
+        searchParent: c.e,
+        searchBadge: electionHint.localSubType === 'mayor' ? '기초단체장' : '기초비례',
+      };
+    }
+  }
+
   return {
     adm_cd: c.cd,
-    adm_nm: c.an,  // 읍면동 전체명 (예: "서울특별시 강서구 화곡3동") — 선거 데이터 조회 필수
+    adm_nm: c.an,
     level: 'eupmyeondong',
     sido_cd: c.rc,
     sido_nm: c.rn,
     sigungu_cd: c.sc,
     sigungu_nm: c.sn,
+  };
+}
+
+function cidxToResult(c: CidxEntry): SearchResult {
+  const electionHint = getElectionHint(c.e);
+  const scopedArea = getScopedAreaForCandidate(c, electionHint);
+
+  return {
+    ...scopedArea,
     matchedText: '',
     candidate: {
       name: c.n,
@@ -181,7 +242,7 @@ function cidxToResult(c: CidxEntry): SearchResult {
     },
     assemblyDistrictKey: getAssemblyDistrictKey(c),
     localDistrictKey: getLocalDistrictKey(c),
-    electionHint: getElectionHint(c.e),
+    electionHint,
   };
 }
 
@@ -532,12 +593,20 @@ export function SearchBar({ onSelect, autoFocus }: Props) {
       .slice(0, 6)
       .map((entry) => ({ ...entry.result, matchedText: query }));
 
-    // 후보자 검색 — 이름 매치 후 최신 선거 우선 정렬 (배열 순서가 최신순)
-    const historicalCandidateResults: SearchResult[] = cidxAll
-      .filter((c) => c.n.toLowerCase().includes(lower))
-      .slice(0, 6)
-      .map(cidxToResult)
-      .map((r) => ({ ...r, matchedText: query }));
+    // 후보자 검색 — 이름 매치, 같은 (후보·정당·선거·선거구) 조합은 1개만 (동 단위 중복 제거)
+    const historicalCandidateResults: SearchResult[] = (() => {
+      const matched = cidxAll.filter((c) => c.n.toLowerCase().includes(lower));
+      const seen = new Set<string>();
+      const dedup: CidxEntry[] = [];
+      for (const c of matched) {
+        const key = `${c.n}|${c.p}|${c.e}|${c.d}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        dedup.push(c);
+        if (dedup.length >= 6) break;
+      }
+      return dedup.map(cidxToResult).map((r) => ({ ...r, matchedText: query }));
+    })();
 
     const local9CandidateResults: SearchResult[] = local9Candidates
       .filter((candidate) => candidate.name.toLowerCase().includes(lower))

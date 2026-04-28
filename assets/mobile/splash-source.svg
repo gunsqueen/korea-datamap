@@ -4,5 +4,5 @@
   <rect x="640" y="290" width="320" height="320" rx="64" fill="#0F3460"/>
   <path d="M710 560V380L790 430V510L920 380V560H710Z" fill="#F5F7FA"/>
   <path d="M740 630H860" stroke="#00C2A8" stroke-width="24" stroke-linecap="round"/>
-  <text x="800" y="720" text-anchor="middle" fill="#F5F7FA" font-size="52" font-family="Arial, sans-serif">Korea DataMap</text>
+  <text x="800" y="720" text-anchor="middle" fill="#F5F7FA" font-size="52" font-family="Arial, sans-serif">선거지도</text>
 </svg>
