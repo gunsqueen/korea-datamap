@@ -58,10 +58,15 @@ export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelec
     });
     L.control.zoom({ position: 'bottomright' }).addTo(mapRef.current);
 
-    const tileStyle = theme === 'light' ? 'light_nolabels' : 'dark_nolabels';
+    const tileStyle = theme === 'light' ? 'rastertiles/voyager_nolabels' : 'dark_nolabels';
     tileLayerRef.current = L.tileLayer(
       `https://{s}.basemaps.cartocdn.com/${tileStyle}/{z}/{x}/{y}{r}.png`,
-      { attribution: '© OpenStreetMap contributors © CARTO', subdomains: 'abcd', maxZoom: 18 }
+      {
+        attribution: '© OpenStreetMap contributors © CARTO',
+        subdomains: 'abcd',
+        maxZoom: 20,
+        detectRetina: true,
+      }
     ).addTo(mapRef.current);
 
     labelLayerRef.current = L.layerGroup().addTo(mapRef.current);
@@ -83,7 +88,7 @@ export function KoreaMap({ geoData, level, selectedCode, theme = 'dark', onSelec
   // 테마 변경 시 타일 레이어 교체
   useEffect(() => {
     if (!mapRef.current || !tileLayerRef.current) return;
-    const tileStyle = theme === 'light' ? 'light_nolabels' : 'dark_nolabels';
+    const tileStyle = theme === 'light' ? 'rastertiles/voyager_nolabels' : 'dark_nolabels';
     const newUrl = `https://{s}.basemaps.cartocdn.com/${tileStyle}/{z}/{x}/{y}{r}.png`;
     tileLayerRef.current.setUrl(newUrl);
   }, [theme]);

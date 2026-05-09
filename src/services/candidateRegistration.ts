@@ -2,9 +2,12 @@ import axios from 'axios';
 import type { AdminLevel, CandidateRegistrationCandidate, CandidateRegistrationData, ElectionHint } from '../types';
 import { NEC_API_KEY, PARENT_CITY, SIDO_NAME, getNecQueryRegion, getSidoNameByCode, getSigunguNameByCode } from './necRegion';
 import searchIndex from '../data/static/search_index.json';
+import local9CandidateIndex from '../data/static/local_9_candidate_index.json';
 import { findLocalCouncilDistrictByAdmCd, getLocalCouncilDistrictCodes } from './localCouncilMapping';
 
-const CANDIDATE_REGISTRATION_BASE = 'https://apis.data.go.kr/9760000/PofelcddInfoInqireService';
+const CANDIDATE_REGISTRATION_BASE = import.meta.env.DEV
+  ? '/api/nec/9760000/PofelcddInfoInqireService'
+  : 'https://apis.data.go.kr/9760000/PofelcddInfoInqireService';
 
 export type LocalCandidateElectionId =
   | 'local_9_metro_mayor'
@@ -145,6 +148,7 @@ export interface Local9CandidateSearchEntry {
 }
 
 const SEARCH_INDEX = searchIndex as SearchIndexEntry[];
+const STATIC_LOCAL_9_CANDIDATE_INDEX = local9CandidateIndex as Local9CandidateSearchEntry[];
 const SEARCH_INDEX_BY_CODE = new Map(SEARCH_INDEX.map((item) => [item.adm_cd, item]));
 const SIDO_SHORT: Record<string, string> = {
   '서울특별시': '서울',
@@ -171,6 +175,7 @@ const SIDO_SHORT: Record<string, string> = {
 const SIGUNGU_BY_KEY = new Map<string, SearchIndexEntry>();
 const PARENT_CITY_BY_KEY = new Map<string, SearchIndexEntry>();
 const SIDO_BY_NAME = new Map<string, SearchIndexEntry>();
+const SIGUNGU_BY_ADM_CD = new Map<string, SearchIndexEntry>();
 
 for (const row of SEARCH_INDEX) {
   if (row.level === 'sido') {
@@ -178,6 +183,8 @@ for (const row of SEARCH_INDEX) {
     continue;
   }
   if (row.level !== 'sigungu') continue;
+
+  SIGUNGU_BY_ADM_CD.set(row.adm_cd, row);
 
   const short = row.adm_nm.split(/\s+/).pop() ?? row.adm_nm;
   const sidoName = row.sido_nm ?? row.adm_nm.split(/\s+/)[0] ?? '';
@@ -189,16 +196,29 @@ for (const row of SEARCH_INDEX) {
   }
 }
 
+/** admCd(5자리)로부터 시군구 short name 추출. SEARCH_INDEX 기반이라 강서구·하남시 같은 일반 시군구도 처리. */
+function getSigunguShortNameByAdmCd(admCd: string): string {
+  const row = SIGUNGU_BY_ADM_CD.get(admCd.slice(0, 5));
+  if (!row) return '';
+  return row.adm_nm.split(/\s+/).pop() ?? '';
+}
+
 const LOCAL_9_SEARCH_IDS: LocalCandidateElectionId[] = [
-  'local_9_metro_mayor',
-  'local_9_mayor',
   'local_9_council_district',
-  'local_9_council_pr',
   'local_9_basic_district',
+  'local_9_mayor',
+  'local_9_metro_mayor',
+  'local_9_council_pr',
   'local_9_basic_pr',
 ];
 
 let local9CandidateIndexPromise: Promise<Local9CandidateSearchEntry[]> | null = null;
+const local9CandidateIndexProgressListeners = new Set<(items: Local9CandidateSearchEntry[]) => void>();
+
+function notifyLocal9CandidateIndexProgress(items: Local9CandidateSearchEntry[]) {
+  if (items.length === 0) return;
+  local9CandidateIndexProgressListeners.forEach((listener) => listener(items));
+}
 
 function parseCandidate(item: CandidateRegistrationApiItem): CandidateRegistrationCandidate {
   const age = Number(item.age ?? 0);
@@ -276,11 +296,36 @@ function findSidoArea(sdName?: string): SearchIndexEntry | null {
 
 function findSigunguArea(sdName?: string, sigunguName?: string): SearchIndexEntry | null {
   if (!sdName || !sigunguName) return null;
+  if (sdName === '세종특별자치시' && sigunguName === '세종특별자치시') {
+    return SIGUNGU_BY_KEY.get(`${sdName}|세종시`) ?? null;
+  }
   return (
     SIGUNGU_BY_KEY.get(`${sdName}|${sigunguName}`) ??
     PARENT_CITY_BY_KEY.get(`${sdName}|${sigunguName}`) ??
     null
   );
+}
+
+/**
+ * 광역의원·기초의원 선거구명에서 시군구명을 추출.
+ *  "하남시제1선거구" → "하남시"
+ *  "수원시영통구제1선거구" → "영통구" (자치구가 있는 도시는 자치구 short 우선)
+ *  "하남시" → "하남시" (이미 시군구명인 경우 그대로 반환)
+ *
+ * 9회 광역의원 매핑이 local_council_emd_mapping.json에 누락된 경우의 fallback 용도.
+ * 시군구 단위까지만 매칭되며, 선거구 폴리곤 하이라이트는 못 함.
+ */
+function extractSigunguFromDistrictName(districtName?: string): string | null {
+  if (!districtName) return null;
+  let work = districtName.trim();
+  work = work.replace(/(제(\d+|[일이삼사오육칠팔구십]+)|[가-힣])선거구$/, '');
+  work = work.replace(/선거구$/, '');
+  work = work.replace(/제(\d+|[일이삼사오육칠팔구십]+)$/, '');
+  work = work.replace(/\d+$/, '');
+  if (!work) return null;
+  const guMatch = work.match(/^(.+?시)(.+구)$/);
+  if (guMatch) return guMatch[2];
+  return work;
 }
 
 function findDistrictRepresentativeArea(item: CandidateRegistrationApiItem, electionId: LocalCandidateElectionId): SearchIndexEntry | null {
@@ -315,7 +360,9 @@ function resolveLocal9CandidateArea(item: CandidateRegistrationApiItem, election
   if (electionId === 'local_9_council_district' || electionId === 'local_9_basic_district') {
     return findDistrictRepresentativeArea(item, electionId) ??
       findSigunguArea(item.sdName, item.wiwName) ??
-      findSigunguArea(item.sdName, item.sggName);
+      findSigunguArea(item.sdName, extractSigunguFromDistrictName(item.wiwName) ?? undefined) ??
+      findSigunguArea(item.sdName, item.sggName) ??
+      findSigunguArea(item.sdName, extractSigunguFromDistrictName(item.sggName) ?? undefined);
   }
 
   return findSigunguArea(item.sdName, item.wiwName) ??
@@ -325,6 +372,7 @@ function resolveLocal9CandidateArea(item: CandidateRegistrationApiItem, election
 async function fetchCandidateRegistrationPage(
   electionId: LocalCandidateElectionId,
   pageNo: number,
+  sdName?: string,
 ): Promise<{ items: CandidateRegistrationApiItem[]; totalCount: number }> {
   const meta = LOCAL_9_CANDIDATE_MAP[electionId];
   const params: Record<string, string | number> = {
@@ -335,6 +383,9 @@ async function fetchCandidateRegistrationPage(
     numOfRows: 1000,
     resultType: 'json',
   };
+  if (sdName) {
+    params.sdName = sdName;
+  }
 
   const { data } = await axios.get<CandidateRegistrationApiResponse>(
     `${CANDIDATE_REGISTRATION_BASE}/getPoelpcddRegistSttusInfoInqire`,
@@ -357,35 +408,125 @@ async function fetchCandidateRegistrationPage(
   };
 }
 
-async function fetchAllCandidateRegistrationItems(electionId: LocalCandidateElectionId): Promise<CandidateRegistrationApiItem[]> {
-  const firstPage = await fetchCandidateRegistrationPage(electionId, 1);
-  const totalPages = Math.max(1, Math.ceil(firstPage.totalCount / 1000));
+async function fetchCandidateRegistrationPageWithRetry(
+  electionId: LocalCandidateElectionId,
+  pageNo: number,
+  sdName?: string,
+  retries = 2,
+): Promise<{ items: CandidateRegistrationApiItem[]; totalCount: number }> {
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    try {
+      return await fetchCandidateRegistrationPage(electionId, pageNo, sdName);
+    } catch (error) {
+      lastError = error;
+      if (attempt < retries) {
+        await new Promise((resolve) => setTimeout(resolve, 300 * (attempt + 1)));
+      }
+    }
+  }
+
+  throw lastError instanceof Error ? lastError : new Error('후보자 등록 현황 API 오류');
+}
+
+async function mapWithConcurrency<T, R>(
+  items: T[],
+  limit: number,
+  mapper: (item: T) => Promise<R>,
+): Promise<R[]> {
+  const results: R[] = [];
+  let nextIndex = 0;
+
+  async function worker() {
+    while (nextIndex < items.length) {
+      const currentIndex = nextIndex;
+      nextIndex += 1;
+      results[currentIndex] = await mapper(items[currentIndex]);
+    }
+  }
+
+  await Promise.all(
+    Array.from({ length: Math.min(limit, items.length) }, () => worker()),
+  );
+  return results;
+}
+
+function toSearchEntries(
+  items: CandidateRegistrationApiItem[],
+  electionId: LocalCandidateElectionId,
+): Local9CandidateSearchEntry[] {
+  return items
+    .filter((item) => `${item.name ?? ''}`.trim())
+    .map((item) => {
+      const area = resolveLocal9CandidateArea(item, electionId);
+      return area ? toSearchEntry(area, item, electionId) : null;
+    })
+    .filter((entry): entry is Local9CandidateSearchEntry => entry !== null);
+}
+
+async function fetchAllCandidateRegistrationItems(
+  electionId: LocalCandidateElectionId,
+  sdName?: string,
+  onPageItems?: (items: CandidateRegistrationApiItem[]) => void,
+): Promise<CandidateRegistrationApiItem[]> {
+  const firstPage = await fetchCandidateRegistrationPageWithRetry(electionId, 1, sdName);
+  onPageItems?.(firstPage.items);
+  // NEC API는 요청한 numOfRows(1000)와 무관하게 응답을 100건으로 캡한다.
+  // 실제 응답 길이를 페이지 크기로 사용해야 누락 없이 전체를 가져올 수 있다.
+  const pageSize = Math.max(1, firstPage.items.length);
+  const totalPages = Math.max(1, Math.ceil(firstPage.totalCount / pageSize));
   if (totalPages === 1) return firstPage.items;
 
-  const restPages = await Promise.all(
-    Array.from({ length: totalPages - 1 }, (_, index) => fetchCandidateRegistrationPage(electionId, index + 2)),
+  const restPages = await mapWithConcurrency(
+    Array.from({ length: totalPages - 1 }, (_, index) =>
+      index + 2,
+    ),
+    6,
+    async (pageNo) => {
+      const page = await fetchCandidateRegistrationPageWithRetry(electionId, pageNo, sdName);
+      onPageItems?.(page.items);
+      return page;
+    },
   );
   return [firstPage, ...restPages].flatMap((page) => page.items);
 }
 
-export async function loadLocal9CandidateSearchIndex(): Promise<Local9CandidateSearchEntry[]> {
-  if (!NEC_API_KEY) return [];
-  if (local9CandidateIndexPromise) return local9CandidateIndexPromise;
+export async function loadLocal9CandidateSearchIndex(
+  onProgress?: (items: Local9CandidateSearchEntry[]) => void,
+): Promise<Local9CandidateSearchEntry[]> {
+  if (STATIC_LOCAL_9_CANDIDATE_INDEX.length > 0) {
+    onProgress?.(STATIC_LOCAL_9_CANDIDATE_INDEX);
+  }
+  if (!NEC_API_KEY) return STATIC_LOCAL_9_CANDIDATE_INDEX;
+  if (onProgress) {
+    local9CandidateIndexProgressListeners.add(onProgress);
+  }
+  if (local9CandidateIndexPromise) {
+    return local9CandidateIndexPromise.finally(() => {
+      if (onProgress) {
+        local9CandidateIndexProgressListeners.delete(onProgress);
+      }
+    });
+  }
 
-  local9CandidateIndexPromise = Promise.all(
+  local9CandidateIndexPromise = Promise.allSettled(
     LOCAL_9_SEARCH_IDS.map(async (electionId) => {
-      const items = await fetchAllCandidateRegistrationItems(electionId);
-      return items
-        .filter((item) => `${item.name ?? ''}`.trim())
-        .map((item) => {
-          const area = resolveLocal9CandidateArea(item, electionId);
-          return area ? toSearchEntry(area, item, electionId) : null;
-        })
-        .filter((entry): entry is Local9CandidateSearchEntry => entry !== null);
+      const items = await fetchAllCandidateRegistrationItems(electionId, undefined, (pageItems) => {
+        notifyLocal9CandidateIndexProgress(toSearchEntries(pageItems, electionId));
+      });
+      return toSearchEntries(items, electionId);
     }),
-  ).then((groups) => groups.flat());
+  ).then((groups) => {
+    const liveItems = groups.flatMap((group) => (group.status === 'fulfilled' ? group.value : []));
+    return liveItems.length > 0 ? liveItems : STATIC_LOCAL_9_CANDIDATE_INDEX;
+  });
 
-  return local9CandidateIndexPromise;
+  return local9CandidateIndexPromise.finally(() => {
+    if (onProgress) {
+      local9CandidateIndexProgressListeners.delete(onProgress);
+    }
+  });
 }
 
 function normalizeScope(admCd: string, electionId: LocalCandidateElectionId, sdName?: string, sggName?: string) {
@@ -474,6 +615,58 @@ export async function fetchCandidateRegistration(
       total_count: 0,
       candidates: [],
       request_scope: { sdName },
+    };
+  }
+
+  // 시군구(5자리) + 광역의원/기초의원: 시군구명을 그대로 sggName에 보내면
+  // NEC API가 0건 응답하므로(API는 선거구명을 기대), 시도 전체를 받아 시군구명 prefix로 필터한다.
+  if (isLocalCouncilDistrictElection(query.electionId) && query.admCd.length === 5) {
+    // SEARCH_INDEX 기반 시군구명을 우선 사용 (necRegion의 SIGUNGU_NAME은 자치구만 담고 있음)
+    const sigunguName = (
+      getSigunguShortNameByAdmCd(query.admCd) ||
+      getSigunguNameByCode(query.admCd) ||
+      ''
+    ).replace(/\s+/g, '');
+    if (!sigunguName) {
+      return {
+        election_id: query.electionId,
+        election_name: meta.electionName,
+        election_date: meta.electionDate,
+        adm_cd: query.admCd,
+        adm_nm: sdName,
+        sub_type: meta.subType,
+        total_count: 0,
+        candidates: [],
+        request_scope: { sdName },
+      };
+    }
+    // 자치구가 있는 도시(예: 수원시 영통구)의 경우 NEC sggName/wiwName은
+    // "수원시영통구..." 형태이므로 부모시 + 시군구명 결합형도 함께 검사한다.
+    const parentCity = (PARENT_CITY[query.admCd] ?? '').replace(/\s+/g, '');
+    const fullSigunguName = parentCity ? `${parentCity}${sigunguName}` : sigunguName;
+
+    const sidoItems = await fetchAllCandidateRegistrationItems(query.electionId, sdName);
+    const filtered = sidoItems.filter((it) => {
+      const sgg = (it.sggName ?? '').replace(/\s+/g, '');
+      const wiw = (it.wiwName ?? '').replace(/\s+/g, '');
+      return (
+        sgg.startsWith(fullSigunguName) ||
+        wiw === fullSigunguName ||
+        wiw.startsWith(fullSigunguName) ||
+        (!parentCity && (sgg.startsWith(sigunguName) || wiw.startsWith(sigunguName)))
+      );
+    });
+
+    return {
+      election_id: query.electionId,
+      election_name: meta.electionName,
+      election_date: meta.electionDate,
+      adm_cd: query.admCd,
+      adm_nm: `${sdName} ${parentCity ? `${parentCity} ` : ''}${sigunguName}`.trim(),
+      sub_type: meta.subType,
+      total_count: filtered.length,
+      candidates: filtered.map(parseCandidate),
+      request_scope: { sdName, sggName: sigunguName },
     };
   }
 

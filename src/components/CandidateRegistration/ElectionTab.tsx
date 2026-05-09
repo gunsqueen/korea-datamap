@@ -19,8 +19,11 @@ export function ElectionTab({ admCd, electionId }: Props) {
     defaults.requiresSigungu ? defaults.selectedSigunguCode : '',
   );
 
+  // 시군구(5자리) admCd + 광역의원/기초의원: 정확한 선거구 매핑이 없어도
+  // 시군구 단위로 후보 전체를 조회한다(서비스에서 시도 전체 fetch 후 시군구명 prefix로 필터).
+  const isSigunguLevel = admCd.length === 5;
   const canQuery = requiresDistrictMapping
-    ? !!defaults.districtName
+    ? !!defaults.districtName || isSigunguLevel
     : !defaults.requiresSigungu || !!selectedSigunguCode;
   const lockedToDistrict = !!defaults.districtName;
   const selectedAdmCd = requiresDistrictMapping
@@ -32,7 +35,8 @@ export function ElectionTab({ admCd, electionId }: Props) {
         : selectedSidoCode;
   const selectedSdName = SIDO_NAME[selectedSidoCode] ?? defaults.sdName;
   const selectedSggName = requiresDistrictMapping
-    ? defaults.districtName
+    ? // 5자리 시군구 레벨에서는 sggName(선거구명) 추측이 불가하므로 비워서 서비스의 시군구 fallback 분기로 보낸다.
+      defaults.districtName ?? undefined
     : lockedToDistrict
       ? defaults.districtName
       : defaults.requiresSigungu

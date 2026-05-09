@@ -274,6 +274,23 @@ function normalizeSearchText(value: string): string {
   return value.toLowerCase().replace(/[\s_·\-/(),]/g, '');
 }
 
+function mergeLocal9CandidateEntries(
+  current: Local9CandidateSearchEntry[],
+  incoming: Local9CandidateSearchEntry[],
+): Local9CandidateSearchEntry[] {
+  if (incoming.length === 0) return current;
+  const merged = new Map<string, Local9CandidateSearchEntry>();
+
+  for (const item of current) {
+    merged.set(`${item.name}|${item.party}|${item.electionLabel}|${item.district}|${item.adm_cd}`, item);
+  }
+  for (const item of incoming) {
+    merged.set(`${item.name}|${item.party}|${item.electionLabel}|${item.district}|${item.adm_cd}`, item);
+  }
+
+  return Array.from(merged.values());
+}
+
 function resolveAreaFromCode(admCd: string, fallbackLabel: string): SearchResult {
   const exact = SEARCH_INDEX_BY_CODE.get(admCd);
   if (exact) {
@@ -530,7 +547,11 @@ export function SearchBar({ onSelect, autoFocus }: Props) {
   useEffect(() => {
     if (query.trim().length < 2 || local9Candidates.length > 0) return;
     let cancelled = false;
-    loadLocal9CandidateSearchIndex()
+    loadLocal9CandidateSearchIndex((items) => {
+      if (!cancelled) {
+        setLocal9Candidates((current) => mergeLocal9CandidateEntries(current, items));
+      }
+    })
       .then((items) => {
         if (!cancelled) setLocal9Candidates(items);
       })

@@ -10,4 +10,13 @@ export default defineConfig({
   define: {
     __APP_BUILD_TARGET__: JSON.stringify(buildTarget),
   },
+  server: {
+    proxy: {
+      '/api/nec': {
+        target: 'https://apis.data.go.kr',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/nec/, ''),
+      },
+    },
+  },
 })
