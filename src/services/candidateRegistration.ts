@@ -9,6 +9,9 @@ const CANDIDATE_REGISTRATION_BASE = import.meta.env.DEV
   ? '/api/nec/9760000/PofelcddInfoInqireService'
   : 'https://apis.data.go.kr/9760000/PofelcddInfoInqireService';
 
+const NEC_INFO_BASE = import.meta.env.DEV ? '/api/nec-info' : 'https://info.nec.go.kr';
+const NEC_INFO_ELECTION_ID = '0020260603';
+
 export type LocalCandidateElectionId =
   | 'local_9_metro_mayor'
   | 'local_9_mayor'
@@ -172,6 +175,35 @@ const SIDO_SHORT: Record<string, string> = {
   '제주특별자치도': '제주',
 };
 
+const NEC_INFO_CITY_CODE_BY_SIDO_CODE: Record<string, string> = {
+  '11': '1100',
+  '21': '2600',
+  '22': '2700',
+  '23': '2800',
+  '24': '2900',
+  '25': '3000',
+  '26': '3100',
+  '29': '5100',
+  '31': '4100',
+  '32': '5200',
+  '33': '4300',
+  '34': '4400',
+  '35': '5300',
+  '36': '4600',
+  '37': '4700',
+  '38': '4800',
+  '39': '4900',
+};
+
+const NEC_INFO_ELECTION_CODE_BY_ID: Record<LocalCandidateElectionId, string> = {
+  local_9_metro_mayor: '3',
+  local_9_mayor: '4',
+  local_9_council_district: '5',
+  local_9_basic_district: '6',
+  local_9_council_pr: '8',
+  local_9_basic_pr: '9',
+};
+
 const SIGUNGU_BY_KEY = new Map<string, SearchIndexEntry>();
 const PARENT_CITY_BY_KEY = new Map<string, SearchIndexEntry>();
 const SIDO_BY_NAME = new Map<string, SearchIndexEntry>();
@@ -246,6 +278,40 @@ function toItemArray(item?: CandidateRegistrationApiItem | CandidateRegistration
   return Array.isArray(item) ? item : [item];
 }
 
+function normalizeKoreanKey(value?: string | null): string {
+  return `${value ?? ''}`.replace(/\s+/g, '').trim();
+}
+
+function normalizeText(value: string): string {
+  return value.replace(/\s+/g, ' ').trim();
+}
+
+function textFromHtml(html: string): string {
+  const doc = new DOMParser().parseFromString(
+    html.replace(/<br\s*\/?>/gi, ' / '),
+    'text/html',
+  );
+  return normalizeText(doc.body.textContent ?? '');
+}
+
+function textFromCell(cell: Element | undefined): string {
+  if (!cell) return '';
+  return textFromHtml(cell.innerHTML);
+}
+
+function getCandidateNameFromOfficialCell(cell: Element | undefined): string {
+  const link = cell?.querySelector('a');
+  const textNode = link
+    ? Array.from(link.childNodes).find((node) => node.nodeType === 3)
+    : null;
+  return normalizeText(textNode?.textContent ?? textFromCell(cell).replace(/\(.+\)/, ''));
+}
+
+function getAgeFromBirthAge(value: string): number {
+  const age = Number(value.match(/\((\d+)세\)/)?.[1] ?? 0);
+  return Number.isFinite(age) ? age : 0;
+}
+
 function getLocal9ElectionHint(electionId: LocalCandidateElectionId): ElectionHint {
   return {
     type: 'local',
@@ -257,6 +323,307 @@ function getLocal9ElectionHint(electionId: LocalCandidateElectionId): ElectionHi
 function getLocal9ElectionLabel(electionId: LocalCandidateElectionId): string {
   const meta = LOCAL_9_CANDIDATE_MAP[electionId];
   return `9회 지방선거 ${meta.subType.replace(' 후보자 등록 현황', '')}`;
+}
+
+function getLocal9SubType(electionId: LocalCandidateElectionId): string {
+  return electionId.replace('local_9_', '');
+}
+
+function getStaticCandidateKey(candidate: CandidateRegistrationCandidate) {
+  return `${candidate.party}|${candidate.name}|${candidate.district}`;
+}
+
+function staticEntryToCandidate(entry: Local9CandidateSearchEntry): CandidateRegistrationCandidate {
+  return {
+    name: entry.name,
+    party: entry.party,
+    district: entry.district,
+    age: 0,
+    gender: '-',
+    job: '-',
+    education: '-',
+    career: '-',
+    status: '등록',
+  };
+}
+
+function matchesStaticSido(entry: Local9CandidateSearchEntry, admCd: string, sdName?: string) {
+  const sidoCd = admCd.slice(0, 2);
+  return (
+    entry.adm_cd === sidoCd ||
+    entry.sido_cd === sidoCd ||
+    (!!sdName && (entry.adm_nm === sdName || entry.sido_nm === sdName))
+  );
+}
+
+function matchesStaticSigungu(entry: Local9CandidateSearchEntry, admCd: string, sggName?: string) {
+  const sigunguCd = admCd.length >= 5 ? admCd.slice(0, 5) : '';
+  const normalizedSggName = `${sggName ?? ''}`.replace(/\s+/g, '');
+
+  return (
+    (!!sigunguCd && (entry.adm_cd === sigunguCd || entry.sigungu_cd === sigunguCd)) ||
+    (!!normalizedSggName && (
+      entry.adm_nm.replace(/\s+/g, '').endsWith(normalizedSggName) ||
+      `${entry.sigungu_nm ?? ''}`.replace(/\s+/g, '') === normalizedSggName ||
+      entry.district.replace(/\s+/g, '') === normalizedSggName
+    ))
+  );
+}
+
+function getStaticLocal9CandidateEntries(
+  query: CandidateRegistrationQuery,
+  sdName?: string,
+  sggName?: string,
+  districtMatch?: LocalDistrictMatch | null,
+): Local9CandidateSearchEntry[] {
+  const localSubType = getLocal9SubType(query.electionId);
+  const entries = STATIC_LOCAL_9_CANDIDATE_INDEX.filter((entry) => (
+    entry.electionHint?.localPrefix === 'local_9' &&
+    entry.electionHint.localSubType === localSubType
+  ));
+
+  if (query.electionId === 'local_9_metro_mayor' || query.electionId === 'local_9_council_pr') {
+    return entries.filter((entry) => matchesStaticSido(entry, query.admCd, sdName));
+  }
+
+  if (query.electionId === 'local_9_council_district' || query.electionId === 'local_9_basic_district') {
+    if (districtMatch?.districtKey) {
+      return entries.filter((entry) => entry.localDistrictKey === districtMatch.districtKey);
+    }
+
+    return entries.filter((entry) => matchesStaticSigungu(entry, query.admCd, sggName));
+  }
+
+  return entries.filter((entry) => matchesStaticSigungu(entry, query.admCd, sggName));
+}
+
+function buildStaticLocal9CandidateData(
+  query: CandidateRegistrationQuery,
+  sdName: string,
+  sggName: string | undefined,
+  districtMatch?: LocalDistrictMatch | null,
+): CandidateRegistrationData | null {
+  const entries = getStaticLocal9CandidateEntries(query, sdName, sggName, districtMatch);
+  if (entries.length === 0) return null;
+
+  const candidates = new Map<string, CandidateRegistrationCandidate>();
+  for (const entry of entries) {
+    const candidate = staticEntryToCandidate(entry);
+    candidates.set(getStaticCandidateKey(candidate), candidate);
+  }
+
+  const meta = LOCAL_9_CANDIDATE_MAP[query.electionId];
+  return {
+    election_id: query.electionId,
+    election_name: meta.electionName,
+    election_date: meta.electionDate,
+    adm_cd: query.admCd,
+    adm_nm: sggName ? `${sdName} ${sggName}` : sdName,
+    sub_type: meta.subType,
+    total_count: candidates.size,
+    candidates: Array.from(candidates.values()),
+    request_scope: { sdName, sggName },
+  };
+}
+
+interface NecInfoSelectboxResponse {
+  jsonResult?: {
+    body?: Array<{ CODE: string; NAME: string }>;
+  };
+}
+
+const necInfoTownCodeCache = new Map<string, Promise<string | null>>();
+const necInfoSggCityCodeCache = new Map<string, Promise<string | null>>();
+
+async function fetchNecInfoSelectbox(
+  path: string,
+  params: Record<string, string>,
+): Promise<Array<{ CODE: string; NAME: string }>> {
+  const body = new URLSearchParams(params);
+  const { data } = await axios.post<NecInfoSelectboxResponse>(
+    `${NEC_INFO_BASE}${path}`,
+    body,
+    { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } },
+  );
+  return data.jsonResult?.body ?? [];
+}
+
+function findCodeByName(
+  rows: Array<{ CODE: string; NAME: string }>,
+  name?: string | null,
+): string | null {
+  const key = normalizeKoreanKey(name);
+  if (!key) return null;
+  return rows.find((row) => normalizeKoreanKey(row.NAME) === key)?.CODE ?? null;
+}
+
+function getNecInfoCityCode(admCd: string): string | null {
+  return NEC_INFO_CITY_CODE_BY_SIDO_CODE[admCd.slice(0, 2)] ?? null;
+}
+
+async function getNecInfoTownCode(
+  electionCode: string,
+  cityCode: string,
+  townName?: string | null,
+): Promise<string | null> {
+  const key = `${electionCode}|${cityCode}|${normalizeKoreanKey(townName)}`;
+  if (!necInfoTownCodeCache.has(key)) {
+    necInfoTownCodeCache.set(key, (async () => {
+      const rows = await fetchNecInfoSelectbox('/bizcommon/selectbox/selectbox_townCodeBySgJson.json', {
+        electionId: NEC_INFO_ELECTION_ID,
+        electionCode,
+        cityCode,
+      });
+      return findCodeByName(rows, townName);
+    })());
+  }
+  return necInfoTownCodeCache.get(key)!;
+}
+
+async function getNecInfoSggCityCode(
+  electionCode: string,
+  cityCode: string,
+  sigunguName?: string | null,
+): Promise<string | null> {
+  const key = `${electionCode}|${cityCode}|${normalizeKoreanKey(sigunguName)}`;
+  if (!necInfoSggCityCodeCache.has(key)) {
+    necInfoSggCityCodeCache.set(key, (async () => {
+      const rows = await fetchNecInfoSelectbox('/bizcommon/selectbox/selectbox_getSggCityCodeJson.json', {
+        electionId: NEC_INFO_ELECTION_ID,
+        electionCode,
+        cityCode,
+      });
+      return findCodeByName(rows, sigunguName);
+    })());
+  }
+  return necInfoSggCityCodeCache.get(key)!;
+}
+
+async function fetchNecInfoCandidateHtml(params: Record<string, string>): Promise<string> {
+  const body = new URLSearchParams({
+    electionId: NEC_INFO_ELECTION_ID,
+    requestURI: '/electioninfo/0020260603/cp/cpri03.jsp',
+    topMenuId: 'CP',
+    secondMenuId: 'CPRI03',
+    menuId: 'CPRI03',
+    dateCode: '0',
+    ...params,
+  });
+
+  const { data } = await axios.post<string>(
+    `${NEC_INFO_BASE}/electioninfo/electionInfo_report.xhtml`,
+    body,
+    { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } },
+  );
+  return data;
+}
+
+function parseNecInfoCandidateRows(html: string, electionId: LocalCandidateElectionId): CandidateRegistrationCandidate[] {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const rows = Array.from(doc.querySelectorAll('#table01 tbody tr'));
+  const candidates: CandidateRegistrationCandidate[] = [];
+
+  for (const row of rows) {
+    const cells = Array.from(row.querySelectorAll('td'));
+    if (cells.length < 11 || textFromCell(cells[0]).includes('검색된 결과가 없습니다')) continue;
+
+    const name = getCandidateNameFromOfficialCell(cells[4]);
+    if (!name) continue;
+
+    candidates.push({
+      name,
+      party: textFromCell(cells[3]) || '무소속',
+      district: textFromCell(cells[0]) || '선거구 정보 없음',
+      age: getAgeFromBirthAge(textFromCell(cells[6])),
+      gender: textFromCell(cells[5]) || '-',
+      job: textFromCell(cells[8]) || '-',
+      education: textFromCell(cells[9]) || '-',
+      career: textFromCell(cells[10]) || '-',
+      status: '등록',
+    });
+  }
+
+  if (electionId === 'local_9_council_pr' || electionId === 'local_9_basic_pr') {
+    return candidates.filter((candidate) => candidate.party !== '계');
+  }
+  return candidates;
+}
+
+function getNecInfoTownName(query: CandidateRegistrationQuery, sggName?: string, districtMatch?: LocalDistrictMatch | null): string {
+  if (districtMatch?.districtName) {
+    return extractSigunguFromDistrictName(districtMatch.districtName) ?? districtMatch.districtName;
+  }
+  return (
+    getSigunguShortNameByAdmCd(query.admCd) ||
+    getSigunguNameByCode(query.admCd) ||
+    extractSigunguFromDistrictName(sggName) ||
+    sggName ||
+    ''
+  );
+}
+
+function filterNecInfoCandidates(
+  candidates: CandidateRegistrationCandidate[],
+  query: CandidateRegistrationQuery,
+  districtMatch?: LocalDistrictMatch | null,
+): CandidateRegistrationCandidate[] {
+  if (query.electionId === 'local_9_council_district' || query.electionId === 'local_9_basic_district') {
+    const districtName = districtMatch?.districtName;
+    if (!districtName) return candidates;
+    const districtKey = normalizeKoreanKey(districtName);
+    return candidates.filter((candidate) => normalizeKoreanKey(candidate.district) === districtKey);
+  }
+  return candidates;
+}
+
+async function fetchNecInfoCandidateRegistration(
+  query: CandidateRegistrationQuery,
+  sdName: string,
+  sggName: string | undefined,
+  districtMatch?: LocalDistrictMatch | null,
+): Promise<CandidateRegistrationData | null> {
+  const meta = LOCAL_9_CANDIDATE_MAP[query.electionId];
+  const electionCode = NEC_INFO_ELECTION_CODE_BY_ID[query.electionId];
+  const cityCode = getNecInfoCityCode(query.admCd);
+  if (!electionCode || !cityCode) return null;
+
+  const params: Record<string, string> = {
+    statementId: `CPRI03_#${electionCode}`,
+    electionCode,
+    cityCode,
+  };
+
+  if (query.electionId === 'local_9_mayor' || query.electionId === 'local_9_basic_pr') {
+    const officialSigunguCode = await getNecInfoSggCityCode(electionCode, cityCode, sggName);
+    if (!officialSigunguCode) return null;
+    params.sggCityCode = officialSigunguCode;
+  } else if (query.electionId === 'local_9_council_district' || query.electionId === 'local_9_basic_district') {
+    const townName = getNecInfoTownName(query, sggName, districtMatch);
+    const townCode = await getNecInfoTownCode(electionCode, cityCode, townName);
+    if (!townCode) return null;
+    params.townCode = townCode;
+    params.sggTownCode = '0';
+  }
+
+  const html = await fetchNecInfoCandidateHtml(params);
+  const candidates = filterNecInfoCandidates(
+    parseNecInfoCandidateRows(html, query.electionId),
+    query,
+    districtMatch,
+  );
+  if (candidates.length === 0) return null;
+
+  return {
+    election_id: query.electionId,
+    election_name: meta.electionName,
+    election_date: meta.electionDate,
+    adm_cd: query.admCd,
+    adm_nm: sggName ? `${sdName} ${sggName}` : sdName,
+    sub_type: meta.subType,
+    total_count: candidates.length,
+    candidates,
+    request_scope: { sdName, sggName },
+  };
 }
 
 function getLocal9DistrictKey(item: CandidateRegistrationApiItem, electionId: LocalCandidateElectionId): string | undefined {
@@ -589,10 +956,6 @@ export function findLocalCouncilDistrict(admCd: string, electionId: LocalCandida
 export async function fetchCandidateRegistration(
   query: CandidateRegistrationQuery,
 ): Promise<CandidateRegistrationData> {
-  if (!NEC_API_KEY) {
-    throw new Error('NEC API 키가 설정되지 않았습니다');
-  }
-
   const meta = LOCAL_9_CANDIDATE_MAP[query.electionId];
   if (!meta) {
     throw new Error(`지원하지 않는 선거 ID입니다: ${query.electionId}`);
@@ -604,8 +967,24 @@ export async function fetchCandidateRegistration(
     query.sdName,
     query.sggName,
   );
+
+  const staticFallback = () => buildStaticLocal9CandidateData(query, sdName, sggName, districtMatch);
+  let officialFallbackPromise: Promise<CandidateRegistrationData | null> | null = null;
+  const officialFallback = () => {
+    officialFallbackPromise ??= fetchNecInfoCandidateRegistration(query, sdName, sggName, districtMatch)
+      .catch(() => null);
+    return officialFallbackPromise;
+  };
+  const fallback = async () => (await officialFallback()) ?? staticFallback();
+
+  if (!NEC_API_KEY) {
+    const fallbackData = await fallback();
+    if (fallbackData) return fallbackData;
+    throw new Error('NEC API 키가 설정되지 않았습니다');
+  }
+
   if (isLocalCouncilDistrictElection(query.electionId) && query.admCd.length === 8 && !districtMatch) {
-    return {
+    return (await fallback()) ?? {
       election_id: query.electionId,
       election_name: meta.electionName,
       election_date: meta.electionDate,
@@ -628,7 +1007,7 @@ export async function fetchCandidateRegistration(
       ''
     ).replace(/\s+/g, '');
     if (!sigunguName) {
-      return {
+      return (await fallback()) ?? {
         election_id: query.electionId,
         election_name: meta.electionName,
         election_date: meta.electionDate,
@@ -645,7 +1024,15 @@ export async function fetchCandidateRegistration(
     const parentCity = (PARENT_CITY[query.admCd] ?? '').replace(/\s+/g, '');
     const fullSigunguName = parentCity ? `${parentCity}${sigunguName}` : sigunguName;
 
-    const sidoItems = await fetchAllCandidateRegistrationItems(query.electionId, sdName);
+    let sidoItems: CandidateRegistrationApiItem[] = [];
+    try {
+      sidoItems = await fetchAllCandidateRegistrationItems(query.electionId, sdName);
+    } catch (error) {
+      const fallbackData = await fallback();
+      if (fallbackData) return fallbackData;
+      throw error;
+    }
+
     const filtered = sidoItems.filter((it) => {
       const sgg = (it.sggName ?? '').replace(/\s+/g, '');
       const wiw = (it.wiwName ?? '').replace(/\s+/g, '');
@@ -656,6 +1043,11 @@ export async function fetchCandidateRegistration(
         (!parentCity && (sgg.startsWith(sigunguName) || wiw.startsWith(sigunguName)))
       );
     });
+
+    if (filtered.length === 0) {
+      const fallbackData = await fallback();
+      if (fallbackData) return fallbackData;
+    }
 
     return {
       election_id: query.electionId,
@@ -683,14 +1075,22 @@ export async function fetchCandidateRegistration(
     params.sggName = sggName;
   }
 
-  const { data } = await axios.get<CandidateRegistrationApiResponse>(
-    `${CANDIDATE_REGISTRATION_BASE}/getPoelpcddRegistSttusInfoInqire`,
-    { params },
-  );
+  let data: CandidateRegistrationApiResponse;
+  try {
+    const response = await axios.get<CandidateRegistrationApiResponse>(
+      `${CANDIDATE_REGISTRATION_BASE}/getPoelpcddRegistSttusInfoInqire`,
+      { params },
+    );
+    data = response.data;
+  } catch (error) {
+    const fallbackData = await fallback();
+    if (fallbackData) return fallbackData;
+    throw error;
+  }
 
   const resultCode = data.response?.header?.resultCode;
   if (resultCode === 'INFO-03') {
-    return {
+    return (await fallback()) ?? {
       election_id: query.electionId,
       election_name: meta.electionName,
       election_date: meta.electionDate,
@@ -704,11 +1104,18 @@ export async function fetchCandidateRegistration(
   }
 
   if (resultCode !== 'INFO-00') {
+    const fallbackData = await fallback();
+    if (fallbackData) return fallbackData;
     throw new Error(data.response?.header?.resultMsg || '후보자 등록 현황 API 오류');
   }
 
   const items = toItemArray(data.response?.body?.items?.item).map(parseCandidate);
   const totalCount = Number(data.response?.body?.totalCount ?? items.length);
+
+  if (items.length === 0) {
+    const fallbackData = await fallback();
+    if (fallbackData) return fallbackData;
+  }
 
   return {
     election_id: query.electionId,

@@ -111,6 +111,9 @@ export function ElectionTab({ admCd, electionId }: Props) {
 
       <div className="panel-source-links">
         <span className="panel-source-links-label">공식 출처</span>
+        <a href="https://info.nec.go.kr/" target="_blank" rel="noopener noreferrer" className="panel-source-link">
+          info.nec.go.kr <ExternalLink size={10} />
+        </a>
         <a href="https://www.data.go.kr/data/15000908/openapi.do" target="_blank" rel="noopener noreferrer" className="panel-source-link">
           data.go.kr <ExternalLink size={10} />
         </a>
