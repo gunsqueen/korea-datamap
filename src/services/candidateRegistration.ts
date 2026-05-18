@@ -3,6 +3,7 @@ import type { AdminLevel, CandidateRegistrationCandidate, CandidateRegistrationD
 import { NEC_API_KEY, PARENT_CITY, SIDO_NAME, getNecQueryRegion, getSidoNameByCode, getSigunguNameByCode } from './necRegion';
 import searchIndex from '../data/static/search_index.json';
 import local9CandidateIndex from '../data/static/local_9_candidate_index.json';
+import local9CandidateDetails from '../data/static/local_9_candidate_details.json';
 import { findLocalCouncilDistrictByAdmCd, getLocalCouncilDistrictCodes } from './localCouncilMapping';
 
 const CANDIDATE_REGISTRATION_BASE = import.meta.env.DEV
@@ -150,8 +151,17 @@ export interface Local9CandidateSearchEntry {
   district: string;
 }
 
+interface StaticLocal9CandidateDetail {
+  age?: number;
+  gender?: string;
+  job?: string;
+  education?: string;
+  career?: string;
+}
+
 const SEARCH_INDEX = searchIndex as SearchIndexEntry[];
 const STATIC_LOCAL_9_CANDIDATE_INDEX = local9CandidateIndex as Local9CandidateSearchEntry[];
+const STATIC_LOCAL_9_CANDIDATE_DETAILS = local9CandidateDetails as Record<string, StaticLocal9CandidateDetail>;
 const SEARCH_INDEX_BY_CODE = new Map(SEARCH_INDEX.map((item) => [item.adm_cd, item]));
 const SIDO_SHORT: Record<string, string> = {
   '서울특별시': '서울',
@@ -329,20 +339,32 @@ function getLocal9SubType(electionId: LocalCandidateElectionId): string {
   return electionId.replace('local_9_', '');
 }
 
+function getStaticCandidateDetailKey(localSubType: string, candidate: Pick<CandidateRegistrationCandidate, 'party' | 'name' | 'district'>) {
+  return [
+    localSubType,
+    normalizeKoreanKey(candidate.party),
+    normalizeKoreanKey(candidate.name),
+    normalizeKoreanKey(candidate.district),
+  ].join('|');
+}
+
 function getStaticCandidateKey(candidate: CandidateRegistrationCandidate) {
   return `${candidate.party}|${candidate.name}|${candidate.district}`;
 }
 
 function staticEntryToCandidate(entry: Local9CandidateSearchEntry): CandidateRegistrationCandidate {
+  const localSubType = entry.electionHint.localSubType ?? '';
+  const detail = STATIC_LOCAL_9_CANDIDATE_DETAILS[getStaticCandidateDetailKey(localSubType, entry)];
+
   return {
     name: entry.name,
     party: entry.party,
     district: entry.district,
-    age: 0,
-    gender: '-',
-    job: '-',
-    education: '-',
-    career: '-',
+    age: detail?.age ?? 0,
+    gender: detail?.gender ?? '-',
+    job: detail?.job ?? '-',
+    education: detail?.education ?? '-',
+    career: detail?.career ?? '-',
     status: '등록',
   };
 }
