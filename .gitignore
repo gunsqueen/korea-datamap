@@ -23,6 +23,7 @@ dist-ssr
 # Capacitor / Android build artifacts
 android/.gradle/
 android/app/build/
+android/app/release/
 android/local.properties
 ios/App/Pods/
 ios/.xcode.env.local
@@ -37,3 +38,4 @@ ios/.xcode.env.local
 *.njsproj
 *.sln
 *.sw?
+.vercel

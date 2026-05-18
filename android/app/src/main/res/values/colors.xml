@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1a1a2e</color>
+    <color name="colorPrimaryDark">#16213e</color>
+    <color name="colorAccent">#4a9eff</color>
+
+    <!-- About 화면 색상 -->
+    <color name="about_background">#1a1a2e</color>
+    <color name="about_card_bg">#16213e</color>
+    <color name="about_text_primary">#e8eaf6</color>
+    <color name="about_text_secondary">#b0bec5</color>
+    <color name="about_link_color">#64b5f6</color>
+    <color name="about_divider">#2a2a4a</color>
+</resources>

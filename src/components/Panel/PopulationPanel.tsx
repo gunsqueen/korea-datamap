@@ -1,19 +1,32 @@
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  Cell, CartesianGrid,
+  Cell,
 } from 'recharts';
-import { Users, User, UserRound, Home } from 'lucide-react';
+import { Users, User, UserRound, Home, ExternalLink, Vote, Scale } from 'lucide-react';
 import type { PopulationData, PopulationFieldSource, PopulationFieldStatus } from '../../types';
 import { StatsCard } from '../UI/StatsCard';
 import { ChartCard } from '../UI/ChartCard';
+import { chartTheme, theme } from '../../theme';
+
+export interface CouncilDistrictInfo {
+  /** 선거구 키 (예: "서울_강서구나선거구") */
+  districtKey: string;
+  /** 표시용 라벨 (시도 제거, 예: "강서구나선거구") */
+  districtLabel: string;
+  /** 기초의원 정수 = 8회 지방선거 당선자 수 */
+  seatCount: number;
+  /** 선거구 전체 합산 인구 */
+  totalPopulation: number;
+}
 
 interface Props {
   data: PopulationData;
+  councilDistrict?: CouncilDistrictInfo | null;
 }
 
 const HOUSEHOLD_COLORS = [
-  '#6366f1', '#3b82f6', '#22c55e', '#f59e0b', '#ef4444',
-  '#8b5cf6', '#06b6d4', '#84cc16', '#f97316', '#64748b',
+  theme.colors.primary, theme.colors.secondary, theme.colors.success, theme.colors.warning, theme.colors.danger,
+  '#7c3aed', '#06b6d4', '#84cc16', '#f97316', theme.colors.textSecondary,
 ];
 const ROOT_SOURCE_LABELS: Record<string, string> = {
   real: '실제값',
@@ -28,7 +41,7 @@ const FIELD_STATUS_LABELS: Record<PopulationFieldStatus, string> = {
   unavailable: '데이터 미지원',
 };
 
-export function PopulationPanel({ data }: Props) {
+export function PopulationPanel({ data, councilDistrict }: Props) {
   const fmt = (n: number) => n.toLocaleString('ko-KR');
   const maleRatio = data.total_population > 0
     ? ((data.male_population / data.total_population) * 100).toFixed(1)
@@ -38,13 +51,45 @@ export function PopulationPanel({ data }: Props) {
     : '0';
 
   const totalPop = data.total_population || 1;
-  const ageData = data.age_groups?.map((g) => ({
-    name: g.age_range,
-    남성: g.male,
-    여성: g.female,
-    남성Pct: totalPop > 0 ? ((g.male / totalPop) * 100).toFixed(1) : '0',
-    여성Pct: totalPop > 0 ? ((g.female / totalPop) * 100).toFixed(1) : '0',
-  })) ?? [];
+
+  // 5세 단위(21구간)는 10년 단위로 묶어 차트 표시
+  const AGE_10YR_BUCKETS: { label: string; ranges: string[] }[] = [
+    { label: '0-9',   ranges: ['0-4',   '5-9']   },
+    { label: '10-19', ranges: ['10-14', '15-19']  },
+    { label: '20-29', ranges: ['20-24', '25-29']  },
+    { label: '30-39', ranges: ['30-34', '35-39']  },
+    { label: '40-49', ranges: ['40-44', '45-49']  },
+    { label: '50-59', ranges: ['50-54', '55-59']  },
+    { label: '60-69', ranges: ['60-64', '65-69']  },
+    { label: '70-79', ranges: ['70-74', '75-79']  },
+    { label: '80+',   ranges: ['80-84', '85-89', '90-94', '95-99', '100+'] },
+  ];
+  const rawGroups = data.age_groups ?? [];
+  const is5yr = rawGroups.some((g) => ['0-4', '5-9'].includes(g.age_range));
+
+  const ageData = (() => {
+    if (!rawGroups.length) return [];
+    const buckets = is5yr ? AGE_10YR_BUCKETS : null;
+    if (!buckets) {
+      // 10년 단위 그대로
+      return rawGroups.map((g) => ({
+        name: g.age_range, 남성: g.male, 여성: g.female,
+        남성Pct: ((g.male   / totalPop) * 100).toFixed(1),
+        여성Pct: ((g.female / totalPop) * 100).toFixed(1),
+      }));
+    }
+    // 5년 → 10년 합산
+    return buckets.map(({ label, ranges }) => {
+      const matched = rawGroups.filter((g) => ranges.includes(g.age_range));
+      const male   = matched.reduce((s, g) => s + g.male,   0);
+      const female = matched.reduce((s, g) => s + g.female, 0);
+      return {
+        name: label, 남성: male, 여성: female,
+        남성Pct: ((male   / totalPop) * 100).toFixed(1),
+        여성Pct: ((female / totalPop) * 100).toFixed(1),
+      };
+    });
+  })();
 
   const householdData = data.household_structure?.map((h) => ({
     name: h.members_label,
@@ -61,12 +106,27 @@ export function PopulationPanel({ data }: Props) {
     const fivePlusPct = Math.round((fivePlusValue / totalHouseholds) * 1000) / 10;
     return [...first4, { name: '5인 이상', value: fivePlusValue, pct: fivePlusPct }];
   })();
-  const youthPopulation = data.age_groups
-    ?.filter((group) => ['15-19', '20-29', '30-39'].includes(group.age_range))
-    .reduce((sum, group) => sum + group.total, 0);
-  const elderlyPopulation = data.age_groups
-    ?.filter((group) => ['65-69', '70-79', '80+'].includes(group.age_range))
-    .reduce((sum, group) => sum + group.total, 0);
+  // 청년(15~39세): 5세 단위(실API) or 10년 단위(mock) 모두 대응
+  const YOUTH_5YR  = ['15-19', '20-24', '25-29', '30-34', '35-39'];
+  const YOUTH_10YR = ['20-29', '30-39']; // mock fallback (10년 단위엔 15-19 없음)
+  const youthPopulation = (() => {
+    const groups = data.age_groups ?? [];
+    const has5yr = groups.some((g) => YOUTH_5YR.includes(g.age_range));
+    return groups
+      .filter((g) => (has5yr ? YOUTH_5YR : YOUTH_10YR).includes(g.age_range))
+      .reduce((sum, g) => sum + g.total, 0);
+  })();
+
+  // 고령(65세 이상): 5세 단위 실API → 정확한 65+ / 10년 단위 mock → 70+ 근사
+  const ELDERLY_5YR  = ['65-69', '70-74', '75-79', '80-84', '85-89', '90-94', '95-99', '100+'];
+  const ELDERLY_10YR = ['70-79', '80+']; // mock fallback (60-69는 60~64 포함)
+  const elderlyPopulation = (() => {
+    const groups = data.age_groups ?? [];
+    const has5yr = groups.some((g) => ELDERLY_5YR.includes(g.age_range));
+    return groups
+      .filter((g) => (has5yr ? ELDERLY_5YR : ELDERLY_10YR).includes(g.age_range))
+      .reduce((sum, g) => sum + g.total, 0);
+  })();
   const youthRatio = youthPopulation !== undefined
     ? ((youthPopulation / totalPop) * 100).toFixed(1)
     : null;
@@ -74,16 +134,24 @@ export function PopulationPanel({ data }: Props) {
     ? ((elderlyPopulation / totalPop) * 100).toFixed(1)
     : null;
 
+  // 데이터 단위에 따라 레이블 기준 표시
+  const has5yrData = (data.age_groups ?? []).some((g) => ELDERLY_5YR.includes(g.age_range));
+  const elderlyLabel = has5yrData ? '고령화율 (65세 이상)' : '고령화율 (70세 이상, 근사치)';
+  const youthLabel   = has5yrData ? '청년비율 (15–39세)'  : '청년비율 (20–39세, 근사치)';
+
   const sourceRows: Array<{ label: string; source?: PopulationFieldSource; value?: string | null }> = [
     { label: '총 인구', source: data.field_sources?.total_population, value: `${fmt(data.total_population)}명` },
     { label: '남성', source: data.field_sources?.male_population, value: `${fmt(data.male_population)}명` },
     { label: '여성', source: data.field_sources?.female_population, value: `${fmt(data.female_population)}명` },
     { label: '세대 수', source: data.field_sources?.total_households, value: `${fmt(data.total_households)}세대` },
-    { label: '연령 분포', source: data.field_sources?.age_distribution },
-    { label: '청년비율', source: data.field_sources?.youth_ratio, value: youthRatio ? `${youthRatio}%` : null },
-    { label: '고령화율', source: data.field_sources?.elderly_ratio, value: elderlyRatio ? `${elderlyRatio}%` : null },
-    { label: '세대원수별 세대수', source: data.field_sources?.household_structure },
+    { label: youthLabel,   source: data.field_sources?.youth_ratio,   value: youthRatio   ? `${youthRatio}%`   : null },
+    { label: elderlyLabel, source: data.field_sources?.elderly_ratio, value: elderlyRatio ? `${elderlyRatio}%` : null },
   ];
+
+  // 의원 1인당 인구 (선거구 인구 ÷ 정수)
+  const councilPerSeat = councilDistrict && councilDistrict.seatCount > 0
+    ? Math.round(councilDistrict.totalPopulation / councilDistrict.seatCount)
+    : 0;
 
   return (
     <div className="panel-section">
@@ -130,6 +198,41 @@ export function PopulationPanel({ data }: Props) {
         />
       </div>
 
+      {councilDistrict && councilDistrict.seatCount > 0 && (
+        <>
+          <div className="panel-section-header">
+            <span className="panel-section-title">기초의원 대표성</span>
+            <div className="pop-source-wrap">
+              <span className="panel-section-meta">{councilDistrict.districtLabel} · 8회 기준</span>
+            </div>
+          </div>
+          <div className="stats-grid">
+            <StatsCard
+              icon={Vote}
+              label="기초의원 정수"
+              value={`${councilDistrict.seatCount}`}
+              sub="명"
+              accentColor="#8b5cf6"
+            />
+            <StatsCard
+              icon={Users}
+              label="선거구 인구"
+              value={fmt(councilDistrict.totalPopulation)}
+              sub="명"
+              accentColor="#06b6d4"
+            />
+            <StatsCard
+              icon={Scale}
+              label="의원 1인당 인구"
+              value={fmt(councilPerSeat)}
+              sub="명/의원"
+              accentColor="#f59e0b"
+              fullWidth
+            />
+          </div>
+        </>
+      )}
+
       {ageData.length > 0 && data.field_sources?.age_distribution.status !== 'unavailable' ? (
         <ChartCard
           title="연령별 인구 분포"
@@ -139,18 +242,19 @@ export function PopulationPanel({ data }: Props) {
             </span>
           }
         >
+          <div className="chart-responsive-wrap">
           <ResponsiveContainer width="100%" height={190}>
-            <BarChart data={ageData} barCategoryGap="22%" barGap={2} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+            <BarChart data={ageData} barCategoryGap="24%" barGap={3} margin={{ top: 8, right: 4, left: 0, bottom: 4 }}>
               <XAxis
                 dataKey="name"
-                tick={{ fontSize: 9, fill: '#94a3b8' }}
+                tick={{ fontSize: 10, fill: chartTheme.axis }}
                 axisLine={false}
                 tickLine={false}
+                height={18}
               />
               <YAxis
                 tickFormatter={(v) => `${(v / 10000).toFixed(0)}만`}
-                tick={{ fontSize: 9, fill: '#94a3b8' }}
+                tick={{ fontSize: 10, fill: chartTheme.axis }}
                 axisLine={false}
                 tickLine={false}
                 width={30}
@@ -161,18 +265,14 @@ export function PopulationPanel({ data }: Props) {
                   const pct = props.payload[pctKey];
                   return [`${(v as number).toLocaleString('ko-KR')}명 (${pct}%)`, name as string];
                 }}
-                contentStyle={{
-                  borderRadius: 8,
-                  border: '1px solid #e2e8f0',
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
-                  fontSize: 12,
-                }}
-                cursor={{ fill: 'rgba(37,99,235,0.04)' }}
+                contentStyle={{ ...chartTheme.tooltipStyle }}
+                cursor={chartTheme.cursor}
               />
-              <Bar dataKey="남성" fill="#3b82f6" radius={[3, 3, 0, 0]} maxBarSize={12} />
-              <Bar dataKey="여성" fill="#ec4899" radius={[3, 3, 0, 0]} maxBarSize={12} />
+              <Bar dataKey="남성" fill={theme.colors.male} radius={[6, 6, 0, 0]} maxBarSize={12} />
+              <Bar dataKey="여성" fill={theme.colors.female} radius={[6, 6, 0, 0]} maxBarSize={12} />
             </BarChart>
           </ResponsiveContainer>
+          </div>
         </ChartCard>
       ) : (
         <ChartCard title="연령별 인구 분포">
@@ -195,22 +295,23 @@ export function PopulationPanel({ data }: Props) {
             </span>
           }
         >
+          <div className="chart-responsive-wrap">
           <ResponsiveContainer width="100%" height={180}>
             <BarChart
               data={displayHouseholdData}
-              margin={{ top: 4, right: 4, left: 0, bottom: 0 }}
+              margin={{ top: 4, right: 4, left: 0, bottom: 4 }}
               barCategoryGap="20%"
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
               <XAxis
                 dataKey="name"
-                tick={{ fontSize: 10, fill: '#94a3b8' }}
+                tick={{ fontSize: 10, fill: chartTheme.axis }}
                 axisLine={false}
                 tickLine={false}
+                height={18}
               />
               <YAxis
                 tickFormatter={(v) => v >= 10000 ? `${(v / 10000).toFixed(0)}만` : `${v}`}
-                tick={{ fontSize: 9, fill: '#94a3b8' }}
+                tick={{ fontSize: 10, fill: chartTheme.axis }}
                 axisLine={false}
                 tickLine={false}
                 width={32}
@@ -220,21 +321,17 @@ export function PopulationPanel({ data }: Props) {
                   `${(v as number).toLocaleString('ko-KR')}세대 (${props.payload.pct}%)`,
                   props.payload.name,
                 ]}
-                contentStyle={{
-                  borderRadius: 8,
-                  border: '1px solid #e2e8f0',
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
-                  fontSize: 12,
-                }}
-                cursor={{ fill: 'rgba(99,102,241,0.06)' }}
+                contentStyle={{ ...chartTheme.tooltipStyle }}
+                cursor={chartTheme.cursor}
               />
-              <Bar dataKey="value" radius={[3, 3, 0, 0]} maxBarSize={40}>
+              <Bar dataKey="value" radius={[7, 7, 0, 0]} maxBarSize={40}>
                 {displayHouseholdData.map((_, i) => (
                   <Cell key={i} fill={HOUSEHOLD_COLORS[i % HOUSEHOLD_COLORS.length]} />
                 ))}
               </Bar>
             </BarChart>
           </ResponsiveContainer>
+          </div>
         </ChartCard>
       ) : (
         <ChartCard title="세대구조 (세대원수별)">
@@ -256,14 +353,17 @@ export function PopulationPanel({ data }: Props) {
                 <span className="population-source-label">{row.label}</span>
                 {row.value ? <span className="population-source-value">{row.value}</span> : null}
               </div>
-              <div className="population-source-meta">
-                <span className={`population-source-badge population-source-badge--${row.source?.status ?? 'unavailable'}`}>
-                  {FIELD_STATUS_LABELS[row.source?.status ?? 'unavailable']}
-                </span>
-                <span className="population-source-note">{row.source?.note ?? '출처 정보 없음'}</span>
-              </div>
             </div>
           ))}
+        </div>
+        <div className="panel-source-links">
+          <span className="panel-source-links-label">공식 출처</span>
+          <a href="https://jumin.mois.go.kr" target="_blank" rel="noopener noreferrer" className="panel-source-link">
+            jumin.mois.go.kr <ExternalLink size={10} />
+          </a>
+          <a href="https://sgis.kostat.go.kr" target="_blank" rel="noopener noreferrer" className="panel-source-link">
+            sgis.kostat.go.kr <ExternalLink size={10} />
+          </a>
         </div>
       </ChartCard>
     </div>

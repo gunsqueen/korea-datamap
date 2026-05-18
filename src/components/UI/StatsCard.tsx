@@ -1,4 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
+import { Card } from './Card';
 
 interface StatsCardProps {
   icon: LucideIcon;
@@ -20,17 +21,17 @@ export function StatsCard({
   const iconBg = accentColor + '18';
 
   return (
-    <div className={`stats-card${fullWidth ? ' stats-card--full' : ''}`}>
+    <Card className={`stats-card${fullWidth ? ' stats-card--full' : ''}`}>
       <div className="stats-card__icon" style={{ background: iconBg, color: accentColor }}>
         <Icon size={18} strokeWidth={2} />
       </div>
       <div className="stats-card__content">
         <div className="stats-card__label">{label}</div>
-        <div className="stats-card__value" style={{ color: accentColor === '#2563eb' ? '#0f172a' : accentColor }}>
+        <div className="stats-card__value" style={{ color: accentColor }}>
           {value}
         </div>
         {sub && <div className="stats-card__sub">{sub}</div>}
       </div>
-    </div>
+    </Card>
   );
 }

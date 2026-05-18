@@ -104,6 +104,60 @@
     "sub_type": "비례대표"
   },
   {
+    "id": "local_9_metro_mayor",
+    "type": "local",
+    "name": "제9회 전국동시지방선거",
+    "short_name": "9회 지방선거",
+    "date": "2026-06-03",
+    "year": 2026,
+    "sub_type": "광역단체장"
+  },
+  {
+    "id": "local_9_mayor",
+    "type": "local",
+    "name": "제9회 전국동시지방선거",
+    "short_name": "9회 지방선거",
+    "date": "2026-06-03",
+    "year": 2026,
+    "sub_type": "단체장"
+  },
+  {
+    "id": "local_9_council_district",
+    "type": "local",
+    "name": "제9회 전국동시지방선거",
+    "short_name": "9회 지방선거",
+    "date": "2026-06-03",
+    "year": 2026,
+    "sub_type": "광역의원(지역구)"
+  },
+  {
+    "id": "local_9_council_pr",
+    "type": "local",
+    "name": "제9회 전국동시지방선거",
+    "short_name": "9회 지방선거",
+    "date": "2026-06-03",
+    "year": 2026,
+    "sub_type": "광역의원(비례)"
+  },
+  {
+    "id": "local_9_basic_district",
+    "type": "local",
+    "name": "제9회 전국동시지방선거",
+    "short_name": "9회 지방선거",
+    "date": "2026-06-03",
+    "year": 2026,
+    "sub_type": "기초의원(지역구)"
+  },
+  {
+    "id": "local_9_basic_pr",
+    "type": "local",
+    "name": "제9회 전국동시지방선거",
+    "short_name": "9회 지방선거",
+    "date": "2026-06-03",
+    "year": 2026,
+    "sub_type": "기초의원(비례)"
+  },
+  {
     "id": "local_8_metro_mayor",
     "type": "local",
     "name": "제8회 전국동시지방선거",

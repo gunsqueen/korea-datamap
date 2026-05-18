@@ -2,12 +2,12 @@
   {
     "adm_cd": "11010",
     "adm_nm": "서울특별시 종로구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 142000,
-    "male_population": 71000,
-    "female_population": 71000,
-    "total_households": 82000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 136764,
+    "male_population": 65495,
+    "female_population": 71269,
+    "total_households": 72381,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -62,12 +62,12 @@
   {
     "adm_cd": "11020",
     "adm_nm": "서울특별시 중구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 119000,
-    "male_population": 58000,
-    "female_population": 61000,
-    "total_households": 68000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 117625,
+    "male_population": 56464,
+    "female_population": 61161,
+    "total_households": 63883,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -122,12 +122,12 @@
   {
     "adm_cd": "11030",
     "adm_nm": "서울특별시 용산구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 217000,
-    "male_population": 104000,
-    "female_population": 113000,
-    "total_households": 113000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 201494,
+    "male_population": 95846,
+    "female_population": 105648,
+    "total_households": 102844,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -182,12 +182,12 @@
   {
     "adm_cd": "11040",
     "adm_nm": "서울특별시 성동구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 286000,
-    "male_population": 140000,
-    "female_population": 146000,
-    "total_households": 142000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 274854,
+    "male_population": 132577,
+    "female_population": 142277,
+    "total_households": 133618,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -242,12 +242,12 @@
   {
     "adm_cd": "11050",
     "adm_nm": "서울특별시 광진구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 341000,
-    "male_population": 165000,
-    "female_population": 176000,
-    "total_households": 171000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 331095,
+    "male_population": 158509,
+    "female_population": 172586,
+    "total_households": 171518,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -302,12 +302,12 @@
   {
     "adm_cd": "11060",
     "adm_nm": "서울특별시 동대문구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 344000,
-    "male_population": 168000,
-    "female_population": 176000,
-    "total_households": 182000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 350393,
+    "male_population": 170741,
+    "female_population": 179652,
+    "total_households": 179035,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -362,12 +362,12 @@
   {
     "adm_cd": "11070",
     "adm_nm": "서울특별시 중랑구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 383000,
-    "male_population": 189000,
-    "female_population": 194000,
-    "total_households": 179000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 376884,
+    "male_population": 183932,
+    "female_population": 192952,
+    "total_households": 189939,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -422,12 +422,12 @@
   {
     "adm_cd": "11080",
     "adm_nm": "서울특별시 성북구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 431000,
-    "male_population": 208000,
-    "female_population": 223000,
-    "total_households": 208000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 422542,
+    "male_population": 201881,
+    "female_population": 220661,
+    "total_households": 199301,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -482,12 +482,12 @@
   {
     "adm_cd": "11090",
     "adm_nm": "서울특별시 강북구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 289000,
-    "male_population": 140000,
-    "female_population": 149000,
-    "total_households": 141000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 278786,
+    "male_population": 134045,
+    "female_population": 144741,
+    "total_households": 142553,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -542,12 +542,12 @@
   {
     "adm_cd": "11100",
     "adm_nm": "서울특별시 도봉구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 308000,
-    "male_population": 149000,
-    "female_population": 159000,
-    "total_households": 148000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 299295,
+    "male_population": 144374,
+    "female_population": 154921,
+    "total_households": 139054,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -602,12 +602,12 @@
   {
     "adm_cd": "11110",
     "adm_nm": "서울특별시 노원구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 507000,
-    "male_population": 245000,
-    "female_population": 262000,
-    "total_households": 240000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 482293,
+    "male_population": 230633,
+    "female_population": 251660,
+    "total_households": 216429,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -662,12 +662,12 @@
   {
     "adm_cd": "11120",
     "adm_nm": "서울특별시 은평구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 468000,
-    "male_population": 225000,
-    "female_population": 243000,
-    "total_households": 221000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 454341,
+    "male_population": 214765,
+    "female_population": 239576,
+    "total_households": 214489,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -722,12 +722,12 @@
   {
     "adm_cd": "11130",
     "adm_nm": "서울특별시 서대문구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 302000,
-    "male_population": 143000,
-    "female_population": 159000,
-    "total_households": 160000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 300175,
+    "male_population": 141730,
+    "female_population": 158445,
+    "total_households": 146591,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -782,12 +782,12 @@
   {
     "adm_cd": "11140",
     "adm_nm": "서울특별시 마포구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 368000,
-    "male_population": 179000,
-    "female_population": 189000,
-    "total_households": 198000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 357136,
+    "male_population": 165689,
+    "female_population": 191447,
+    "total_households": 180447,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -842,12 +842,12 @@
   {
     "adm_cd": "11150",
     "adm_nm": "서울특별시 양천구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 455000,
-    "male_population": 221000,
-    "female_population": 234000,
-    "total_households": 199000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 424499,
+    "male_population": 206594,
+    "female_population": 217905,
+    "total_households": 179618,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -902,12 +902,12 @@
   {
     "adm_cd": "11160",
     "adm_nm": "서울특별시 강서구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 557000,
-    "male_population": 270000,
-    "female_population": 287000,
-    "total_households": 256000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 549050,
+    "male_population": 262142,
+    "female_population": 286908,
+    "total_households": 273891,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -962,12 +962,12 @@
   {
     "adm_cd": "11170",
     "adm_nm": "서울특별시 구로구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 410000,
-    "male_population": 201000,
-    "female_population": 209000,
-    "total_households": 193000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 382800,
+    "male_population": 187037,
+    "female_population": 195763,
+    "total_households": 184378,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1022,12 +1022,12 @@
   {
     "adm_cd": "11180",
     "adm_nm": "서울특별시 금천구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 231000,
-    "male_population": 113000,
-    "female_population": 118000,
-    "total_households": 115000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 222809,
+    "male_population": 111903,
+    "female_population": 110906,
+    "total_households": 121591,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1082,12 +1082,12 @@
   {
     "adm_cd": "11190",
     "adm_nm": "서울특별시 영등포구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 381000,
-    "male_population": 187000,
-    "female_population": 194000,
-    "total_households": 195000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 371055,
+    "male_population": 180918,
+    "female_population": 190137,
+    "total_households": 192779,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1142,12 +1142,12 @@
   {
     "adm_cd": "11200",
     "adm_nm": "서울특별시 동작구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 397000,
-    "male_population": 190000,
-    "female_population": 207000,
-    "total_households": 192000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 371746,
+    "male_population": 179409,
+    "female_population": 192337,
+    "total_households": 187240,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1202,12 +1202,12 @@
   {
     "adm_cd": "11210",
     "adm_nm": "서울특별시 관악구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 491000,
-    "male_population": 240000,
-    "female_population": 251000,
-    "total_households": 261000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 478195,
+    "male_population": 240381,
+    "female_population": 237814,
+    "total_households": 290146,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1262,12 +1262,12 @@
   {
     "adm_cd": "11220",
     "adm_nm": "서울특별시 서초구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 432000,
-    "male_population": 205000,
-    "female_population": 227000,
-    "total_households": 193000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 415691,
+    "male_population": 197511,
+    "female_population": 218180,
+    "total_households": 174010,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1322,12 +1322,12 @@
   {
     "adm_cd": "11230",
     "adm_nm": "서울특별시 강남구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 527000,
-    "male_population": 248000,
-    "female_population": 279000,
-    "total_households": 243000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 555502,
+    "male_population": 265349,
+    "female_population": 290153,
+    "total_households": 245226,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1382,12 +1382,12 @@
   {
     "adm_cd": "11240",
     "adm_nm": "서울특별시 송파구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 620000,
-    "male_population": 296000,
-    "female_population": 324000,
-    "total_households": 274000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 649042,
+    "male_population": 310717,
+    "female_population": 338325,
+    "total_households": 288403,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1442,12 +1442,12 @@
   {
     "adm_cd": "11250",
     "adm_nm": "서울특별시 강동구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 469000,
-    "male_population": 225000,
-    "female_population": 244000,
-    "total_households": 211000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 500063,
+    "male_population": 243658,
+    "female_population": 256405,
+    "total_households": 223454,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1502,12 +1502,12 @@
   {
     "adm_cd": "21010",
     "adm_nm": "부산광역시 중구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 38000,
-    "male_population": 18000,
-    "female_population": 20000,
-    "total_households": 23000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 36399,
+    "male_population": 17641,
+    "female_population": 18758,
+    "total_households": 23273,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1562,12 +1562,12 @@
   {
     "adm_cd": "21020",
     "adm_nm": "부산광역시 서구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 95000,
-    "male_population": 45000,
-    "female_population": 50000,
-    "total_households": 51000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 101572,
+    "male_population": 48659,
+    "female_population": 52913,
+    "total_households": 53386,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1622,12 +1622,12 @@
   {
     "adm_cd": "21030",
     "adm_nm": "부산광역시 동구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82000,
-    "male_population": 39000,
-    "female_population": 43000,
-    "total_households": 44000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 83553,
+    "male_population": 40552,
+    "female_population": 43001,
+    "total_households": 46279,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1682,12 +1682,12 @@
   {
     "adm_cd": "21040",
     "adm_nm": "부산광역시 영도구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 99000,
-    "male_population": 47000,
-    "female_population": 52000,
-    "total_households": 55000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 100944,
+    "male_population": 49442,
+    "female_population": 51502,
+    "total_households": 53049,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1742,12 +1742,12 @@
   {
     "adm_cd": "21050",
     "adm_nm": "부산광역시 부산진구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 358000,
-    "male_population": 172000,
-    "female_population": 186000,
-    "total_households": 177000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 365395,
+    "male_population": 174591,
+    "female_population": 190804,
+    "total_households": 189205,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1802,12 +1802,12 @@
   {
     "adm_cd": "21060",
     "adm_nm": "부산광역시 동래구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 270000,
-    "male_population": 130000,
-    "female_population": 140000,
-    "total_households": 130000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 272758,
+    "male_population": 131198,
+    "female_population": 141560,
+    "total_households": 122734,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1862,12 +1862,12 @@
   {
     "adm_cd": "21070",
     "adm_nm": "부산광역시 남구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 274000,
-    "male_population": 132000,
-    "female_population": 142000,
-    "total_households": 135000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 252749,
+    "male_population": 122619,
+    "female_population": 130130,
+    "total_households": 120210,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1922,12 +1922,12 @@
   {
     "adm_cd": "21080",
     "adm_nm": "부산광역시 북구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 275000,
-    "male_population": 134000,
-    "female_population": 141000,
-    "total_households": 133000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 262000,
+    "male_population": 128349,
+    "female_population": 133651,
+    "total_households": 121924,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -1982,12 +1982,12 @@
   {
     "adm_cd": "21090",
     "adm_nm": "부산광역시 해운대구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 422000,
-    "male_population": 205000,
-    "female_population": 217000,
-    "total_households": 200000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 372175,
+    "male_population": 178146,
+    "female_population": 194029,
+    "total_households": 169786,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2042,12 +2042,12 @@
   {
     "adm_cd": "21100",
     "adm_nm": "부산광역시 사하구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 285000,
-    "male_population": 138000,
-    "female_population": 147000,
-    "total_households": 137000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 284653,
+    "male_population": 141022,
+    "female_population": 143631,
+    "total_households": 139443,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2102,12 +2102,12 @@
   {
     "adm_cd": "21110",
     "adm_nm": "부산광역시 금정구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 224000,
-    "male_population": 108000,
-    "female_population": 116000,
-    "total_households": 111000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 205932,
+    "male_population": 100086,
+    "female_population": 105846,
+    "total_households": 104470,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2162,12 +2162,12 @@
   {
     "adm_cd": "21120",
     "adm_nm": "부산광역시 강서구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 145000,
-    "male_population": 73000,
-    "female_population": 72000,
-    "total_households": 63000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 151888,
+    "male_population": 78532,
+    "female_population": 73356,
+    "total_households": 65946,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2222,12 +2222,12 @@
   {
     "adm_cd": "21130",
     "adm_nm": "부산광역시 연제구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 199000,
-    "male_population": 96000,
-    "female_population": 103000,
-    "total_households": 98000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 211506,
+    "male_population": 100705,
+    "female_population": 110801,
+    "total_households": 100456,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2282,12 +2282,12 @@
   {
     "adm_cd": "21140",
     "adm_nm": "부산광역시 수영구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 174000,
-    "male_population": 83000,
-    "female_population": 91000,
-    "total_households": 91000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 168745,
+    "male_population": 79012,
+    "female_population": 89733,
+    "total_households": 87617,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2342,12 +2342,12 @@
   {
     "adm_cd": "21150",
     "adm_nm": "부산광역시 사상구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 218000,
-    "male_population": 106000,
-    "female_population": 112000,
-    "total_households": 107000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 193474,
+    "male_population": 96599,
+    "female_population": 96875,
+    "total_households": 98565,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2402,12 +2402,12 @@
   {
     "adm_cd": "21510",
     "adm_nm": "부산광역시 기장군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 195000,
-    "male_population": 97000,
-    "female_population": 98000,
-    "total_households": 82000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 175273,
+    "male_population": 86887,
+    "female_population": 88386,
+    "total_households": 80310,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2462,12 +2462,12 @@
   {
     "adm_cd": "22010",
     "adm_nm": "대구광역시 중구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 68000,
-    "male_population": 32000,
-    "female_population": 36000,
-    "total_households": 40000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 101081,
+    "male_population": 48285,
+    "female_population": 52796,
+    "total_households": 50531,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2522,12 +2522,12 @@
   {
     "adm_cd": "22020",
     "adm_nm": "대구광역시 동구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 330000,
-    "male_population": 161000,
-    "female_population": 169000,
-    "total_households": 154000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 338753,
+    "male_population": 165398,
+    "female_population": 173355,
+    "total_households": 165757,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2582,12 +2582,12 @@
   {
     "adm_cd": "22030",
     "adm_nm": "대구광역시 서구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 162000,
-    "male_population": 78000,
-    "female_population": 84000,
-    "total_households": 83000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 163987,
+    "male_population": 81127,
+    "female_population": 82860,
+    "total_households": 85343,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2642,12 +2642,12 @@
   {
     "adm_cd": "22040",
     "adm_nm": "대구광역시 남구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 142000,
-    "male_population": 68000,
-    "female_population": 74000,
-    "total_households": 74000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 137746,
+    "male_population": 65578,
+    "female_population": 72168,
+    "total_households": 76710,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2702,12 +2702,12 @@
   {
     "adm_cd": "22050",
     "adm_nm": "대구광역시 북구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 404000,
-    "male_population": 197000,
-    "female_population": 207000,
-    "total_households": 192000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 408481,
+    "male_population": 201970,
+    "female_population": 206511,
+    "total_households": 193088,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2762,12 +2762,12 @@
   {
     "adm_cd": "22060",
     "adm_nm": "대구광역시 수성구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 415000,
-    "male_population": 200000,
-    "female_population": 215000,
-    "total_households": 188000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 409297,
+    "male_population": 196537,
+    "female_population": 212760,
+    "total_households": 177219,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2822,12 +2822,12 @@
   {
     "adm_cd": "22070",
     "adm_nm": "대구광역시 달서구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 525000,
-    "male_population": 255000,
-    "female_population": 270000,
-    "total_households": 239000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 516019,
+    "male_population": 252501,
+    "female_population": 263518,
+    "total_households": 239078,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2882,12 +2882,12 @@
   {
     "adm_cd": "22510",
     "adm_nm": "대구광역시 달성군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 311000,
-    "male_population": 155000,
-    "female_population": 156000,
-    "total_households": 128000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 205134,
+    "male_population": 103585,
+    "female_population": 101549,
+    "total_households": 92808,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -2942,12 +2942,12 @@
   {
     "adm_cd": "22520",
     "adm_nm": "대구광역시 군위군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 261942,
-    "male_population": 127556,
-    "female_population": 134386,
-    "total_households": 109667,
+    "year": 2026,
+    "month": 2,
+    "total_population": 22567,
+    "male_population": 11762,
+    "female_population": 10805,
+    "total_households": 13525,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3002,12 +3002,12 @@
   {
     "adm_cd": "23010",
     "adm_nm": "인천광역시 중구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 118000,
-    "male_population": 59000,
-    "female_population": 59000,
-    "total_households": 55000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 177525,
+    "male_population": 91923,
+    "female_population": 85602,
+    "total_households": 89424,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3062,12 +3062,12 @@
   {
     "adm_cd": "23020",
     "adm_nm": "인천광역시 동구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 58000,
-    "male_population": 28000,
-    "female_population": 30000,
-    "total_households": 31000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 57033,
+    "male_population": 28509,
+    "female_population": 28524,
+    "total_households": 27576,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3122,12 +3122,12 @@
   {
     "adm_cd": "23040",
     "adm_nm": "인천광역시 연수구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 382000,
-    "male_population": 188000,
-    "female_population": 194000,
-    "total_households": 171000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 410040,
+    "male_population": 202816,
+    "female_population": 207224,
+    "total_households": 168766,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3182,12 +3182,12 @@
   {
     "adm_cd": "23050",
     "adm_nm": "인천광역시 남동구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 510000,
-    "male_population": 250000,
-    "female_population": 260000,
-    "total_households": 233000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 479874,
+    "male_population": 237920,
+    "female_population": 241954,
+    "total_households": 225969,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3242,12 +3242,12 @@
   {
     "adm_cd": "23060",
     "adm_nm": "인천광역시 부평구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 491000,
-    "male_population": 240000,
-    "female_population": 251000,
-    "total_households": 231000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 489901,
+    "male_population": 240608,
+    "female_population": 249293,
+    "total_households": 226538,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3302,12 +3302,12 @@
   {
     "adm_cd": "23070",
     "adm_nm": "인천광역시 계양구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 287000,
-    "male_population": 141000,
-    "female_population": 146000,
-    "total_households": 131000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 277372,
+    "male_population": 137945,
+    "female_population": 139427,
+    "total_households": 128795,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3362,12 +3362,12 @@
   {
     "adm_cd": "23080",
     "adm_nm": "인천광역시 서구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 617000,
-    "male_population": 307000,
-    "female_population": 310000,
-    "total_households": 265000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 656549,
+    "male_population": 330017,
+    "female_population": 326532,
+    "total_households": 283480,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3422,12 +3422,12 @@
   {
     "adm_cd": "23090",
     "adm_nm": "인천광역시 미추홀구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 299098,
-    "male_population": 148700,
-    "female_population": 150398,
-    "total_households": 123200,
+    "year": 2026,
+    "month": 2,
+    "total_population": 416941,
+    "male_population": 209559,
+    "female_population": 207382,
+    "total_households": 205318,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3482,12 +3482,12 @@
   {
     "adm_cd": "23510",
     "adm_nm": "인천광역시 강화군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 65000,
-    "male_population": 32500,
-    "female_population": 32500,
-    "total_households": 30000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 69406,
+    "male_population": 34730,
+    "female_population": 34676,
+    "total_households": 35999,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3542,12 +3542,12 @@
   {
     "adm_cd": "23520",
     "adm_nm": "인천광역시 옹진군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 10000,
-    "male_population": 5200,
-    "female_population": 4800,
-    "total_households": 5000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 17920,
+    "male_population": 10260,
+    "female_population": 7660,
+    "total_households": 11285,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3602,12 +3602,12 @@
   {
     "adm_cd": "24010",
     "adm_nm": "광주광역시 동구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 91000,
-    "male_population": 43000,
-    "female_population": 48000,
-    "total_households": 51000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 104794,
+    "male_population": 51265,
+    "female_population": 53529,
+    "total_households": 55311,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3662,12 +3662,12 @@
   {
     "adm_cd": "24020",
     "adm_nm": "광주광역시 서구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 293000,
-    "male_population": 141000,
-    "female_population": 152000,
-    "total_households": 143000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 275730,
+    "male_population": 134771,
+    "female_population": 140959,
+    "total_households": 133268,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3722,12 +3722,12 @@
   {
     "adm_cd": "24030",
     "adm_nm": "광주광역시 남구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 209000,
-    "male_population": 101000,
-    "female_population": 108000,
-    "total_households": 101000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 207015,
+    "male_population": 98836,
+    "female_population": 108179,
+    "total_households": 96178,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3782,12 +3782,12 @@
   {
     "adm_cd": "24040",
     "adm_nm": "광주광역시 북구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 438000,
-    "male_population": 212000,
-    "female_population": 226000,
-    "total_households": 210000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 415473,
+    "male_population": 205266,
+    "female_population": 210207,
+    "total_households": 201186,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3842,12 +3842,12 @@
   {
     "adm_cd": "24050",
     "adm_nm": "광주광역시 광산구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 409000,
-    "male_population": 202000,
-    "female_population": 207000,
-    "total_households": 181000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 386223,
+    "male_population": 195183,
+    "female_population": 191040,
+    "total_households": 173144,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3902,12 +3902,12 @@
   {
     "adm_cd": "25010",
     "adm_nm": "대전광역시 동구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 209000,
-    "male_population": 101000,
-    "female_population": 108000,
-    "total_households": 104000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 218169,
+    "male_population": 109786,
+    "female_population": 108383,
+    "total_households": 112781,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -3962,12 +3962,12 @@
   {
     "adm_cd": "25020",
     "adm_nm": "대전광역시 중구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 231000,
-    "male_population": 112000,
-    "female_population": 119000,
-    "total_households": 118000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 225250,
+    "male_population": 110223,
+    "female_population": 115027,
+    "total_households": 109815,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4022,12 +4022,12 @@
   {
     "adm_cd": "25030",
     "adm_nm": "대전광역시 서구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 480000,
-    "male_population": 234000,
-    "female_population": 246000,
-    "total_households": 227000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 463863,
+    "male_population": 227245,
+    "female_population": 236618,
+    "total_households": 223276,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4082,12 +4082,12 @@
   {
     "adm_cd": "25040",
     "adm_nm": "대전광역시 유성구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 349000,
-    "male_population": 172000,
-    "female_population": 177000,
-    "total_households": 158000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 369113,
+    "male_population": 187059,
+    "female_population": 182054,
+    "total_households": 172762,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4142,12 +4142,12 @@
   {
     "adm_cd": "25050",
     "adm_nm": "대전광역시 대덕구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 178000,
-    "male_population": 87000,
-    "female_population": 91000,
-    "total_households": 87000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 165010,
+    "male_population": 83771,
+    "female_population": 81239,
+    "total_households": 81041,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4202,12 +4202,12 @@
   {
     "adm_cd": "26010",
     "adm_nm": "울산광역시 중구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 207000,
-    "male_population": 101000,
-    "female_population": 106000,
-    "total_households": 98000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 203682,
+    "male_population": 102984,
+    "female_population": 100698,
+    "total_households": 94887,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4262,12 +4262,12 @@
   {
     "adm_cd": "26020",
     "adm_nm": "울산광역시 남구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 296000,
-    "male_population": 145000,
-    "female_population": 151000,
-    "total_households": 137000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 304648,
+    "male_population": 156033,
+    "female_population": 148615,
+    "total_households": 143428,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4322,12 +4322,12 @@
   {
     "adm_cd": "26030",
     "adm_nm": "울산광역시 동구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 154000,
-    "male_population": 76000,
-    "female_population": 78000,
-    "total_households": 72000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 148469,
+    "male_population": 77757,
+    "female_population": 70712,
+    "total_households": 68245,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4382,12 +4382,12 @@
   {
     "adm_cd": "26040",
     "adm_nm": "울산광역시 북구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 192000,
-    "male_population": 96000,
-    "female_population": 96000,
-    "total_households": 87000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 214395,
+    "male_population": 111681,
+    "female_population": 102714,
+    "total_households": 90163,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4442,12 +4442,12 @@
   {
     "adm_cd": "26510",
     "adm_nm": "울산광역시 울주군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 235000,
-    "male_population": 118000,
-    "female_population": 117000,
-    "total_households": 98000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 218641,
+    "male_population": 113510,
+    "female_population": 105131,
+    "total_households": 103227,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4502,12 +4502,12 @@
   {
     "adm_cd": "29010",
     "adm_nm": "세종특별자치시 세종시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 389649,
-    "male_population": 195000,
-    "female_population": 194649,
-    "total_households": 162000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 391240,
+    "male_population": 194784,
+    "female_population": 196456,
+    "total_households": 165449,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4562,12 +4562,12 @@
   {
     "adm_cd": "31011",
     "adm_nm": "경기도 수원시 장안구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 270944,
+    "male_population": 135858,
+    "female_population": 135086,
+    "total_households": 122662,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4622,12 +4622,12 @@
   {
     "adm_cd": "31012",
     "adm_nm": "경기도 수원시 권선구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 360535,
+    "male_population": 181874,
+    "female_population": 178661,
+    "total_households": 165794,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4682,12 +4682,12 @@
   {
     "adm_cd": "31013",
     "adm_nm": "경기도 수원시 팔달구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 192473,
+    "male_population": 96672,
+    "female_population": 95801,
+    "total_households": 98138,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4742,12 +4742,12 @@
   {
     "adm_cd": "31014",
     "adm_nm": "경기도 수원시 영통구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 362132,
+    "male_population": 181303,
+    "female_population": 180829,
+    "total_households": 156416,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4802,12 +4802,12 @@
   {
     "adm_cd": "31021",
     "adm_nm": "경기도 성남시 수정구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 234087,
+    "male_population": 118274,
+    "female_population": 115813,
+    "total_households": 117001,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4862,12 +4862,12 @@
   {
     "adm_cd": "31022",
     "adm_nm": "경기도 성남시 중원구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 202679,
+    "male_population": 101991,
+    "female_population": 100688,
+    "total_households": 99636,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4922,12 +4922,12 @@
   {
     "adm_cd": "31023",
     "adm_nm": "경기도 성남시 분당구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 469435,
+    "male_population": 227288,
+    "female_population": 242147,
+    "total_households": 193492,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -4982,12 +4982,12 @@
   {
     "adm_cd": "31030",
     "adm_nm": "경기도 의정부시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 461581,
+    "male_population": 226525,
+    "female_population": 235056,
+    "total_households": 212781,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5042,12 +5042,12 @@
   {
     "adm_cd": "31041",
     "adm_nm": "경기도 안양시 만안구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 233578,
+    "male_population": 116258,
+    "female_population": 117320,
+    "total_households": 105709,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5102,12 +5102,12 @@
   {
     "adm_cd": "31042",
     "adm_nm": "경기도 안양시 동안구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 329815,
+    "male_population": 161405,
+    "female_population": 168410,
+    "total_households": 134682,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5162,12 +5162,12 @@
   {
     "adm_cd": "31051",
     "adm_nm": "경기도 부천시 원미구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 383544,
+    "male_population": 187947,
+    "female_population": 195597,
+    "total_households": 174552,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5222,12 +5222,12 @@
   {
     "adm_cd": "31052",
     "adm_nm": "경기도 부천시 소사구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 225010,
+    "male_population": 110051,
+    "female_population": 114959,
+    "total_households": 98795,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5282,12 +5282,12 @@
   {
     "adm_cd": "31053",
     "adm_nm": "경기도 부천시 오정구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 148890,
+    "male_population": 75029,
+    "female_population": 73861,
+    "total_households": 69306,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5342,12 +5342,12 @@
   {
     "adm_cd": "31060",
     "adm_nm": "경기도 광명시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 300826,
+    "male_population": 147321,
+    "female_population": 153505,
+    "total_households": 126287,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5402,12 +5402,12 @@
   {
     "adm_cd": "31070",
     "adm_nm": "경기도 평택시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 613456,
+    "male_population": 321932,
+    "female_population": 291524,
+    "total_households": 294746,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5462,12 +5462,12 @@
   {
     "adm_cd": "31080",
     "adm_nm": "경기도 동두천시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 86299,
+    "male_population": 42958,
+    "female_population": 43341,
+    "total_households": 43598,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5522,12 +5522,12 @@
   {
     "adm_cd": "31091",
     "adm_nm": "경기도 안산시 상록구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 322171,
+    "male_population": 164519,
+    "female_population": 157652,
+    "total_households": 151907,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5582,12 +5582,12 @@
   {
     "adm_cd": "31092",
     "adm_nm": "경기도 안산시 단원구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 289296,
+    "male_population": 148747,
+    "female_population": 140549,
+    "total_households": 136421,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5642,12 +5642,12 @@
   {
     "adm_cd": "31101",
     "adm_nm": "경기도 고양시 덕양구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 484682,
+    "male_population": 237418,
+    "female_population": 247264,
+    "total_households": 219098,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5702,12 +5702,12 @@
   {
     "adm_cd": "31103",
     "adm_nm": "경기도 고양시 일산동구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 297383,
+    "male_population": 144124,
+    "female_population": 153259,
+    "total_households": 133378,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5762,12 +5762,12 @@
   {
     "adm_cd": "31104",
     "adm_nm": "경기도 고양시 일산서구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 277365,
+    "male_population": 133792,
+    "female_population": 143573,
+    "total_households": 114428,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5822,12 +5822,12 @@
   {
     "adm_cd": "31110",
     "adm_nm": "경기도 과천시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 80098,
+    "male_population": 38997,
+    "female_population": 41101,
+    "total_households": 28847,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5882,12 +5882,12 @@
   {
     "adm_cd": "31120",
     "adm_nm": "경기도 구리시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 185946,
+    "male_population": 92053,
+    "female_population": 93893,
+    "total_households": 81925,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -5942,12 +5942,12 @@
   {
     "adm_cd": "31130",
     "adm_nm": "경기도 남양주시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 681014,
+    "male_population": 336252,
+    "female_population": 344762,
+    "total_households": 288810,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6002,12 +6002,12 @@
   {
     "adm_cd": "31140",
     "adm_nm": "경기도 오산시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 250518,
+    "male_population": 130695,
+    "female_population": 119823,
+    "total_households": 115919,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6062,12 +6062,12 @@
   {
     "adm_cd": "31150",
     "adm_nm": "경기도 시흥시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 514384,
+    "male_population": 267787,
+    "female_population": 246597,
+    "total_households": 229860,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6122,12 +6122,12 @@
   {
     "adm_cd": "31160",
     "adm_nm": "경기도 군포시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 250701,
+    "male_population": 124186,
+    "female_population": 126515,
+    "total_households": 111647,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6182,12 +6182,12 @@
   {
     "adm_cd": "31170",
     "adm_nm": "경기도 의왕시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 161183,
+    "male_population": 79527,
+    "female_population": 81656,
+    "total_households": 66467,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6242,12 +6242,12 @@
   {
     "adm_cd": "31180",
     "adm_nm": "경기도 하남시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 327740,
+    "male_population": 162579,
+    "female_population": 165161,
+    "total_households": 140996,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6302,12 +6302,12 @@
   {
     "adm_cd": "31191",
     "adm_nm": "경기도 용인시 처인구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 283119,
+    "male_population": 144817,
+    "female_population": 138302,
+    "total_households": 129890,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6362,12 +6362,12 @@
   {
     "adm_cd": "31192",
     "adm_nm": "경기도 용인시 기흥구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 434349,
+    "male_population": 213745,
+    "female_population": 220604,
+    "total_households": 177394,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6422,12 +6422,12 @@
   {
     "adm_cd": "31193",
     "adm_nm": "경기도 용인시 수지구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 373308,
+    "male_population": 181537,
+    "female_population": 191771,
+    "total_households": 142338,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6482,12 +6482,12 @@
   {
     "adm_cd": "31200",
     "adm_nm": "경기도 파주시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 528614,
+    "male_population": 266195,
+    "female_population": 262419,
+    "total_households": 234643,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6542,12 +6542,12 @@
   {
     "adm_cd": "31210",
     "adm_nm": "경기도 이천시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 222906,
+    "male_population": 116424,
+    "female_population": 106482,
+    "total_households": 107056,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6602,12 +6602,12 @@
   {
     "adm_cd": "31220",
     "adm_nm": "경기도 안성시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 196871,
+    "male_population": 101765,
+    "female_population": 95106,
+    "total_households": 97338,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6662,12 +6662,12 @@
   {
     "adm_cd": "31230",
     "adm_nm": "경기도 김포시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 484614,
+    "male_population": 241754,
+    "female_population": 242860,
+    "total_households": 207528,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6782,12 +6782,12 @@
   {
     "adm_cd": "31250",
     "adm_nm": "경기도 광주시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 397174,
+    "male_population": 202159,
+    "female_population": 195015,
+    "total_households": 175998,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6842,12 +6842,12 @@
   {
     "adm_cd": "31260",
     "adm_nm": "경기도 양주시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 296740,
+    "male_population": 149162,
+    "female_population": 147578,
+    "total_households": 132742,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6902,12 +6902,12 @@
   {
     "adm_cd": "31270",
     "adm_nm": "경기도 포천시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 140355,
+    "male_population": 74272,
+    "female_population": 66083,
+    "total_households": 73843,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -6962,12 +6962,12 @@
   {
     "adm_cd": "31280",
     "adm_nm": "경기도 여주시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 113735,
+    "male_population": 57981,
+    "female_population": 55754,
+    "total_households": 56872,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7022,12 +7022,12 @@
   {
     "adm_cd": "31550",
     "adm_nm": "경기도 연천군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 42578,
+    "male_population": 22294,
+    "female_population": 20284,
+    "total_households": 22583,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7082,12 +7082,12 @@
   {
     "adm_cd": "31570",
     "adm_nm": "경기도 가평군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 62030,
+    "male_population": 31887,
+    "female_population": 30143,
+    "total_households": 33118,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7142,12 +7142,12 @@
   {
     "adm_cd": "31580",
     "adm_nm": "경기도 양평군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 309535,
-    "male_population": 154614,
-    "female_population": 154921,
-    "total_households": 123886,
+    "year": 2026,
+    "month": 2,
+    "total_population": 126830,
+    "male_population": 63672,
+    "female_population": 63158,
+    "total_households": 63733,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7202,12 +7202,12 @@
   {
     "adm_cd": "32010",
     "adm_nm": "강원특별자치도 춘천시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 284855,
+    "male_population": 140307,
+    "female_population": 144548,
+    "total_households": 138395,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7262,12 +7262,12 @@
   {
     "adm_cd": "32020",
     "adm_nm": "강원특별자치도 원주시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 363669,
+    "male_population": 180125,
+    "female_population": 183544,
+    "total_households": 176700,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7322,12 +7322,12 @@
   {
     "adm_cd": "32030",
     "adm_nm": "강원특별자치도 강릉시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 205895,
+    "male_population": 101966,
+    "female_population": 103929,
+    "total_households": 105173,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7382,12 +7382,12 @@
   {
     "adm_cd": "32040",
     "adm_nm": "강원특별자치도 동해시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 86062,
+    "male_population": 43680,
+    "female_population": 42382,
+    "total_households": 43473,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7442,12 +7442,12 @@
   {
     "adm_cd": "32050",
     "adm_nm": "강원특별자치도 태백시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 36886,
+    "male_population": 18619,
+    "female_population": 18267,
+    "total_households": 20017,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7502,12 +7502,12 @@
   {
     "adm_cd": "32060",
     "adm_nm": "강원특별자치도 속초시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 79252,
+    "male_population": 39193,
+    "female_population": 40059,
+    "total_households": 41087,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7562,12 +7562,12 @@
   {
     "adm_cd": "32070",
     "adm_nm": "강원특별자치도 삼척시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 58711,
+    "male_population": 30013,
+    "female_population": 28698,
+    "total_households": 32088,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7622,12 +7622,12 @@
   {
     "adm_cd": "32510",
     "adm_nm": "강원특별자치도 홍천군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 65937,
+    "male_population": 33964,
+    "female_population": 31973,
+    "total_households": 34957,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7682,12 +7682,12 @@
   {
     "adm_cd": "32520",
     "adm_nm": "강원특별자치도 횡성군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 45583,
+    "male_population": 23551,
+    "female_population": 22032,
+    "total_households": 24097,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7742,12 +7742,12 @@
   {
     "adm_cd": "32530",
     "adm_nm": "강원특별자치도 영월군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 34452,
+    "male_population": 17856,
+    "female_population": 16596,
+    "total_households": 19896,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7802,12 +7802,12 @@
   {
     "adm_cd": "32540",
     "adm_nm": "강원특별자치도 평창군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 38246,
+    "male_population": 19838,
+    "female_population": 18408,
+    "total_households": 21078,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7862,12 +7862,12 @@
   {
     "adm_cd": "32550",
     "adm_nm": "강원특별자치도 정선군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 33478,
+    "male_population": 17593,
+    "female_population": 15885,
+    "total_households": 19180,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7922,12 +7922,12 @@
   {
     "adm_cd": "32560",
     "adm_nm": "강원특별자치도 철원군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 36458,
+    "male_population": 18876,
+    "female_population": 17582,
+    "total_households": 18626,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -7982,12 +7982,12 @@
   {
     "adm_cd": "32570",
     "adm_nm": "강원특별자치도 화천군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 22284,
+    "male_population": 11936,
+    "female_population": 10348,
+    "total_households": 11945,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8042,12 +8042,12 @@
   {
     "adm_cd": "32580",
     "adm_nm": "강원특별자치도 양구군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 20382,
+    "male_population": 10680,
+    "female_population": 9702,
+    "total_households": 10363,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8102,12 +8102,12 @@
   {
     "adm_cd": "32590",
     "adm_nm": "강원특별자치도 인제군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 30279,
+    "male_population": 16612,
+    "female_population": 13667,
+    "total_households": 16321,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8162,12 +8162,12 @@
   {
     "adm_cd": "32600",
     "adm_nm": "강원특별자치도 고성군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 26942,
+    "male_population": 13792,
+    "female_population": 13150,
+    "total_households": 15395,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8222,12 +8222,12 @@
   {
     "adm_cd": "32610",
     "adm_nm": "강원특별자치도 양양군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 84524,
-    "male_population": 42167,
-    "female_population": 42357,
-    "total_households": 37556,
+    "year": 2026,
+    "month": 2,
+    "total_population": 27390,
+    "male_population": 13990,
+    "female_population": 13400,
+    "total_households": 15005,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8282,12 +8282,12 @@
   {
     "adm_cd": "33020",
     "adm_nm": "충청북도 충주시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 114062,
-    "male_population": 57429,
-    "female_population": 56633,
-    "total_households": 49214,
+    "year": 2026,
+    "month": 2,
+    "total_population": 206177,
+    "male_population": 104529,
+    "female_population": 101648,
+    "total_households": 104466,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8342,12 +8342,12 @@
   {
     "adm_cd": "33030",
     "adm_nm": "충청북도 제천시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 114062,
-    "male_population": 57429,
-    "female_population": 56633,
-    "total_households": 49214,
+    "year": 2026,
+    "month": 2,
+    "total_population": 127640,
+    "male_population": 64426,
+    "female_population": 63214,
+    "total_households": 66194,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8402,12 +8402,12 @@
   {
     "adm_cd": "33041",
     "adm_nm": "충청북도 청주시 상당구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 114062,
-    "male_population": 57429,
-    "female_population": 56633,
-    "total_households": 49214,
+    "year": 2026,
+    "month": 2,
+    "total_population": 194232,
+    "male_population": 96418,
+    "female_population": 97814,
+    "total_households": 89431,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8462,12 +8462,12 @@
   {
     "adm_cd": "33042",
     "adm_nm": "충청북도 청주시 서원구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 114062,
-    "male_population": 57429,
-    "female_population": 56633,
-    "total_households": 49214,
+    "year": 2026,
+    "month": 2,
+    "total_population": 184851,
+    "male_population": 92262,
+    "female_population": 92589,
+    "total_households": 90635,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8522,12 +8522,12 @@
   {
     "adm_cd": "33043",
     "adm_nm": "충청북도 청주시 흥덕구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 114062,
-    "male_population": 57429,
-    "female_population": 56633,
-    "total_households": 49214,
+    "year": 2026,
+    "month": 2,
+    "total_population": 291887,
+    "male_population": 149013,
+    "female_population": 142874,
+    "total_households": 140121,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8582,12 +8582,12 @@
   {
     "adm_cd": "33044",
     "adm_nm": "충청북도 청주시 청원구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 114062,
-    "male_population": 57429,
-    "female_population": 56633,
-    "total_households": 49214,
+    "year": 2026,
+    "month": 2,
+    "total_population": 186450,
+    "male_population": 96209,
+    "female_population": 90241,
+    "total_households": 90769,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8642,12 +8642,12 @@
   {
     "adm_cd": "33520",
     "adm_nm": "충청북도 보은군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 114062,
-    "male_population": 57429,
-    "female_population": 56633,
-    "total_households": 49214,
+    "year": 2026,
+    "month": 2,
+    "total_population": 30601,
+    "male_population": 15582,
+    "female_population": 15019,
+    "total_households": 16983,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8702,12 +8702,12 @@
   {
     "adm_cd": "33530",
     "adm_nm": "충청북도 옥천군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 114062,
-    "male_population": 57429,
-    "female_population": 56633,
-    "total_households": 49214,
+    "year": 2026,
+    "month": 2,
+    "total_population": 50117,
+    "male_population": 25420,
+    "female_population": 24697,
+    "total_households": 26351,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8762,12 +8762,12 @@
   {
     "adm_cd": "33540",
     "adm_nm": "충청북도 영동군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 114062,
-    "male_population": 57429,
-    "female_population": 56633,
-    "total_households": 49214,
+    "year": 2026,
+    "month": 2,
+    "total_population": 43043,
+    "male_population": 21727,
+    "female_population": 21316,
+    "total_households": 23701,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8822,12 +8822,12 @@
   {
     "adm_cd": "33550",
     "adm_nm": "충청북도 진천군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 114062,
-    "male_population": 57429,
-    "female_population": 56633,
-    "total_households": 49214,
+    "year": 2026,
+    "month": 2,
+    "total_population": 85689,
+    "male_population": 45303,
+    "female_population": 40386,
+    "total_households": 43180,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8882,12 +8882,12 @@
   {
     "adm_cd": "33560",
     "adm_nm": "충청북도 괴산군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 114062,
-    "male_population": 57429,
-    "female_population": 56633,
-    "total_households": 49214,
+    "year": 2026,
+    "month": 2,
+    "total_population": 37774,
+    "male_population": 19515,
+    "female_population": 18259,
+    "total_households": 22038,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -8942,12 +8942,12 @@
   {
     "adm_cd": "33570",
     "adm_nm": "충청북도 음성군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 114062,
-    "male_population": 57429,
-    "female_population": 56633,
-    "total_households": 49214,
+    "year": 2026,
+    "month": 2,
+    "total_population": 95021,
+    "male_population": 50768,
+    "female_population": 44253,
+    "total_households": 51647,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9002,12 +9002,12 @@
   {
     "adm_cd": "33580",
     "adm_nm": "충청북도 단양군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 114062,
-    "male_population": 57429,
-    "female_population": 56633,
-    "total_households": 49214,
+    "year": 2026,
+    "month": 2,
+    "total_population": 26711,
+    "male_population": 13663,
+    "female_population": 13048,
+    "total_households": 15196,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9062,12 +9062,12 @@
   {
     "adm_cd": "33590",
     "adm_nm": "충청북도 증평군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 114062,
-    "male_population": 57429,
-    "female_population": 56633,
-    "total_households": 49214,
+    "year": 2026,
+    "month": 2,
+    "total_population": 36623,
+    "male_population": 19083,
+    "female_population": 17540,
+    "total_households": 19000,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9122,12 +9122,12 @@
   {
     "adm_cd": "34011",
     "adm_nm": "충청남도 천안시 동남구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 262718,
+    "male_population": 133239,
+    "female_population": 129479,
+    "total_households": 128112,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9182,12 +9182,12 @@
   {
     "adm_cd": "34012",
     "adm_nm": "충청남도 천안시 서북구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 402028,
+    "male_population": 207792,
+    "female_population": 194236,
+    "total_households": 190932,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9242,12 +9242,12 @@
   {
     "adm_cd": "34020",
     "adm_nm": "충청남도 공주시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 99551,
+    "male_population": 49709,
+    "female_population": 49842,
+    "total_households": 53454,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9302,12 +9302,12 @@
   {
     "adm_cd": "34030",
     "adm_nm": "충청남도 보령시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 89200,
+    "male_population": 45137,
+    "female_population": 44063,
+    "total_households": 47406,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9362,12 +9362,12 @@
   {
     "adm_cd": "34040",
     "adm_nm": "충청남도 아산시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 360864,
+    "male_population": 188184,
+    "female_population": 172680,
+    "total_households": 169169,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9422,12 +9422,12 @@
   {
     "adm_cd": "34050",
     "adm_nm": "충청남도 서산시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 171893,
+    "male_population": 90110,
+    "female_population": 81783,
+    "total_households": 84118,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9482,12 +9482,12 @@
   {
     "adm_cd": "34060",
     "adm_nm": "충청남도 논산시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 106522,
+    "male_population": 53471,
+    "female_population": 53051,
+    "total_households": 56923,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9542,12 +9542,12 @@
   {
     "adm_cd": "34070",
     "adm_nm": "충청남도 계룡시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 45990,
+    "male_population": 22877,
+    "female_population": 23113,
+    "total_households": 19585,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9602,12 +9602,12 @@
   {
     "adm_cd": "34080",
     "adm_nm": "충청남도 당진시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 172251,
+    "male_population": 92607,
+    "female_population": 79644,
+    "total_households": 86208,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9662,12 +9662,12 @@
   {
     "adm_cd": "34510",
     "adm_nm": "충청남도 금산군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 48741,
+    "male_population": 24844,
+    "female_population": 23897,
+    "total_households": 26626,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9722,12 +9722,12 @@
   {
     "adm_cd": "34530",
     "adm_nm": "충청남도 부여군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 58036,
+    "male_population": 28937,
+    "female_population": 29099,
+    "total_households": 32024,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9782,12 +9782,12 @@
   {
     "adm_cd": "34540",
     "adm_nm": "충청남도 서천군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 47074,
+    "male_population": 23452,
+    "female_population": 23622,
+    "total_households": 26124,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9842,12 +9842,12 @@
   {
     "adm_cd": "34550",
     "adm_nm": "충청남도 청양군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 29919,
+    "male_population": 15362,
+    "female_population": 14557,
+    "total_households": 16821,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9902,12 +9902,12 @@
   {
     "adm_cd": "34560",
     "adm_nm": "충청남도 홍성군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 101040,
+    "male_population": 50643,
+    "female_population": 50397,
+    "total_households": 50825,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -9962,12 +9962,12 @@
   {
     "adm_cd": "34570",
     "adm_nm": "충청남도 예산군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 78647,
+    "male_population": 39564,
+    "female_population": 39083,
+    "total_households": 41190,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10022,12 +10022,12 @@
   {
     "adm_cd": "34580",
     "adm_nm": "충청남도 태안군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 133365,
-    "male_population": 67500,
-    "female_population": 65865,
-    "total_households": 56750,
+    "year": 2026,
+    "month": 2,
+    "total_population": 59169,
+    "male_population": 29990,
+    "female_population": 29179,
+    "total_households": 33326,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10082,12 +10082,12 @@
   {
     "adm_cd": "35011",
     "adm_nm": "전북특별자치도 전주시 완산구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 117832,
-    "male_population": 57933,
-    "female_population": 59899,
-    "total_households": 51267,
+    "year": 2026,
+    "month": 2,
+    "total_population": 315217,
+    "male_population": 152698,
+    "female_population": 162519,
+    "total_households": 152706,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10142,12 +10142,12 @@
   {
     "adm_cd": "35012",
     "adm_nm": "전북특별자치도 전주시 덕진구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 117832,
-    "male_population": 57933,
-    "female_population": 59899,
-    "total_households": 51267,
+    "year": 2026,
+    "month": 2,
+    "total_population": 308216,
+    "male_population": 153128,
+    "female_population": 155088,
+    "total_households": 144066,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10202,12 +10202,12 @@
   {
     "adm_cd": "35020",
     "adm_nm": "전북특별자치도 군산시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 117832,
-    "male_population": 57933,
-    "female_population": 59899,
-    "total_households": 51267,
+    "year": 2026,
+    "month": 2,
+    "total_population": 255886,
+    "male_population": 129870,
+    "female_population": 126016,
+    "total_households": 126276,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10262,12 +10262,12 @@
   {
     "adm_cd": "35030",
     "adm_nm": "전북특별자치도 익산시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 117832,
-    "male_population": 57933,
-    "female_population": 59899,
-    "total_households": 51267,
+    "year": 2026,
+    "month": 2,
+    "total_population": 266797,
+    "male_population": 132656,
+    "female_population": 134141,
+    "total_households": 133007,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10322,12 +10322,12 @@
   {
     "adm_cd": "35040",
     "adm_nm": "전북특별자치도 정읍시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 117832,
-    "male_population": 57933,
-    "female_population": 59899,
-    "total_households": 51267,
+    "year": 2026,
+    "month": 2,
+    "total_population": 100980,
+    "male_population": 50521,
+    "female_population": 50459,
+    "total_households": 54513,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10382,12 +10382,12 @@
   {
     "adm_cd": "35050",
     "adm_nm": "전북특별자치도 남원시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 117832,
-    "male_population": 57933,
-    "female_population": 59899,
-    "total_households": 51267,
+    "year": 2026,
+    "month": 2,
+    "total_population": 74243,
+    "male_population": 36482,
+    "female_population": 37761,
+    "total_households": 39826,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10442,12 +10442,12 @@
   {
     "adm_cd": "35060",
     "adm_nm": "전북특별자치도 김제시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 117832,
-    "male_population": 57933,
-    "female_population": 59899,
-    "total_households": 51267,
+    "year": 2026,
+    "month": 2,
+    "total_population": 81743,
+    "male_population": 40993,
+    "female_population": 40750,
+    "total_households": 44582,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10502,12 +10502,12 @@
   {
     "adm_cd": "35510",
     "adm_nm": "전북특별자치도 완주군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 117832,
-    "male_population": 57933,
-    "female_population": 59899,
-    "total_households": 51267,
+    "year": 2026,
+    "month": 2,
+    "total_population": 100355,
+    "male_population": 51611,
+    "female_population": 48744,
+    "total_households": 50307,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10562,12 +10562,12 @@
   {
     "adm_cd": "35520",
     "adm_nm": "전북특별자치도 진안군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 117832,
-    "male_population": 57933,
-    "female_population": 59899,
-    "total_households": 51267,
+    "year": 2026,
+    "month": 2,
+    "total_population": 24289,
+    "male_population": 12437,
+    "female_population": 11852,
+    "total_households": 13855,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10622,12 +10622,12 @@
   {
     "adm_cd": "35530",
     "adm_nm": "전북특별자치도 무주군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 117832,
-    "male_population": 57933,
-    "female_population": 59899,
-    "total_households": 51267,
+    "year": 2026,
+    "month": 2,
+    "total_population": 22871,
+    "male_population": 11494,
+    "female_population": 11377,
+    "total_households": 13062,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10682,12 +10682,12 @@
   {
     "adm_cd": "35540",
     "adm_nm": "전북특별자치도 장수군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 117832,
-    "male_population": 57933,
-    "female_population": 59899,
-    "total_households": 51267,
+    "year": 2026,
+    "month": 2,
+    "total_population": 21052,
+    "male_population": 10608,
+    "female_population": 10444,
+    "total_households": 11796,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10742,12 +10742,12 @@
   {
     "adm_cd": "35550",
     "adm_nm": "전북특별자치도 임실군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 117832,
-    "male_population": 57933,
-    "female_population": 59899,
-    "total_households": 51267,
+    "year": 2026,
+    "month": 2,
+    "total_population": 25309,
+    "male_population": 13120,
+    "female_population": 12189,
+    "total_households": 14827,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10802,12 +10802,12 @@
   {
     "adm_cd": "35560",
     "adm_nm": "전북특별자치도 순창군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 117832,
-    "male_population": 57933,
-    "female_population": 59899,
-    "total_households": 51267,
+    "year": 2026,
+    "month": 2,
+    "total_population": 27687,
+    "male_population": 13704,
+    "female_population": 13983,
+    "total_households": 15031,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10862,12 +10862,12 @@
   {
     "adm_cd": "35570",
     "adm_nm": "전북특별자치도 고창군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 117832,
-    "male_population": 57933,
-    "female_population": 59899,
-    "total_households": 51267,
+    "year": 2026,
+    "month": 2,
+    "total_population": 50196,
+    "male_population": 25160,
+    "female_population": 25036,
+    "total_households": 28428,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10922,12 +10922,12 @@
   {
     "adm_cd": "35580",
     "adm_nm": "전북특별자치도 부안군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 117832,
-    "male_population": 57933,
-    "female_population": 59899,
-    "total_households": 51267,
+    "year": 2026,
+    "month": 2,
+    "total_population": 47100,
+    "male_population": 23612,
+    "female_population": 23488,
+    "total_households": 27289,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -10982,12 +10982,12 @@
   {
     "adm_cd": "36010",
     "adm_nm": "전라남도 목포시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 201025,
+    "male_population": 99968,
+    "female_population": 101057,
+    "total_households": 102479,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11042,12 +11042,12 @@
   {
     "adm_cd": "36020",
     "adm_nm": "전라남도 여수시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 251891,
+    "male_population": 127928,
+    "female_population": 123963,
+    "total_households": 121564,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11102,12 +11102,12 @@
   {
     "adm_cd": "36030",
     "adm_nm": "전라남도 순천시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 224420,
+    "male_population": 111866,
+    "female_population": 112554,
+    "total_households": 108130,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11162,12 +11162,12 @@
   {
     "adm_cd": "36040",
     "adm_nm": "전라남도 나주시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 116940,
+    "male_population": 59210,
+    "female_population": 57730,
+    "total_households": 60129,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11222,12 +11222,12 @@
   {
     "adm_cd": "36060",
     "adm_nm": "전라남도 광양시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 155672,
+    "male_population": 81698,
+    "female_population": 73974,
+    "total_households": 73671,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11282,12 +11282,12 @@
   {
     "adm_cd": "36510",
     "adm_nm": "전라남도 담양군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 44108,
+    "male_population": 22295,
+    "female_population": 21813,
+    "total_households": 23877,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11342,12 +11342,12 @@
   {
     "adm_cd": "36520",
     "adm_nm": "전라남도 곡성군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 27499,
+    "male_population": 13697,
+    "female_population": 13802,
+    "total_households": 15942,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11402,12 +11402,12 @@
   {
     "adm_cd": "36530",
     "adm_nm": "전라남도 구례군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 23904,
+    "male_population": 11681,
+    "female_population": 12223,
+    "total_households": 13471,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11462,12 +11462,12 @@
   {
     "adm_cd": "36550",
     "adm_nm": "전라남도 고흥군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 58631,
+    "male_population": 29041,
+    "female_population": 29590,
+    "total_households": 34566,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11522,12 +11522,12 @@
   {
     "adm_cd": "36560",
     "adm_nm": "전라남도 보성군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 35704,
+    "male_population": 17588,
+    "female_population": 18116,
+    "total_households": 21063,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11582,12 +11582,12 @@
   {
     "adm_cd": "36570",
     "adm_nm": "전라남도 화순군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 59761,
+    "male_population": 29634,
+    "female_population": 30127,
+    "total_households": 31359,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11642,12 +11642,12 @@
   {
     "adm_cd": "36580",
     "adm_nm": "전라남도 장흥군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 34102,
+    "male_population": 16826,
+    "female_population": 17276,
+    "total_households": 19670,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11702,12 +11702,12 @@
   {
     "adm_cd": "36590",
     "adm_nm": "전라남도 강진군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 31759,
+    "male_population": 15595,
+    "female_population": 16164,
+    "total_households": 18101,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11762,12 +11762,12 @@
   {
     "adm_cd": "36600",
     "adm_nm": "전라남도 해남군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 62147,
+    "male_population": 31260,
+    "female_population": 30887,
+    "total_households": 34430,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11822,12 +11822,12 @@
   {
     "adm_cd": "36610",
     "adm_nm": "전라남도 영암군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 44244,
+    "male_population": 22809,
+    "female_population": 21435,
+    "total_households": 25088,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11882,12 +11882,12 @@
   {
     "adm_cd": "36620",
     "adm_nm": "전라남도 무안군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 63342,
+    "male_population": 32195,
+    "female_population": 31147,
+    "total_households": 32049,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -11942,12 +11942,12 @@
   {
     "adm_cd": "36630",
     "adm_nm": "전라남도 함평군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 29325,
+    "male_population": 14997,
+    "female_population": 14328,
+    "total_households": 17526,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12002,12 +12002,12 @@
   {
     "adm_cd": "36640",
     "adm_nm": "전라남도 영광군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 53133,
+    "male_population": 26564,
+    "female_population": 26569,
+    "total_households": 28191,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12062,12 +12062,12 @@
   {
     "adm_cd": "36650",
     "adm_nm": "전라남도 장성군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 43001,
+    "male_population": 22082,
+    "female_population": 20919,
+    "total_households": 23538,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12122,12 +12122,12 @@
   {
     "adm_cd": "36660",
     "adm_nm": "전라남도 완도군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 43513,
+    "male_population": 22054,
+    "female_population": 21459,
+    "total_households": 24493,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12182,12 +12182,12 @@
   {
     "adm_cd": "36670",
     "adm_nm": "전라남도 진도군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 27296,
+    "male_population": 13693,
+    "female_population": 13603,
+    "total_households": 15955,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12242,12 +12242,12 @@
   {
     "adm_cd": "36680",
     "adm_nm": "전라남도 신안군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 82365,
-    "male_population": 40909,
-    "female_population": 41456,
-    "total_households": 36318,
+    "year": 2026,
+    "month": 2,
+    "total_population": 39092,
+    "male_population": 20878,
+    "female_population": 18214,
+    "total_households": 20715,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12302,12 +12302,12 @@
   {
     "adm_cd": "37011",
     "adm_nm": "경상북도 포항시 남구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 214484,
+    "male_population": 111250,
+    "female_population": 103234,
+    "total_households": 108644,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12362,12 +12362,12 @@
   {
     "adm_cd": "37012",
     "adm_nm": "경상북도 포항시 북구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 273330,
+    "male_population": 136006,
+    "female_population": 137324,
+    "total_households": 130158,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12422,12 +12422,12 @@
   {
     "adm_cd": "37020",
     "adm_nm": "경상북도 경주시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 243462,
+    "male_population": 121928,
+    "female_population": 121534,
+    "total_households": 126526,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12482,12 +12482,12 @@
   {
     "adm_cd": "37030",
     "adm_nm": "경상북도 김천시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 133080,
+    "male_population": 66993,
+    "female_population": 66087,
+    "total_households": 68798,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12542,12 +12542,12 @@
   {
     "adm_cd": "37040",
     "adm_nm": "경상북도 안동시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 151745,
+    "male_population": 75104,
+    "female_population": 76641,
+    "total_households": 80568,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12602,12 +12602,12 @@
   {
     "adm_cd": "37050",
     "adm_nm": "경상북도 구미시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 403254,
+    "male_population": 208432,
+    "female_population": 194822,
+    "total_households": 193554,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12662,12 +12662,12 @@
   {
     "adm_cd": "37060",
     "adm_nm": "경상북도 영주시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 96790,
+    "male_population": 48129,
+    "female_population": 48661,
+    "total_households": 51233,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12722,12 +12722,12 @@
   {
     "adm_cd": "37070",
     "adm_nm": "경상북도 영천시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 94756,
+    "male_population": 48468,
+    "female_population": 46288,
+    "total_households": 53820,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12782,12 +12782,12 @@
   {
     "adm_cd": "37080",
     "adm_nm": "경상북도 상주시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 87381,
+    "male_population": 43114,
+    "female_population": 44267,
+    "total_households": 47344,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12842,12 +12842,12 @@
   {
     "adm_cd": "37090",
     "adm_nm": "경상북도 문경시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 63127,
+    "male_population": 30994,
+    "female_population": 32133,
+    "total_households": 34864,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12902,12 +12902,12 @@
   {
     "adm_cd": "37100",
     "adm_nm": "경상북도 경산시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 263316,
+    "male_population": 132131,
+    "female_population": 131185,
+    "total_households": 131983,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -12962,12 +12962,12 @@
   {
     "adm_cd": "37520",
     "adm_nm": "경상북도 의성군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 47868,
+    "male_population": 24064,
+    "female_population": 23804,
+    "total_households": 29044,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13022,12 +13022,12 @@
   {
     "adm_cd": "37530",
     "adm_nm": "경상북도 청송군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 23313,
+    "male_population": 11785,
+    "female_population": 11528,
+    "total_households": 13902,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13082,12 +13082,12 @@
   {
     "adm_cd": "37540",
     "adm_nm": "경상북도 영양군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 15986,
+    "male_population": 8029,
+    "female_population": 7957,
+    "total_households": 9181,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13142,12 +13142,12 @@
   {
     "adm_cd": "37550",
     "adm_nm": "경상북도 영덕군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 30640,
+    "male_population": 14739,
+    "female_population": 15901,
+    "total_households": 18122,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13202,12 +13202,12 @@
   {
     "adm_cd": "37560",
     "adm_nm": "경상북도 청도군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 37586,
+    "male_population": 18783,
+    "female_population": 18803,
+    "total_households": 22012,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13262,12 +13262,12 @@
   {
     "adm_cd": "37570",
     "adm_nm": "경상북도 고령군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 29625,
+    "male_population": 15335,
+    "female_population": 14290,
+    "total_households": 17360,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13322,12 +13322,12 @@
   {
     "adm_cd": "37580",
     "adm_nm": "경상북도 성주군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 40571,
+    "male_population": 21237,
+    "female_population": 19334,
+    "total_households": 23919,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13382,12 +13382,12 @@
   {
     "adm_cd": "37590",
     "adm_nm": "경상북도 칠곡군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 104347,
+    "male_population": 54999,
+    "female_population": 49348,
+    "total_households": 53499,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13442,12 +13442,12 @@
   {
     "adm_cd": "37600",
     "adm_nm": "경상북도 예천군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 53808,
+    "male_population": 26655,
+    "female_population": 27153,
+    "total_households": 28003,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13502,12 +13502,12 @@
   {
     "adm_cd": "37610",
     "adm_nm": "경상북도 봉화군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 28158,
+    "male_population": 14399,
+    "female_population": 13759,
+    "total_households": 16428,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13562,12 +13562,12 @@
   {
     "adm_cd": "37620",
     "adm_nm": "경상북도 울진군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 45356,
+    "male_population": 23161,
+    "female_population": 22195,
+    "total_households": 25485,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13622,12 +13622,12 @@
   {
     "adm_cd": "37630",
     "adm_nm": "경상북도 울릉군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 111132,
-    "male_population": 55478,
-    "female_population": 55654,
-    "total_households": 49261,
+    "year": 2026,
+    "month": 2,
+    "total_population": 8274,
+    "male_population": 4673,
+    "female_population": 3601,
+    "total_households": 5213,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13682,12 +13682,12 @@
   {
     "adm_cd": "38030",
     "adm_nm": "경상남도 진주시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 335108,
+    "male_population": 165557,
+    "female_population": 169551,
+    "total_households": 162381,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13742,12 +13742,12 @@
   {
     "adm_cd": "38050",
     "adm_nm": "경상남도 통영시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 116208,
+    "male_population": 58395,
+    "female_population": 57813,
+    "total_households": 59264,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13802,12 +13802,12 @@
   {
     "adm_cd": "38060",
     "adm_nm": "경상남도 사천시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 107678,
+    "male_population": 54689,
+    "female_population": 52989,
+    "total_households": 56056,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13862,12 +13862,12 @@
   {
     "adm_cd": "38070",
     "adm_nm": "경상남도 김해시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 532715,
+    "male_population": 269469,
+    "female_population": 263246,
+    "total_households": 239388,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13922,12 +13922,12 @@
   {
     "adm_cd": "38080",
     "adm_nm": "경상남도 밀양시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 97569,
+    "male_population": 48404,
+    "female_population": 49165,
+    "total_households": 53203,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -13982,12 +13982,12 @@
   {
     "adm_cd": "38090",
     "adm_nm": "경상남도 거제시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 226874,
+    "male_population": 119293,
+    "female_population": 107581,
+    "total_households": 105125,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14042,12 +14042,12 @@
   {
     "adm_cd": "38100",
     "adm_nm": "경상남도 양산시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 361336,
+    "male_population": 180928,
+    "female_population": 180408,
+    "total_households": 166374,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14102,12 +14102,12 @@
   {
     "adm_cd": "38111",
     "adm_nm": "경상남도 창원시 의창구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 206993,
+    "male_population": 105299,
+    "female_population": 101694,
+    "total_households": 97797,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14162,12 +14162,12 @@
   {
     "adm_cd": "38112",
     "adm_nm": "경상남도 창원시 성산구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 247105,
+    "male_population": 126099,
+    "female_population": 121006,
+    "total_households": 109950,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14222,12 +14222,12 @@
   {
     "adm_cd": "38113",
     "adm_nm": "경상남도 창원시 마산합포구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 175375,
+    "male_population": 86813,
+    "female_population": 88562,
+    "total_households": 86689,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14282,12 +14282,12 @@
   {
     "adm_cd": "38114",
     "adm_nm": "경상남도 창원시 마산회원구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 175539,
+    "male_population": 87354,
+    "female_population": 88185,
+    "total_households": 82857,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14342,12 +14342,12 @@
   {
     "adm_cd": "38115",
     "adm_nm": "경상남도 창원시 진해구",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 183906,
+    "male_population": 94776,
+    "female_population": 89130,
+    "total_households": 85403,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14402,12 +14402,12 @@
   {
     "adm_cd": "38510",
     "adm_nm": "경상남도 의령군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 24531,
+    "male_population": 12296,
+    "female_population": 12235,
+    "total_households": 14780,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14462,12 +14462,12 @@
   {
     "adm_cd": "38520",
     "adm_nm": "경상남도 함안군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 57345,
+    "male_population": 29472,
+    "female_population": 27873,
+    "total_households": 29909,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14522,12 +14522,12 @@
   {
     "adm_cd": "38530",
     "adm_nm": "경상남도 창녕군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 54883,
+    "male_population": 27631,
+    "female_population": 27252,
+    "total_households": 31883,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14582,12 +14582,12 @@
   {
     "adm_cd": "38540",
     "adm_nm": "경상남도 고성군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 46901,
+    "male_population": 23801,
+    "female_population": 23100,
+    "total_households": 26320,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14642,12 +14642,12 @@
   {
     "adm_cd": "38550",
     "adm_nm": "경상남도 남해군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 40887,
+    "male_population": 19988,
+    "female_population": 20899,
+    "total_households": 22862,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14702,12 +14702,12 @@
   {
     "adm_cd": "38560",
     "adm_nm": "경상남도 하동군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 39835,
+    "male_population": 20035,
+    "female_population": 19800,
+    "total_households": 23280,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14762,12 +14762,12 @@
   {
     "adm_cd": "38570",
     "adm_nm": "경상남도 산청군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 32679,
+    "male_population": 16285,
+    "female_population": 16394,
+    "total_households": 19563,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14822,12 +14822,12 @@
   {
     "adm_cd": "38580",
     "adm_nm": "경상남도 함양군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 35388,
+    "male_population": 17380,
+    "female_population": 18008,
+    "total_households": 20232,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14882,12 +14882,12 @@
   {
     "adm_cd": "38590",
     "adm_nm": "경상남도 거창군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 58737,
+    "male_population": 28914,
+    "female_population": 29823,
+    "total_households": 31082,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -14942,12 +14942,12 @@
   {
     "adm_cd": "38600",
     "adm_nm": "경상남도 합천군",
-    "year": 2024,
-    "month": 6,
-    "total_population": 146908,
-    "male_population": 73364,
-    "female_population": 73544,
-    "total_households": 62136,
+    "year": 2026,
+    "month": 2,
+    "total_population": 39011,
+    "male_population": 19315,
+    "female_population": 19696,
+    "total_households": 23387,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -15002,12 +15002,12 @@
   {
     "adm_cd": "39010",
     "adm_nm": "제주특별자치도 제주시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 336872,
-    "male_population": 167500,
-    "female_population": 169372,
-    "total_households": 148000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 483031,
+    "male_population": 240670,
+    "female_population": 242361,
+    "total_households": 226105,
     "age_groups": [
       {
         "age_range": "0-9",
@@ -15062,12 +15062,12 @@
   {
     "adm_cd": "39020",
     "adm_nm": "제주특별자치도 서귀포시",
-    "year": 2024,
-    "month": 6,
-    "total_population": 336872,
-    "male_population": 167500,
-    "female_population": 169372,
-    "total_households": 148000,
+    "year": 2026,
+    "month": 2,
+    "total_population": 179000,
+    "male_population": 90058,
+    "female_population": 88942,
+    "total_households": 88751,
     "age_groups": [
       {
         "age_range": "0-9",

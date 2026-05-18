@@ -33,7 +33,7 @@ jobs:
         env:
           VITE_DATA_MODE: mock
           VITE_BOUNDARY_MODE: mock
-        run: npm run build
+        run: npm run build:web
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

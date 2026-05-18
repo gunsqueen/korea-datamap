@@ -1,8 +1,8 @@
 {
-  "name": "Korea DataMap",
-  "short_name": "KoreaMap",
-  "description": "대한민국 행정구역 인구통계 · 선거결과 데이터맵",
-  "start_url": "/",
+  "name": "선거지도",
+  "short_name": "선거지도",
+  "description": "대한민국 행정구역 인구통계 · 선거결과 선거지도",
+  "start_url": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#f0f2f5",
@@ -10,13 +10,13 @@
   "lang": "ko",
   "icons": [
     {
-      "src": "/icons/icon-192.png",
+      "src": "./icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/icons/icon-512.png",
+      "src": "./icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

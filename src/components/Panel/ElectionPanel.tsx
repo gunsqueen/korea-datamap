@@ -1,12 +1,26 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import type { ElectionType, ElectionData } from '../../types';
+import { ExternalLink } from 'lucide-react';
+import type { ElectionType, ElectionData, ElectionHint } from '../../types';
 import { useElection } from '../../hooks/useElection';
 import { ELECTIONS_META } from '../../services';
+import districtResults from '../../data/static/assembly_district_results.json';
+import { ElectionTab as Local9CandidateTab } from '../CandidateRegistration/ElectionTab';
+import { ChartCard } from '../UI/ChartCard';
+import { chartTheme } from '../../theme';
+import type { LocalCandidateElectionId } from '../../services/candidateRegistration';
 
 interface Props {
   admCd: string;
   admNm?: string;
+  /** 후보자 검색 클릭 시 자동 전환할 선거 힌트 */
+  electionHint?: ElectionHint | null;
+  /** "22_서울_강서구갑" 형식 — 설정 시 해당 선거구 정적 데이터 우선 표시 */
+  assemblyDistrictKey?: string;
+  /** "8_basic_서울_강서구나선거구" 형식 — 설정 시 선거구 전체 동 집계 결과 표시 */
+  localDistrictKey?: string | null;
+  /** 현재 선택된 electionId를 상위로 알려 지도 코로플레스 채색에 사용 */
+  onElectionIdChange?: (electionId: string | null) => void;
 }
 
 const TYPE_LABELS: Record<ElectionType, string> = {
@@ -15,24 +29,24 @@ const TYPE_LABELS: Record<ElectionType, string> = {
   local: '지방선거',
 };
 
-const TYPE_ORDER: ElectionType[] = ['presidential', 'assembly', 'local'];
+const TYPE_ORDER: ElectionType[] = ['local', 'assembly', 'presidential'];
 
-const ASSEMBLY_SUB_LABELS = [
+const ASSEMBLY_SUB_LABELS: { key: 'district' | 'pr'; label: string }[] = [
   { key: 'district', label: '지역구' },
   { key: 'pr', label: '비례대표' },
 ];
 
 const LOCAL_SUB_LABELS = [
-  { key: 'metro_mayor', label: '광역단체장' },
-  { key: 'mayor', label: '기초단체장' },
-  { key: 'council_district', label: '광역의원' },
-  { key: 'council_pr', label: '광역비례' },
-  { key: 'basic_district', label: '기초의원' },
-  { key: 'basic_pr', label: '기초비례' },
+  { key: 'metro_mayor', label: '광역\n단체장' },
+  { key: 'mayor', label: '기초\n단체장' },
+  { key: 'council_district', label: '광역 의원' },
+  { key: 'council_pr', label: '광역 비례' },
+  { key: 'basic_district', label: '기초 의원' },
+  { key: 'basic_pr', label: '기초 비례' },
 ];
 
-export function ElectionPanel({ admCd, admNm }: Props) {
-  const [activeType, setActiveType] = useState<ElectionType>('presidential');
+export function ElectionPanel({ admCd, admNm, electionHint, assemblyDistrictKey, localDistrictKey, onElectionIdChange }: Props) {
+  const [activeType, setActiveType] = useState<ElectionType>(electionHint?.type ?? 'local');
 
   // ── 대통령 ───────────────────────────────────────────
   const presidentialMetas = useMemo(
@@ -40,7 +54,9 @@ export function ElectionPanel({ admCd, admNm }: Props) {
     []
   );
   const [selectedPresidentialId, setSelectedPresidentialId] = useState(
-    presidentialMetas[0]?.id ?? ''
+    (electionHint?.type === 'presidential' && electionHint.presidentialId)
+      ? electionHint.presidentialId
+      : (presidentialMetas[0]?.id ?? '')
   );
 
   // ── 국회의원: 선거(suffix) + 지역구/비례 ──────────────
@@ -59,9 +75,15 @@ export function ElectionPanel({ admCd, admNm }: Props) {
     return groups;
   }, []);
   const [selectedAssemblySuffix, setSelectedAssemblySuffix] = useState(
-    assemblyGroups[0]?.suffix ?? '22'
+    (electionHint?.type === 'assembly' && electionHint.assemblySuffix)
+      ? electionHint.assemblySuffix
+      : (assemblyGroups[0]?.suffix ?? '22')
   );
-  const [assemblySubType, setAssemblySubType] = useState('district');
+  const [assemblySubType, setAssemblySubType] = useState<'district' | 'pr'>(
+    (electionHint?.type === 'assembly' && electionHint.assemblySubType)
+      ? electionHint.assemblySubType
+      : 'district'
+  );
 
   // ── 지방선거: 선거(prefix) + 세부 유형 ─────────────────
   const localGroups = useMemo(() => {
@@ -79,9 +101,31 @@ export function ElectionPanel({ admCd, admNm }: Props) {
     return groups;
   }, []);
   const [selectedLocalPrefix, setSelectedLocalPrefix] = useState(
-    localGroups[0]?.prefix ?? 'local_8'
+    (electionHint?.type === 'local' && electionHint.localPrefix)
+      ? electionHint.localPrefix
+      : (localGroups[0]?.prefix ?? 'local_8')
   );
-  const [localSubType, setLocalSubType] = useState('metro_mayor');
+  const [localSubType, setLocalSubType] = useState(
+    (electionHint?.type === 'local' && electionHint.localSubType)
+      ? electionHint.localSubType
+      : 'metro_mayor'
+  );
+
+  // 후보자 선택 시 탭 자동 전환 (electionHint가 바뀔 때마다 모든 관련 상태 업데이트)
+  useEffect(() => {
+    if (!electionHint) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setActiveType(electionHint.type);
+    if (electionHint.type === 'presidential') {
+      if (electionHint.presidentialId) setSelectedPresidentialId(electionHint.presidentialId);
+    } else if (electionHint.type === 'assembly') {
+      if (electionHint.assemblySuffix) setSelectedAssemblySuffix(electionHint.assemblySuffix);
+      if (electionHint.assemblySubType) setAssemblySubType(electionHint.assemblySubType);
+    } else if (electionHint.type === 'local') {
+      if (electionHint.localPrefix) setSelectedLocalPrefix(electionHint.localPrefix);
+      if (electionHint.localSubType) setLocalSubType(electionHint.localSubType);
+    }
+  }, [electionHint]);
 
   // ── selectedId 도출 ────────────────────────────────────
   const selectedId = useMemo(() => {
@@ -91,7 +135,24 @@ export function ElectionPanel({ admCd, admNm }: Props) {
     return '';
   }, [activeType, selectedPresidentialId, selectedAssemblySuffix, assemblySubType, selectedLocalPrefix, localSubType]);
 
-  const { data, loading, error } = useElection(admCd, selectedId, admNm);
+  // 국회의원 탭에서 선거구 키가 있으면 정적 데이터 우선 사용
+  const districtData: ElectionData | null = useMemo(() => {
+    if (activeType !== 'assembly' || !assemblyDistrictKey) return null;
+    const gen = assemblyDistrictKey.split('_')[0];
+    if (gen !== selectedAssemblySuffix) return null;
+    const raw = (districtResults as Record<string, unknown>)[assemblyDistrictKey];
+    return raw ? (raw as ElectionData) : null;
+  }, [activeType, assemblyDistrictKey, selectedAssemblySuffix]);
+
+  const { data: apiData, loading, error } = useElection(admCd, selectedId, admNm, localDistrictKey);
+  const data = districtData ?? apiData;
+  const isLocal9CandidateTab = activeType === 'local' && selectedLocalPrefix === 'local_9';
+
+  // 현재 선거 ID를 상위로 전달 (코로플레스 채색용)
+  useEffect(() => {
+    onElectionIdChange?.(selectedId || null);
+    return () => { onElectionIdChange?.(null); };
+  }, [selectedId, onElectionIdChange]);
 
   return (
     <div className="panel-section">
@@ -162,7 +223,7 @@ export function ElectionPanel({ admCd, admNm }: Props) {
             {localGroups.map((g) => (
               <button
                 key={g.prefix}
-                className={`election-year-btn ${selectedLocalPrefix === g.prefix ? 'active' : ''}`}
+                className={`election-year-btn ${selectedLocalPrefix === g.prefix ? 'active' : ''} ${g.prefix === 'local_9' ? 'election-year-btn--future' : ''}`}
                 onClick={() => setSelectedLocalPrefix(g.prefix)}
               >
                 <span className="election-year-name">{g.short_name}</span>
@@ -185,12 +246,16 @@ export function ElectionPanel({ admCd, admNm }: Props) {
       )}
 
       {/* 결과 표시 */}
-      {loading ? (
+      {isLocal9CandidateTab ? (
+        <Local9CandidateTab key={`${selectedId}-${admCd}`} admCd={admCd} electionId={selectedId as LocalCandidateElectionId} />
+      ) : loading ? (
         <div className="loading">불러오는 중...</div>
       ) : error === '선거 데이터 확인 필요' ? (
         <div className="empty">선거 데이터 확인 필요</div>
+      ) : data?.is_uncontested ? (
+        <UncandidateResult data={data} />
       ) : data ? (
-        <ElectionResult data={data} />
+        <ElectionResult data={data} requestedAdmCd={admCd} />
       ) : (
         <div className="empty">선거 데이터 없음</div>
       )}
@@ -198,8 +263,16 @@ export function ElectionPanel({ admCd, admNm }: Props) {
   );
 }
 
-function ElectionResult({ data }: { data: ElectionData }) {
+function ElectionResult({ data, requestedAdmCd }: { data: ElectionData; requestedAdmCd: string }) {
   const fmt = (n: number) => n.toLocaleString('ko-KR');
+  const topTwo = [...data.candidates]
+    .sort((a, b) => {
+      if (b.votes !== a.votes) return b.votes - a.votes;
+      return b.vote_rate - a.vote_rate;
+    })
+    .slice(0, 2);
+  const voteGap = topTwo.length === 2 ? topTwo[0].votes - topTwo[1].votes : null;
+  const rateGap = topTwo.length === 2 ? topTwo[0].vote_rate - topTwo[1].vote_rate : null;
 
   const pieData = data.candidates.slice(0, 6).map((c) => ({
     name: c.name,
@@ -213,6 +286,7 @@ function ElectionResult({ data }: { data: ElectionData }) {
     data.adm_cd === '00' ? '전국' :
     data.adm_cd.length === 2 ? '시·도' :
     data.adm_cd.length === 5 ? '시·군·구' : '동';
+  const isBroaderFallback = data.adm_cd !== requestedAdmCd;
 
   return (
     <>
@@ -227,6 +301,11 @@ function ElectionResult({ data }: { data: ElectionData }) {
         )}
         <span className="election-level-badge">{dataLevel} 기준</span>
       </div>
+      {isBroaderFallback && (
+        <div className="election-fallback-note">
+          해당 회차는 하위 행정동 공식 결과가 없어 실제 {dataLevel} 결과를 표시합니다.
+        </div>
+      )}
 
       {/* 투개표 현황 */}
       <div className="election-stats-grid">
@@ -254,39 +333,57 @@ function ElectionResult({ data }: { data: ElectionData }) {
 
       {/* 파이 차트 */}
       {pieData.length > 1 && (
-        <div className="chart-container">
-          <ResponsiveContainer width="100%" height={180}>
-            <PieChart>
-              <Pie
-                data={pieData}
-                cx="45%"
-                cy="50%"
-                innerRadius={45}
-                outerRadius={75}
-                dataKey="value"
+        <>
+          <ChartCard title="득표 구성">
+            <ResponsiveContainer width="100%" height={180}>
+              <PieChart>
+                <Pie
+                  data={pieData}
+                  cx="45%"
+                  cy="50%"
+                  innerRadius={45}
+                  outerRadius={75}
+                  dataKey="value"
+                >
+                  {pieData.map((entry, i) => (
+                    <Cell key={i} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip
+                  formatter={(v, _n, props) => [
+                    `${fmt(v as number)}표 (${props.payload.vote_rate?.toFixed(2) ?? ''}%)`,
+                    `${props.payload.name} (${props.payload.party})`
+                  ]}
+                  contentStyle={{ ...chartTheme.tooltipStyle }}
+                />
+                <Legend
+                  layout="vertical"
+                  align="right"
+                  verticalAlign="middle"
+                  iconSize={10}
+                  formatter={(_, entry: { payload?: { name?: string } }) =>
+                    <span style={{ fontSize: 11 }}>{entry.payload?.name ?? ''}</span>
+                  }
+                />
+              </PieChart>
+            </ResponsiveContainer>
+          </ChartCard>
+          {voteGap !== null && rateGap !== null && (
+            <div className="election-gap-card">
+              <span className="election-gap-label">1,2위 격차</span>
+              <div
+                className="election-gap-rate"
+                style={{ color: topTwo[0].party_color }}
               >
-                {pieData.map((entry, i) => (
-                  <Cell key={i} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip
-                formatter={(v, _n, props) => [
-                  `${fmt(v as number)}표 (${props.payload.vote_rate?.toFixed(2) ?? ''}%)`,
-                  `${props.payload.name} (${props.payload.party})`
-                ]}
-              />
-              <Legend
-                layout="vertical"
-                align="right"
-                verticalAlign="middle"
-                iconSize={10}
-                formatter={(_, entry: { payload?: { name?: string } }) =>
-                  <span style={{ fontSize: 11 }}>{entry.payload?.name ?? ''}</span>
-                }
-              />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
+                {rateGap.toFixed(2)}%p
+              </div>
+              <div className="election-gap-votes">{fmt(voteGap)}표 차이</div>
+              <div className="election-gap-names">
+                {topTwo[0].name} vs {topTwo[1].name}
+              </div>
+            </div>
+          )}
+        </>
       )}
 
       {/* 전체 후보 결과 테이블 */}
@@ -299,11 +396,12 @@ function ElectionResult({ data }: { data: ElectionData }) {
               <th>득표수</th>
               <th>득표율</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {data.candidates.map((c, i) => (
-              <tr key={i}>
+              <tr key={i} className={c.elected ? 'elected-row' : ''}>
                 <td className="col-rank">{c.rank}</td>
                 <td className="col-name">
                   <span className="cand-dot" style={{ background: c.party_color }} />
@@ -320,11 +418,62 @@ function ElectionResult({ data }: { data: ElectionData }) {
                     />
                   </div>
                 </td>
+                <td className="col-elected">{c.elected ? '당선' : ''}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <div className="panel-source-links">
+        <span className="panel-source-links-label">공식 출처</span>
+        <a href="https://info.nec.go.kr" target="_blank" rel="noopener noreferrer" className="panel-source-link">
+          info.nec.go.kr <ExternalLink size={10} />
+        </a>
+        <a href="https://www.data.go.kr" target="_blank" rel="noopener noreferrer" className="panel-source-link">
+          data.go.kr <ExternalLink size={10} />
+        </a>
+      </div>
     </>
+  );
+}
+
+function UncandidateResult({ data }: { data: ElectionData }) {
+  return (
+    <div className="panel-section">
+      <div className="uncontested-banner">
+        <span className="uncontested-badge">무투표당선</span>
+        <p className="uncontested-desc">
+          이 선거구는 후보자 수가 당선인 수와 같아 투표 없이 당선이 결정되었습니다.
+        </p>
+        {data.uncontested_district && (
+          <p className="uncontested-sgg">선거구: {data.uncontested_district}</p>
+        )}
+      </div>
+
+      {data.candidates.length > 0 ? (
+        <div className="uncontested-candidates">
+          {data.candidates.map((c, i) => (
+            <div key={i} className="uncontested-candidate-row">
+              <span
+                className="uncontested-party-dot"
+                style={{ background: c.party_color }}
+              />
+              <span className="uncontested-name">{c.name}</span>
+              <span className="uncontested-party">{c.party}</span>
+              <span className="uncontested-elected-badge">당선</span>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p className="uncontested-no-data">당선인 정보를 불러오는 중입니다.</p>
+      )}
+
+      <div className="panel-source-links" style={{ marginTop: 16 }}>
+        <span className="panel-source-links-label">공식 출처</span>
+        <a href="https://info.nec.go.kr" target="_blank" rel="noopener noreferrer" className="panel-source-link">
+          info.nec.go.kr <ExternalLink size={10} />
+        </a>
+      </div>
+    </div>
   );
 }

@@ -136,6 +136,10 @@ export interface ElectionData {
   turnout_rate: number;
   candidates: Candidate[];
   debug_meta?: ElectionDebugMeta;
+  /** 무투표당선 선거구 여부 */
+  is_uncontested?: boolean;
+  /** 무투표당선 선거구명 */
+  uncontested_district?: string;
 }
 
 export interface Candidate {
@@ -148,6 +152,34 @@ export interface Candidate {
   elected?: boolean;
 }
 
+export interface CandidateRegistrationCandidate {
+  name: string;
+  party: string;
+  district: string;
+  age: number;
+  gender: string;
+  job: string;
+  education: string;
+  career: string;
+  status: string;
+  registration_date?: string;
+}
+
+export interface CandidateRegistrationData {
+  election_id: string;
+  election_name: string;
+  election_date: string;
+  adm_cd: string;
+  adm_nm: string;
+  sub_type: string;
+  total_count: number;
+  candidates: CandidateRegistrationCandidate[];
+  request_scope: {
+    sdName: string;
+    sggName?: string;
+  };
+}
+
 // ───────────────────────────────────────────
 // UI 상태 타입
 // ───────────────────────────────────────────
@@ -157,11 +189,9 @@ export type PanelTab = 'population' | 'election';
 export interface AppState {
   selectedArea: AdminArea | null;
   hoveredArea: AdminArea | null;
-  compareArea: AdminArea | null;
   currentLevel: AdminLevel;
   parentCode: string | null;
   activeTab: PanelTab;
-  isComparing: boolean;
 }
 
 export interface SearchResult {
@@ -169,6 +199,8 @@ export interface SearchResult {
   adm_nm: string;
   level: AdminLevel;
   parent_nm?: string;
+  /** 국회의원 선거구 하이라이트용: "22_서울_강서갑" 형식 */
+  assemblyDistrictKey?: string;
 }
 
 /** 네비게이션 스택 아이템 (드릴다운 히스토리) */
@@ -176,4 +208,22 @@ export interface NavItem {
   adm_cd: string;
   adm_nm: string;
   level: AdminLevel;
+}
+
+/**
+ * 후보자 검색 결과 클릭 시 ElectionPanel에 전달할 선거 힌트.
+ * 선거 종류·회차·세부 유형을 담아 패널이 올바른 탭으로 자동 전환하게 한다.
+ */
+export interface ElectionHint {
+  type: ElectionType;
+  /** 대선용: 'presidential_21' 등 */
+  presidentialId?: string;
+  /** 총선용: '22' (대수) */
+  assemblySuffix?: string;
+  /** 총선용: 'district' | 'pr' */
+  assemblySubType?: 'district' | 'pr';
+  /** 지방선거용: 'local_8' 등 */
+  localPrefix?: string;
+  /** 지방선거용: 'metro_mayor' | 'mayor' | 'council_district' | 'council_pr' | 'basic_district' | 'basic_pr' */
+  localSubType?: string;
 }

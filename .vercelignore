@@ -1,0 +1,16 @@
+node_modules
+.git
+dist
+android
+*.xlsx
+*.xls
+*.csv
+*.md
+scripts/
+check-yangsan.mjs
+fix-*.mjs
+inspect_excel*.cjs
+district-verification-results.json
+election-quota-issues.csv
+potential-3person-districts.csv
+ELECTION_QUOTA_FIX*.md

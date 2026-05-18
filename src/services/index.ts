@@ -5,6 +5,7 @@ import type {
   ElectionData,
   AdminLevel,
   DataMode,
+  PopulationFieldSource,
   PopulationFieldSources,
   PopulationSourceType,
 } from '../types';
@@ -186,19 +187,100 @@ export async function getPopulation(admCd: string): Promise<PopulationData> {
     }
   }
 
-  // 시군구(5자리)는 실제 API 시도 후 실패 시 snapshot fallback
-  if (admCd.length === 5) {
-    try {
-      const apiData = await fetchPopulation(admCd);
-      return finalizePopulationData({ ...apiData, source_type: 'real' }, admCd);
-    } catch (err) {
-      console.warn('시군구 인구 API 실패 → snapshot fallback', err);
+  // 시군구(5자리)·시도(2자리)는 스냅샷 사용
+  // (병렬 API 호출 시 일부 동만 성공하면 부분합이 반환되는 문제 방지)
+  const mockData = getMockPopulation(admCd);
+  return finalizePopulationData({ ...mockData, source_type: 'snapshot' }, admCd);
+}
+
+function mergeFieldStatus(
+  sources: Array<PopulationFieldSource | undefined>,
+  fallbackNote: string,
+): PopulationFieldSource {
+  const valid = sources.filter((source): source is PopulationFieldSource => !!source);
+  if (valid.length === 0) {
+    return { status: 'estimated', note: fallbackNote };
+  }
+  const first = valid[0];
+  const sameStatus = valid.every((source) => source.status === first.status);
+  return {
+    status: sameStatus ? first.status : 'estimated',
+    note: fallbackNote,
+  };
+}
+
+export async function getAggregatedPopulation(admCds: string[], admNm: string, admCd: string): Promise<PopulationData> {
+  const uniqueCodes = Array.from(new Set(admCds.filter(Boolean)));
+  if (uniqueCodes.length === 0) {
+    throw new Error('집계할 인구 데이터가 없습니다');
+  }
+
+  const rows = await Promise.all(uniqueCodes.map((code) => getPopulation(code)));
+  const latest = rows.reduce((current, row) => {
+    if (!current) return row;
+    if (row.year > current.year) return row;
+    if (row.year === current.year && row.month > current.month) return row;
+    return current;
+  }, rows[0]);
+
+  const ageMap = new Map<string, { male: number; female: number; total: number }>();
+  for (const row of rows) {
+    for (const group of row.age_groups ?? []) {
+      const current = ageMap.get(group.age_range) ?? { male: 0, female: 0, total: 0 };
+      current.male += group.male;
+      current.female += group.female;
+      current.total += group.total;
+      ageMap.set(group.age_range, current);
     }
   }
 
-  // 시도(2자리)는 snapshot 데이터 사용
-  const mockData = getMockPopulation(admCd);
-  return finalizePopulationData({ ...mockData, source_type: 'snapshot' }, admCd);
+  const householdMap = new Map<number, { members_label: string; count: number }>();
+  for (const row of rows) {
+    for (const group of row.household_structure ?? []) {
+      const current = householdMap.get(group.members) ?? { members_label: group.members_label, count: 0 };
+      current.count += group.count;
+      householdMap.set(group.members, current);
+    }
+  }
+
+  const totalHouseholds = rows.reduce((sum, row) => sum + row.total_households, 0);
+  const householdStructure = Array.from(householdMap.entries())
+    .sort((a, b) => a[0] - b[0])
+    .map(([members, value]) => ({
+      members,
+      members_label: value.members_label,
+      count: value.count,
+      percentage: totalHouseholds > 0 ? Math.round((value.count / totalHouseholds) * 1000) / 10 : 0,
+    }));
+
+  const aggregateNote = `선거구 포함 ${uniqueCodes.length}개 읍면동 합산`;
+  const sourceType = rows.every((row) => row.source_type === rows[0].source_type)
+    ? (rows[0].source_type ?? 'snapshot')
+    : 'snapshot';
+
+  return {
+    adm_cd: admCd,
+    adm_nm: admNm,
+    year: latest.year,
+    month: latest.month,
+    total_population: rows.reduce((sum, row) => sum + row.total_population, 0),
+    male_population: rows.reduce((sum, row) => sum + row.male_population, 0),
+    female_population: rows.reduce((sum, row) => sum + row.female_population, 0),
+    total_households: totalHouseholds,
+    age_groups: Array.from(ageMap.entries()).map(([age_range, value]) => ({ age_range, ...value })),
+    household_structure: householdStructure,
+    source_type: sourceType,
+    field_sources: {
+      total_population: mergeFieldStatus(rows.map((row) => row.field_sources?.total_population), aggregateNote),
+      male_population: mergeFieldStatus(rows.map((row) => row.field_sources?.male_population), aggregateNote),
+      female_population: mergeFieldStatus(rows.map((row) => row.field_sources?.female_population), aggregateNote),
+      total_households: mergeFieldStatus(rows.map((row) => row.field_sources?.total_households), aggregateNote),
+      age_distribution: mergeFieldStatus(rows.map((row) => row.field_sources?.age_distribution), aggregateNote),
+      youth_ratio: mergeFieldStatus(rows.map((row) => row.field_sources?.youth_ratio), aggregateNote),
+      elderly_ratio: mergeFieldStatus(rows.map((row) => row.field_sources?.elderly_ratio), aggregateNote),
+      household_structure: mergeFieldStatus(rows.map((row) => row.field_sources?.household_structure), aggregateNote),
+    },
+  };
 }
 
 function createPopulationFieldSources(
@@ -264,16 +346,16 @@ function finalizePopulationData(data: PopulationData, admCd: string): Population
   const isSido = admCd.length === 2;
   const rootSource = data.source_type ?? 'snapshot';
 
-  // ─── 연령 분포: 파일 데이터 우선 ───────────────────────────
+  // ─── 연령 분포: 파일 데이터 우선 (시도 포함) ──────────────────
   let ageGroups = data.age_groups;
-  let ageSource: PopulationSourceType | 'unavailable' = isSido
-    ? (ageGroups?.length ? rootSource : 'unavailable')
+  let ageSource: PopulationSourceType | 'unavailable' = ageGroups?.length
+    ? rootSource
     : 'unavailable';
 
-  if (!isSido && Object.keys(AGE_FILE_DATA).length > 0) {
+  if (Object.keys(AGE_FILE_DATA).length > 0) {
     const fileAgeGroups = admCd.length === 8
       ? getAgeGroupsFromFile(admCd)
-      : aggregateAgeGroupsFromFile(admCd);
+      : aggregateAgeGroupsFromFile(admCd); // 시도(2자리)도 하위 읍면동 집계
     if (fileAgeGroups) {
       ageGroups = fileAgeGroups;
       ageSource = 'file';
